@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashControl;
+use App\View\Components\layout\app;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('master.master');
-});
+Route::get('/', [DashControl::class, 'index']);
