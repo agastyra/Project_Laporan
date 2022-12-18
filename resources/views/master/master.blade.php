@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="{{asset("admin")}}/template/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset("admin")}}/template/images/favicon.png" />
+  @livewireStyles
 </head>
 <body>
   <div class="container-scroller">
@@ -1244,6 +1245,7 @@
   <script src="{{asset("admin")}}/template/js/jquery.cookie.js" type="text/javascript"></script>
   <script src="{{asset("admin")}}/template/js/dashboard.js"></script>
   <script src="{{asset("admin")}}/template/js/Chart.roundedBarCharts.js"></script>
+  @livewireScripts
   <!-- End custom js for this page-->
 </body>
 
