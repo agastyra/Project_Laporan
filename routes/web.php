@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashControl::class, 'index']);
+
+Route::get('/sales', function () {
+    return view('transaksi.penjualan.sales');
+});
