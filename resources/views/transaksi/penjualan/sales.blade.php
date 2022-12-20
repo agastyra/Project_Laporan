@@ -28,6 +28,7 @@
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
                                     <th>Harga</th>
+                                    <th>Jumlah</th>
                                     <th>Keranjang</th>
                                 </tr>
                             </thead>
@@ -36,9 +37,14 @@
                                     <td>BRG003</td>
                                     <td>Kaos Gucci</td>
                                     <td>100.0000</td>
-                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit"
-                                            data-bs-toggle="modal" data-bs-target="#modal-keranjang"><i
-                                                class="mdi mdi-cart"></i></button></td>
+                                    <td>
+                                        <div class="col-sm-6">
+                                            <input class="form-control text-light" type="number" name="qty" id="qty">
+                                        </div>
+                                    </td>
+                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit">
+                                            <i class="mdi mdi-cart"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -137,39 +143,6 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="modal-keranjang" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Keranjang</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Nama Barang</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Jumlah</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark" type="number" placeholder="1" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                                class="mdi mdi-window-close"></i> Tutup</button>
-                        <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -228,18 +201,6 @@
         </div>
 </x-layout.app>
 @push('jssj')
-<script>
-    var modalId = document.getElementById('modal-keranjang');
-        
-            modalId.addEventListener('show.bs.modal', function (event) {
-                  // Button that triggered the modal
-                  let button = event.relatedTarget;
-                  // Extract info from data-bs-* attributes
-                  let recipient = button.getAttribute('data-bs-whatever');
-        
-                // Use above variables to manipulate the DOM
-            });
-</script>
 <script>
     var modalEd = document.getElementById('modal-edit');
         
