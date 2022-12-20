@@ -15,6 +15,11 @@ class CreateBuktiKasMasuksTable extends Migration
     {
         Schema::create('bukti_kas_masuks', function (Blueprint $table) {
             $table->id();
+            $table->date('tanggal');
+            $table->int('id_transaksi_pembelian');
+            $table->string('description');
+            $table->string('is_other');
+            $table->string('other_acccount');
             $table->timestamps();
         });
     }
