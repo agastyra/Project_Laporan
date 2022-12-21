@@ -15,6 +15,12 @@ class CreateTransaksiPenjualansTable extends Migration
     {
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->id();
+            $table->string('noTrans');
+            $table->date('dateTrans');
+            $table->bigInteger('gTotal');
+            $table->bigInteger('diskon');
+            $table->bigInteger('bayar');
+            $table->bigInteger('kembali');
             $table->timestamps();
         });
     }

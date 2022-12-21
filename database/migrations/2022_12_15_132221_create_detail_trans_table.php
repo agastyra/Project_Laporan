@@ -15,6 +15,10 @@ class CreateDetailTransTable extends Migration
     {
         Schema::create('detail_trans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transaksi_penjualans_id');
+            $table->foreignId('barangs_id');
+            $table->integer('qty');
+            $table->bigInteger('subTotal');
             $table->timestamps();
         });
     }

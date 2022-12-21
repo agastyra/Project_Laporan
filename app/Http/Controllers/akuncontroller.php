@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\akun;
 
-class akuncontroller extends Controller
+class akunController extends Controller
 {
     public function index()
     {
