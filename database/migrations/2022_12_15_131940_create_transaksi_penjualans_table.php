@@ -15,12 +15,15 @@ class CreateTransaksiPenjualansTable extends Migration
     {
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->id();
-            $table->string('noTrans');
-            $table->date('dateTrans');
-            $table->bigInteger('gTotal');
-            $table->bigInteger('diskon');
-            $table->bigInteger('bayar');
-            $table->bigInteger('kembali');
+            #ganti nama field (rangga)
+            $table->string('no_transaction', 5);
+            $table->date('date');
+            $table->string('customer', 50)->default("");
+            #ganti tipe data (rangga)
+            $table->double('grand_total')->default(0);
+            $table->double('diskon')->default(0);
+            $table->double('bayar')->default(0);
+            $table->double('kembali')->default(0);
             $table->timestamps();
         });
     }
