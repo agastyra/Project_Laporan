@@ -18,7 +18,7 @@ class CreateBarangsTable extends Migration
             $table->id();
             $table->string('no_barang', 5)->unique(); # ditambahkan rangga
             $table->string('name_barang', 30);
-            $table->int('stok', 3);
+            $table->integer('stok', 3)->default(0);
             # diganti rangga
             $table->double('harga_beli')->default(0);
             $table->double('harga_jual')->default(0);
