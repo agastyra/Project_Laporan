@@ -16,7 +16,7 @@ class CreateBuktiKasMasuksTable extends Migration
         Schema::create('bukti_kas_masuks', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->foreignId('id_transaksi_pembelian');
+            $table->foreignId('transaksi_penjualans_id');
             $table->string('description');
             $table->string('is_other');
             $table->string('other_acccount');
