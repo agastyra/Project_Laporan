@@ -14,6 +14,7 @@ class CreateTransaksiPembeliansTable extends Migration
     public function up()
     {
         Schema::create('transaksi_pembelians', function (Blueprint $table) {
+            $table->id();
             $table->integer('no_transaksi', 5);
             $table->date('tanggal');
             $table->string('vendor', 35);
