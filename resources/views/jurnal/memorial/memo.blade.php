@@ -3,7 +3,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal Penyesuaian
+                    <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal Memorial
                     </h4>
                     <div class="form-group row mt-5">
                         <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
