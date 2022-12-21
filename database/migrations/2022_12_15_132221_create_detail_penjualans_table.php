@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailTransTable extends Migration
+class CreateDetailPenjualansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateDetailTransTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail_trans', function (Blueprint $table) {
+        Schema::create('detail_penjualans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaksi_penjualans_id');
             $table->foreignId('barangs_id');
-            $table->integer('qty');
-            $table->bigInteger('subTotal');
+            $table->integer('qty', 4)->default(0);
+            $table->double('subTotal')->default(0);
             $table->timestamps();
         });
     }
