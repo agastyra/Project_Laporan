@@ -17,7 +17,8 @@ class CreateDetailPenjualansTable extends Migration
             $table->id();
             $table->foreignId('transaksi_penjualans_id');
             $table->foreignId('barangs_id');
-            $table->integer('qty', 4)->default(0);
+            // $table->integer('qty', 4); diganti oleh rangga
+            $table->integer('qty')->nullable();
             $table->double('subTotal')->default(0);
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateDetailPenjualansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_trans');
+        Schema::dropIfExists('detail_penjualans');
     }
 }
