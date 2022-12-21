@@ -15,7 +15,7 @@ class CreateTransaksiPembeliansTable extends Migration
     {
         Schema::create('transaksi_pembelians', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_transaksi', 5);
+            $table->integer('no_transaksi', 4);
             $table->date('tanggal');
             $table->string('vendor', 35);
             $table->double('gtotal');
