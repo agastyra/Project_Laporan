@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMemorialsTable extends Migration
+class CreateDetailPembeliansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateMemorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('memorials', function (Blueprint $table) {
+        Schema::create('detail_pembelians', function (Blueprint $table) {
             $table->id();
+            $table->int('transaction_id', 5);
+            $table->int('barang_id', 5);
+            $table->int('qty',3);
+            $table->double('sub_total');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateMemorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('memorials');
+        Schema::dropIfExists('detail_pembelians');
     }
 }
