@@ -15,4 +15,5 @@ class barang extends Model
     {
         return $this->belongsTo(detail_trans::class);
     }
+
 }
