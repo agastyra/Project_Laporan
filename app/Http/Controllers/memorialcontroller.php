@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class memorialcontroller extends Controller
 {
-    //
+    public function index()
+    {
+        return view('jurnal.memorial.memo');
+    }
 }

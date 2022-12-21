@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\DashControl;
+use App\Http\Controllers\memorialcontroller;
+use App\Models\transaksi_penjualan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +21,6 @@ Route::get('/', [DashControl::class, 'index']);
 
 Route::get('/accounting/accounts', [akuncontroller::class, "index"]);
 
-Route::get('/sales', function () {
-    return view('transaksi.penjualan.sales');
-});
+Route::get('/sales', [transaksi_penjualan::class, "index"]);
 
-Route::get('/memo', function () {
-    return view('jurnal.memorial.memo');
-});
+Route::get('/memo', [memorialcontroller::class, "index"]);
