@@ -14,11 +14,14 @@ class CreateTransaksiPembeliansTable extends Migration
     public function up()
     {
         Schema::create('transaksi_pembelians', function (Blueprint $table) {
-            $table->integer('no_transaksi', 5);
-            $table->date('tanggal');
-            $table->string('vendor', 35);
-            $table->double('gtotal');
-            $table->double('pot_harga');
+            $table->id(); # ditambahkan oleh rangga
+            $table->integer('no_transaction', 5); # direlasikan ke bukti kas keluar
+            $table->date('date');
+            $table->string('vendor', 50)->default("");
+            $table->double('grand_total')->default(0);
+            $table->double('diskon')->default(0);
+            $table->double('bayar')->default(0);
+            $table->double('kembali')->default(0);
             $table->timestamps();
         });
     }
