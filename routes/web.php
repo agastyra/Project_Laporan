@@ -22,3 +22,7 @@ Route::get('/accounting/accounts', [akuncontroller::class, "index"]);
 Route::get('/sales', function () {
     return view('transaksi.penjualan.sales');
 });
+
+Route::get('/memo', function () {
+    return view('jurnal.memorial.memo');
+});

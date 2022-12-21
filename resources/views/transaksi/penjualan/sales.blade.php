@@ -4,7 +4,7 @@
         <div class="col-lg-4 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-magnify text-info"></i> Cari Barang</h4>
+                    <h4 class="card-tittle"><i class="mdi mdi-magnify text-info icon-md"></i> Cari Barang</h4>
                     <div class="form-group">
                         <select class="js-example-basic-single" style="width:100%">
                             <option value="AL">Alabama</option>
@@ -20,7 +20,7 @@
         <div class="col-lg-8 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-buffer text-success"></i> Hasil Pencarian</h4>
+                    <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -57,7 +57,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-cash text-primary"></i> Pembayaran</h4>
+                    <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Pembayaran</h4>
                     <div class="row mt-3">
                         <div class="col-sm-4">
                             <div class="form-group row">
