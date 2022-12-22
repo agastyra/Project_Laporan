@@ -19,6 +19,11 @@ class akun extends Model
         'balance',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'no_account';
+    }
+
     public function jurnal_penyesuaian_detail()
     {
         return $this->hasMany(jurnal_penyesuaian_detail::class);

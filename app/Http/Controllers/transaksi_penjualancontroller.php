@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class transaksi_penjualancontroller extends Controller
 {
-    //
+    public function index()
+    {
+        return view("transaksi.penjualan.sales");
+    }
 }
