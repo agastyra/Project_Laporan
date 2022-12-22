@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body sm-6">
+                <div class="card-body">
                     <h5 class="card-title">Table Account</h5>
-                    <div style=align:right;>
+                    <div align="right">
                     <button class="positive ui button">Tambah</button>
                     <button class="negative ui button">Hapus</button>
                     </div>
