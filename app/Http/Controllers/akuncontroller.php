@@ -19,5 +19,4 @@ class akunController extends Controller
 
         return view('akun.show', compact('akun'));
     }
-
 }
