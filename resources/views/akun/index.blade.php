@@ -1,10 +1,14 @@
 {{-- Nanti pras kerjain tampilannya yaa --}}
 <x-layout.app>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Small Table</h5>
+                <div class="card-body sm-6">
+                    <h5 class="card-title">Table Account</h5>
+                    <div style=align:right;>
+                    <button class="positive ui button">Tambah</button>
+                    <button class="negative ui button">Hapus</button>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-sm">
                             <thead>
@@ -17,7 +21,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">1</th>
+
                                 </tr>
                             </tbody>
                         </table>
