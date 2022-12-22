@@ -22,6 +22,8 @@ class akunController extends Controller
             'akun' => $akun,
         ]);
     }
+<<<<<<< HEAD
+=======
 
     public function edit(akun $akun)
     {
@@ -66,4 +68,5 @@ class akunController extends Controller
 
         return redirect()->route('accounts');
     }
+>>>>>>> cbf5c9c9d4774734d2192155c0fc5da30c5474ae
 }
