@@ -18,7 +18,7 @@ class akunController extends Controller
 
     public function show(akun $akun)
     {
-        return view('akun.show', [
+        return view('akun.view', [
             'akun' => $akun,
         ]);
     }
