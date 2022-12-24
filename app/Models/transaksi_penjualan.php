@@ -11,8 +11,8 @@ class transaksi_penjualan extends Model
 
     protected $guarded = ['id'];
 
-    public function detail_trans()
+    public function detail_penjualan()
     {
-        return $this->belongsTo(detail_trans::class);
+        return $this->hasMany(detail_penjualan::class);
     }
 }
