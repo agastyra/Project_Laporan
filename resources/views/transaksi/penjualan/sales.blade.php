@@ -5,50 +5,49 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-magnify text-info icon-md"></i> Cari Barang</h4>
-                    <div class="form-group">
-                        <select class="js-example-basic-single" style="width:100%">
-                            <option value="AL">Alabama</option>
-                            <option value="WY">Wyoming</option>
-                            <option value="AM">America</option>
-                            <option value="CA">Canada</option>
-                            <option value="RU">Russia</option>
-                        </select>
+                    <form action="{{ route('search_barang') }}" method="GET">
+                        @csrf
+                        <input type="text" name="" id="" class="form-control" role="search">
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-8 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Harga</th>
-                                    <th>Jumlah</th>
-                                    <th>Keranjang</th>
+            <div class="col-lg-8 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah</th>
+                                        <th>Keranjang</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>BRG003</td>
-                                    <td>Kaos Gucci</td>
-                                    <td>100.0000</td>
-                                    <td>
-                                        <div class="col-sm-6">
-                                            <input class="form-control text-light" type="number" name="qty" id="qty">
-                                        </div>
-                                    </td>
-                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit">
+                                @if ($barangs->isNotEmpty())
+                                    @foreach ($barangs as $barang )
+                                    <tr>
+                                        <td>{{ $barang->no_barang }}</td>
+                                        <td>{{ $barang->name_barang }}</td>
+                                        <td>{{ $barang->harga_jual }}</td>
+                                        <td>
+                                            <div class="col-sm-6">
+                                                <input class="form-control text-light" type="number" name="qty" id="qty">
+                                            </div>
+                                        </td>
+                                        <td><button class="btn btn-icon btn-success btn-sm" type="submit">
                                             <i class="mdi mdi-cart"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

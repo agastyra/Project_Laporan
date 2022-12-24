@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\barang;
 use App\Models\detail_penjualan;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class transaksi_penjualancontroller extends Controller
@@ -26,8 +27,18 @@ class transaksi_penjualancontroller extends Controller
         $detail = detail_penjualan::where('transaksi_penjualans_id', $this->nota)->get();
         return view("transaksi.penjualan.sales", [
             'date' => $date,
-            'name_barang' => $barang,
+            'barang' => $barang,
             'detail' => $detail,
+        ]);
+    }
+
+    public function searchBarang(Request $request)
+    {
+        $barangs = barang::where('no_barang', 'LIKE', "%{$request->search}%")
+            ->orWhere('name_barang', 'LIKE', "%{$request->search}%")->get();
+
+        return view('transaksi.penjualan.sales', [
+            'barangs' => $barangs,
         ]);
     }
 }
