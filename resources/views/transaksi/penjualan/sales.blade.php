@@ -7,23 +7,27 @@
                     <h4 class="card-tittle"><i class="mdi mdi-magnify text-info icon-md"></i> Cari Barang</h4>
                     <form action="{{ route('search_barang') }}" method="GET">
                         @csrf
-                        <input type="text" name="" id="" class="form-control" role="search">
-                    </div>
+                        <div class="form-group">
+                            <input type="text" name="term" id="term" class="form-control text-light" role="search">
+                            <button type="submit" class="btn btn-info btn-icon"><i class="mdi mdi-magnify"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-lg-8 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Barang</th>
-                                        <th>Nama Barang</th>
-                                        <th>Harga</th>
-                                        <th>Jumlah</th>
-                                        <th>Keranjang</th>
+        </div>
+        <div class="col-lg-8 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Kode Barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>Keranjang</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,15 +43,16 @@
                                             </div>
                                         </td>
                                         <td><button class="btn btn-icon btn-success btn-sm" type="submit">
-                                            <i class="mdi mdi-cart"></i></button>
+                                                <i class="mdi mdi-cart"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
+                                @else
+                                <h2>barang tidak ditemukan</h2>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
