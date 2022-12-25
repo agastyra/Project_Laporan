@@ -28,6 +28,6 @@ Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"])->name('sales');
-Route::get('/sales', [transaksi_penjualancontroller::class, "index"])->name('search_barang');
+Route::get('/sales', [transaksi_penjualancontroller::class, "search"])->name('search_barang');
 
 Route::get('/memo', [memorialcontroller::class, "index"]);

@@ -8,8 +8,8 @@
                     <form action="{{ route('search_barang') }}" method="GET">
                         @csrf
                         <div class="form-group">
-                            <input type="text" name="term" id="term" class="form-control text-light" role="search">
-                            <button type="submit" class="btn btn-info btn-icon"><i class="mdi mdi-magnify"></i></button>
+                            <input type="text" name="keyword" id="keyword" value="{{ request('keyword') }}"
+                                class="form-control text-light" role="search">
                         </div>
                     </form>
                 </div>
@@ -32,23 +32,21 @@
                             </thead>
                             <tbody>
                                 @if ($barangs->isNotEmpty())
-                                    @foreach ($barangs as $barang )
-                                    <tr>
-                                        <td>{{ $barang->no_barang }}</td>
-                                        <td>{{ $barang->name_barang }}</td>
-                                        <td>{{ $barang->harga_jual }}</td>
-                                        <td>
-                                            <div class="col-sm-6">
-                                                <input class="form-control text-light" type="number" name="qty" id="qty">
-                                            </div>
-                                        </td>
-                                        <td><button class="btn btn-icon btn-success btn-sm" type="submit">
-                                                <i class="mdi mdi-cart"></i></button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                <h2>barang tidak ditemukan</h2>
+                                @foreach ($barangs as $barang )
+                                <tr>
+                                    <td>{{ $barang->no_barang }}</td>
+                                    <td>{{ $barang->name_barang }}</td>
+                                    <td>{{ $barang->harga_jual }}</td>
+                                    <td>
+                                        <div class="col-sm-6">
+                                            <input class="form-control text-light" type="number" name="qty" id="qty">
+                                        </div>
+                                    </td>
+                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit">
+                                            <i class="mdi mdi-cart"></i></button>
+                                    </td>
+                                </tr>
+                                @endforeach
                                 @endif
                             </tbody>
                         </table>

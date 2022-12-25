@@ -23,30 +23,23 @@ class transaksi_penjualancontroller extends Controller
         }
 
         $date = date('Y-m-d');
-        $barangs = barang::where([
-            ['name_barang', '!=', null],
-            [
-                function ($query) use ($request) {
-                    if (($term = $request->term)) {
-                        $query->orWhere('name_barang', 'LIKE', '%' . $term . '%')->get();
-                    }
-                }
-            ]
-        ])
-            ->orderBy('id')
-            ->paginate(10);
+        $barangs = barang::all();
         $detail = detail_penjualan::where('transaksi_penjualans_id', $this->nota)->get();
-        return view("transaksi.penjualan.sales", compact('barangs'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view("transaksi.penjualan.sales", [
+            'barangs' => $barangs,
+        ]);
     }
 
-// public function searchBarang(Request $request)
-// {
-//     $barangs = barang::where('no_barang', 'LIKE', "%{$request->search}%")
-//         ->orWhere('name_barang', 'LIKE', "%{$request->search}%")->get();
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $barangs = collect([]);
+        if ($keyword) {
+            $barangs = barang::query()
+                ->where('no_barang', 'like', "%{$keyword}%")
+                ->orWhere('name_barang', 'like', "%{$keyword}%")->get();
+        }
 
-//     return view('transaksi.penjualan.sales', [
-//         'barangs' => $barangs,
-//     ]);
-// }
+        return view('transaksi.penjualan.sales', compact('barangs'));
+    }
 }
