@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\akun;
 use App\Models\barang;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,12 +21,14 @@ class DatabaseSeeder extends Seeder
             'no_account' => '1000',
             'name_account' => 'Aktiva Lancar',
             'is_header_account' => true,
+            'type_account' => "1",
         ]);
 
         akun::create([
             'no_account' => '1001',
             'name_account' => 'Kas',
             'header_account' => "1000",
+            'type_account' => "1",
         ]);
 
         barang::create([
