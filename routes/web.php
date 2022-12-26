@@ -23,7 +23,7 @@ Route::get('/', [DashControl::class, 'index']);
 // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
 Route::post('/accounting/accounts', [akuncontroller::class, "store"])->name('save_account');
-Route::get('/accounting/accounts/{akun}', [akuncontroller::class, "show"])->name('detail_account');
+Route::get('/accounting/accounts/new', [akuncontroller::class, "create"])->name('create_account');
 Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])->name('edit_account');
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])->name('update_account');
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');

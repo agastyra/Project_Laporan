@@ -19,6 +19,7 @@ class CreateAkunsTable extends Migration
             $table->string('name_account', 100)->unique();
             $table->boolean('is_header_account')->nullable()->default(false);
             $table->string('header_account', 4)->nullable()->default("");
+            $table->string('type_account', 1);
             $table->double('balance')->nullable()->default(0);
             $table->timestamps();
         });

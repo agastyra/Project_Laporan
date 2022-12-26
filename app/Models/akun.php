@@ -11,13 +11,7 @@ class akun extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'no_account',
-        'name_account',
-        'is_header_account',
-        'header_account',
-        'balance',
-    ];
+    protected $guarded = ['id'];
 
     public function getRouteKeyName()
     {
