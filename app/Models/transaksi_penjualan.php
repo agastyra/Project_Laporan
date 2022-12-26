@@ -9,7 +9,15 @@ class transaksi_penjualan extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'no_transaction',
+        'date',
+        'customer',
+        'grand_total',
+        'diskon',
+        'bayar',
+        'kembali',
+    ];
 
     public function detail_penjualan()
     {

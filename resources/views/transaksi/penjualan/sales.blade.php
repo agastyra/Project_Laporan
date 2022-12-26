@@ -26,7 +26,6 @@
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
                                     <th>Harga</th>
-                                    <th>Jumlah</th>
                                     <th>Keranjang</th>
                                 </tr>
                             </thead>
@@ -37,12 +36,8 @@
                                     <td>{{ $barang->no_barang }}</td>
                                     <td>{{ $barang->name_barang }}</td>
                                     <td>{{ $barang->harga_jual }}</td>
-                                    <td>
-                                        <div class="col-sm-6">
-                                            <input class="form-control text-light" type="number" name="qty" id="qty">
-                                        </div>
-                                    </td>
-                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit">
+                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit"
+                                            data-bs-toggle="modal" data-bs-target="#modal-keranjang">
                                             <i class="mdi mdi-cart"></i></button>
                                     </td>
                                 </tr>
@@ -65,7 +60,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tanggal</label>
                                 <div class="col-sm-9 text-dark">
-                                    <input class="form-control text-dark" placeholder="{{ date('Y-m-d') }}" disabled />
+                                    <input class="form-control text-dark" value="{{ date('Y-m-d') }}" disabled />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -145,6 +140,49 @@
             </div>
         </div>
         <!-- Modal -->
+        <div class="modal fade" id="modal-keranjang" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Opsi Barang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form action="{{ route('detail') }}" method="post">
+                                @csrf
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nama Barang</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Harga</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark" type="number" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Jumlah</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark" type="number" placeholder="1" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                                class="mdi mdi-window-close"></i> Tutup</button>
+                        <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -203,6 +241,18 @@
         </div>
 </x-layout.app>
 @push('jssj')
+<script>
+    var modalKr = document.getElementById('modal-keranjang');
+        
+            modalEd.addEventListener('show.bs.modal', function (event) {
+                  // Button that triggered the modal
+                  let button = event.relatedTarget;
+                  // Extract info from data-bs-* attributes
+                  let recipient = button.getAttribute('data-bs-whatever');
+        
+                // Use above variables to manipulate the DOM
+            });
+</script>
 <script>
     var modalEd = document.getElementById('modal-edit');
         

@@ -9,7 +9,12 @@ class detail_penjualan extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'transaksi_penjualans_id',
+        'barangs_id',
+        'qty',
+        'subTotal',
+    ];
 
     public function transaksi_penjualan()
     {

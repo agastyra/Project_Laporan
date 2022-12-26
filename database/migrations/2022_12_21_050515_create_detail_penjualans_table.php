@@ -18,7 +18,7 @@ class CreateDetailPenjualansTable extends Migration
             $table->foreignId('transaksi_penjualans_id');
             $table->foreignId('barangs_id');
             // $table->integer('qty', 4); diganti oleh rangga
-            $table->integer('qty')->nullable();
+            $table->integer('qty')->default(1);
             $table->double('subTotal')->default(0);
             $table->timestamps();
         });
