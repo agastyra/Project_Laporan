@@ -36,20 +36,22 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama Barang</th>
+                                    <th>No Barang</th>
+                                    <th>Name Barang</th>
                                     <th>Stock</th>
                                     <th>Purchase Price</th>
-                                    <th>Selling Pricc</th>
+                                    <th>Selling Price</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td> 1 </td>
-                                    <td>Kaos Gucci</td>
-                                    <td> $ 77.99 </td>
                                     <td>1</td>
-                                    <td> $ 77.99 </td>
+                                    <td>BRG01</td>
+                                    <td>Tas Guci</td>
+                                    <td>4</td>
+                                    <td>300000</td>
+                                    <td>400000 </td>
                                     <td>
                                         <button type="submit" class="btn btn-icon btn-success btn-sm "
                                             data-bs-toggle="modal" data-bs-target="#modal-edit"><i
@@ -66,6 +68,87 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Edit Barang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Barang</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-dark" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jumlah</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-white" type="number" placeholder="1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                            class="mdi mdi-window-close"></i> Tutup</button>
+                    <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
+    <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Hapus Barang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="display4">
+                            <h4>Apakah Barang Ingin dihapus?</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                            class="mdi mdi-window-close"></i> Batal</button>
+                    <button type="submit" class="btn btn-success"><i class="mdi mdi-check"></i> Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-layout.app>
+@push('jssj')
+    <script>
+        var modalEd = document.getElementById('modal-edit');
+
+        modalEd.addEventListener('show.bs.modal', function(event) {
+            // Button that triggered the modal
+            let button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            let recipient = button.getAttribute('data-bs-whatever');
+
+            // Use above variables to manipulate the DOM
+        });
+    </script>
+    <script>
+        var modalHp = document.getElementById('modal-hapus');
+
+        modalHp.addEventListener('show.bs.modal', function(event) {
+            // Button that triggered the modal
+            let button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            let recipient = button.getAttribute('data-bs-whatever');
+
+            // Use above variables to manipulate the DOM
+        });
+    </script>
+@endpush
