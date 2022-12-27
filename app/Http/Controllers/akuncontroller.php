@@ -26,7 +26,9 @@ class akunController extends Controller
 
     public function edit(akun $akun)
     {
+        $akun_headers = akun::where('is_header_account', true)->get();
         return view('akun.edit', [
+            'akun_headers' => $akun_headers,
             'akun' => $akun,
         ]);
     }
