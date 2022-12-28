@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class bukti_kas_keluarcontroller extends Controller
 {
-    //
+    public function index()
+    {
+        return view('BuktiKasKeluar.index');
+    }
 }
