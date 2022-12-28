@@ -26,7 +26,9 @@ class akunController extends Controller
 
     public function edit(akun $akun)
     {
+        $akun_headers = akun::where('is_header_account', true)->get();
         return view('akun.edit', [
+            'akun_headers' => $akun_headers,
             'akun' => $akun,
         ]);
     }
@@ -37,7 +39,7 @@ class akunController extends Controller
             'no_account' => 'required|size:4|unique:akuns',
             'name_account' => 'required|max:100|unique:akuns',
             'is_header_account' => '',
-            'header_account' => '',
+            'header_account' => 'required_if:is_header_account,false',
             'type_account' => 'required',
             'balance' => '',
         ]);
@@ -53,7 +55,7 @@ class akunController extends Controller
             'no_account' => 'required|size:3|unique:akuns',
             'name_account' => 'required|max:100|unique:akuns',
             'is_header_account' => '',
-            'header_account' => '',
+            'header_account' => 'required_if:is_header_account,false',
             'balance' => '',
         ]);
 
