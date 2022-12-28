@@ -39,7 +39,7 @@ class akunController extends Controller
             'no_account' => 'required|size:4|unique:akuns',
             'name_account' => 'required|max:100|unique:akuns',
             'is_header_account' => '',
-            'header_account' => '',
+            'header_account' => 'required_if:is_header_account,false',
             'type_account' => 'required',
             'balance' => '',
         ]);
@@ -55,7 +55,7 @@ class akunController extends Controller
             'no_account' => 'required|size:3|unique:akuns',
             'name_account' => 'required|max:100|unique:akuns',
             'is_header_account' => '',
-            'header_account' => '',
+            'header_account' => 'required_if:is_header_account,false',
             'balance' => '',
         ]);
 
