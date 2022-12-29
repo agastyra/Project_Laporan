@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\akuncontroller;
-use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
+use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Models\bukti_kas_keluar;
 use Illuminate\Support\Facades\Route;
