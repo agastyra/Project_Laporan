@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\akuncontroller;
-use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
+use App\Models\bukti_kas_keluar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +36,7 @@ Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/barang', [barangcontroller::class, "index"]);
 
+//route kas keluar
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
+Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
+Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
