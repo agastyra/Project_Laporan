@@ -125,15 +125,15 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Kembali</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark" placeholder="0" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Bayar</label>
                                 <div class="col-sm-9">
                                     <input class="form-control text-light" type="number" placeholder="Bayar" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Kembali</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control text-dark" placeholder="0" disabled />
                                     <div class="col-sm-12 mt-3">
                                         <button type="submit" class="btn btn-success"><i
                                                 class="mdi mdi-cart-outline"></i>
