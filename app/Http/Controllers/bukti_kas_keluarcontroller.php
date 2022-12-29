@@ -14,4 +14,9 @@ class bukti_kas_keluarcontroller extends Controller
     {
         return view('BuktiKasKeluar.tb_kas_keluar');
     }
+
+    public function form()
+    {
+        return view('buktikaskeluar.form');
+    }
 }
