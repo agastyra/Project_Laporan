@@ -7,11 +7,9 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">id</th>
                                 <th scope="col">tgl</th>
-                                <th scope="col">no trans pemb</th>
-                                <th scope="col">is other</th>
-                                <th scope="col">other account</th>
+                                <th scope="col">No Bukti Pembelian</th>
+                                <th>Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,12 +18,6 @@
                                 <td>Mark</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
                             </tr>
                         </tbody>
                     </table>
