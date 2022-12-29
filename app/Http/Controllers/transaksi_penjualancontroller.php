@@ -36,8 +36,15 @@ class transaksi_penjualancontroller extends Controller
             'barangs' => $barangs,
             'date' => $date,
             'detail' => $detail,
-            'grand_total' => $grandTotal,
+            // 'grand_total' => $grandTotal,
         ]);
+    }
+
+    public function createTrans($transaksiId)
+    {
+        if (is_null($transaksiId)) {
+            abort(404);
+        }
     }
 
     public function search(Request $request)
@@ -57,7 +64,7 @@ class transaksi_penjualancontroller extends Controller
     {
         $input = $request->all();
 
-        $transaksiId = $input['id'];
+        $transaksiId = $input['no_transaction'];
         $qty = $input['qty'];
 
         transaksi_penjualan::firstOrCreate([
