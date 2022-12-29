@@ -5,11 +5,19 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-magnify text-info icon-md"></i> Cari Barang</h4>
-                    <form action="{{ route('search_barang') }}" method="GET">
+                    <form action="" method="GET">
                         @csrf
-                        <div class="form-group">
-                            <input type="text" name="keyword" id="keyword" value="{{ request('keyword') }}"
-                                class="form-control text-light" role="search">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Kode Barang</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukkan Kode Barang">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jumlah</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukkan Jumlah">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -19,33 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Harga</th>
-                                    <th>Keranjang</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($barangs->isNotEmpty())
-                                @foreach ($barangs as $barang )
-                                <tr>
-                                    <td>{{ $barang->no_barang }}</td>
-                                    <td>{{ $barang->name_barang }}</td>
-                                    <td>{{ $barang->harga_jual }}</td>
-                                    <td><button class="btn btn-icon btn-success btn-sm" type="submit"
-                                            data-bs-toggle="modal" data-bs-target="#modal-keranjang">
-                                            <i class="mdi mdi-cart"></i></button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
+                    // konten
                 </div>
             </div>
         </div>
