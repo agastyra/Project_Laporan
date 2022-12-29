@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\barang;
 use App\Models\detail_penjualan;
+use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,6 @@ class transaksi_penjualancontroller extends Controller
 {
 
     public $nota;
-    public $data = [];
     public function index()
     {
         $sales = DB::table('transaksi_penjualans')->select(DB::raw('MAX(id) as NSale'));
@@ -42,59 +42,105 @@ class transaksi_penjualancontroller extends Controller
 
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword');
-        $barangs = collect([]);
-        if ($keyword) {
-            $barangs = barang::query()
-                ->where('no_barang', 'like', "%{$keyword}%")
-                ->orWhere('name_barang', 'like', "%{$keyword}%")->get();
-        }
+        // $keyword = $request->input('keyword');
+        // $barangs = collect([]);
+        // if ($keyword) {
+        //     $barangs = barang::query()
+        //         ->where('no_barang', 'like', "%{$keyword}%")
+        //         ->orWhere('name_barang', 'like', "%{$keyword}%")->get();
+        // }
 
-        return view('transaksi.penjualan.sales', compact('barangs'));
+        // return view('transaksi.penjualan.sales', compact('barangs'));
     }
 
     public function storeDetail(Request $request)
     {
-        $sales = DB::table('transaksi_penjualans')->select(DB::raw('MAX(id) as num'));
-        if ($sales->count() > 0) {
-            foreach ($sales->get() as $key) {
-                $no = ((int) $key->num + 1);
+        $input = $request->all();
+
+        $transaksiId = $input['id'];
+        $qty = $input['qty'];
+
+        transaksi_penjualan::firstOrCreate([
+            'id' => $transaksiId,
+        ]);
+
+        $barangs = barang::where('no_barang', $input['no_barang'])->get();
+        foreach ($barangs as $barang) {
+            $barangId = $barang->id;
+            $barangName = $barang->name_barang;
+            $barangPrice = $barang->harga_jual;
+            $barangStock = $barang->stok;
+        }
+
+        if (isset($barangId)) {
+            return redirect()->back()->withErrors('Produk Tidak Ditemukan');
+        }
+
+        $details = detail_penjualan::where([
+            ['transaksi_penjualans_id', '=', $transaksiId],
+            ['barangs_id', '=', $barangId]
+        ])->get();
+
+        $subTotal = $qty * $barangPrice;
+        $reduceStock = $barangStock - $qty;
+
+        $stockReduce = [
+            'stok' => $reduceStock
+        ];
+
+        $request->validate([
+            'barangs_id' => 'required',
+            'transaksi_penjualans_id' => 'required',
+            'qty' => 'required',
+            'subTotal' => 'required'
+        ]);
+
+        $create = ([
+            'barangs_id' => $barangId,
+            'transaksi_penjualan_id' => $transaksiId,
+            'qty' => $qty,
+            'subTotal' => $subTotal,
+        ]);
+
+        if ($barangStock == 0) {
+            return redirect()->back()->withErrors('Stok' . $barangName . 'Kosong');
+        }elseif ((int)$qty <= $barangStock) {
+            if ($details->isEmpty()) {
+                foreach ($details as $detail) {
+                    if ($detail->barangs_id == $barangId) {
+                        $update = [
+                            'qty' => $detail->qty + $qty,
+                            'subTotal' => $detail->subTotal + $subTotal,
+                        ];
+                        detail_penjualan::findOrFail($detail->id)->update($update);
+                        barang::findOrFail($barangId)->update($stockReduce);
+                    }else {
+                        detail_penjualan::create($create);
+                        barang::findOrFail($barangId)->update($stockReduce);
+                    }
+                    
+                }
+            }else {
+                detail_penjualan::create($create);
+                barang::findOrFail($barangId)->update($stockReduce);
             }
-        }else {
-            $no = 1;
         }
 
-        // $barangs = barang::all();
+       
 
-        $details = DB::table('detail_penjualans')->where('transaksi_penjualans_id', $no)->where('barangs_id', $this->data['name_barang'])->first();
+        
 
-        if ($details) {
-           $valid = $request->validate($this->data, [
-                'name_barang' => 'required|max:30|unique:barangs',
-                'harga_jual' => 'required',
-                'qty' => 'required',
-                'subTotal' => 'required',
-            ]);
+        // $sales = DB::table('transaksi_penjualans')->select(DB::raw('MAX(id) as num'));
+        // if ($sales->count() > 0) {
+        //     foreach ($sales->get() as $key) {
+        //         $no = ((int) $key->num + 1);
+        //     }
+        // }else {
+        //     $no = 1;
+        // }
 
-            $qtyTotal = $details->qty + $this->data['qty'];
-            $totalSub = $details->subTotal + $this->data['subTotal'];
+        
 
-            DB::table('detail_penjualans')->where('transaksi_penjualans_id', $no)->where('barangs_id', $this->data['name_barang'])
-                ->update(['qty' => $qtyTotal, 'subTotal' => $totalSub]);
-        }else {
-            $valid = $request->validate($this->data, [
-                'name_barang' => 'required|max:30|unique:barangs',
-                'harga_jual' => 'required',
-                'qty' => 'required',
-                'subTotal' => 'required',
-            ]);
-
-            detail_penjualan::create([
-                'transaksi_penjualans_id' => $no,
-                'barangs_id' => $this->data['name_barang'],
-                'qty' => $this->data['qty'],
-                'subTotal' => $this->data['subTotal'],
-            ]);
-        }
+        
     }
 }

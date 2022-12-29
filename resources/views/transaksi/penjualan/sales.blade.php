@@ -150,7 +150,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form action="{{ route('detail') }}" method="post">
+                            <form action="" method="post">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Barang</label>

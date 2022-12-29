@@ -29,6 +29,6 @@ Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])
 
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"])->name('sales');
 Route::get('/sales', [transaksi_penjualancontroller::class, "search"])->name('search_barang');
-Route::get('/sales', [transaksi_penjualancontroller::class, "storeDetail"])->name('detail');
+// Route::get('/sales', [transaksi_penjualancontroller::class, "storeDetail"])->name('detail');
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
