@@ -4,6 +4,7 @@ use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
+use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,7 @@ Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/barang', [barangcontroller::class, "index"]);
+
+Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
 
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
