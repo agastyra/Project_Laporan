@@ -34,23 +34,10 @@
                             <button class="positive ui button">Simpan</button>
                             <a class="negative ui button" href="{{ route('accounts') }}">Batal</a>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
                 </form>
-
-
-               
- </d iv>
-            </div>
+            </d
+iv>
         </div>
+    </div>
 
 </x-layout.app>
