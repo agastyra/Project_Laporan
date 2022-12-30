@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DetailStoreRequest;
+use App\Http\Requests\TranSaleRequest;
 use App\Models\barang;
 use App\Models\detail_penjualan;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class transaksi_penjualancontroller extends Controller
 {
@@ -14,30 +17,30 @@ class transaksi_penjualancontroller extends Controller
     public $nota;
     public function index()
     {
-        $sales = DB::table('transaksi_penjualans')->select(DB::raw('MAX(id) as NSale'));
-        if ($sales->count() > 0) {
-            foreach ($sales->get() as $key) {
-                $this->nota = ((int) $key->NSale + 1);
-            }
-        } else {
-            $this->nota = 1;
-        }
+        // $sales = DB::table('transaksi_penjualans')->select(DB::raw('MAX(id) as NSale'));
+        // if ($sales->count() > 0) {
+        //     foreach ($sales->get() as $key) {
+        //         $this->nota = ((int) $key->NSale + 1);
+        //     }
+        // } else {
+        //     $this->nota = 1;
+        // }
 
-        $date = date('Y-m-d');
-        $barangs = barang::all();
-        $detail = detail_penjualan::where('transaksi_penjualans_id', $this->nota)->get();
+        // $date = date('Y-m-d');
+        // $barangs = barang::all();
+        // $detail = detail_penjualan::where('transaksi_penjualans_id', $this->nota)->get();
 
-        if ($detail->count() > 0) {
-            $total = DB::table('detail_penjualans')->select(DB::raw('SUM(subTotal) as grand_total'))
-                ->where('transaksi_penjualans_id', $this->nota)->groupBy('transaksi_penjualans_id')->first();
-            $grandTotal = $total->grand_total;
-        }
-        return view("transaksi.penjualan.sales", [
-            'barangs' => $barangs,
-            'date' => $date,
-            'detail' => $detail,
-            // 'grand_total' => $grandTotal,
-        ]);
+        // if ($detail->count() > 0) {
+        //     $total = DB::table('detail_penjualans')->select(DB::raw('SUM(subTotal) as grand_total'))
+        //         ->where('transaksi_penjualans_id', $this->nota)->groupBy('transaksi_penjualans_id')->first();
+        //     $grandTotal = $total->grand_total;
+        // }
+        // return view("transaksi.penjualan.sales", [
+        //     'barangs' => $barangs,
+        //     'date' => $date,
+        //     'detail' => $detail,
+        //     // 'grand_total' => $grandTotal,
+        // ]);
     }
 
     public function createTrans($transaksiId)
@@ -45,6 +48,36 @@ class transaksi_penjualancontroller extends Controller
         if (is_null($transaksiId)) {
             abort(404);
         }
+
+        $details = detail_penjualan::with([
+            'barangs_id'
+        ])->where('transaksi_penjualans_id', $transaksiId);
+
+        $items = $details->get();
+        $subTotal = $details->sum('subTotal');
+
+        return view('transaksi.penjualan.sales', [
+            'transaksiId' => $transaksiId,
+            'items' => $items,
+            'subTotal' => $subTotal
+        ]);
+    }
+
+    public function storeTrans(TranSaleRequest $request)
+    {
+        $request = $request->all();
+
+        $data['grand_total'] = str_replace(',', '', $request['grand_total']);
+        $data['bayar'] = str_replace(',', '', $request['bayar']);
+        $data['kembali'] = str_replace(',', '', $request['kembali']);
+
+        $transaksiId = now() . transaksi_penjualan::all()->count();
+
+        transaksi_penjualan::where('no_transaction', $request['no_transaction'])
+            ->update($data);
+
+        return redirect()->route('transaksi.create');
+
     }
 
     public function search(Request $request)
@@ -60,7 +93,7 @@ class transaksi_penjualancontroller extends Controller
         // return view('transaksi.penjualan.sales', compact('barangs'));
     }
 
-    public function storeDetail(Request $request)
+    public function storeDetail(DetailStoreRequest $request)
     {
         $input = $request->all();
 
@@ -68,7 +101,7 @@ class transaksi_penjualancontroller extends Controller
         $qty = $input['qty'];
 
         transaksi_penjualan::firstOrCreate([
-            'id' => $transaksiId,
+            'no_transaction' => $transaksiId,
         ]);
 
         $barangs = barang::where('no_barang', $input['no_barang'])->get();
@@ -94,13 +127,6 @@ class transaksi_penjualancontroller extends Controller
         $stockReduce = [
             'stok' => $reduceStock
         ];
-
-        $request->validate([
-            'barangs_id' => 'required',
-            'transaksi_penjualans_id' => 'required',
-            'qty' => 'required',
-            'subTotal' => 'required'
-        ]);
 
         $create = ([
             'barangs_id' => $barangId,
@@ -131,6 +157,9 @@ class transaksi_penjualancontroller extends Controller
                 detail_penjualan::create($create);
                 barang::findOrFail($barangId)->update($stockReduce);
             }
+            return redirect()->route('transaksi.create', $transaksiId);
+        }else{
+            return redirect()->back();
         }
 
        

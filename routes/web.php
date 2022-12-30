@@ -4,6 +4,7 @@ use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
+use App\Models\transaksi_penjualan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,7 @@ Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"])->name('sales');
+Route::get('/sales/trans/{no_transaction}', [transaksi_penjualancontroller::class, "createTrans"])->name('transaksi.create');
 // Route::get('/sales', [transaksi_penjualancontroller::class, "search"])->name('search_barang');
 // Route::get('/sales', [transaksi_penjualancontroller::class, "storeDetail"])->name('detail');
 
