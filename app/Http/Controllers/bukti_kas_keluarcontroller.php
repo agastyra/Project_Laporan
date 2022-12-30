@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 class bukti_kas_keluarcontroller extends Controller
 {
-    public function index()
+    public function report()
     {
-        return view('BuktiKasKeluar.index');
+        return view('BuktiKasKeluar.report');
     }
 
 
