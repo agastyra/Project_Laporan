@@ -179,4 +179,67 @@ class transaksi_penjualancontroller extends Controller
 
         
     }
+
+    public function updateDetail(Request $request, $id)
+    {
+        $input = $request->all();
+
+        $id = $id;
+
+        $transaksiId = $input['no_transaction'];
+        $qty = $input['qty'];
+
+        $valid = Validator::make($input, [
+            'no_transaction' => 'required',
+            'qty' => 'required'
+        ]);
+
+        if ($valid->fails()) {
+            return redirect()->route('transaksi.create', $transaksiId)
+                ->withErrors($valid)
+                ->withInput();
+        }
+
+        $details = detail_penjualan::find($id);
+        $stockSale = $details->qty;
+        $barangId = $details->barangs_id;
+
+        $barangs = barang::findOrFail($barangId);
+        $barangPrice = $barangs->harga_jual;
+        $barangStock = $barangs->stok;
+
+        $firstStock = $barangStock + $stockSale;
+        $stockReduce = $firstStock - $qty;
+        $total = $qty * $barangPrice;
+
+        if ((int)$qty < $firstStock) {
+            detail_penjualan::findOrFail($id)->update([
+                'qty' => $qty,
+                'subTotal' => $total
+            ]);
+            barang::findOrFail($barangId)->update([
+                'stok' => $stockReduce
+            ]);
+            return redirect()->route('transaksi.create');
+        }else {
+            return redirect()->back()->withErrors('Stok tidak mencukupi');
+        }
+    }
+
+    public function destroy($id)
+    {
+        $details = detail_penjualan::findOrFail($id);
+        $stockSale = $details->qty;
+        $barangId = $details->barangs_id;
+
+        $barangStock = barang::findOrFail($barangId)->stok;
+        $firstStock = $barangStock + $stockSale;
+
+        barang::findOrFail($barangId)->update([
+            'stok' => $firstStock
+        ]);
+
+        detail_penjualan::findOrFail($id)->delete();
+        return redirect()->back();
+    }
 }
