@@ -3,6 +3,7 @@
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\barangcontroller;
@@ -35,6 +36,8 @@ Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
+
+Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
 Route::get('/barang', [barangcontroller::class, "index"]);
 
