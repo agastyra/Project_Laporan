@@ -7,6 +7,7 @@ use App\Http\Controllers\transaksi_penjualancontroller;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
+use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Models\bukti_kas_keluar;
 use Illuminate\Support\Facades\Route;
 
@@ -45,3 +46,8 @@ Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
+
+//route kas masuk
+Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
+Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
+Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
