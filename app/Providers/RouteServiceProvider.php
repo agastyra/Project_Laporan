@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -33,6 +34,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    protected $namespace = 'App\Http\Controller';
     public function boot()
     {
         $this->configureRateLimiting();

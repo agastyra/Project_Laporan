@@ -13,7 +13,7 @@ class TranSaleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

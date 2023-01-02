@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\DashControl;
+use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use App\Models\transaksi_penjualan;
@@ -28,9 +29,12 @@ Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])-
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])->name('update_account');
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
-Route::get('/sales', [transaksi_penjualancontroller::class, "index"])->name('sales');
-Route::get('/sales/trans/{no_transaction}', [transaksi_penjualancontroller::class, "createTrans"])->name('transaksi.create');
-// Route::get('/sales', [transaksi_penjualancontroller::class, "search"])->name('search_barang');
-// Route::get('/sales', [transaksi_penjualancontroller::class, "storeDetail"])->name('detail');
+Route::resource('detail', DetailPenjualanController::class);
+Route::post('/sales/save', [transaksi_penjualancontroller::class, "store"])->name('transaksi.store');
+Route::resource('sales', transaksi_penjualancontroller::class)->except([
+    'create'
+]);
+Route::get('/sales/{no_transaction?}', [transaksi_penjualancontroller::class, "create"])->name('transaksi.create');
+
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
