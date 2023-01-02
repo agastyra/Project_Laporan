@@ -42,6 +42,6 @@ Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 
 //route kas keluar
-Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
+Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
