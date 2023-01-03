@@ -45,3 +45,4 @@ Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
+Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
