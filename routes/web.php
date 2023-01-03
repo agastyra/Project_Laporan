@@ -3,10 +3,12 @@
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
+use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Models\bukti_kas_keluar;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +37,8 @@ Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 
+Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
+
 Route::get('/barang', [barangcontroller::class, "index"]);
 
 Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
@@ -45,4 +49,12 @@ Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
+<<<<<<< HEAD
 Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
+=======
+
+//route kas masuk
+Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
+Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
+Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
+>>>>>>> c5fb78234602c159911aedb99ef2829728994c03
