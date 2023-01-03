@@ -54,3 +54,4 @@ Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
 Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
 Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
+Route::get('/nota_penjualan', [bukti_kas_masukcontroller::class, "nota"]);

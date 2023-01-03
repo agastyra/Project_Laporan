@@ -20,4 +20,9 @@ class bukti_kas_masukcontroller extends Controller
     {
         return view('BuktiKasMasuk.tb_kas_masuk');
     }
+
+    public function nota()
+    {
+        return view('BuktiKasMasuk.nota-penjualan');
+    }
 }
