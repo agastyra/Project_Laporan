@@ -15,12 +15,15 @@ class CreateDetailPenjualansTable extends Migration
     {
         Schema::create('detail_penjualans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_penjualans_id');
-            $table->foreignId('barangs_id');
-            // $table->integer('qty', 4); diganti oleh rangga
+            $table->string('no_transaction');
+            $table->unsignedBigInteger('barangs_id');
+            $table->double('harga_jual');
             $table->integer('qty')->default(1);
             $table->double('subTotal')->default(0);
             $table->timestamps();
+
+            $table->foreign('no_transaction')->references('no_transaction')->on('transaksi_penjualans');
+            $table->foreign('barangs_id')->references('id')->on(' barangs');
         });
     }
 

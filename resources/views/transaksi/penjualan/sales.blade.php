@@ -1,5 +1,5 @@
 <x-layout.app>
-    <form action="{{ route('detail.store') }}" method="POST">
+    <form action="{{ route('detail.store') }}" method="post">
         @csrf
         <div class="row">
             <h3 class="header">Transaksi Penjualan</h3>

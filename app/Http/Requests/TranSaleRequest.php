@@ -25,6 +25,8 @@ class TranSaleRequest extends FormRequest
     {
         return [
            'no_transaction' => 'required',
+           'customer_id' => 'required|integer',
+           'sub_total' => 'required',
            'grand_total' => 'required',
            'bayar' => 'required',
             'kembali' => 'required'

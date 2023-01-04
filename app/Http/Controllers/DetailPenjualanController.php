@@ -45,9 +45,7 @@ class DetailPenjualanController extends Controller
         $transaksiId = $input['no_transaction'];
         $qty = $input['qty'];
 
-        transaksi_penjualan::firstOrCreate([
-            'no_transaction' => $transaksiId,
-        ]);
+        transaksi_penjualan::firstOrCreate(['no_transaction' => $transaksiId], ['valid' => false]);
 
         $barangs = barang::where('no_barang', $input['no_barang'])->get();
         foreach ($barangs as $barang) {
@@ -62,7 +60,7 @@ class DetailPenjualanController extends Controller
         }
 
         $details = detail_penjualan::where([
-            ['transaksi_penjualans_id', '=', $transaksiId],
+            ['no_transaction', '=', $transaksiId],
             ['barangs_id', '=', $barangId]
         ])->get();
 
@@ -75,7 +73,8 @@ class DetailPenjualanController extends Controller
 
         $create = ([
             'barangs_id' => $barangId,
-            'transaksi_penjualan_id' => $transaksiId,
+            'no_transaction' => $transaksiId,
+            'harga_jual' => $barangPrice,
             'qty' => $qty,
             'subTotal' => $subTotal
         ]);
@@ -177,7 +176,7 @@ class DetailPenjualanController extends Controller
             barang::findOrFail($barangId)->update([
                 'stok' => $stockReduce
             ]);
-            return redirect()->route('transaksi.create');
+            return redirect()->route('transaksi.create', $transaksiId);
         }else {
             return redirect()->back()->withErrors('Stok tidak mencukupi');
         }

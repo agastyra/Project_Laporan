@@ -10,19 +10,20 @@ class detail_penjualan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'transaksi_penjualans_id',
+        'no_transaction',
         'barangs_id',
+        'harga_jual',
         'qty',
         'subTotal',
     ];
 
-    public function transaksi_penjualan()
-    {
-        return $this->belongsTo(transaksi_penjualan::class);
-    }
+    // public function transaksi_penjualan()
+    // {
+    //     return $this->belongsTo(transaksi_penjualan::class);
+    // }
 
     public function barang()
     {
-        return $this->belongsTo(barang::class);
+        return $this->belongsTo(barang::class, 'barangs_id', 'id');
     }
 }

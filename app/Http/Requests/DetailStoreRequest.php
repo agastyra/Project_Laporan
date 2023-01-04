@@ -24,10 +24,9 @@ class DetailStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'transaksi_penjualans_id' => 'required',
-            'barangs_id' => 'required',
+            'no_transaction' => 'required',
+            'no_barang' => 'required',
             'qty' => 'required|double',
-            'subTotal' => 'required|double'
         ];
     }
 }

@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
 
-    protected $namespace = 'App\Http\Controller';
+    // protected $namespace = 'App\\Http\\Controllers';
     public function boot()
     {
         $this->configureRateLimiting();
