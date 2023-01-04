@@ -49,12 +49,9 @@ Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
-<<<<<<< HEAD
 Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
-=======
 
 //route kas masuk
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
 Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
 Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
->>>>>>> c5fb78234602c159911aedb99ef2829728994c03
