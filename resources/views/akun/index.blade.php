@@ -24,13 +24,19 @@
                                         <td>{{ $akun->name_account }}</td>
                                         <td>
                                             <a href="{{ route('edit_account', $akun->no_account) }}"
-                                                class="link-primary text-decoration-none fs-5">
+                                                class="text-decoration-none link-light badge bg-primary border-0">
                                                 <i class="mdi mdi-file-document-edit-outline"></i>
                                             </a>
-                                            <a href="{{ route('delete_account', $akun->no_account) }}"
-                                                class="link-danger text-decoration-none fs-5">
-                                                <i class="mdi mdi-trash-can-outline"></i>
-                                            </a>
+                                            <form action="{{ route('delete_account', $akun->no_account) }}"
+                                                method="POST"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0"
+                                                    onclick="return confirm('Apakah anda yakin ?')">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
