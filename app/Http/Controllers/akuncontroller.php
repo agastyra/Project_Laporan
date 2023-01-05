@@ -52,10 +52,11 @@ class akunController extends Controller
     public function update(Request $request, akun $akun)
     {
         $validatedData = $request->validate([
-            'no_account' => 'required|size:3|unique:akuns',
-            'name_account' => 'required|max:100|unique:akuns',
+            'no_account' => 'required|size:4',
+            'name_account' => 'required|max:100',
             'is_header_account' => '',
             'header_account' => 'required_if:is_header_account,false',
+            'type_account' => 'required',
             'balance' => '',
         ]);
 

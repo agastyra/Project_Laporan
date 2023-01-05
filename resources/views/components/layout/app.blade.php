@@ -37,7 +37,11 @@
     <!-- End layout styles -->
     <link rel="shortcut icon"
         href="{{ asset('assets/images/favicon.png') }}" />
-    <link </head>
+
+    {{-- SweetAlert2 --}}
+    <link rel="stylesheet"
+        href="{{ asset('assets/css/sweetalert2.min.css') }}">
+</head>
 
 <body>
 
@@ -67,6 +71,8 @@
     </div>
     <!-- JQuery -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    {{-- SweetAlert2 --}}
+    <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
     <!-- plugins:js -->
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
