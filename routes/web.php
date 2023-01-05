@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\akuncontroller;
+use App\Http\Controllers\barangcontroller;
+use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
@@ -9,7 +11,6 @@ use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
-use App\Models\bukti_kas_keluar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,7 @@ Route::post('/accounting/accounts', [akuncontroller::class, "store"])->name('sav
 Route::get('/accounting/accounts/new', [akuncontroller::class, "create"])->name('create_account');
 Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])->name('edit_account');
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "update"])->name('update_account');
-Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
+Route::delete('/accounting/accounts/delete/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
@@ -51,6 +52,7 @@ Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
+Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
 
 //route kas masuk
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);

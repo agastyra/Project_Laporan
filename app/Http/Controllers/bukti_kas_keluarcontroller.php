@@ -19,4 +19,9 @@ class bukti_kas_keluarcontroller extends Controller
     {
         return view('buktikaskeluar.form');
     }
+
+    public function nota()
+    {
+        return view('BuktiKasKeluar.nota_pembelian');
+    }
 }
