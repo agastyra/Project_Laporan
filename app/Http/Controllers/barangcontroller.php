@@ -18,12 +18,18 @@ class barangcontroller extends Controller
 
     public function show(barang $barang)
     {
-        return view();
+        $result = barang::where('no_barang', $barang->no_barang)->get();
+        return view('barang.barang', [
+            'barangs' => $result
+        ]);
     }
 
     public function edit(barang $barang)
     {
-        return view();
+        $rubah = barang::where('no_barang', $barang->no_barang)->get();
+        return view('barang.index', [
+            'barangs' => $rubah
+        ]);
     }
 
     public function store(Request $request)
@@ -34,7 +40,7 @@ class barangcontroller extends Controller
             'nama_barang' => 'required|max:30|unique:barangs',
             'stok' => 'required|integer|gte:0',
             'harga_beli' => 'required|numeric|gte:0',
-            'harga_jual' => 'required|numeric|gte:0', 
+            'harga_jual' => 'required|numeric|gte:0',
         ]);
         barang::create($valid);
 
@@ -48,7 +54,7 @@ class barangcontroller extends Controller
             'nama_barang' => 'required|max:30|unique:barangs',
             'stok' => 'required|integer|gte:0',
             'harga_beli' => 'required|numeric|gte:0',
-            'harga_jual' => 'required|numeric|gte:0', 
+            'harga_jual' => 'required|numeric|gte:0',
         ]);
         barang::whereId($barang->id)->update($valid);
 
@@ -59,6 +65,6 @@ class barangcontroller extends Controller
     {
         barang::destroy($barang->id);
 
-        return redirect()->route('');
+        return redirect()->route('barang');
     }
 }

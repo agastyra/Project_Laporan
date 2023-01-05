@@ -16,4 +16,9 @@ class barang extends Model
         'harga_beli',
         'harga_jual',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'no_barang';
+    }
 }

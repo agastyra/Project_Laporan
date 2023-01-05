@@ -39,7 +39,9 @@ Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
+//route barang
 Route::get('/barang', [barangcontroller::class, "index"]);
+Route::get('/barang/{barang}', [barangcontroller::class, "show"]);
 
 Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
 
