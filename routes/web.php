@@ -3,14 +3,12 @@
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
-use App\Http\Controllers\DashControl;
-use App\Http\Controllers\memorialcontroller;
-use App\Http\Controllers\jurnal_penyesuaiancontroller;
-use App\Http\Controllers\transaksi_penjualancontroller;
-use App\Http\Controllers\transaksi_pembeliancontroller;
-use App\Http\Controllers\barangcontroller;
-use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
+use App\Http\Controllers\DashControl;
+use App\Http\Controllers\jurnal_penyesuaiancontroller;
+use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\transaksi_pembeliancontroller;
+use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +40,9 @@ Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
 Route::get('/barang', [barangcontroller::class, "index"]);
 
-Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
+// route pembelian
+Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"]);
+Route::get('/cari_barang/{barang}', [transaksi_pembeliancontroller::class, "cari_barang"]);
 
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 
