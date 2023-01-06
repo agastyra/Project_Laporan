@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\akuncontroller;
-use App\Http\Controllers\barangcontroller;
-use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
@@ -25,6 +23,10 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [DashControl::class, 'index']);
+// Routing untuk jurnal_penyesuaian
+Route::get('/penyesuaian/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
+Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('create_penyesuaian');
+Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan_penyesuaian');
 
 // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');

@@ -35,16 +35,31 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="content">
-                        <div class="card card-info card-outline">
-                            <div class="card-header">
-                                <div class="card-tools">
-                                    <a href="{{ route('create_penyesuaian') }}" class="btn btn-succes">Tambah <i
-                                            class="fas fa-plus-square"></i></a>
+                        <form action="{{ route('simpan-penyesuaian') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="col-lg-4 mt-5">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
+                                        Debit</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-light" type="number" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-lg-4 mt-5">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
+                                        Kredit</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-light" type="number" />
+                                        <div class="col-sm-12 mt-3">
+                                            <button type="submit" class="btn btn-success"><i class="mdi mdi-plus"></i>
+                                                Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-md-12 mt-3">
                         <div class="table-responsive">

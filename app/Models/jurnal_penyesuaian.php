@@ -10,10 +10,14 @@ class jurnal_penyesuaian extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'date',
-        'debet',
-        'kredit',
+    // protected $fillable = [
+    //     'date',
+    //     'debet',
+    //     'kredit',
+    // ];
+
+    protected $guarded = [
+        'id',
     ];
 
     public function jurnal_penyesuaian_detail()
