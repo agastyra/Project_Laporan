@@ -9,11 +9,10 @@ class barang extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'no_barang',
-        'name_barang',
-        'stok',
-        'harga_beli',
-        'harga_jual',
-    ];
+    protected $guarded = ['id'];
+
+    public function getRouteKeyName()
+    {
+        return 'no_barang';
+    }
 }
