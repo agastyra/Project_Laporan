@@ -26,9 +26,11 @@
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
                     <div class="table-responsive">
-                        <form action="{{ route('save_barang_pembelian') }}"
-                            method="post">
+                        <form>
                             @csrf
+                            <input type="hidden"
+                                name="barangs_id"
+                                id="barangs_id">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -294,6 +296,7 @@
                     if (this.value) {
                         $.get('http://127.0.0.1:8000/cari_barang/' + this.value, function(response) {
                             if (response) {
+                                $('#barangs_id').val(response.result[0]['id']);
                                 $('#no_barang').text(response.result[0]['no_barang']);
                                 $('#name_barang').text(response.result[0]['name_barang']);
                                 $('#harga_beli').text(response.result[0]['harga_beli']);
