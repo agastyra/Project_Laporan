@@ -10,6 +10,7 @@
                             style="width:100%"
                             name="keyBarang"
                             id="keyBarang">
+                            <option value="">-</option>
                             @forelse ($barangs as $barang)
                                 <option value="{{ $barang->no_barang }}">{{ $barang->name_barang }}</option>
                             @empty
@@ -25,36 +26,40 @@
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
                     <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Harga</th>
-                                    <th>Jumlah</th>
-                                    <th>Keranjang</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="no_barang">-</td>
-                                    <td id="name_barang">-</td>
-                                    <td id="harga_beli">-</td>
-                                    <td>
-                                        <input class="form-control text-light"
-                                            type="number"
-                                            name="qty"
-                                            id="qty">
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-icon btn-success btn-sm"
-                                            type="submit">
-                                            <i class="mdi mdi-cart"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="{{ route('save_barang_pembelian') }}"
+                            method="post">
+                            @csrf
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah</th>
+                                        <th>Keranjang</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="no_barang">-</td>
+                                        <td id="name_barang">-</td>
+                                        <td id="harga_beli">-</td>
+                                        <td>
+                                            <input class="form-control text-light"
+                                                type="number"
+                                                name="qty"
+                                                id="qty">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-icon btn-success btn-sm"
+                                                type="submit">
+                                                <i class="mdi mdi-cart"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -286,11 +291,23 @@
         <script>
             $(document).ready(function() {
                 $("#keyBarang").on('change', function() {
-                    $.get('http://127.0.0.1:8000/cari_barang/' + this.value, function(response) {
-                        $('#no_barang').text(response.result[0]['no_barang']);
-                        $('#name_barang').text(response.result[0]['name_barang']);
-                        $('#harga_beli').text(response.result[0]['harga_beli']);
-                    });
+                    if (this.value) {
+                        $.get('http://127.0.0.1:8000/cari_barang/' + this.value, function(response) {
+                            if (response) {
+                                $('#no_barang').text(response.result[0]['no_barang']);
+                                $('#name_barang').text(response.result[0]['name_barang']);
+                                $('#harga_beli').text(response.result[0]['harga_beli']);
+                            } else {
+                                $('#no_barang').text('-');
+                                $('#name_barang').text('-');
+                                $('#harga_beli').text('-');
+                            }
+                        });
+                    } else {
+                        $('#no_barang').text('-');
+                        $('#name_barang').text('-');
+                        $('#harga_beli').text('-');
+                    }
                 });
             });
         </script>
