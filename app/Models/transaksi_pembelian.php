@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class transaksi_pembelian extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
 }

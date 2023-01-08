@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-buffer text-success icon-md"></i> Hasil Pencarian</h4>
                     <div class="table-responsive">
-                        <form>
+                        <form id="form-barang">
                             @csrf
                             <input type="hidden"
                                 name="barangs_id"
@@ -50,7 +50,8 @@
                                             <input class="form-control text-light"
                                                 type="number"
                                                 name="qty"
-                                                id="qty">
+                                                id="qty"
+                                                required>
                                         </td>
                                         <td>
                                             <button class="btn btn-icon btn-success btn-sm"
@@ -292,25 +293,41 @@
         </script>
         <script>
             $(document).ready(function() {
+                let baseUrl = $(location).attr('protocol') + '//' + $(location).attr('host') + '/';
+
                 $("#keyBarang").on('change', function() {
                     if (this.value) {
-                        $.get('http://127.0.0.1:8000/cari_barang/' + this.value, function(response) {
+                        $.get(baseUrl + 'cari_barang/' + this.value, function(response) {
                             if (response) {
                                 $('#barangs_id').val(response.result[0]['id']);
                                 $('#no_barang').text(response.result[0]['no_barang']);
                                 $('#name_barang').text(response.result[0]['name_barang']);
                                 $('#harga_beli').text(response.result[0]['harga_beli']);
+                                $('#qty').val('');
                             } else {
                                 $('#no_barang').text('-');
                                 $('#name_barang').text('-');
                                 $('#harga_beli').text('-');
+                                $('#qty').val('');
                             }
                         });
                     } else {
                         $('#no_barang').text('-');
                         $('#name_barang').text('-');
                         $('#harga_beli').text('-');
+                        $('#qty').val('');
                     }
+                });
+
+                $("#form-barang").submit(function(e) {
+                    e.preventDefault();
+                    let formData = $(this).serialize();
+
+                    $.post(baseUrl + "purchase/save_detail", formData,
+                        function(response) {
+                            console.log("Okee data masuk bang");
+                        }
+                    );
                 });
             });
         </script>

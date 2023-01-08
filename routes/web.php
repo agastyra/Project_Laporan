@@ -41,9 +41,10 @@ Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 Route::get('/barang', [barangcontroller::class, "index"]);
 
 // route pembelian
-Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"]);
+Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');
+Route::get('/purchase/new', [transaksi_pembeliancontroller::class, "create"])->name('create_purchase');
 Route::get('/cari_barang/{barang}', [transaksi_pembeliancontroller::class, "cari_barang"]);
-Route::post('/purchase/save_barang', [transaksi_pembeliancontroller::class, "store_barang"])->name('save_barang_pembelian');
+Route::post('/purchase/save_detail', [transaksi_pembeliancontroller::class, "store_detail"])->name('save_detail_purchase');
 
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 
