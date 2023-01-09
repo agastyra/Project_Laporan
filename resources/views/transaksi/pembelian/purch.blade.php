@@ -144,7 +144,8 @@
 
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-dark">
+                                <table class="table table-dark"
+                                    id="table_detail_barang">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -155,25 +156,10 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="table_detail_barang_tbody">
                                         <tr>
-                                            <td> 1 </td>
-                                            <td>Tas Gucci</td>
-                                            <td> 300000 </td>
-                                            <td>1</td>
-                                            <td> 300000 </td>
-                                            <td>
-                                                <button type="submit"
-                                                    class="btn btn-icon btn-success btn-sm "
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modal-edit"><i
-                                                        class="mdi mdi-pencil icon-sm"></i></button>
-                                                <button type="submit"
-                                                    class="btn btn-icon btn-danger btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modal-hapus"><i
-                                                        class="mdi mdi-delete icon-sm"></i></button>
-                                            </td>
+                                            <td colspan="6"
+                                                class="text-center"> -- Tidak ada data -- </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -295,6 +281,8 @@
             $(document).ready(function() {
                 let baseUrl = $(location).attr('protocol') + '//' + $(location).attr('host') + '/';
 
+                let html = '';
+
                 $("#keyBarang").on('change', function() {
                     if (this.value) {
                         $.get(baseUrl + 'cari_barang/' + this.value, function(response) {
@@ -325,7 +313,26 @@
 
                     $.post(baseUrl + "purchase/save_detail", formData,
                         function(response) {
-                            console.log("Okee data masuk bang");
+                            $.get(baseUrl + "purchase/get_detail",
+                                function(response) {
+                                    $('#table_detail_barang_tbody').empty();
+                                    $.each(response.result, function(key, value) {
+                                        html += '<tr>';
+                                        html += '<td>' + (key + 1) + '</td>';
+                                        html += '<td>' + value.name_barang + '</td>';
+                                        html += '<td>' + value.harga_beli + '</td>';
+                                        html += '<td>' + value.qty + '</td>';
+                                        html += '<td>' + (value.harga_beli * value.qty) +
+                                            '</td>';
+                                        html += '<td>' +
+                                            "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
+                                            '</td>'
+                                        html += '</tr>';
+                                    });
+                                    $('#table_detail_barang').append(html);
+                                    html = ''
+                                },
+                            );
                         }
                     );
                 });

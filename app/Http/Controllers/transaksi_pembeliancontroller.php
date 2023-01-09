@@ -43,6 +43,26 @@ class transaksi_pembeliancontroller extends Controller
         return response()->json(['result' => $result]);
     }
 
+    public function get_detail()
+    {
+        $idTransaksiPembelian = $this->getTransactionId();
+
+        $result = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelians_id')
+            ->join('barangs', 'detail_pembelians.barangs_id', '=', 'barangs.id')
+            ->select('transaksi_pembelians.id',
+                'transaksi_pembelians.no_transaction',
+                'barangs.id',
+                'barangs.no_barang',
+                'barangs.name_barang',
+                'barangs.harga_beli',
+                'detail_pembelians.qty'
+            )
+            ->where('transaksi_pembelians.id', $idTransaksiPembelian)
+            ->get();
+
+        return response()->json(['result' => $result]);
+    }
+
     public function store_detail(Request $request)
     {
         $idTransaksiPembelian = $this->getTransactionId();
