@@ -5,20 +5,6 @@
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal Penyesuaian
                     </h4>
-                    <div class="form-group row mt-5">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
-                            Rincian</label>
-                        <div class="col-sm-9">
-                            <input class="form-control text-light" type="text" placeholder="Masukkan Rincian" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
-                            Tanggal</label>
-                        <div class="col-sm-9">
-                            <input class="form-control text-light" type="date" />
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-lg-4 mt-5">
                             <div class="form-group row">
@@ -39,8 +25,8 @@
                     <div class="content">
                         <div class="card card-info card-outline">
                             <div class="card-header">
-                                <div class="card-tools">
-                                    <a href="{{ route('create_penyesuaian') }}" class="btn btn-succes">Tambah <i
+                                <div class="positive ui button">
+                                    <a href="{{ route('create-penyesuaian') }}" class="btn btn-succes">Tambah<i
                                             class="fas fa-plus-square"></i></a>
                                 </div>
                             </div>
@@ -57,13 +43,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($jurnal_penyesuaians as $item)
+                                    @forelse ($jurnal_penyesuaians as $item)
                                         <tr>
                                             <td>{{ date('d-m-y', strtotime($item->date)) }}</td>
                                             <td>{{ $item->debet }}</td>
                                             <td>{{ $item->kredit }}</td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">Tidak ada data</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

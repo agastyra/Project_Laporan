@@ -10,10 +10,10 @@ class jurnal_penyesuaiancontroller extends Controller
      public function index()
 
     {
-        $jurnal_penyesuaians = jurnal_penyesuaian::all();
+        $dtpenyesuaian = jurnal_penyesuaian::all();
 
         return view('jurnal.penyesuaian.penyesuaian', [
-            'jurnal_penyesuaians' => $jurnal_penyesuaians,
+            'jurnal_penyesuaians' => $dtpenyesuaian,
         ]);
     }
 
@@ -24,13 +24,13 @@ class jurnal_penyesuaiancontroller extends Controller
 
     public function store(Request $request)
     {
-        // 
+        // dd($request->toArray());
+       
         jurnal_penyesuaian::create([
-            'tgl' => $request->tgl,
+            'date' => $request->date,
             'debet' => $request->debet,
             'kredit' => $request->kredit,
         ]);
-
         return redirect('penyesuaian');
     }
 }

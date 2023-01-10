@@ -24,9 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashControl::class, 'index']);
 // Routing untuk jurnal_penyesuaian
-Route::get('/penyesuaian/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
-Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('create_penyesuaian');
-Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan_penyesuaian');
+Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
+Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "create"])->name('create-penyesuaian');
+Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
 
 // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
@@ -40,7 +40,7 @@ Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 
-Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
+// Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
 Route::get('/barang', [barangcontroller::class, "index"]);
 
