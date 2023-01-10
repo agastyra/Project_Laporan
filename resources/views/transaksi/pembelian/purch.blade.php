@@ -73,99 +73,114 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Pembayaran</h4>
-                    <div class="row mt-3">
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tanggal</label>
-                                <div class="col-sm-9 text-dark">
-                                    <input class="form-control text-dark"
-                                        placeholder="{{ date('Y-m-d') }}"
-                                        disabled />
+                    <form action="{{ route('save_purchase') }}"
+                        method="post">
+                        @csrf
+                        <div class="row mt-3">
+                            <div class="col-sm-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tanggal</label>
+                                    <div class="col-sm-9 text-dark">
+                                        <input class="form-control text-dark"
+                                            value="{{ date('Y-m-d') }}"
+                                            id="date_transaksi"
+                                            name="date"
+                                            type="date"
+                                            disabled />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Vendor</label>
-                                <div class="col-sm-9">
-                                    <select name=""
-                                        id=""
-                                        class="form-control text-light">
-                                        <option value="Kasir 1">Risky</option>
-                                        <option value="Kasir 2">Mukhlas</option>
-                                        <option value="Kasir 2">MUkhlis</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Diskon</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark"
-                                        placeholder="0"
-                                        disabled />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Grand Total</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark"
-                                        placeholder="0"
-                                        disabled />
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Bayar</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-light"
-                                        type="number"
-                                        placeholder="Bayar" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Kembali</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark"
-                                        placeholder="0"
-                                        disabled />
-                                    <div class="col-sm-12 mt-3">
-                                        <button type="submit"
-                                            class="btn btn-success"><i class="mdi mdi-cart-outline"></i>
-                                            Simpan</button>
-                                        <button type="submit"
-                                            class="btn btn-info"><i class="mdi mdi-fax"></i> Cetak
-                                            Nota</button>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Vendor</label>
+                                    <div class="col-sm-9">
+                                        <select name="vendor"
+                                            id="vendor"
+                                            class="form-control form-select text-light">
+                                            <option value="Risky">Risky</option>
+                                            <option value="Mukhlas">Mukhlas</option>
+                                            <option value="Mukhlis">Mukhlis</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-sm-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Diskon</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark"
+                                            id="diskon"
+                                            name="diskon"
+                                            placeholder="0"
+                                            disabled />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Grand Total</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark"
+                                            id="grand_total"
+                                            name="grand_total"
+                                            placeholder="0"
+                                            disabled />
+                                    </div>
+                                </div>
 
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-dark"
-                                    id="table_detail_barang">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Nama Barang</th>
-                                            <th>Harga</th>
-                                            <th>Jumlah</th>
-                                            <th>Subtotal</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="table_detail_barang_tbody">
-                                        <tr>
-                                            <td colspan="6"
-                                                class="text-center"> -- Tidak ada data -- </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Bayar</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-light"
+                                            type="number"
+                                            id="bayar"
+                                            name="bayar"
+                                            placeholder="Bayar" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kembali</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark"
+                                            placeholder="0"
+                                            id="kembali"
+                                            name="kembali"
+                                            disabled />
+                                        <div class="col-sm-12 mt-3">
+                                            <button type="submit"
+                                                class="btn btn-success"><i class="mdi mdi-cart-outline"></i>
+                                                Simpan</button>
+                                            <button type="submit"
+                                                class="btn btn-info"><i class="mdi mdi-fax"></i> Cetak
+                                                Nota</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-dark"
+                                        id="table_detail_barang">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Nama Barang</th>
+                                                <th>Harga</th>
+                                                <th>Jumlah</th>
+                                                <th>Subtotal</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table_detail_barang_tbody">
+                                            <tr>
+                                                <td colspan="6"
+                                                    class="text-center"> -- Tidak ada data -- </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -283,6 +298,29 @@
 
                 let html = '';
 
+                $.get(baseUrl + "purchase/get_detail",
+                    function(response) {
+                        if (response.result != null || response.result != [] || response.result != '') {
+                            $('#table_detail_barang_tbody').empty();
+                            $.each(response.result, function(key, value) {
+                                html += '<tr>';
+                                html += '<td>' + (key + 1) + '</td>';
+                                html += '<td>' + value.name_barang + '</td>';
+                                html += '<td>' + value.harga_beli + '</td>';
+                                html += '<td>' + value.qty + '</td>';
+                                html += '<td>' + (value.harga_beli * value.qty) +
+                                    '</td>';
+                                html += '<td>' +
+                                    "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
+                                    '</td>'
+                                html += '</tr>';
+                            });
+                            $('#table_detail_barang').append(html);
+                            html = '';
+                        }
+                    },
+                );
+
                 $("#keyBarang").on('change', function() {
                     if (this.value) {
                         $.get(baseUrl + 'cari_barang/' + this.value, function(response) {
@@ -315,22 +353,30 @@
                         function(response) {
                             $.get(baseUrl + "purchase/get_detail",
                                 function(response) {
-                                    $('#table_detail_barang_tbody').empty();
-                                    $.each(response.result, function(key, value) {
-                                        html += '<tr>';
-                                        html += '<td>' + (key + 1) + '</td>';
-                                        html += '<td>' + value.name_barang + '</td>';
-                                        html += '<td>' + value.harga_beli + '</td>';
-                                        html += '<td>' + value.qty + '</td>';
-                                        html += '<td>' + (value.harga_beli * value.qty) +
-                                            '</td>';
-                                        html += '<td>' +
-                                            "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
-                                            '</td>'
-                                        html += '</tr>';
-                                    });
-                                    $('#table_detail_barang').append(html);
-                                    html = ''
+                                    if (response.result != null || response.result != [] || response
+                                        .result != '') {
+                                        $('#table_detail_barang_tbody').empty();
+                                        $.each(response.result, function(key, value) {
+                                            html += '<tr>';
+                                            html += '<td>' + (key + 1) + '</td>';
+                                            html += '<td>' + value.name_barang + '</td>';
+                                            html += '<td>' + value.harga_beli + '</td>';
+                                            html += '<td>' + value.qty + '</td>';
+                                            html += '<td>' + (value.harga_beli * value.qty) +
+                                                '</td>';
+                                            html += '<td>' +
+                                                "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
+                                                '</td>'
+                                            html += '</tr>';
+                                        });
+                                        $('#table_detail_barang').append(html);
+                                        html = '';
+                                    }
+                                    $('#no_barang').text('-');
+                                    $('#name_barang').text('-');
+                                    $('#harga_beli').text('-');
+                                    $('#qty').val('');
+                                    $("#keyBarang").val("").change();
                                 },
                             );
                         }

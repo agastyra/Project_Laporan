@@ -36,6 +36,11 @@ class transaksi_pembeliancontroller extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        dd($request->toArray());
+    }
+
     public function cari_barang(barang $barang)
     {
         $result = barang::where('no_barang', $barang->no_barang)->get();
