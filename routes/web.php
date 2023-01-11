@@ -27,7 +27,7 @@ Route::get('/', [DashControl::class, 'index']);
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
 Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "create"])->name('create-penyesuaian');
 Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
-
+Route::get('/penyesuaian/edit-penyesuaian', [jurnal_penyesuaiancontroller::class, "edit"])->name('edit-penyesuaian');
 // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
 Route::post('/accounting/accounts', [akuncontroller::class, "store"])->name('save_account');

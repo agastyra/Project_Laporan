@@ -51,7 +51,8 @@
                                             <td>{{ $item->debet }}</td>
                                             <td>{{ $item->kredit }}</td>
                                             <td>
-                                                <a href="#"><i class="mdi mdi-file-document-edit-outline"></i></a>
+                                                <a href="{{ url('edit-penyesuaian') }}}"><i
+                                                        class="mdi mdi-file-document-edit-outline"></i></a>
                                                 | <a href="#"> <i class="mdi mdi-trash-can-outline"
                                                         style="color: red"></i></a>
                                             </td>
