@@ -52,8 +52,9 @@
                                     <div class="col-sm-9">
                                         <input class="form-control text-light" type="number" name="kredit" />
                                         <div class="col-sm-12 mt-3">
-                                            <button type="submit" class="btn btn-success"><i class="mdi mdi-plus"></i>
-                                                Simpan</button>
+                                            <button type="submit" class="positive ui button">
+                                                Simpan</button> <a class="negative ui button"
+                                                href="{{ route('penyesuaian') }}">Batal</a>
                                         </div>
                                     </div>
                                 </div>

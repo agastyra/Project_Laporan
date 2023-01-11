@@ -11,7 +11,7 @@
                                 <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
                                     Akun</label>
                                 <div class="col-sm-9">
-                                    <select class="js-example-basic-single" style="width:100%">
+                                    <select class="js-example-basic-single" style="width:100%cvx" disabled>
                                         <option value="AL">01</option>
                                         <option value="WY">02</option>
                                         <option value="AM">03</option>
@@ -27,7 +27,7 @@
                             <div class="card-header">
                                 <div class="positive ui button">
                                     <a href="{{ route('create-penyesuaian') }}" class="btn btn-succes">Tambah<i
-                                            class="fas fa-plus-square"></i></a>
+                                            class="mdi mdi-plus ms-3"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -37,9 +37,11 @@
                             <table class="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th>Tanggal</th>
-                                        <th>Debit</th>
-                                        <th>Kredit</th>
+                                        <th scope="col-md">Tanggal</th>
+                                        <th scope="col-md">Debit</th>
+                                        <th scope="col-md">Kredit</th>
+                                        <th scope="col-md">Aksi</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +50,11 @@
                                             <td>{{ date('d-m-y', strtotime($item->date)) }}</td>
                                             <td>{{ $item->debet }}</td>
                                             <td>{{ $item->kredit }}</td>
+                                            <td>
+                                                <a href="#"><i class="mdi mdi-file-document-edit-outline"></i></a>
+                                                | <a href="#"> <i class="mdi mdi-trash-can-outline"
+                                                        style="color: red"></i></a>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
