@@ -26,4 +26,9 @@ class detail_penjualan extends Model
     {
         return $this->belongsTo(barang::class, 'barangs_id', 'id');
     }
+
+    // public function transaksi_penjualan()
+    // {
+    //     return $this->belongsTo(transaksi_penjualan::class, 'no_transaction', 'no_transaction');
+    // }
 }

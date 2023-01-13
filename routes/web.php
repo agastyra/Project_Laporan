@@ -29,12 +29,12 @@ Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])-
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])->name('update_account');
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
-// Route::resource('detail', 'DetailPenjualanController');
-// Route::post('/sales/save', 'transaksi_penjualancontroller@store')->name('transaksi.store');
-Route::get('/sales', 'DetailPenjualanController@store')->name('detail.store');
-// Route::resource('sales', 'transaksi_penjualancontroller')->except([
-//     'create'
-// ]);
+Route::resource('detail', 'DetailPenjualanController');
+Route::post('/sales/save', 'transaksi_penjualancontroller@store')->name('transaksi.store');
+Route::post('/sales', 'DetailPenjualanController@store')->name('detail.store');
+Route::resource('sales', 'transaksi_penjualancontroller')->except([
+    'create'
+]);
 Route::get('/sales/create/{no_transaction?}', 'transaksi_penjualancontroller@create')->name('transaksi.create');
 
 

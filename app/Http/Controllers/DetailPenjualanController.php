@@ -55,7 +55,7 @@ class DetailPenjualanController extends Controller
             $barangStock = $barang->stok;
         }
 
-        if (isset($barangId)) {
+        if (!isset($barangId)) {
             return redirect()->back()->withErrors('Produk Tidak Ditemukan');
         }
 

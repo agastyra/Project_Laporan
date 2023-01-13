@@ -12,13 +12,13 @@ use Illuminate\Http\Request;
 
 class transaksi_penjualancontroller extends Controller
 {
-    public function index($transaksiId)
+    public function index()
     {
         $title = "Transaksi Penjualan";
         $items = transaksi_penjualan::with([
             'customer'
         ])->where('valid', true)->get();
-       return view("transaksi.penjualan.sales", [
+       return view("transaksi.penjualan.index", [
         'title' => $title,
         'items' => $items
        ]);
@@ -97,10 +97,10 @@ class transaksi_penjualancontroller extends Controller
             ->first();
 
         $data = [
-            'date' => $trans->date->toDateTimeString(),
-            'customerId' => $trans->customer_id,
-            'bayar' => $trans->bayar,
-            'kembali' => $trans->kembali
+            // 'date' => $trans->date->toDateTimeString(),
+            // 'customerId' => $trans->customer_id,
+            // 'bayar' => $trans->bayar,
+            // 'kembali' => $trans->kembali
         ];
 
         return view('transaksi.penjualan.sales', [

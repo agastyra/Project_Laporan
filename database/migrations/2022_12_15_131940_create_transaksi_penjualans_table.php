@@ -16,7 +16,7 @@ class CreateTransaksiPenjualansTable extends Migration
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             // $table->id();
             #ganti nama field (rangga)
-            $table->string('no_transaction')->primary();
+            $table->integer('no_transaction')->primary();
             $table->date('date');
             $table->unsignedBigInteger('customer_id')->nullable();
             #ganti tipe data (rangga)

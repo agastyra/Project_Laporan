@@ -2,7 +2,7 @@
     <form action="{{ route('detail.store') }}" method="post">
         @csrf
         <div class="row">
-            <h3 class="header">Transaksi Penjualan</h3>
+            <h3 class="header">{{ $title }}</h3>
             <div class="col-lg-5 grid-margin">
                 <div class="card">
                     <div class="card-body">
@@ -10,7 +10,11 @@
                         <div class="form-group row mt-4">
                             <label class="col-sm-3 col-form-label">Kode Barang</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-light" placeholder="Masukkan Kode Barang" value="{{ old('no_barang') }}" required>
+                                <select class="js-example-basic-single" style="width:100%">
+                                    @foreach ($items as $item)
+                                    <option value="{{ old('no_barang') }}">{{ $item->no_barang }}</option>
+                                    @endforeach
+                                  </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -35,7 +39,7 @@
                         </span>
                         <span class="float-none float-sm-right d-block mt-3 text-center">
                             <div class="display2 text-info">
-                                {{-- <h2>{{ number_format($subTotal, 0,',',',') }}</h2> --}}
+                                <h2>{{ number_format($subTotal, 0,',',',') }}</h2>
                             </div>
                         </span>
                         <div class="row">
@@ -43,7 +47,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-dark" placeholder="" value="{{ date('Y m d') }}"
+                                        <input class="form-control text-dark" placeholder="" value="{{ $transaksiId }}" name="no_transaction"
                                             readonly />
                                     </div>
                                 </div>
