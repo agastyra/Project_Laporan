@@ -6,8 +6,9 @@
                     <h3>Edit Data Penyesuaian</h3>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="POST">
-                        {{ csrf_field() }}
+                    <form action="{{ route('update-penyesuaian', $id->id) }}" method="POST">
+                        @method('put')
+                        @csrf
                         <div class="form-group row mt-5">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
                                 Rincian</label>
@@ -19,8 +20,9 @@
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                 Tanggal</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-light" type="date" value="{{ date('y-m-d') }}"
-                                    id="date" name="date" placeholder="masukan jumlah disni" />
+                                <input class="form-control text-light" type="date"
+                                    value="{{ old('date', $id->date) }}" id="date" name="date"
+                                    placeholder="masukan jumlah disni" />
                             </div>
                         </div>
                         <div class="row">
@@ -44,7 +46,8 @@
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
                                         Debit</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-light" type="number" name="debet" />
+                                        <input class="form-control text-light" type="number" name="debet"
+                                            value="{{ old('debet', $id->debet) }}">
                                     </div>
                                 </div>
                             </div>
@@ -53,11 +56,12 @@
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
                                         Kredit</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-light" type="number" name="kredit" />
+                                        <input class="form-control text-light" type="number" name="kredit"
+                                            value="{{ old('kredit', $id->kredit) }}">
                                         <div class="col-sm-12 mt-3">
                                             <button type="submit" class="positive ui button">
                                                 Ubah Data</button> <a class="negative ui button"
-                                                href="{{ route('penyesuaian') }}">Batal</a>
+                                                href="{{ url('penyesuaian') }}">Batal</a>
                                         </div>
                                     </div>
                                 </div>
