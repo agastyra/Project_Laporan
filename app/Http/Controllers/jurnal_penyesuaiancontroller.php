@@ -76,5 +76,12 @@ class jurnal_penyesuaiancontroller extends Controller
 
     //     return redirect()->route('penyesuaian');
     // }
+     public function destroy($id)
+     {
+         $penye = jurnal_penyesuaian::findorfail($id);
+         $penye->delete();
+         return redirect()->route('penyesuaian');
+        // return back();
+     }
 
 }

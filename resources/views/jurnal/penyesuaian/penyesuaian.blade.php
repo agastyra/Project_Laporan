@@ -7,7 +7,7 @@
                     </h4>
                     <div class="row">
                         <div class="col-lg-4 mt-5">
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
                                     Akun</label>
                                 <div class="col-sm-9">
@@ -19,7 +19,7 @@
                                         <option value="RU">05</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="content">
@@ -51,10 +51,11 @@
                                             <td>{{ $item->debet }}</td>
                                             <td>{{ $item->kredit }}</td>
                                             <td>
-                                                <a href="{{ url('penyesuaian/edit-penyesuaian', $item->id) }}}"><i
+                                                <a href="{{ url('penyesuaian/edit-penyesuaian', $item->id) }}"><i
                                                         class="mdi mdi-file-document-edit-outline"></i></a>
-                                                | <a href="#"> <i class="mdi mdi-trash-can-outline"
-                                                        style="color: red"></i></a>
+                                                |
+                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $item->id) }}"> <i
+                                                        class="mdi mdi-trash-can-outline" style="color: red"></i></a>
                                             </td>
                                         </tr>
                                     @empty

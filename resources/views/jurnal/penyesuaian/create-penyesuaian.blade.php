@@ -5,13 +5,13 @@
                 <div class="card-body">
                     <form action="{{ route('simpan-penyesuaian') }}" method="POST">
                         {{ csrf_field() }}
-                        <div class="form-group row mt-5">
+                        {{-- <div class="form-group row mt-5">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
                                 Rincian</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-light" type="text" placeholder="Masukkan Rincian" />
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                 Tanggal</label>
@@ -39,8 +39,9 @@
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
-                                        Debit</label>
-                                    <div class="col-sm-9">
+                                        Debit
+                                    </label>
+                                    <div class="col-sm-8">
                                         <input class="form-control text-light" type="number" name="debet" />
                                     </div>
                                 </div>
@@ -63,7 +64,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 </x-layout.app>

@@ -29,7 +29,8 @@ Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::cla
 Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
 Route::get('/penyesuaian/edit-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "edit"])->name('edit-penyesuaian');
 Route::put('/penyesuaian/edit-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
-// Routing untuk akun
+Route::get('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
+// // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
 Route::post('/accounting/accounts', [akuncontroller::class, "store"])->name('save_account');
 Route::get('/accounting/accounts/new', [akuncontroller::class, "create"])->name('create_account');
