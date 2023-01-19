@@ -38,7 +38,7 @@ class transaksi_pembeliancontroller extends Controller
 
     public function store(Request $request)
     {
-        dd($request->toArray());
+        dd($request->all());
     }
 
     public function cari_barang(barang $barang)
