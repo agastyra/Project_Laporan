@@ -72,21 +72,22 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Pembayaran</h4>
+                    <h4 class="card-title"><i class="mdi mdi-cash text-primary icon-md"></i> Pembayaran</h4>
                     <form action="{{ route('save_purchase') }}"
-                        method="post">
+                        method="post"
+                        id="form_transaksi">
                         @csrf
                         <div class="row mt-3">
                             <div class="col-sm-4">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9 text-dark">
-                                        <input class="form-control text-dark"
+                                        <input class="form-control text-dark disabled"
                                             value="{{ date('Y-m-d') }}"
                                             id="date_transaksi"
                                             name="date"
                                             type="date"
-                                            disabled />
+                                            readonly />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -104,23 +105,24 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Diskon</label>
+                                    <label class="col-sm-3 col-form-label">Diskon <span
+                                            id="persen_diskon"></span></label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-dark"
+                                        <input class="form-control text-dark disabled"
                                             id="diskon"
                                             name="diskon"
-                                            placeholder="0"
-                                            disabled />
+                                            value="0"
+                                            readonly />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Grand Total</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-dark"
+                                        <input class="form-control text-dark disabled"
                                             id="grand_total"
                                             name="grand_total"
-                                            placeholder="0"
-                                            disabled />
+                                            placeholder="Total..."
+                                            readonly />
                                     </div>
                                 </div>
 
@@ -129,21 +131,22 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Bayar</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-light"
+                                        <input class="form-control text-light disabled"
                                             type="number"
                                             id="bayar"
                                             name="bayar"
+                                            value="0"
                                             placeholder="Bayar" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kembali</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-dark"
-                                            placeholder="0"
+                                        <input class="form-control text-dark disabled"
+                                            value="0"
                                             id="kembali"
                                             name="kembali"
-                                            disabled />
+                                            readonly />
                                         <div class="col-sm-12 mt-3">
                                             <button type="submit"
                                                 class="btn btn-success"><i class="mdi mdi-cart-outline"></i>
@@ -297,11 +300,15 @@
                 let baseUrl = $(location).attr('protocol') + '//' + $(location).attr('host') + '/';
 
                 let html = '';
+                let grandTotal = 0;
+                let diskon = 0;
 
                 $.get(baseUrl + "purchase/get_detail",
                     function(response) {
-                        if (response.result != null || response.result != [] || response.result != '') {
+                        if (response.result != null || response.result != [] || response
+                            .result != '') {
                             $('#table_detail_barang_tbody').empty();
+                            let subTotal = 0;
                             $.each(response.result, function(key, value) {
                                 html += '<tr>';
                                 html += '<td>' + (key + 1) + '</td>';
@@ -314,9 +321,12 @@
                                     "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
                                     '</td>'
                                 html += '</tr>';
+                                subTotal += (value.harga_beli * value.qty);
                             });
                             $('#table_detail_barang').append(html);
                             html = '';
+                            grandTotal = subTotal;
+                            $("#grand_total").val(grandTotal);
                         }
                     },
                 );
@@ -356,6 +366,7 @@
                                     if (response.result != null || response.result != [] || response
                                         .result != '') {
                                         $('#table_detail_barang_tbody').empty();
+                                        let subTotal = 0;
                                         $.each(response.result, function(key, value) {
                                             html += '<tr>';
                                             html += '<td>' + (key + 1) + '</td>';
@@ -368,19 +379,41 @@
                                                 "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
                                                 '</td>'
                                             html += '</tr>';
+                                            subTotal += (value.harga_beli * value.qty);
                                         });
                                         $('#table_detail_barang').append(html);
                                         html = '';
+                                        grandTotal = subTotal;
+
+                                        if (grandTotal >= 200000 && grandTotal < 350000) {
+                                            diskon = (grandTotal * 5) / 100;
+                                            grandTotal = grandTotal - diskon;
+                                            $("#persen_diskon").text("5%");
+                                        } else if (grandTotal >= 350000) {
+                                            diskon = (grandTotal * 7) / 100;
+                                            grandTotal = grandTotal - diskon;
+                                            $("#persen_diskon").text("7%");
+                                        } else {
+                                            diskon = 0;
+                                            grandTotal = grandTotal - diskon;
+                                        }
                                     }
                                     $('#no_barang').text('-');
                                     $('#name_barang').text('-');
                                     $('#harga_beli').text('-');
                                     $('#qty').val('');
                                     $("#keyBarang").val("").change();
+
+                                    $("#diskon").val(diskon);
+                                    $("#grand_total").val(grandTotal);
                                 },
                             );
                         }
                     );
+                });
+
+                $("#bayar").keyup(function(e) {
+                    $("#kembali").val($(this).val() - $("#grand_total").val());
                 });
             });
         </script>
