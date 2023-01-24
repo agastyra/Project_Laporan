@@ -28,7 +28,7 @@
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
-                                        Akun</label>
+                                        No Akun</label>
                                     <div class="col-sm-9">
                                         <select class="js-example-basic-single" style="width:100%" name="akuns_id">
                                             <option value="AL">01</option>
@@ -42,33 +42,44 @@
                             </div>
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
-                                        Debit</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control text-light" type="number" name="debet"
-                                            value="{{ old('debet', $id->debet) }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 mt-5">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
-                                        Kredit</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control text-light" type="number" name="kredit"
-                                            value="{{ old('kredit', $id->kredit) }}">
-                                        <div class="col-sm-12 mt-3">
-                                            <button type="submit" class="positive ui button">
-                                                Ubah Data</button> <a class="negative ui button"
-                                                href="{{ url('penyesuaian') }}">Batal</a>
-                                        </div>
-                                    </div>
+                                    <label for="tipe_akun">Tipe Akun</label>
+                                    <select name="type_account" id="tipe_akun"
+                                        class="form-select form-control @error('id')
+                                is-invalid
+                                       <option value=">--Pilih tipe akun--</option>
+                            @for ($i = 1; $i <= 2; $i++)
+                                @if (old('id', $id->type_account) == $i)
+                                    <option value="{{ $id->type_account }}"
+                                        selected>
+                                        @if ($id->debett == 1)
+                                            Debet
+                                        @elseif ($id->kredit == 2)
+                                            Kredit  
+                                        @endif
+                                    </option>
+                                @else
+                                    <option value="{{ $i }}">
+                                        @if ($i == 1)
+                                            Debet
+                                        @elseif ($i == 2)
+                                           Kredit
+                                        @endif
+                                    </option>
+                                @endif
+                            @endfor
+                        </select>   
+                                                <button type="submit"
+                                        class="positive ui button">
+                                        Ubah Data</button> <a class="negative ui button"
+                                            href="{{ url('penyesuaian') }}">Batal</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
+            </form>
         </div>
+    </div>
+    </div>
     </div>
 </x-layout.app>

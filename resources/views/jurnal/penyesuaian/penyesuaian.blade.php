@@ -51,7 +51,7 @@
                                             <td>{{ $item->debet }}</td>
                                             <td>{{ $item->kredit }}</td>
                                             <td>
-                                                <a href="{{ url('penyesuaian/edit-penyesuaian', $item->id) }}"><i
+                                                <a href="{{ url('penyesuaian/editt-penyesuaian', $item->id) }}"><i
                                                         class="mdi mdi-file-document-edit-outline"></i></a>
                                                 |
                                                 <a href="{{ url('penyesuaian/delete-penyesuaian', $item->id) }}"> <i

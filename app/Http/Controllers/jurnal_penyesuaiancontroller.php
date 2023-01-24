@@ -50,7 +50,7 @@ class jurnal_penyesuaiancontroller extends Controller
     public function edit(jurnal_penyesuaian $id)
     {
         $penye= jurnal_penyesuaian::where('kredit', true)->get();
-        return view('jurnal.penyesuaian.edit-penyesuaian', [
+        return view('jurnal.penyesuaian.editt-penyesuaian', [
             'penye' => $penye,
             'id' => $id,
         ]);
