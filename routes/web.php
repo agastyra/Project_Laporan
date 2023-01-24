@@ -32,15 +32,24 @@ Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])-
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "update"])->name('update_account');
 Route::delete('/accounting/accounts/delete/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
+//route barang
+Route::get('/barang', [barangcontroller::class, "index"])->name('barang');
+Route::post('/barang/simpan', [barangcontroller::class, "store"])->name('simpan_barang');
+Route::get('/barang/barang/baru', [barangcontroller::class, "create"])->name('tambah_barang');
+Route::get('/barang/edit/{barang}', [barangcontroller::class, "edit"])->name('edit_barang');
+Route::put('/barang/edit/{barang}', [barangcontroller::class, "update"])->name('update_barang');
+Route::delete('/barang/barangs/delete/{barangs}', [barangcontroller::class, "destroy"])->name('hapus_barang');
+
+
+
+
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
-//route barang
-Route::get('/barang', [barangcontroller::class, "index"]);
-Route::get('/barang/{barang}', [barangcontroller::class, "show"]);
+
 
 Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
 

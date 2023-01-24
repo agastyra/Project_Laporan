@@ -26,8 +26,7 @@
                             <h5 class="card-title">Barang</h5>
                         </div>
                         <div class="col-6 d-flex justify-content-end mb-3">
-                            <a href="#" wire:click.prevent="tambahBrg" class="btn btn-info btn-sm mr-1"><i
-                                    class="fa fa-plus-circle"></i> Tambah</a>
+                            <a class="positive ui button" href="{{ route('tambah_barang') }}">Tambah</a>
                         </div>
                     </div>
 
@@ -45,13 +44,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @forelse ($barangs as $barang )
+
+
+
+
                                 <tr>
-                                    <td>1</td>
-                                    <td>BRG01</td>
-                                    <td>Tas Guci</td>
-                                    <td>4</td>
-                                    <td>300000</td>
-                                    <td>400000 </td>
+                                    <td>{{ $barang->id}}</td>
+                                    <td>{{ $barang->no_barang}}</td>
+                                    <td>{{ $barang->name_barang}}</td>
+                                    <td>{{ $barang->stok}}</td>
+                                    <td>{{ $barang->harga_beli}}</td>
+                                    <td>{{ $barang->harga_jual }} </td>
                                     <td>
                                         <button type="submit" class="btn btn-icon btn-success btn-sm "
                                             data-bs-toggle="modal" data-bs-target="#modal-edit"><i
@@ -61,6 +66,12 @@
                                                 class="mdi mdi-delete icon-sm"></i></button>
                                     </td>
                                 </tr>
+                                @empty
+
+                                <tr>
+
+                                    @endforelse
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -68,6 +79,8 @@
             </div>
         </div>
     </div>
+
+
     <!-- Modal -->
     <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
         aria-hidden="true">
@@ -80,17 +93,25 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Barang</label>
+                            <label class="col-sm-3 col-form-label">nama barang</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-dark" disabled />
+                                <input type="" name="" value="{{$barang -> name_barang}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Jumlah</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-white" type="number" placeholder="1" />
+                                <input class="form-control text-white" type="number" placeholder="0" />
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Harga Jual</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control text-white" placeholder="Harga Jual baru">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -127,28 +148,32 @@
     </div>
 </x-layout.app>
 @push('jssj')
-    <script>
-        var modalEd = document.getElementById('modal-edit');
+<script>
+var modalEd = document.getElementById('modal-edit');
 
-        modalEd.addEventListener('show.bs.modal', function(event) {
-            // Button that triggered the modal
-            let button = event.relatedTarget;
-            // Extract info from data-bs-* attributes
-            let recipient = button.getAttribute('data-bs-whatever');
+modalEd.addEventListener('show.bs.modal', function(event) {
+    // Button that triggered the modal
+    let button = event.relatedTarget;
+    // Extract info from data-bs-* attributes
+    let recipient = button.getAttribute('data-bs-whatever');
 
-            // Use above variables to manipulate the DOM
-        });
-    </script>
-    <script>
-        var modalHp = document.getElementById('modal-hapus');
+    // Use above variables to manipulate the DOM
+});
+</script>
+<script>
+var modalHp = document.getElementById('modal-hapus');
 
-        modalHp.addEventListener('show.bs.modal', function(event) {
-            // Button that triggered the modal
-            let button = event.relatedTarget;
-            // Extract info from data-bs-* attributes
-            let recipient = button.getAttribute('data-bs-whatever');
+modalHp.
+addEvent
+Listener
+    ('show.bs.modal ', function(event) {
+        
+// Button that triggered the modal
+        let button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        let recipient = button.getAttribute('data-bs-whatever');
 
-            // Use above variables to manipulate the DOM
-        });
-    </script>
+        // Use above variables to manipulate the DOM
+    });
+</script>
 @endpush

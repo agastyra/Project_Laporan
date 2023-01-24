@@ -16,11 +16,11 @@ class barangcontroller extends Controller
         ]);
     }
 
-    public function show(barang $barang)
+    public function create()
     {
-        $result = barang::where('no_barang', $barang->no_barang)->get();
+        $tambah = barang::where('no_barang', true)->get();
         return view('barang.barang', [
-            'barangs' => $result
+            'tambah' => $tambah
         ]);
     }
 
