@@ -13,7 +13,11 @@ class transaksi_pembeliancontroller extends Controller
 
     public function index()
     {
-        return view('transaksi.pembelian.index');
+        $purchases = transaksi_pembelian::where('is_display', true)->get();
+
+        return view('transaksi.pembelian.index', [
+            'purchases' => $purchases,
+        ]);
     }
 
     public function create()
@@ -38,7 +42,17 @@ class transaksi_pembeliancontroller extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $idTransaksiPembelian = $this->getTransactionId();
+        transaksi_pembelian::where('id', $idTransaksiPembelian)
+            ->update([
+                'vendor' => $request->vendor,
+                'grand_total' => $request->grand_total,
+                'diskon' => $request->diskon,
+                'bayar' => $request->bayar,
+                'kembali' => $request->kembali,
+                'is_display' => true,
+            ]);
+        return redirect()->route('purchase')->with('success', 'Berhasil membeli barang');
     }
 
     public function cari_barang(barang $barang)
