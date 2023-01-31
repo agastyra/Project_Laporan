@@ -22,6 +22,7 @@ class CreateTransaksiPembeliansTable extends Migration
             $table->double('diskon')->nullable()->default(0);
             $table->double('bayar')->nullable()->default(0);
             $table->double('kembali')->nullable()->default(0);
+            $table->boolean('is_display')->nullable()->default(false);
             $table->timestamps();
         });
     }
