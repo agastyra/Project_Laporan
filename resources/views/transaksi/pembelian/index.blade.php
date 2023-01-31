@@ -12,26 +12,33 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col-md">No Akun</th>
-                                    <th scope="col-md">Nama Akun</th>
+                                    <th scope="col-md">#</th>
+                                    <th scope="col-md">No Transaksi</th>
+                                    <th scope="col-md">Tanggal</th>
+                                    <th scope="col-md">Total</th>
                                     <th scope="col-md">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>
-                                        <a href=""
-                                            class="text-decoration-none link-light badge bg-primary border-0">
-                                            <i class="mdi mdi-file-document-edit-outline"></i>
-                                        </a>
-                                        <button class="badge bg-danger border-0"
-                                            onclick="return confirm('Apakah anda yakin ?')">
-                                            <i class="mdi mdi-trash-can-outline"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                @forelse ($purchases as $purchase)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $purchase->no_transaction }}</td>
+                                        <td>{{ $purchase->date }}</td>
+                                        <td>{{ number_format($purchase->grand_total, 0, ',', '.') }}</td>
+                                        <td>
+                                            <a href=""
+                                                class="text-decoration-none link-light badge bg-primary border-0">
+                                                <i class="mdi mdi-file-document-edit-outline"></i>
+                                            </a>
+                                            <button class="badge bg-danger border-0"
+                                                onclick="return confirm('Apakah anda yakin ?')">
+                                                <i class="mdi mdi-trash-can-outline"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
