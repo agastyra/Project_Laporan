@@ -38,7 +38,7 @@ Route::post('/barang/simpan', [barangcontroller::class, "store"])->name('simpan_
 Route::get('/barang/barang/baru', [barangcontroller::class, "create"])->name('tambah_barang');
 Route::get('/barang/edit/{barang}', [barangcontroller::class, "edit"])->name('edit_barang');
 Route::put('/barang/edit/{barang}', [barangcontroller::class, "update"])->name('update_barang');
-Route::delete('/barang/barangs/delete/{barangs}', [barangcontroller::class, "destroy"])->name('hapus_barang');
+Route::delete('/barang/barangs/delete/{barang}', [barangcontroller::class, "destroy"])->name('hapus_barang');
 
 
 
