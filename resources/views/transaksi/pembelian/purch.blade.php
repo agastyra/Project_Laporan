@@ -12,7 +12,7 @@
                             id="keyBarang">
                             <option value="">-</option>
                             @forelse ($barangs as $barang)
-                                <option value="{{ $barang->no_barang }}">{{ $barang->name_barang }}</option>
+                                <option value="{{ $barang->id }}">{{ $barang->name_barang }}</option>
                             @empty
                                 <option value="">-- Tidak ada data --</option>
                             @endforelse
@@ -135,8 +135,7 @@
                                             type="number"
                                             id="bayar"
                                             name="bayar"
-                                            value="0"
-                                            placeholder="Bayar" />
+                                            placeholder="0" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -359,33 +358,76 @@
                     e.preventDefault();
                     let formData = $(this).serialize();
 
+                    let barangs_id = $("#barangs_id").val();
+
+                    $.get(baseUrl + "purchase/validate_barang/" + barangs_id,
+                        function(response) {
+                            if (response) {
+                                if (response[0]['jml_barang'] > 1) {
+                                    console.log(
+                                        `id barang nya : ${response[0]['barangs_id']}\njumlah nya ada : ${response[0]['jml_barang']}`
+                                    );
+
+                                    $.ajax({
+                                        type: "PUT",
+                                        url: baseUrl + "purchase/update_detail/" + barangs_id,
+                                        data: formData,
+                                        dataType: 'JSON',
+                                        success: function(response) {
+                                            console.log('oke data keubah');
+                                            console.log(response);
+                                        },
+                                        error: function(error) {
+                                            console.error('data gak keubah bro');
+                                            console.log(error);
+                                        },
+                                        complete: function(response) {
+                                            console.log('penting mari');
+                                            console.log(response);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    );
+
                     $.post(baseUrl + "purchase/save_detail", formData,
                         function(response) {
                             $.get(baseUrl + "purchase/get_detail",
                                 function(response) {
-                                    if (response.result != null || response.result != [] || response
+                                    if (response.result != null || response
+                                        .result != [] || response
                                         .result != '') {
                                         $('#table_detail_barang_tbody').empty();
                                         let subTotal = 0;
-                                        $.each(response.result, function(key, value) {
+                                        $.each(response.result, function(key,
+                                            value) {
                                             html += '<tr>';
-                                            html += '<td>' + (key + 1) + '</td>';
-                                            html += '<td>' + value.name_barang + '</td>';
-                                            html += '<td>' + value.harga_beli + '</td>';
-                                            html += '<td>' + value.qty + '</td>';
-                                            html += '<td>' + (value.harga_beli * value.qty) +
+                                            html += '<td>' + (key + 1) +
+                                                '</td>';
+                                            html += '<td>' + value
+                                                .name_barang + '</td>';
+                                            html += '<td>' + value
+                                                .harga_beli + '</td>';
+                                            html += '<td>' + value.qty +
+                                                '</td>';
+                                            html += '<td>' + (value
+                                                    .harga_beli * value.qty
+                                                ) +
                                                 '</td>';
                                             html += '<td>' +
                                                 "<button type='submit' class = 'btn btn-icon btn-success btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'submit' class = 'btn btn-icon btn-danger btn-sm' data-bs-toggle = 'modal' data-bs-target = '#modal-hapus'> <i class = 'mdi mdi-delete icon-sm'> </i></button>" +
                                                 '</td>'
                                             html += '</tr>';
-                                            subTotal += (value.harga_beli * value.qty);
+                                            subTotal += (value.harga_beli *
+                                                value.qty);
                                         });
                                         $('#table_detail_barang').append(html);
                                         html = '';
                                         grandTotal = subTotal;
 
-                                        if (grandTotal >= 200000 && grandTotal < 350000) {
+                                        if (grandTotal >= 200000 && grandTotal <
+                                            350000) {
                                             diskon = (grandTotal * 5) / 100;
                                             grandTotal = grandTotal - diskon;
                                             $("#persen_diskon").text("5%");
