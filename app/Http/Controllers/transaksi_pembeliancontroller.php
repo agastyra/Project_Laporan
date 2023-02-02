@@ -6,6 +6,7 @@ use App\Models\barang;
 use App\Models\detail_pembelian;
 use App\Models\transaksi_pembelian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class transaksi_pembeliancontroller extends Controller
 {
@@ -62,6 +63,20 @@ class transaksi_pembeliancontroller extends Controller
         return response()->json(['result' => $result]);
     }
 
+    public function validate_barang(barang $barang)
+    {
+        $idTransaksiPembelian = $this->getTransactionId();
+
+        $barang_exists = detail_pembelian::select(DB::raw('barangs_id, count(barangs_id) as jml_barang, transaksi_pembelians_id'))
+            ->where('barangs_id', $barang->id)
+            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+            ->groupBy('barangs_id')
+            ->groupBy('transaksi_pembelians_id')
+            ->get();
+
+        return response()->json($barang_exists);
+    }
+
     public function get_detail()
     {
         $idTransaksiPembelian = $this->getTransactionId();
@@ -97,6 +112,14 @@ class transaksi_pembeliancontroller extends Controller
         ];
 
         detail_pembelian::create($data);
+    }
+
+    public function update_detail(Request $request, barang $barang)
+    {
+        return response()->json([
+            'request' => $request->all(),
+            'barang' => $barang,
+        ]);
     }
 
     private function getTransactionId()
