@@ -11,8 +11,13 @@ class barang extends Model
 
     protected $guarded = ['id'];
 
-    public function getRouteKeyName()
+    /**
+     * Get all of the detail_pembelian for the barang
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detail_pembelian()
     {
-        return 'no_barang';
+        return $this->hasMany(detail_pembelian::class);
     }
 }

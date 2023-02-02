@@ -21,4 +21,14 @@ class detail_pembelian extends Model
     {
         return $this->belongsTo(transaksi_pembelian::class);
     }
+
+    /**
+     * Get the barang that owns the detail_pembelian
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function barang()
+    {
+        return $this->belongsTo(barang::class);
+    }
 }
