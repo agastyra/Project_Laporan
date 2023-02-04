@@ -27,9 +27,6 @@ class barangcontroller extends Controller
     public function edit(barang $barang)
     {
         $rubah = barang::where('no_barang', $barang->no_barang)->get();
-        return view('barang.index', [
-            'barangs' => $rubah
-        ]);
     }
 
     public function store(Request $request)
@@ -44,7 +41,7 @@ class barangcontroller extends Controller
         ]);
         barang::create($valid);
 
-        return redirect()->route('');
+        return redirect()->route('barang');
     }
 
     public function update(Request $request, barang $barang)

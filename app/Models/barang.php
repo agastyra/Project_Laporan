@@ -11,14 +11,6 @@ class barang extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = [
-        'no_barang',
-        'name_barang',
-        'stok',
-        'harga_beli',
-        'harga_jual',
-    ];
-
     public function getRouteKeyName()
     {
         return 'no_barang';

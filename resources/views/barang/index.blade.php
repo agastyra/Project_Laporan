@@ -90,25 +90,31 @@
                     <h5 class="modal-title" id="modalTitleId">Edit Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">nama barang</label>
                             <div class="col-sm-9">
-                                <input type="" name="" value="{{$barang -> name_barang}}">
+                                <input type="text" name="name_barang" value="{{old('name_barang')}}">
                             </div>
                         </div>
+
+
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Jumlah</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-white" type="number" placeholder="0" />
+                                <input class="form-control text-white" type="number" name="stok" value="{{old('stok')}}"
+                                    placeholder="0">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga Jual</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control text-white" placeholder="Harga Jual baru">
+                                <input type="number" name="harga_jual" value="{{old('harga_jual')}}"
+                                    class="form-control text-white" placeholder="Harga Jual baru">
                             </div>
                         </div>
 
@@ -167,8 +173,17 @@ modalHp.
 addEvent
 Listener
     ('show.bs.modal ', function(event) {
-        
-// Button that triggered the modal
+
+
+
+
+
+
+
+
+
+
+        // Button that triggered the modal
         let button = event.relatedTarget;
         // Extract info from data-bs-* attributes
         let recipient = button.getAttribute('data-bs-whatever');
