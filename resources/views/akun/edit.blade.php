@@ -51,23 +51,35 @@
                     <div class="form-group">
                         <label for="nomor_akun">Nomor Akun</label>
                         <input type="text"
-                            class="form-control form-control-rounded"
+                            class="form-control form-control-rounded @error('no_account')
+                                is-invalid
+                            @enderror"
                             id="nomor_akun"
                             name="no_account"
                             placeholder="Masukan no akun"
                             value="{{ old('no_account', $akun->no_account) }}">
                         <p style="color: red"
                             id="warning"><em>*ketik nomor akun berdasarkan header</em></p>
+                        @error('no_account')
+                            <p style="color: red"
+                                id="warning"><em>{{ $message }}</em></p>
+                        @enderror
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="nama_akun">Nama Akun</label>
                         <input type="text"
-                            class="form-control form-control-rounded"
+                            class="form-control form-control-rounded @error('name_account')
+                                is-invalid
+                            @enderror"
                             id="nama_akun"
                             name="name_account"
                             placeholder="Masukan nama akun"
                             value="{{ old('name_account', $akun->name_account) }}">
+                        @error('name_account')
+                            <p style="color: red"
+                                id="warning"><em>{{ $message }}</em></p>
+                        @enderror
                     </div>
                     <br>
                     <div class="form-group">
@@ -75,7 +87,9 @@
                         <br>
                         <select name="type_account"
                             id="tipe_akun"
-                            class="form-select form-control">
+                            class="form-select form-control @error('type_account')
+                                is-invalid
+                            @enderror">
                             <option value="">--Pilih tipe akun--</option>
                             @for ($i = 1; $i <= 3; $i++)
                                 @if (old('type_account', $akun->type_account) == $i)
@@ -102,6 +116,10 @@
                                 @endif
                             @endfor
                         </select>
+                        @error('type_account')
+                            <p style="color: red"
+                                id="warning"><em>{{ $message }}</em></p>
+                        @enderror
                     </div>
                     <br>
                     <div class="form-group">

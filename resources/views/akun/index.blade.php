@@ -1,4 +1,3 @@
-{{-- Nanti pras kerjain tampilannya yaa --}}
 <x-layout.app>
     <div class="row">
         <div class="col-lg-12">
@@ -23,7 +22,22 @@
                                     <tr>
                                         <td>{{ $akun->no_account }}</td>
                                         <td>{{ $akun->name_account }}</td>
-                                        <td></td>
+                                        <td>
+                                            <a href="{{ route('edit_account', $akun->no_account) }}"
+                                                class="text-decoration-none link-light badge bg-primary border-0">
+                                                <i class="mdi mdi-file-document-edit-outline"></i>
+                                            </a>
+                                            <form action="{{ route('delete_account', $akun->no_account) }}"
+                                                method="POST"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0"
+                                                    onclick="return confirm('Apakah anda yakin ?')">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
