@@ -102,7 +102,7 @@ class transaksi_pembeliancontroller extends Controller
         $idTransaksiPembelian = $this->getTransactionId();
         $barangs_id = $request->barangs_id;
         $qty = $request->validate([
-            'qty' => 'required',
+            'qty' => 'required|gt:0',
         ]);
 
         $data = [
@@ -114,11 +114,33 @@ class transaksi_pembeliancontroller extends Controller
         detail_pembelian::create($data);
     }
 
-    public function update_detail(Request $request, barang $barang)
+    public function update_detail(Request $request)
     {
+        $idTransaksiPembelian = $this->getTransactionId();
+        $barangs_id = $request->barangs_id;
+        $barang = barang::where('id', $barangs_id)->first();
+
+        $qty = $request->validate([
+            'qty' => 'required|gt:0',
+        ]);
+
+        $barang_qty = detail_pembelian::where('barangs_id', $barang->id)
+            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+            ->value('qty');
+
+        detail_pembelian::where('barangs_id', $barang->id)
+            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+            ->update([
+                'qty' => $barang_qty + $qty['qty'],
+            ]);
+
+        $detail = detail_pembelian::where('barangs_id', $barang->id)
+            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+            ->first();
+
         return response()->json([
-            'request' => $request->all(),
             'barang' => $barang,
+            'detail' => $detail,
         ]);
     }
 
