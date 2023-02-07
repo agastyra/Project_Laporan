@@ -186,51 +186,64 @@
                 </div>
             </div>
         </div>
-        <!-- Modal -->
+        <!-- Modal Edit -->
         <div class="modal fade"
             id="modal-edit"
             tabindex="-1"
             role="dialog"
-            aria-labelledby="modalTitleId"
+            aria-labelledby="edit_barang"
             aria-hidden="true">
             <div class="modal-dialog"
                 role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"
-                            id="modalTitleId">Edit Barang</h5>
-                        <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Nama Barang</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark"
-                                        disabled />
+                <form id="update-barang">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"
+                                id="edit_barang">Edit Barang</h5>
+                            <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                @csrf
+                                <input type="hidden"
+                                    name="transaksi_pembelians_id"
+                                    id="detail_transaksi_id">
+                                <input type="hidden"
+                                    name="barangs_id"
+                                    id="detail_barang_id">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nama Barang</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-dark"
+                                            id="detail_nama"
+                                            name="name_barang"
+                                            readonly />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Jumlah</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control text-dark"
-                                        type="number"
-                                        placeholder="1" />
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Jumlah</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-white"
+                                            type="number"
+                                            placeholder="0"
+                                            id="detail_qty"
+                                            name="qty" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"><i class="mdi mdi-window-close"></i> Tutup</button>
+                            <button type="submit"
+                                class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button"
-                            class="btn btn-danger"
-                            data-bs-dismiss="modal"><i class="mdi mdi-window-close"></i> Tutup</button>
-                        <button type="submit"
-                            class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 

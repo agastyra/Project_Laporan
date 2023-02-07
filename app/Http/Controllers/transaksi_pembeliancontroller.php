@@ -145,6 +145,26 @@ class transaksi_pembeliancontroller extends Controller
         ]);
     }
 
+    public function update_detail_qty(Request $request)
+    {
+        $barang = barang::where('id', $request->barangs_id)->first();
+        $detail = detail_pembelian::where('barangs_id', $barang->id)
+            ->where('transaksi_pembelians_id', $request->transaksi_pembelians_id)
+            ->first();
+
+        detail_pembelian::where('transaksi_pembelians_id', $request->transaksi_pembelians_id)
+            ->where('barangs_id', $request->barangs_id)
+            ->update([
+                'qty' => $request->qty,
+            ]);
+
+        return response()->json([
+            'barang' => $barang,
+            'detail' => $detail,
+        ]);
+
+    }
+
     private function getTransactionId()
     {
         $noTransaksiPembelian = $this->getTransactionNumber();
