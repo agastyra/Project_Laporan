@@ -83,9 +83,10 @@ class transaksi_pembeliancontroller extends Controller
 
         $result = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelians_id')
             ->join('barangs', 'detail_pembelians.barangs_id', '=', 'barangs.id')
-            ->select('transaksi_pembelians.id',
+            ->select('transaksi_pembelians.id as trx_id',
                 'transaksi_pembelians.no_transaction',
-                'barangs.id',
+                'detail_pembelians.id as detail_id',
+                'barangs.id as brg_id',
                 'barangs.no_barang',
                 'barangs.name_barang',
                 'barangs.harga_beli',
