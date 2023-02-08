@@ -27,23 +27,29 @@
                                         Akun</label>
                                     <div class="col-sm-9">
                                         <select class="js-example-basic-single" style="width:100%" name="akuns_id">
-                                            <option value="AL">01</option>
-                                            <option value="WY">02</option>
-                                            <option value="AM">03</option>
-                                            <option value="CA">04</option>
-                                            <option value="RU">05</option>
+                                            {{-- <option value="0"> - Pilih Nama Akun - </option> --}}
+                                            @foreach ($akun as $ak)
+                                                <option value="{{ $ak->id }}">({{ $ak->no_account }})
+                                                    {{ $ak->name_account }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
+                                    {{-- <select class="js-example-basic-single" style="width:100%" name="akuns_id">
+                                        <option value="0"> - Pilih Saldo- </option>
+                                        <option value="AL">Debet</option>
+                                        <option value="WY">Kredit</option> --}}
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
                                         Debit
                                     </label>
                                     <div class="col-sm-8">
-                                        <input class="form-control text-light" type="number" name="debet" />
+                                        <input class="form-control text-light" type="text" name="debet"
+                                            id="debit" />
                                     </div>
+                                    {{-- </select> --}}
                                 </div>
                             </div>
                             <div class="col-lg-4 mt-5">
@@ -51,7 +57,9 @@
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
                                         Kredit</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-light" type="number" name="kredit" />
+                                        {{-- <p id="kredit"></p> --}}
+                                        <input class="form-control text-light" type="text" name="kredit"
+                                            id="kredit" />
                                         <div class="col-sm-12 mt-3">
                                             <button type="submit" class="positive ui button">
                                                 Simpan</button> <a class="negative ui button"
@@ -60,10 +68,25 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @push('jssj')
+        <script>
+            // $(document).ready(function() {
+            //     $("#debit").keyup(function() {
+            //         let deb = $("#debit").val();
+            //         let kre = $("#kredit").text();
 
+            //         if (deb > 0) {
+            //             let kre = 0;
+            //             $("#kredit").html(kre);
+            //         }
+            //     });
+            // });
+        </script>
+    @endpush
 </x-layout.app>

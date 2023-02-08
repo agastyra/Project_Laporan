@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\akun;
 use App\Models\jurnal_penyesuaian;
 use Illuminate\Http\Request;
 use PhpParser\Node\Param;
@@ -20,7 +21,11 @@ class jurnal_penyesuaiancontroller extends Controller
 
       public function create()
     {
-        return view('jurnal.penyesuaian.create-penyesuaian');
+        $akun = akun::all();
+        // $akuns = akun::orderBy('no_account', 'asc')->get();
+        return view('jurnal.penyesuaian.create-penyesuaian', [
+            'akun' => $akun,
+        ]);
     }
 
     public function store(Request $request)
@@ -49,10 +54,13 @@ class jurnal_penyesuaiancontroller extends Controller
     // }
     public function edit(jurnal_penyesuaian $id)
     {
+        $akun = akun::all();
+
         $penye= jurnal_penyesuaian::where('kredit', true)->get();
         return view('jurnal.penyesuaian.editt-penyesuaian', [
             'penye' => $penye,
             'id' => $id,
+            'akun' => $akun,
         ]);
     }
 
