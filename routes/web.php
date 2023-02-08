@@ -3,12 +3,12 @@
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
-use App\Http\Controllers\DashControl;
-use App\Http\Controllers\memorialcontroller;
-use App\Http\Controllers\jurnal_penyesuaiancontroller;
-use App\Http\Controllers\transaksi_penjualancontroller;
-use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
+use App\Http\Controllers\DashControl;
+use App\Http\Controllers\jurnal_penyesuaiancontroller;
+use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\transaksi_pembeliancontroller;
+use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,15 +40,11 @@ Route::put('/barang/tambah/{barang}', [barangcontroller::class, "update"])->name
 Route::delete('/barang/{barang}', [barangcontroller::class, "destroy"])->name('hapus_barang');
 Route::put('/barang/tambah/{barang}', [barangcontroller::class, "incrementid"])->name('increment');
 
-
-
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
-
-
 
 Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
 

@@ -33,16 +33,25 @@ class barangcontroller extends Controller
     public function store(Request $request)
     {
 
-        $valid = $request->validate([
-            'no_barang' => 'required|max:6|unique:barangs',
-            'nama_barang' => 'required|max:30|unique:barangs',
-            'stok' => 'required|integer|gte:0',
-            'harga_beli' => 'required|numeric|gte:0',
-            'harga_jual' => 'required|numeric|gte:0',
+        barang::create([
+            'no_barang' => $request->no_barang,
+            'name_barang' => $request->name_barang,
+            'stok' => $request->stok,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
         ]);
-        barang::create($valid);
 
-        return redirect()->route('barang');
+        return redirect('/barang');
+        // $valid = $request->validate([
+        //     'no_barang' => 'required|max:6|unique:barangs',
+        //     'nama_barang' => 'required|max:30|unique:barangs',
+        //     'stok' => 'required|integer|gte:0',
+        //     'harga_beli' => 'required|numeric|gte:0',
+        //     'harga_jual' => 'required|numeric|gte:0',
+        // ]);
+        // barang::create($valid);
+
+        // return redirect()->route('barang');
     }
 
     public function update(Request $request, barang $barang)
@@ -59,11 +68,15 @@ class barangcontroller extends Controller
         return redirect()->route('');
     }
 
-    public function destroy(barang $barang)
+    public function destroy($id)
     {
-        barang::destroy($barang->id);
+        $barang = barang::findorfail($id);
+        $barang->delete();
+        return redirect();
 
-        return redirect()->route('barang');
+        // barang::destroy($barang->id);
+
+        // return redirect()->route('barang');
     }
 
     private function incrementid()

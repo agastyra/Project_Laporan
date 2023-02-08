@@ -20,7 +20,7 @@
                             <div class="row mb-3">
                                 <label for="inputEnterYourName" class="col-sm-3 col-form-label">Id Barang</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="no_barang" value="{{old('no_barang', $this->increment)}}"
+                                    <input type="text" name="no_barang" value="{{old('no_barang')}}"
                                         class="form-control" id="inputEnterYourName" placeholder="Masukan Kode Barang"
                                         style="color: white;">
                                 </div>
