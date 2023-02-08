@@ -193,7 +193,7 @@ $(document).ready(function () {
                                         value.brg_id +
                                         "' data-detail-barang-nama='" +
                                         value.name_barang +
-                                        "' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'button' class = 'btn btn-icon btn-danger btn-sm' data-detail-transaksi-id='" +
+                                        "' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'button' class = 'btn btn-icon btn-danger btn-sm btn-delete-detail' data-detail-transaksi-id='" +
                                         value.trx_id +
                                         "' data-detail-barang-id='" +
                                         value.brg_id +
@@ -264,6 +264,15 @@ $(document).ready(function () {
         $("#detail_qty").val(detail_qty);
     });
 
+    // get data for barang who want to delete
+    $(document).on("click", ".btn-delete-detail", function () {
+        let barangs_id = $(this).data("detail-barang-id");
+        let transaksis_id = $(this).data("detail-transaksi-id");
+
+        $("#delete-transaksi-pembelians-id").val(transaksis_id);
+        $("#delete-barangs-id").val(barangs_id);
+    });
+
     // update qty barang
     $("#update-barang").submit(function (e) {
         e.preventDefault();
@@ -309,6 +318,21 @@ $(document).ready(function () {
                 }
                 $("#diskon").val(diskon);
                 $("#grand_total").val(grand_total);
+            },
+        });
+    });
+
+    // hapus detail barang
+    $("#hapus-barang").submit(function (e) {
+        e.preventDefault();
+        let formData = $(this).serialize();
+
+        $.ajax({
+            type: "DELETE",
+            url: baseUrl + "purchase/delete_detail",
+            data: formData,
+            success: function (response) {
+                $("#modal-hapus").modal("hide");
             },
         });
     });

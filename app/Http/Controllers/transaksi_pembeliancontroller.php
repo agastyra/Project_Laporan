@@ -165,6 +165,15 @@ class transaksi_pembeliancontroller extends Controller
 
     }
 
+    public function delete_detail(Request $request)
+    {
+        $detail_id = detail_pembelian::where('barangs_id', $request->barangs_id)
+            ->where('transaksi_pembelians_id', $request->transaksi_pembelians_id)
+            ->value('id');
+
+        detail_pembelian::destroy($detail_id);
+    }
+
     private function getTransactionId()
     {
         $noTransaksiPembelian = $this->getTransactionNumber();

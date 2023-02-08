@@ -251,33 +251,42 @@
             id="modal-hapus"
             tabindex="-1"
             role="dialog"
-            aria-labelledby="modalTitleId"
+            aria-labelledby="delete_barang"
             aria-hidden="true">
             <div class="modal-dialog"
                 role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title"
-                            id="modalTitleId">Hapus Barang</h5>
+                            id="delete_barang">Hapus Barang</h5>
                         <button type="button"
                             class="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="display4">
-                                <h4>Apakah Barang Ingin dihapus?</h4>
+                    <form id="hapus-barang">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="display4">
+                                    <h4>Apakah Barang Ingin dihapus?</h4>
+                                    <input type="hidden"
+                                        name="barangs_id"
+                                        id="delete-barangs-id">
+                                    <input type="hidden"
+                                        name="transaksi_pembelians_id"
+                                        id="delete-transaksi-pembelians-id">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"
-                            class="btn btn-danger"
-                            data-bs-dismiss="modal"><i class="mdi mdi-window-close"></i> Batal</button>
-                        <button type="submit"
-                            class="btn btn-success"><i class="mdi mdi-check"></i> Hapus</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"><i class="mdi mdi-window-close"></i> Batal</button>
+                            <button type="submit"
+                                class="btn btn-success"><i class="mdi mdi-check"></i> Hapus</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
