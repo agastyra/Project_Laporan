@@ -32,10 +32,10 @@
                                     <div class="col-sm-9">
                                         <select class="js-example-basic-single" style="width:100%" name="akuns_id">
                                             <option value="AL">01</option>
-                                            <option value="WY">02</option>
-                                            <option value="AM">03</option>
-                                            <option value="CA">04</option>
-                                            <option value="RU">05</option>
+                                            @foreach ($akun as $ak)
+                                                <option value="{{ $ak->id }}">({{ $ak->no_account }})
+                                                    {{ $ak->name_account }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

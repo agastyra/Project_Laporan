@@ -34,28 +34,36 @@
                     </div>
                     <div class="col-md-12 mt-3">
                         <div class="table-responsive">
-                            <table class="table table-dark">
+                            {{-- <table class="table table-dark"> --}}
+                            <table id="list-barang" class="table table-dark table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col-md">Tanggal</th>
-                                        <th scope="col-md">Debit</th>
-                                        <th scope="col-md">Kredit</th>
-                                        <th scope="col-md">Aksi</th>
-
+                                        <th style="background-color:black" scope="col-md">Tanggal</th>
+                                        <th style="background-color:black" scope="col-md">Debit</th>
+                                        <th style="background-color:black" scope="col-md">Kredit</th>
+                                        <th style="background-color:black" scope="col-md">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($jurnal_penyesuaians as $item)
+
+
+                                    @forelse ($jurnal_penyesuaians as $penye)
                                         <tr>
-                                            <td>{{ date('d-m-y', strtotime($item->date)) }}</td>
-                                            <td>{{ $item->debet }}</td>
-                                            <td>{{ $item->kredit }}</td>
+                                            <td>{{ date('d-m-y', strtotime($penye->date)) }}</td>
+                                            <td>{{ $penye->debet }}</td>
+                                            <td>{{ $penye->kredit }}</td>
                                             <td>
-                                                <a href="{{ url('penyesuaian/editt-penyesuaian', $item->id) }}"><i
+                                                <a href="{{ url('penyesuaian/editt-penyesuaian', $penye->id) }}"
+                                                    class="text-decoration-none link-light badge bg-primary border-0"><i
                                                         class="mdi mdi-file-document-edit-outline"></i></a>
                                                 |
-                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $item->id) }}"> <i
-                                                        class="mdi mdi-trash-can-outline" style="color: red"></i></a>
+                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $penye->id) }}"
+                                                    method="POST"> @method('delete') @csrf <button
+                                                        class="badge bg-danger border-0"
+                                                        onclick="return confirm('Apakah anda yakin ingin menghapus ?')">
+                                                        <i class="mdi mdi-trash-can-outline"></i>
+                                                    </button>
+                                                    {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
                                             </td>
                                         </tr>
                                     @empty

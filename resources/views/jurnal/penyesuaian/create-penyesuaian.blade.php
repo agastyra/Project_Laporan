@@ -27,7 +27,7 @@
                                         Akun</label>
                                     <div class="col-sm-9">
                                         <select class="js-example-basic-single" style="width:100%" name="akuns_id">
-                                            {{-- <option value="0"> - Pilih Nama Akun - </option> --}}
+                                            <option value="0"> - Pilih Nama Akun - </option>
                                             @foreach ($akun as $ak)
                                                 <option value="{{ $ak->id }}">({{ $ak->no_account }})
                                                     {{ $ak->name_account }}</option>
@@ -38,10 +38,13 @@
                             </div>
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
-                                    {{-- <select class="js-example-basic-single" style="width:100%" name="akuns_id">
-                                        <option value="0"> - Pilih Saldo- </option>
-                                        <option value="AL">Debet</option>
-                                        <option value="WY">Kredit</option> --}}
+                                    {{-- <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
+                                        Saldo</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control text-light" style="width:100%" name="akuns_id">
+                                            <option value="0">-Pilih Saldo-</option>
+                                            <option value="AL">Debet</option>
+                                            <option value="WY">Kredit</option> --}}
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
                                         Debit
                                     </label>
@@ -49,15 +52,15 @@
                                         <input class="form-control text-light" type="text" name="debet"
                                             id="debit" />
                                     </div>
-                                    {{-- </select> --}}
+                                    {{-- </select>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
-                                        Kredit</label>
-                                    <div class="col-sm-9">
-                                        {{-- <p id="kredit"></p> --}}
+                                    <label class="col-sm-4 col-form-label"><i class="mdi mdi-cash text-warning"></i>
+                                        kredit</label>
+                                    <div class="col-sm-8">
                                         <input class="form-control text-light" type="text" name="kredit"
                                             id="kredit" />
                                         <div class="col-sm-12 mt-3">
@@ -76,17 +79,23 @@
     </div>
     @push('jssj')
         <script>
-            // $(document).ready(function() {
-            //     $("#debit").keyup(function() {
-            //         let deb = $("#debit").val();
-            //         let kre = $("#kredit").text();
+            $(document).ready(function() {
+                $("#debit").keyup(function() {
+                    $("#kredit").val(0);
+                });
 
-            //         if (deb > 0) {
-            //             let kre = 0;
-            //             $("#kredit").html(kre);
-            //         }
-            //     });
-            // });
+                $("#kredit").keyup(function() {
+                    $("#debit").val(0);
+                });
+                //         let deb = $("#debit").val();
+                //         let kre = $("#kredit").text();
+
+                //         if (deb > 0) {
+                //             let kre = 0;
+                //             $("#kredit").html(kre);
+                //         }
+                //     });
+            });
         </script>
     @endpush
 </x-layout.app>
