@@ -172,6 +172,24 @@ class transaksi_pembeliancontroller extends Controller
             ->value('id');
 
         detail_pembelian::destroy($detail_id);
+
+        $idTransaksiPembelian = $this->getTransactionId();
+
+        $detail = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelians_id')
+            ->join('barangs', 'detail_pembelians.barangs_id', '=', 'barangs.id')
+            ->select('transaksi_pembelians.id as trx_id',
+                'transaksi_pembelians.no_transaction',
+                'detail_pembelians.id as detail_id',
+                'barangs.id as brg_id',
+                'barangs.no_barang',
+                'barangs.name_barang',
+                'barangs.harga_beli',
+                'detail_pembelians.qty'
+            )
+            ->where('transaksi_pembelians.id', $idTransaksiPembelian)
+            ->get();
+
+        return response()->json($detail);
     }
 
     private function getTransactionId()

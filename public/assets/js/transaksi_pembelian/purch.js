@@ -35,7 +35,7 @@ $(document).ready(function () {
                     value.brg_id +
                     "' data-detail-barang-nama='" +
                     value.name_barang +
-                    "' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'button' class = 'btn btn-icon btn-danger btn-sm' data-detail-transaksi-id='" +
+                    "' data-bs-toggle = 'modal' data-bs-target = '#modal-edit'> <i class = 'mdi mdi-pencil icon-sm'> </i></button> <button type = 'button' class = 'btn btn-icon btn-danger btn-sm btn-delete-detail' data-detail-transaksi-id='" +
                     value.trx_id +
                     "' data-detail-barang-id='" +
                     value.brg_id +
@@ -333,6 +333,48 @@ $(document).ready(function () {
             data: formData,
             success: function (response) {
                 $("#modal-hapus").modal("hide");
+                if (
+                    response == null ||
+                    response == undefined ||
+                    response == [] ||
+                    response.length == 0
+                ) {
+                    $("#table_detail_barang_tbody").empty();
+                    $("#persen_diskon").text("");
+                    $("#diskon").val(0);
+                    $("#grand_total").val(0);
+                    console.log("response nya null");
+                    console.log(response);
+                } else {
+                    console.log("response nya tidak null");
+                    console.log(response);
+
+                    $(`tr#barang_${$("#delete-barangs-id").val()}`).remove();
+
+                    let grand_total = 0;
+                    let items = document.querySelectorAll("td.barang_subtotal");
+                    let total_item = Array.from(items);
+
+                    for (let i = 0; i < total_item.length; i++) {
+                        grand_total =
+                            grand_total + parseInt($(total_item[i]).text());
+                    }
+                    if (grand_total >= 200000 && grand_total < 350000) {
+                        diskon = (grand_total * 5) / 100;
+                        grand_total = grand_total - diskon;
+                        $("#persen_diskon").text("5%");
+                    } else if (grand_total >= 350000) {
+                        diskon = (grand_total * 7) / 100;
+                        grand_total = grand_total - diskon;
+                        $("#persen_diskon").text("7%");
+                    } else {
+                        diskon = 0;
+                        grand_total = grand_total - diskon;
+                        $("#persen_diskon").text("");
+                    }
+                    $("#diskon").val(diskon);
+                    $("#grand_total").val(grand_total);
+                }
             },
         });
     });
