@@ -67,6 +67,14 @@ class jurnal_penyesuaiancontroller extends Controller
     public function update(Request $request, $id)
     {
         $penye = jurnal_penyesuaian::findorfail($id);
+    //     if ($request->debit) {
+    //     $penye->debit = $request->debit;
+    //     $penye->kredit = 0;
+    // } elseif ($request->B) {
+    //     $penye->kredit = $request->kredit;
+    //     $penye->debit = 0;
+    // }
+    // $penye->save();
         $penye->update($request->all());
         return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Update');
 
