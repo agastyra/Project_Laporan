@@ -13,12 +13,12 @@ class CreateJurnalPenyesuaianDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jurnal_penyesuaian_details', function (Blueprint $table) {
+        Schema::create('jurnal_penyesuaians_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jurnal_penesuaians_id');
+            $table->foreignId('jurnal_penyesuaians_id');
             $table->foreignId('akuns_id');
-            $table->integer('type')->default(1);
-            $table->double('amount')->default(0);
+            $table->double('debet')->nullable()->default(0);
+            $table->double('kredit')->nullable()->default(0);
             $table->timestamps();
         });
     }
