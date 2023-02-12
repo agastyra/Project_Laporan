@@ -9,7 +9,6 @@ use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
-use App\Http\Livewire\Accounting\BuktiKasKeluar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,12 +54,8 @@ Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "up
 Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
 Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail');
 
-Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
-
 //route kas keluar
-Route::get('accounting/cash_out', BuktiKasKeluar::class);
-
-Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "report"]);
+Route::get('/accounting/cash_out', [bukti_kas_keluarcontroller::class, "index"])->name('cash_out');
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
 Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
 Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
