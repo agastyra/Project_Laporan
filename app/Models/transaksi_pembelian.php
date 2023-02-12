@@ -12,6 +12,11 @@ class transaksi_pembelian extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'no_transaction';
+    }
+
     /**
      * Get all of the detail_pembelian for the transaksi_pembelian
      *
