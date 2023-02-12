@@ -46,7 +46,21 @@ Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
-Route::get('/purch', [transaksi_pembeliancontroller::class, "index"]);
+Route::get('/barang', [barangcontroller::class, "index"]);
+
+// route pembelian
+Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');
+Route::get('/purchase/new', [transaksi_pembeliancontroller::class, "create"])->name('create_purchase');
+Route::get('/purchase/detail/{transaksi_pembelian}', [transaksi_pembeliancontroller::class, "detail"])->name('detail_purchase');
+Route::delete('/purchase/delete/{transaksi_pembelian}', [transaksi_pembeliancontroller::class, 'delete'])->name('delete_purchase');
+Route::post('/purchase/save_transaksi', [transaksi_pembeliancontroller::class, "store"])->name('save_purchase');
+Route::get('/cari_barang/{barang:id}', [transaksi_pembeliancontroller::class, "cari_barang"]);
+Route::post('/purchase/save_detail', [transaksi_pembeliancontroller::class, "store_detail"])->name('save_detail_purchase');
+Route::get('/purchase/get_detail', [transaksi_pembeliancontroller::class, "get_detail"])->name('get_detail_purchase');
+Route::get('/purchase/validate_barang/{barang:id}', [transaksi_pembeliancontroller::class, "validate_barang"])->name('validate_barang');
+Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "update_detail"])->name("update_detail");
+Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
+Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail');
 
 Route::get('/bukti_kas_keluar', [bukti_kas_keluarcontroller::class, "index"]);
 

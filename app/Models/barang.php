@@ -10,9 +10,20 @@ class barang extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+}
 
-    public function getRouteKeyName()
+public function getRouteKeyName()
     {
         return 'no_barang';
+    }
+
+    /**
+     * Get all of the detail_pembelian for the barang
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detail_pembelian()
+    {
+        return $this->hasMany(detail_pembelian::class);
     }
 }

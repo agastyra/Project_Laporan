@@ -41,10 +41,26 @@ class DatabaseSeeder extends Seeder
 
         barang::create([
             'no_barang' => 'BRG02',
-            'name_barang' => 'baju bape',
-            'stok' => 3,
-            'harga_beli' => 400000,
-            'harga_jual' => 700000,
+            'name_barang' => 'Tas Lampu',
+            'stok' => 10,
+            'harga_beli' => 1000000,
+            'harga_jual' => 50000,
+        ]);
+
+        barang::create([
+            'no_barang' => 'BRG03',
+            'name_barang' => 'Sepatu Nike',
+            'stok' => 50,
+            'harga_beli' => 10000,
+            'harga_jual' => 50000,
+        ]);
+
+        barang::create([
+            'no_barang' => 'BRG04',
+            'name_barang' => 'Sepatu Adidas',
+            'stok' => 50,
+            'harga_beli' => 15000,
+            'harga_jual' => 55000,
         ]);
     }
 }
