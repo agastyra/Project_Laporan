@@ -18,6 +18,16 @@ class transaksi_pembelian extends Model
     }
 
     /**
+     * Get the bukti_kas_keluar associated with the transaksi_pembelian
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function bukti_kas_keluar()
+    {
+        return $this->hasOne(bukti_kas_keluar::class);
+    }
+
+    /**
      * Get all of the detail_pembelian for the transaksi_pembelian
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
