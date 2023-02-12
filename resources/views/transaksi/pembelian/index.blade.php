@@ -27,17 +27,27 @@
                                         <td>{{ $purchase->date }}</td>
                                         <td>{{ number_format($purchase->grand_total, 0, ',', '.') }}</td>
                                         <td>
-                                            <a href=""
+                                            <a href="{{ route('detail_purchase', $purchase->no_transaction) }}"
                                                 class="text-decoration-none link-light badge bg-primary border-0">
                                                 <i class="mdi mdi-file-document-edit-outline"></i>
                                             </a>
-                                            <button class="badge bg-danger border-0"
-                                                onclick="return confirm('Apakah anda yakin ?')">
-                                                <i class="mdi mdi-trash-can-outline"></i>
-                                            </button>
+                                            <form action="{{ route('delete_purchase', $purchase->no_transaction) }}"
+                                                method="POST"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0"
+                                                    type="submit"
+                                                    onclick="return confirm('Apakah anda yakin ?')">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
+                                    <tr>
+                                        <td colspan="5">Tidak ada data</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>

@@ -41,6 +41,22 @@ class transaksi_pembeliancontroller extends Controller
         ]);
     }
 
+    public function detail(transaksi_pembelian $transaksi_pembelian)
+    {
+        $transaksis = transaksi_pembelian::whereId($transaksi_pembelian->id)->get();
+
+        return view('transaksi.pembelian.detail', [
+            'transaksis' => $transaksis,
+        ]);
+    }
+
+    public function delete(transaksi_pembelian $transaksi_pembelian)
+    {
+        transaksi_pembelian::destroy($transaksi_pembelian->id);
+        return redirect()->route('purchase');
+
+    }
+
     public function store(Request $request)
     {
         $idTransaksiPembelian = $this->getTransactionId();

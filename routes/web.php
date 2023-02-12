@@ -43,6 +43,8 @@ Route::get('/barang', [barangcontroller::class, "index"]);
 // route pembelian
 Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');
 Route::get('/purchase/new', [transaksi_pembeliancontroller::class, "create"])->name('create_purchase');
+Route::get('/purchase/detail/{transaksi_pembelian}', [transaksi_pembeliancontroller::class, "detail"])->name('detail_purchase');
+Route::delete('/purchase/delete/{transaksi_pembelian}', [transaksi_pembeliancontroller::class, 'delete'])->name('delete_purchase');
 Route::post('/purchase/save_transaksi', [transaksi_pembeliancontroller::class, "store"])->name('save_purchase');
 Route::get('/cari_barang/{barang:id}', [transaksi_pembeliancontroller::class, "cari_barang"]);
 Route::post('/purchase/save_detail', [transaksi_pembeliancontroller::class, "store_detail"])->name('save_detail_purchase');
