@@ -56,8 +56,9 @@ Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, 
 
 //route kas keluar
 Route::get('/accounting/cash_out', [bukti_kas_keluarcontroller::class, "index"])->name('cash_out');
+Route::post('/accounting/cash_out', [bukti_kas_keluarcontroller::class, "save"])->name('save_cash_out');
+Route::get('/accounting/cash_out/new', [bukti_kas_keluarcontroller::class, "form"])->name('create_cash_out');
 Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
-Route::get('/form_kas_keluar', [bukti_kas_keluarcontroller::class, "form"]);
 Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
 
 //route kas masuk
