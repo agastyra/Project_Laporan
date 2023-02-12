@@ -37,6 +37,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon"
         href="{{ asset('assets/images/favicon.png') }}" />
+    @livewireStyles
 </head>
 
 <body>
@@ -95,6 +96,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js">
     @stack('jssj')
 
+    @livewireScripts
 </body>
 
 </html>

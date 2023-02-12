@@ -16,10 +16,11 @@ class CreateBuktiKasKeluarsTable extends Migration
         Schema::create('bukti_kas_keluars', function (Blueprint $table) {
             $table->id();
             $table->Date('tanggal');
-            $table->foreignId('transaksi_pembelian_id');
-            $table->string('description');
-            $table->string('is_other');
-            $table->string('other_account');
+            $table->foreignId('transaksi_pembelian_id')->nullable();
+            $table->text('description');
+            $table->boolean('is_other')->nullable()->default(false);
+            $table->foreignId('akun_id')->nullable();
+            $table->double('akun_amount')->nullable()->default(0);
             $table->timestamps();
         });
     }
