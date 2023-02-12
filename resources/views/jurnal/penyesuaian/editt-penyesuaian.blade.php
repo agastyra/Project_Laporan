@@ -15,7 +15,7 @@
                             <div class="col-sm-9">
                                 <input class="form-control text-light" type="text" placeholder="Masukkan Rincian" />
                             </div> --}}
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                 Tanggal</label>
                             <div class="col-sm-9">
@@ -23,7 +23,7 @@
                                     value="{{ old('date', $id->date) }}" id="date" name="date"
                                     placeholder="masukan jumlah disni" />
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">

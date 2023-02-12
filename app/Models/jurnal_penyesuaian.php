@@ -15,8 +15,8 @@ class jurnal_penyesuaian extends Model
     protected $fillable = [
         'id',
         'date',
-        'debet',
-        'kredit',
+        'total_debet',
+        'total_kredit',
     ];
 
     // protected $guarded = [

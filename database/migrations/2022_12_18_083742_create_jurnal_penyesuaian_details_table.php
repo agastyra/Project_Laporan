@@ -13,7 +13,7 @@ class CreateJurnalPenyesuaianDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jurnal_penyesuaians_details', function (Blueprint $table) {
+        Schema::create('jurnal_penyesuaian_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jurnal_penyesuaians_id');
             $table->foreignId('akuns_id');

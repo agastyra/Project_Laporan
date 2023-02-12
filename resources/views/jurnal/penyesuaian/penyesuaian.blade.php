@@ -3,7 +3,8 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal Penyesuaian
+                    <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal
+                        Penyesuaian
                     </h4>
                     <div class="row">
                         <div class="col-lg-4 mt-5">
@@ -39,25 +40,24 @@
                                 <thead>
                                     <tr>
                                         <th style="background-color:black" scope="col-md">Tanggal</th>
-                                        <th style="background-color:black" scope="col-md">Debit</th>
-                                        <th style="background-color:black" scope="col-md">Kredit</th>
+                                        <th style="background-color:black" scope="col-md">Total_Debit</th>
+                                        <th style="background-color:black" scope="col-md">Total_Kredit</th>
                                         <th style="background-color:black" scope="col-md">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-
-                                    @forelse ($jurnal_penyesuaians as $penye)
+                                    @forelse ($jurnal_penyesuaians as $id)
                                         <tr>
-                                            <td>{{ date('d-m-y', strtotime($penye->date)) }}</td>
-                                            <td>{{ $penye->debet }}</td>
-                                            <td>{{ $penye->kredit }}</td>
+                                            <td>{{ date('d-m-y', strtotime($id->date)) }}</td>
+                                            <td>{{ $id->total_debet }}</td>
+                                            <td>{{ $id->total_kredit }}</td>
                                             <td>
-                                                <a href="{{ url('penyesuaian/editt-penyesuaian', $penye->id) }}"
+                                                <a href="{{ url('penyesuaian/editt-penyesuaian', $id->id) }}"
                                                     class="text-decoration-none link-light badge bg-primary border-0"><i
                                                         class="mdi mdi-file-document-edit-outline"></i></a>
                                                 |
-                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $penye->id) }}"
+                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
                                                     method="POST"> @method('delete') @csrf <button
                                                         class="badge bg-danger border-0"
                                                         onclick="return confirm('Apakah anda yakin ingin menghapus ?')">

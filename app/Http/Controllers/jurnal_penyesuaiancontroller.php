@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\akun;
 use App\Models\jurnal_penyesuaian;
+use App\Models\jurnal_penyesuaian_detail;
 use Illuminate\Http\Request;
 use PhpParser\Node\Param;
 
@@ -34,8 +35,8 @@ class jurnal_penyesuaiancontroller extends Controller
        
         jurnal_penyesuaian::create([
             'date' => $request->date,
-            'debet' => $request->debet,
-            'kredit' => $request->kredit,
+            'total_debet' => $request->total_debet,
+            'total_kredit' => $request->total_kredit,
         ]);
         return redirect('penyesuaian');
     }
@@ -94,7 +95,7 @@ class jurnal_penyesuaiancontroller extends Controller
     // }
      public function destroy($id)
      {
-         $penye = jurnal_penyesuaian::findorfail($id);
+         $penye = jurnal_penyesuaian_detail::findorfail($id);
          $penye->delete();
          return redirect()->route('penyesuaian');
         // return back();

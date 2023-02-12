@@ -29,7 +29,9 @@
                                         <select class="js-example-basic-single" style="width:100%" name="akuns_id">
                                             <option value="0"> - Pilih Nama Akun - </option>
                                             @foreach ($akun as $ak)
-                                                <option value="{{ $ak->id }}">({{ $ak->no_account }})
+                                                <option value="{{ $ak->id }}"
+                                                    {{ old('jurnal_penyesuaians_id') == $ak->id ? 'selected' : '' }}>
+                                                    ({{ $ak->no_account }})
                                                     {{ $ak->name_account }}</option>
                                             @endforeach
                                         </select>
@@ -45,11 +47,11 @@
                                             <option value="0">-Pilih Saldo-</option>
                                             <option value="AL">Debet</option>
                                             <option value="WY">Kredit</option> --}}
-                                    <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
-                                        Debit
+                                    <label class="col-sm-4 col-form-label"><i class="mdi mdi-cash text-warning"></i>
+                                        Total_Debit
                                     </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control text-light" type="text" name="debet"
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-light" type="text" name="total_debet"
                                             id="debit" />
                                     </div>
                                     {{-- </select>
@@ -59,9 +61,9 @@
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label"><i class="mdi mdi-cash text-warning"></i>
-                                        kredit</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control text-light" type="text" name="kredit"
+                                        Total_Kredit</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control text-light" type="text" name="total_kredit"
                                             id="kredit" />
                                         <div class="col-sm-12 mt-3">
                                             <button type="submit" class="positive ui button">
