@@ -29,8 +29,8 @@
                         <form id="form-barang">
                             @csrf
                             <input type="hidden"
-                                name="barangs_id"
-                                id="barangs_id">
+                                name="barang_id"
+                                id="barang_id">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -96,9 +96,9 @@
                                         <select name="vendor"
                                             id="vendor"
                                             class="form-control form-select text-light">
-                                            <option value="Risky">Risky</option>
-                                            <option value="Mukhlas">Mukhlas</option>
-                                            <option value="Mukhlis">Mukhlis</option>
+                                            <option value="1">Risky</option>
+                                            <option value="2">Muhlas</option>
+                                            <option value="3">Mukhlis</option>
                                         </select>
                                     </div>
                                 </div>
@@ -209,10 +209,10 @@
                             <div class="container-fluid">
                                 @csrf
                                 <input type="hidden"
-                                    name="transaksi_pembelians_id"
+                                    name="transaksi_pembelian_id"
                                     id="detail_transaksi_id">
                                 <input type="hidden"
-                                    name="barangs_id"
+                                    name="barang_id"
                                     id="detail_barang_id">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Barang</label>
@@ -271,10 +271,10 @@
                                 <div class="display4">
                                     <h4>Apakah Barang Ingin dihapus?</h4>
                                     <input type="hidden"
-                                        name="barangs_id"
+                                        name="barang_id"
                                         id="delete-barangs-id">
                                     <input type="hidden"
-                                        name="transaksi_pembelians_id"
+                                        name="transaksi_pembelian_id"
                                         id="delete-transaksi-pembelians-id">
                                 </div>
                             </div>

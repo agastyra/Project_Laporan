@@ -2,7 +2,7 @@ $(document).ready(function () {
     let baseUrl =
         $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
 
-    let barangs_id = 0;
+    let barang_id = 0;
     let barang_exists = false;
     let html = "";
     let grandTotal = 0;
@@ -56,17 +56,17 @@ $(document).ready(function () {
         if (this.value) {
             $.get(baseUrl + "cari_barang/" + this.value, function (response) {
                 if (response) {
-                    $("#barangs_id").val(response.result[0]["id"]);
+                    $("#barang_id").val(response.result[0]["id"]);
                     $("#no_barang").text(response.result[0]["no_barang"]);
                     $("#name_barang").text(response.result[0]["name_barang"]);
                     $("#harga_beli").text(response.result[0]["harga_beli"]);
                     $("#qty").val("");
 
-                    barangs_id = $("#barangs_id").val();
+                    barang_id = $("#barang_id").val();
 
                     $.ajax({
                         type: "GET",
-                        url: baseUrl + "purchase/validate_barang/" + barangs_id,
+                        url: baseUrl + "purchase/validate_barang/" + barang_id,
                         success: function (response) {
                             if (response) {
                                 if (
@@ -250,27 +250,27 @@ $(document).ready(function () {
 
     // get data for barang who want to update
     $(document).on("click", ".btn-update-detail", function () {
-        let barangs_id = $(this).data("detail-barang-id");
+        let barang_id = $(this).data("detail-barang-id");
         let barangs_name = $(this).data("detail-barang-nama");
         let transaksis_id = $(this).data("detail-transaksi-id");
         let detail_qty = parseInt(
-            document.querySelector(`tr#barang_${barangs_id} > td.barang_qty`)
+            document.querySelector(`tr#barang_${barang_id} > td.barang_qty`)
                 .innerHTML
         );
 
         $("#detail_transaksi_id").val(transaksis_id);
-        $("#detail_barang_id").val(barangs_id);
+        $("#detail_barang_id").val(barang_id);
         $("#detail_nama").val(barangs_name);
         $("#detail_qty").val(detail_qty);
     });
 
     // get data for barang who want to delete
     $(document).on("click", ".btn-delete-detail", function () {
-        let barangs_id = $(this).data("detail-barang-id");
+        let barang_id = $(this).data("detail-barang-id");
         let transaksis_id = $(this).data("detail-transaksi-id");
 
         $("#delete-transaksi-pembelians-id").val(transaksis_id);
-        $("#delete-barangs-id").val(barangs_id);
+        $("#delete-barangs-id").val(barang_id);
     });
 
     // update qty barang

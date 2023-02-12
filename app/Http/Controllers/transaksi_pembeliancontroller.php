@@ -83,11 +83,11 @@ class transaksi_pembeliancontroller extends Controller
     {
         $idTransaksiPembelian = $this->getTransactionId();
 
-        $barang_exists = detail_pembelian::select(DB::raw('barangs_id, count(barangs_id) as jml_barang, transaksi_pembelians_id'))
-            ->where('barangs_id', $barang->id)
-            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
-            ->groupBy('barangs_id')
-            ->groupBy('transaksi_pembelians_id')
+        $barang_exists = detail_pembelian::select(DB::raw('barang_id, count(barang_id) as jml_barang, transaksi_pembelian_id'))
+            ->where('barang_id', $barang->id)
+            ->where('transaksi_pembelian_id', $idTransaksiPembelian)
+            ->groupBy('barang_id')
+            ->groupBy('transaksi_pembelian_id')
             ->get();
 
         return response()->json($barang_exists);
@@ -97,8 +97,8 @@ class transaksi_pembeliancontroller extends Controller
     {
         $idTransaksiPembelian = $this->getTransactionId();
 
-        $result = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelians_id')
-            ->join('barangs', 'detail_pembelians.barangs_id', '=', 'barangs.id')
+        $result = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelian_id')
+            ->join('barangs', 'detail_pembelians.barang_id', '=', 'barangs.id')
             ->select('transaksi_pembelians.id as trx_id',
                 'transaksi_pembelians.no_transaction',
                 'detail_pembelians.id as detail_id',
@@ -117,14 +117,14 @@ class transaksi_pembeliancontroller extends Controller
     public function store_detail(Request $request)
     {
         $idTransaksiPembelian = $this->getTransactionId();
-        $barangs_id = $request->barangs_id;
+        $barang_id = $request->barang_id;
         $qty = $request->validate([
             'qty' => 'required|gt:0',
         ]);
 
         $data = [
-            'transaksi_pembelians_id' => $idTransaksiPembelian,
-            'barangs_id' => $barangs_id,
+            'transaksi_pembelian_id' => $idTransaksiPembelian,
+            'barang_id' => $barang_id,
             'qty' => $qty['qty'],
         ];
 
@@ -134,25 +134,25 @@ class transaksi_pembeliancontroller extends Controller
     public function update_detail(Request $request)
     {
         $idTransaksiPembelian = $this->getTransactionId();
-        $barangs_id = $request->barangs_id;
-        $barang = barang::where('id', $barangs_id)->first();
+        $barang_id = $request->barang_id;
+        $barang = barang::where('id', $barang_id)->first();
 
         $qty = $request->validate([
             'qty' => 'required|gt:0',
         ]);
 
-        $barang_qty = detail_pembelian::where('barangs_id', $barang->id)
-            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+        $barang_qty = detail_pembelian::where('barang_id', $barang->id)
+            ->where('transaksi_pembelian_id', $idTransaksiPembelian)
             ->value('qty');
 
-        detail_pembelian::where('barangs_id', $barang->id)
-            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+        detail_pembelian::where('barang_id', $barang->id)
+            ->where('transaksi_pembelian_id', $idTransaksiPembelian)
             ->update([
                 'qty' => $barang_qty + $qty['qty'],
             ]);
 
-        $detail = detail_pembelian::where('barangs_id', $barang->id)
-            ->where('transaksi_pembelians_id', $idTransaksiPembelian)
+        $detail = detail_pembelian::where('barang_id', $barang->id)
+            ->where('transaksi_pembelian_id', $idTransaksiPembelian)
             ->first();
 
         return response()->json([
@@ -163,13 +163,13 @@ class transaksi_pembeliancontroller extends Controller
 
     public function update_detail_qty(Request $request)
     {
-        $barang = barang::where('id', $request->barangs_id)->first();
-        $detail = detail_pembelian::where('barangs_id', $barang->id)
-            ->where('transaksi_pembelians_id', $request->transaksi_pembelians_id)
+        $barang = barang::where('id', $request->barang_id)->first();
+        $detail = detail_pembelian::where('barang_id', $barang->id)
+            ->where('transaksi_pembelian_id', $request->transaksi_pembelian_id)
             ->first();
 
-        detail_pembelian::where('transaksi_pembelians_id', $request->transaksi_pembelians_id)
-            ->where('barangs_id', $request->barangs_id)
+        detail_pembelian::where('transaksi_pembelian_id', $request->transaksi_pembelian_id)
+            ->where('barang_id', $request->barang_id)
             ->update([
                 'qty' => $request->qty,
             ]);
@@ -183,16 +183,16 @@ class transaksi_pembeliancontroller extends Controller
 
     public function delete_detail(Request $request)
     {
-        $detail_id = detail_pembelian::where('barangs_id', $request->barangs_id)
-            ->where('transaksi_pembelians_id', $request->transaksi_pembelians_id)
+        $detail_id = detail_pembelian::where('barang_id', $request->barang_id)
+            ->where('transaksi_pembelian_id', $request->transaksi_pembelian_id)
             ->value('id');
 
         detail_pembelian::destroy($detail_id);
 
         $idTransaksiPembelian = $this->getTransactionId();
 
-        $detail = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelians_id')
-            ->join('barangs', 'detail_pembelians.barangs_id', '=', 'barangs.id')
+        $detail = transaksi_pembelian::join('detail_pembelians', 'transaksi_pembelians.id', '=', 'detail_pembelians.transaksi_pembelian_id')
+            ->join('barangs', 'detail_pembelians.barang_id', '=', 'barangs.id')
             ->select('transaksi_pembelians.id as trx_id',
                 'transaksi_pembelians.no_transaction',
                 'detail_pembelians.id as detail_id',
