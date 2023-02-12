@@ -15,13 +15,14 @@ class CreateTransaksiPembeliansTable extends Migration
     {
         Schema::create('transaksi_pembelians', function (Blueprint $table) {
             $table->id();
-            $table->string('no_transaction', 5); # direlasikan ke bukti kas keluar
+            $table->string('no_transaction', 6); # direlasikan ke bukti kas keluar
             $table->date('date');
-            $table->string('vendor', 50)->default("");
-            $table->double('grand_total')->default(0);
-            $table->double('diskon')->default(0);
-            $table->double('bayar')->default(0);
-            $table->double('kembali')->default(0);
+            $table->string('vendor', 50)->nullable()->default("");
+            $table->double('grand_total')->nullable()->default(0);
+            $table->double('diskon')->nullable()->default(0);
+            $table->double('bayar')->nullable()->default(0);
+            $table->double('kembali')->nullable()->default(0);
+            $table->boolean('is_display')->nullable()->default(false);
             $table->timestamps();
         });
     }
