@@ -15,8 +15,8 @@ class CreateJurnalPenyesuaianDetailsTable extends Migration
     {
         Schema::create('jurnal_penyesuaian_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jurnal_penyesuaians_id');
-            $table->foreignId('akuns_id');
+            $table->foreignId('jurnal_penyesuaian_id');
+            $table->foreignId('akun_id');
             $table->double('debet')->nullable()->default(0);
             $table->double('kredit')->nullable()->default(0);
             $table->timestamps();

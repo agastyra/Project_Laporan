@@ -40,8 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th style="background-color:black" scope="col-md">Tanggal</th>
-                                        <th style="background-color:black" scope="col-md">Total_Debit</th>
-                                        <th style="background-color:black" scope="col-md">Total_Kredit</th>
+                                        <th style="background-color:black" scope="col-md">No Transaction</th>
                                         <th style="background-color:black" scope="col-md">Aksi</th>
                                     </tr>
                                 </thead>
@@ -50,8 +49,8 @@
                                     @forelse ($jurnal_penyesuaians as $id)
                                         <tr>
                                             <td>{{ date('d-m-y', strtotime($id->date)) }}</td>
-                                            <td>{{ $id->total_debet }}</td>
-                                            <td>{{ $id->total_kredit }}</td>
+                                            <td>{{ $id->no_transaction }}</td>
+
                                             <td>
                                                 <a href="{{ url('penyesuaian/editt-penyesuaian', $id->id) }}"
                                                     class="text-decoration-none link-light badge bg-primary border-0"><i

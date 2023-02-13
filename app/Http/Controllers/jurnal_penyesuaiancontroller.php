@@ -28,15 +28,26 @@ class jurnal_penyesuaiancontroller extends Controller
             'akun' => $akun,
         ]);
     }
+    
+     public function tambah()
+    {
+        $no_transaksi = jurnal_penyesuaian::all();
+    
+        return view('jurnal.penyesuaian.create-penyesuaian', [
+            'no_transaksi' => $no_transaksi
+            
+        ]);
+    }
+    
 
-    public function store(Request $request)
+
+        public function store(Request $request)
     {
         // dd($request->toArray());
        
         jurnal_penyesuaian::create([
             'date' => $request->date,
-            'total_debet' => $request->total_debet,
-            'total_kredit' => $request->total_kredit,
+            'no_transaction' => $request->no_transaction,
         ]);
         return redirect('penyesuaian');
     }
@@ -56,12 +67,15 @@ class jurnal_penyesuaiancontroller extends Controller
     public function edit(jurnal_penyesuaian $id)
     {
         $akun = akun::all();
+        $no_transaksi = jurnal_penyesuaian::all();
+        
 
         $penye= jurnal_penyesuaian::where('kredit', true)->get();
         return view('jurnal.penyesuaian.editt-penyesuaian', [
             'penye' => $penye,
             'id' => $id,
             'akun' => $akun,
+            'no_transaksi' => $no_transaksi,
         ]);
     }
 

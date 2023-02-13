@@ -5,13 +5,14 @@
                 <div class="card-body">
                     <form action="{{ route('simpan-penyesuaian') }}" method="POST">
                         {{ csrf_field() }}
-                        {{-- <div class="form-group row mt-5">
+                        <div class="form-group row mt-5">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
-                                Rincian</label>
+                                No</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-light" type="text" placeholder="Masukkan Rincian" />
+                                <input class="form-control text-light" type="text"
+                                    placeholder="Masukkan No Transaksi" name="no_transaction" />
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                 Tanggal</label>
@@ -26,7 +27,7 @@
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
                                         Akun</label>
                                     <div class="col-sm-9">
-                                        <select class="js-example-basic-single" style="width:100%" name="akuns_id">
+                                        <select class="js-example-basic-single" style="width:100%" name="akun_id">
                                             <option value="0"> - Pilih Nama Akun - </option>
                                             @foreach ($akun as $ak)
                                                 <option value="{{ $ak->id }}"
