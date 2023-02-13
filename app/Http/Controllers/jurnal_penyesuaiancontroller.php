@@ -101,4 +101,44 @@ class jurnal_penyesuaiancontroller extends Controller
         // return back();
      }
 
+     //untuk penyesuaian_detail
+      public function index_detail()
+
+    {
+        $dtpenyesuaian_detail = jurnal_penyesuaian_detail::all();
+
+        return view('jurnal.penyesuaian_detail.penyesuaian_detail', [
+            'jurnal_penyesuaians_details' => $dtpenyesuaian_detail,
+        ]);
+    }
+      public function create_detail()
+    {
+        // $akun = akun::all();
+        // $akuns = akun::orderBy('no_account', 'asc')->get();
+        return view('jurnal.penyesuaian.penyesuaian_detail', [
+            // 'akun' => $akun,
+        ]);
+    }
+    public function store_detail(Request $request)
+    {
+        dd($request->toArray());
+       
+        // jurnal_penyesuaian_detail::create([
+
+        //     'jurnal_penyesuaians_id' => $request->jurnal_penyesuaians_id,
+        //     'akuns_id' => $request->akuns_id,
+        //     'debet' => $request->debet,
+        //     'kredit' => $request->kredit,
+        // ]);
+        return redirect('simpan_penyesuaian_detail');
+    }
+//     public function getPenyesuaianId($id)
+// {
+//     $penyesuaian_detail = jurnal_penyesuaian_detail::find($id);
+//     $penyesuaians_id = $penyesuaian_detail->penyesuaian->id;
+
+//     return $penyesuaians_id;
+// }
+
+
 }
