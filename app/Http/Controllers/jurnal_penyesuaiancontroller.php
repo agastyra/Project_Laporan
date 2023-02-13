@@ -21,23 +21,27 @@ class jurnal_penyesuaiancontroller extends Controller
     }
 
       public function create()
+
     {
+        
         $akun = akun::all();
         // $akuns = akun::orderBy('no_account', 'asc')->get();
         return view('jurnal.penyesuaian.create-penyesuaian', [
             'akun' => $akun,
+           
+
         ]);
     }
     
-     public function tambah()
-    {
-        $no_transaksi = jurnal_penyesuaian::all();
+    //  public function tambah()
+    // {
+    //      $no_transaksi = jurnal_penyesuaian::all();
     
-        return view('jurnal.penyesuaian.create-penyesuaian', [
-            'no_transaksi' => $no_transaksi
+    //     return view('jurnal.penyesuaian.create-penyesuaian', [
+    //         'no_transaksi' => $no_transaksi
             
-        ]);
-    }
+    //     ]);
+    // }
     
 
 
