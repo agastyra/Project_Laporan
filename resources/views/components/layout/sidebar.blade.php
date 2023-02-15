@@ -80,7 +80,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('barang')}}">
+                <a class="nav-link" href="/barang">
                     <span class="menu-icon">
                         <i class="mdi mdi-table-large"></i>
                     </span>
@@ -88,7 +88,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('penyesuaian')}}">
+                <a class="nav-link" href="/penyesuaian">
                     <span class="menu-icon">
                         <i class="mdi mdi-chart-bar"></i>
                     </span>
@@ -96,7 +96,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('memo')}}">
+                <a class="nav-link" href="/memo">
                     <span class="menu-icon">
                         <i class="mdi mdi-contacts"></i>
                     </span>
@@ -105,7 +105,7 @@
             </li>
             <li class="nav-item menu-items">
 
-                <a class="nav-link" href="{{route('documentation')}}">
+                <a class="nav-link" href="">
                     <span class="menu-icon">
                         <i class="mdi mdi-file-document-box"></i>
                     </span>
