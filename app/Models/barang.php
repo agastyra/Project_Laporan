@@ -17,8 +17,8 @@ class barang extends Model
         'harga_jual',
     ];
 
-    // public function detail_penjualan()
-    // {
-    //     return $this->hasMany(detail_penjualan::class);
-    // }
+    public function detail_penjualan()
+    {
+        return $this->hasMany(detail_penjualan::class);
+    }
 }

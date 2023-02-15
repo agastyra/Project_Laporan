@@ -26,7 +26,7 @@ class DetailStoreRequest extends FormRequest
         return [
             'no_transaction' => 'required',
             'no_barang' => 'required',
-            'qty' => 'required|double',
+            'qty' => 'required',
         ];
     }
 }

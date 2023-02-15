@@ -11,7 +11,7 @@ class detail_penjualan extends Model
 
     protected $fillable = [
         'no_transaction',
-        'barangs_id',
+        'barang_id',
         'harga_jual',
         'qty',
         'subTotal',
@@ -24,11 +24,11 @@ class detail_penjualan extends Model
 
     public function barang()
     {
-        return $this->belongsTo(barang::class, 'barangs_id', 'id');
+        return $this->belongsTo(barang::class);
     }
 
-    // public function transaksi_penjualan()
-    // {
-    //     return $this->belongsTo(transaksi_penjualan::class, 'no_transaction', 'no_transaction');
-    // }
+    public function transaksi_penjualan()
+    {
+        return $this->belongsTo(transaksi_penjualan::class);
+    }
 }
