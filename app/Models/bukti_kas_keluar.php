@@ -11,6 +11,11 @@ class bukti_kas_keluar extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'no_transaction';
+    }
+
     /**
      * Get the akun that owns the bukti_kas_keluar
      *

@@ -59,8 +59,7 @@ Route::get('/accounting/cash-out', [bukti_kas_keluarcontroller::class, "index"])
 Route::post('/accounting/cash-out', [bukti_kas_keluarcontroller::class, "save"])->name('save_cash_out');
 Route::get('/accounting/cash-out/new', [bukti_kas_keluarcontroller::class, "form"])->name('create_cash_out');
 Route::get('/accounting/cash-out/get_transaction/{transaksi_pembelian:id}', [bukti_kas_keluarcontroller::class, 'get_transaction'])->name('get_transaction');
-Route::get('/jurnal_kas_keluar', [bukti_kas_keluarcontroller::class, "jurnal"]);
-Route::get('/nota_pembelian', [bukti_kas_keluarcontroller::class, 'nota']);
+Route::get('/accounting/cash-out/print/{bukti_kas_keluar}', [bukti_kas_keluarcontroller::class, "report"])->name('report_cash_out');
 
 //route kas masuk
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
