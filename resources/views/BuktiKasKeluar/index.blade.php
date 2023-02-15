@@ -22,9 +22,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td colspan="6">Tidak ada data</td>
-                                    </tr>
+                                    @forelse ($bukti_kas_keluars as $bkk)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $bkk->no_transaction }}</td>
+                                            <td>{{ $bkk->tanggal }}</td>
+                                            <td>{{ $bkk->description }}</td>
+                                            @if ($bkk->akun_amount)
+                                                <td>{{ number_format($bkk->akun_amount, 0, ',', '.') }}</td>
+                                            @else
+                                                <td>{{ number_format($bkk->transaksi_pembelian->grand_total, 0, ',', '.') }}
+                                                </td>
+                                            @endif
+                                            <td>
+                                                <a href=""
+                                                    class="text-decoration-none link-light badge bg-primary border-0">
+                                                    <i class="mdi mdi-file-document-edit-outline"></i>
+                                                </a>
+                                                <form action=""
+                                                    method="POST"
+                                                    class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        type="submit"
+                                                        onclick="return confirm('Apakah anda yakin ?')">
+                                                        <i class="mdi mdi-trash-can-outline"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6">Tidak ada data</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
