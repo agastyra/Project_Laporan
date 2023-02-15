@@ -6,6 +6,7 @@ use App\Models\akun;
 use App\Models\bukti_kas_keluar;
 use App\Models\transaksi_pembelian;
 use Illuminate\Http\Request;
+use PDF;
 
 class bukti_kas_keluarcontroller extends Controller
 {
@@ -87,19 +88,13 @@ class bukti_kas_keluarcontroller extends Controller
         ]);
     }
 
-    public function jurnal()
+    public function report(bukti_kas_keluar $bukti_kas_keluar)
     {
-        return view('BuktiKasKeluar.tb_kas_keluar');
-    }
+        $pdf = PDF::loadView('BuktiKasKeluar.report', [
+            'bkk' => $bukti_kas_keluar,
+        ]);
 
-    public function report()
-    {
-        return view('BuktiKasKeluar.report');
-    }
-
-    public function nota()
-    {
-        return view('BuktiKasKeluar.nota_pembelian');
+        return $pdf->stream();
     }
 
     private function setNewTransactionNumber()
