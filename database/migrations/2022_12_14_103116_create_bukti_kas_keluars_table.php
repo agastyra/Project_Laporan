@@ -15,6 +15,7 @@ class CreateBuktiKasKeluarsTable extends Migration
     {
         Schema::create('bukti_kas_keluars', function (Blueprint $table) {
             $table->id();
+            $table->string('no_transaction', 6);
             $table->Date('tanggal');
             $table->foreignId('transaksi_pembelian_id')->nullable();
             $table->text('description');

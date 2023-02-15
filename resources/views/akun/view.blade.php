@@ -26,7 +26,7 @@
                         <label for="no_header"
                             class="form-label">Header Nomor</label>
                         <select
-                            class="js-example-basic-single @error('header_account')
+                            class="js-example-basic-single text-light @error('header_account')
                             is-invalid
                         @enderror"
                             style="width:100%"
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label for="nomor_akun">Nomor Akun</label>
                         <input type="text"
-                            class="form-control form-control-rounded @error('no_account')
+                            class="form-control text-light form-control-rounded @error('no_account')
                             is-invalid
                         @enderror"
                             id="nomor_akun"
@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <label for="nama_akun">Nama Akun</label>
                         <input type="text"
-                            class="form-control form-control-rounded @error('name_account')
+                            class="form-control text-light form-control-rounded @error('name_account')
                             is-invalid
                         @enderror"
                             id="nama_akun"
@@ -86,7 +86,7 @@
                         <br>
                         <select name="type_account"
                             id="tipe_akun"
-                            class="form-select form-control @error('type_account')
+                            class="form-select form-control text-light @error('type_account')
                             is-invalid
                         @enderror">
                             <option value="">--Pilih tipe akun--</option>
@@ -124,7 +124,7 @@
                     <div class="form-group">
                         <label for="saldo_akun">Saldo</label>
                         <input type="number"
-                            class="form-control form-control-rounded"
+                            class="form-control text-light form-control-rounded"
                             id="saldo_akun"
                             name="balance"
                             placeholder="Masukan saldo"
