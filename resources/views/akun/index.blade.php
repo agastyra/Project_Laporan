@@ -46,8 +46,8 @@
                         </table>
                     </div>
                 </div>
-               
- </d iv>
+
             </div>
         </div>
+    </div>
 </x-layout.app>

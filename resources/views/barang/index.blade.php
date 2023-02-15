@@ -45,7 +45,7 @@
                             </thead>
                             <tbody>
 
-                                @forelse ($barangs as $barang )
+                                @foreach ($barangs as $barang )
 
 
 
@@ -58,20 +58,29 @@
                                     <td>{{ $barang->harga_beli}}</td>
                                     <td>{{ $barang->harga_jual }} </td>
                                     <td>
-                                        <button type="submit" class="btn btn-icon btn-success btn-sm "
+                                        <!-- <button type="submit" class="btn btn-icon btn-success btn-sm "
                                             data-bs-toggle="modal" data-bs-target="#modal-edit"><i
                                                 class="mdi mdi-pencil icon-sm"></i></button>
                                         <button type="submit" class="btn btn-icon btn-danger btn-sm"
                                             data-bs-toggle="modal" data-bs-target="#modal-hapus"><i
+                                                class="mdi mdi-delete icon-sm"></i></button> -->
+
+
+                                        <a href="{{route('edit_barang', $barang->no_barang)}}"
+                                            class="btn btn-icon btn-success btn-sm "><i
+                                                class="mdi mdi-pencil icon-sm"></i></a>
+
+                                        <button type="button" class="btn btn-icon btn-danger btn-sm"
+                                            data-bs-toggle="modal" data-bs-target="#modal-hapus"><i
                                                 class="mdi mdi-delete icon-sm"></i></button>
                                     </td>
                                 </tr>
-                                @empty
+                                @endforeach
 
-                                <tr>
+                                <!-- <tr> -->
 
-                                    @endforelse
-                                </tr>
+
+                                <!-- </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -81,54 +90,11 @@
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleId">Edit Barang</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">nama barang</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="name_barang" value="{{old('name_barang')}}">
-                            </div>
-                        </div>
 
 
 
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jumlah</label>
-                            <div class="col-sm-9">
-                                <input class="form-control text-white" type="number" name="stok" value="{{old('stok')}}"
-                                    placeholder="0">
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga Jual</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="harga_jual" value="{{old('harga_jual')}}"
-                                    class="form-control text-white" placeholder="Harga Jual baru">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                            class="mdi mdi-window-close"></i> Tutup</button>
-                    <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- modalhapus -->
     <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -137,58 +103,51 @@
                     <h5 class="modal-title" id="modalTitleId">Hapus Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="display4">
-                            <h4>Apakah Barang Ingin dihapus?</h4>
+
+
+
+
+                <form action="{{route('hapus_barang', $barang->no_barang)}}" method="POST">
+                    @method('Delete')
+                    @csrf
+
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="display4">
+                                <h4>Apakah Barang Ingin dihapus?</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                            class="mdi mdi-window-close"></i> Batal</button>
-                    <button type="submit" class="btn btn-success"><i class="mdi mdi-check"></i> Hapus</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                                class="mdi mdi-window-close"></i> Batal</button>
+                        <button type="submit" class="btn btn-success"><i class="mdi mdi-check"></i>
+                            Hapus</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
+    @push('jssj')
+
+    <script>
+    var modalHp = document.getElementById('modal-hapus');
+
+    modalHp.
+    addEvent
+    Listener
+        ('show.bs.modal ', function(event) {
+
+            // Button that triggered the modal
+            let button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            let recipient = button.getAttribute('data-bs-whatever');
+
+            // Use above variables to manipulate the DOM
+        });
+    </script>
+    @endpush
+
 </x-layout.app>
-@push('jssj')
-<script>
-var modalEd = document.getElementById('modal-edit');
-
-modalEd.addEventListener('show.bs.modal', function(event) {
-    // Button that triggered the modal
-    let button = event.relatedTarget;
-    // Extract info from data-bs-* attributes
-    let recipient = button.getAttribute('data-bs-whatever');
-
-    // Use above variables to manipulate the DOM
-});
-</script>
-<script>
-var modalHp = document.getElementById('modal-hapus');
-
-modalHp.
-addEvent
-Listener
-    ('show.bs.modal ', function(event) {
-
-
-
-
-
-
-
-
-
-
-        // Button that triggered the modal
-        let button = event.relatedTarget;
-        // Extract info from data-bs-* attributes
-        let recipient = button.getAttribute('data-bs-whatever');
-
-        // Use above variables to manipulate the DOM
-    });
-</script>
-@endpush

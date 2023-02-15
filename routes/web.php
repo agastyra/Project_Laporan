@@ -36,9 +36,10 @@ Route::delete('/accounting/accounts/delete/{akun}', [akuncontroller::class, "des
 Route::get('/barang', [barangcontroller::class, "index"])->name('barang');
 Route::post('/barang/tambah', [barangcontroller::class, "store"])->name('simpan_barang');
 Route::get('/barang/tambah', [barangcontroller::class, "create"])->name('tambah_barang');
-Route::put('/barang/tambah/{barang}', [barangcontroller::class, "update"])->name('update_barang');
+Route::get('/barang/edit/{barang}', [barangcontroller::class, "edit"])->name('edit_barang');
+Route::put('/barang/edit/{barang}', [barangcontroller::class, "update"])->name('update_barang');
 Route::delete('/barang/{barang}', [barangcontroller::class, "destroy"])->name('hapus_barang');
-Route::put('/barang/tambah/{barang}', [barangcontroller::class, "incrementid"])->name('increment');
+//Route::put('/barang/tambah/{barang}', [barangcontroller::class, "incrementid"])->name('increment');
 
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
