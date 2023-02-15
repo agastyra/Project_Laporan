@@ -73,15 +73,15 @@ class barangcontroller extends Controller
         return redirect()->route('barang');
     }
 
-    public function destroy($id)
+    public function destroy(barang $barang)
     {
-        $data = barang::findOrFail($id);
-        $data->delete();
+        // $data = barang::findOrFail($id);
+        // $data->delete('no_barang');
 
-        return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        // barang::destroy($barang->id);
+        // return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        barang::destroy($barang->id);
 
-        // return redirect()->route('barang');
+        return redirect()->route('barang');
     }
 
     private function incrementid()

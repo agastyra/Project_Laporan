@@ -72,7 +72,7 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{Route('accounts')}}">
+                <a class="nav-link" href="{{route('accounts')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-playlist-play"></i>
                     </span>
@@ -80,7 +80,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{Route('barang')}}">
+                <a class="nav-link" href="{{route('barang')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-table-large"></i>
                     </span>
@@ -88,7 +88,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="penyesuaian">
+                <a class="nav-link" href="{{route('penyesuaian')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-chart-bar"></i>
                     </span>
@@ -96,7 +96,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="memo">
+                <a class="nav-link" href="{{route('memo')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-contacts"></i>
                     </span>
@@ -105,12 +105,12 @@
             </li>
             <li class="nav-item menu-items">
 
-                <a class="nav-link" href="documentation">
+                <a class="nav-link" href="{{route('documentation')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-file-document-box"></i>
                     </span>
-      
-              <span class="menu-title">Bukti</span>
+
+                    <span class="menu-title">Bukti</span>
                 </a>
             </li>
         </ul>
