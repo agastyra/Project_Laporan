@@ -38,7 +38,7 @@
                                                 <a href="{{ route('report_cash_out', $bkk->no_transaction) }}"
                                                     target="_blank"
                                                     class="text-decoration-none link-light badge bg-primary border-0">
-                                                    <i class="mdi mdi-file-document-edit-outline"></i>
+                                                    <i class="mdi mdi-printer"></i>
                                                 </a>
                                                 {{-- <form action=""
                                                     method="POST"
