@@ -104,32 +104,33 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            {{-- @forelse ($jurnal_penyesuaians_details as $id) --}}
-                                                            {{-- <tr>
-                                                    <td>{{ $id->jurnal_penyesuaian_id }}</td>
-                                                    <td>{{ $id->akuns_id }}</td>
-                                                    <td>{{ $id->debet }}</td>
-                                                    <td>{{ $id->kredit }}</td>
-                                                    <td>
-                                                        <a href="{{ url('penyesuaian_detail', $id->id) }}"
-                                                            class="text-decoration-none link-light badge bg-primary border-0"><i
-                                                                class="mdi mdi-file-document-edit-outline"></i></a>
-                                                        |
-                                                        <a href="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
-                                                            method="POST"> @method('delete') @csrf <button
-                                                                class="badge bg-danger border-0"
-                                                                onclick="return confirm('Apakah anda yakin ingin menghapus ?')">
-                                                                <i class="mdi mdi-trash-can-outline"></i>
-                                                            </button>
-                                                            <i class="mdi mdi-trash-can-outline" style="color: red"></i></a>
-                                                    </td>
-                                                </tr> --}}
-                                                            {{-- @empty
-                                                <tr>
-                                                    <td colspan="3">Tidak ada data</td>
-                                                </tr>
-                                                @endforelse
-                                            </tbody> --}}
+                                                            @forelse ($jurnal_penyesuaians_details as $id)
+                                                                <tr>
+                                                                    <td>{{ $id->jurnal_penyesuaian_id }}</td>
+                                                                    <td>{{ $id->akuns_id }}</td>
+                                                                    <td>{{ $id->debet }}</td>
+                                                                    <td>{{ $id->kredit }}</td>
+                                                                    <td>
+                                                                        <a href="{{ url('penyesuaian_detail', $id->id) }}"
+                                                                            class="text-decoration-none link-light badge bg-primary border-0"><i
+                                                                                class="mdi mdi-file-document-edit-outline"></i></a>
+                                                                        |
+                                                                        <a href="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
+                                                                            method="POST"> @method('delete') @csrf
+                                                                            <button class="badge bg-danger border-0"
+                                                                                onclick="return confirm('Apakah anda yakin ingin menghapus ?')">
+                                                                                <i
+                                                                                    class="mdi mdi-trash-can-outline"></i>
+                                                                                {{-- </button>
+                                                            <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
+                                                                    </td>
+                                                                </tr>
+                                                            @empty
+                                                                <tr>
+                                                                    <td colspan="3">Tidak ada data</td>
+                                                                </tr>
+                                                            @endforelse
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
