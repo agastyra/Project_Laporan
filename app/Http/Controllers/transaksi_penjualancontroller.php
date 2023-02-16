@@ -39,21 +39,15 @@ class transaksi_penjualancontroller extends Controller
 
 
 
-    public function create(Request $request)
+    public function create()
 {
-    $keyword = $request->input('keyword');
-    $barbar = collect([]);
-    if ($keyword) {
-        $barbar = barang::query()
-            ->where('no_barang', 'like', "%{$keyword}%")
-            ->orWhere('name_barang', 'like', "%{$keyword}%")->get();
-    }
+    
 
     $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
     if ($noTrans) {
-        $tranCode = now()->format('dmyHis') . ((int) $noTrans->noTrans + 1);
+        $tranCode = date('dmY') . ((int) $noTrans->noTrans + 1);
     } else {
-        $tranCode = now()->format('dmyHis') . '1';
+        $tranCode = 1;
     }
 
     $Gtotals = 0;
@@ -69,12 +63,26 @@ class transaksi_penjualancontroller extends Controller
     $dates = date('dmyHis');
 
     return view('transaksi.penjualan.create', [
-        'barbar' => $barbar,
         'dates' => $dates,
         'barangs' => $barangs,
         'transCode' => $tranCode,
         'details' => $details,
         'Gtotals' => $Gtotals
+    ]);
+}
+
+// $keyword = $request->input('keyword');
+    // $barbar = collect([]);
+    // if ($keyword) {
+    //     $barbar = barang::query()
+    //         ->where('no_barang', 'like', "%{$keyword}%")
+    //         ->orWhere('name_barang', 'like', "%{$keyword}%")->get();
+    // }
+
+public function getData($id){
+    $barang = Barang::find($id);
+    return response()->json([
+        'subTotal' => $barang->harga_jual,
     ]);
 }
 

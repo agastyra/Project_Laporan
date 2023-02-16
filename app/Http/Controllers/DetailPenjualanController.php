@@ -41,29 +41,40 @@ class DetailPenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name_barang' => 'required',
-            'harga_jual' => 'required',
-            'qty' => 'required',
-            'subTotal' => 'required'
-        ]);
+        // $validatedData = $request->validate([
+        //     'name_barang' => 'required',
+        //     'harga_jual' => 'required',
+        //     'qty' => 'required',
+        //     'subTotal' => 'required'
+        // ]);
+        
     
         $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
         if ($noTrans) {
-            $tranCode = now()->format('dmyHis') . ((int) $noTrans->noTrans + 1);
+            $tranCode = date('dmY') . ((int) $noTrans->noTrans + 1);
         } else {
-            $tranCode = 1;
+            $tranCode =  1;
         }
-    
-        $goods = barang::findOrFail($request->name_barang);
-        if ($goods) {
+
+        
+        // dd($request->barang_id);
+   
+        // $goods = barang::findOrFail($request->name_barang);
+        $goods = barang::where("id", $request->barang_id)->first();
+        
+        // dd($request->qty);
+        if ($goods<> null) {
             $stock = $goods->stok - (int) $request->qty;
             $goods->update(['stok' => $stock]);
         } else {
             return redirect()->back()->withErrors(['name_barang' => 'Barang not found']);
         }
-    
-        $details = detail_penjualan::where('no_transaction', $tranCode)->where('barang_id', $request->name_barang)->first();
+
+        // dd($goods);
+
+        $details = detail_penjualan::where('no_transaction', $tranCode)->where('barang_id', $request->barang_id)->first();
+
+        // dd("tes");
         if ($details) {
             $sumQty = $details->qty + $request->qty;
             $sumSubTotal = $details->subTotal + $request->subTotal;
@@ -72,13 +83,13 @@ class DetailPenjualanController extends Controller
         } else {
             $detailStore = detail_penjualan::create([
                 'no_transaction' => $tranCode,
-                'barang_id' => $request->name_barang,
+                'barang_id' => $request->barang_id,
                 'qty' => $request->qty,
                 'subTotal' => $request->subTotal
             ]);
         }
     
-        return redirect()->route('transaksi.create');
+        return redirect()->route('transaksi.create', $tranCode);
         // $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'));
         // if ($noTrans->count() > 0) {
         //     foreach($noTrans->get() as $pKey){

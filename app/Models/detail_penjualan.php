@@ -12,10 +12,11 @@ class detail_penjualan extends Model
     protected $fillable = [
         'no_transaction',
         'barang_id',
-        'harga_jual',
         'qty',
         'subTotal',
     ];
+
+    protected $hidden = [];
 
     // public function transaksi_penjualan()
     // {

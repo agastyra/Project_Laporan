@@ -17,9 +17,8 @@ class CreateDetailPenjualansTable extends Migration
             $table->id();
             $table->foreignId('no_transaction');
             $table->foreignId('barang_id');
-            $table->double('harga_jual');
             $table->integer('qty');
-            $table->double('subTotal')->default(0);
+            $table->double('subTotal');
             $table->timestamps();
         });
     }
