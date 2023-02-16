@@ -131,8 +131,7 @@ class jurnal_penyesuaiancontroller extends Controller
     }
       public function create_detail()
     {
-        // $akun = akun::all();
-        // $akuns = akun::orderBy('no_account', 'asc')->get();
+       
         return view('jurnal.penyesuaian.penyesuaian_detail', [
             // 'akun' => $akun,
         ]);

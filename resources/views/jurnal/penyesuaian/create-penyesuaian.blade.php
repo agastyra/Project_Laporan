@@ -1,4 +1,5 @@
 <x-layout.app>
+
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
@@ -73,8 +74,8 @@
                                             id="kredit" />
                                         <div class="col-sm-3 mt-4">
                                             <div class="col-sm-12 mt-3">
-                                                <button type="submit" class="btn btn-success"><i
-                                                        class="mdi mdi-plus"></i>
+                                                <button type="submit" class="btn btn-success"><i class="mdi mdi-plus"
+                                                        href="{{ route('create-penyesuaian') }}"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -104,7 +105,7 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            @forelse ($jurnal_penyesuaians_details as $id)
+                                                            {{-- @forelse ($jurnal_penyesuaians as $id)
                                                                 <tr>
                                                                     <td>{{ $id->jurnal_penyesuaian_id }}</td>
                                                                     <td>{{ $id->akuns_id }}</td>
@@ -121,15 +122,15 @@
                                                                                 onclick="return confirm('Apakah anda yakin ingin menghapus ?')">
                                                                                 <i
                                                                                     class="mdi mdi-trash-can-outline"></i>
-                                                                                {{-- </button>
-                                                            <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
+                                                                                </button>
+                                                            <i class="mdi mdi-trash-can-outline" style="color: red"></i></a>
                                                                     </td>
                                                                 </tr>
                                                             @empty
                                                                 <tr>
                                                                     <td colspan="3">Tidak ada data</td>
                                                                 </tr>
-                                                            @endforelse
+                                                            @endforelse --}}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -144,6 +145,7 @@
             </div>
         </div>
     </div>
+
     @push('jssj')
         <script>
             $(document).ready(function() {
