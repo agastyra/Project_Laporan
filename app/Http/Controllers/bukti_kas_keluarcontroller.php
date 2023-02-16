@@ -6,6 +6,7 @@ use App\Models\akun;
 use App\Models\bukti_kas_keluar;
 use App\Models\transaksi_pembelian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class bukti_kas_keluarcontroller extends Controller
@@ -25,7 +26,21 @@ class bukti_kas_keluarcontroller extends Controller
         $akuns = akun::where('is_header_account', false)
             ->where('type_account', '<>', 1)
             ->orderBy('no_account', 'asc')->get();
-        $transaksis = transaksi_pembelian::where('is_display', true)->orderBy('no_transaction', 'asc')->get();
+
+        $transaksis = DB::select(DB::raw(
+            "SELECT
+                purch.*,
+                bkk.transaksi_pembelian_id
+            FROM
+                transaksi_pembelians purch
+            LEFT JOIN bukti_kas_keluars bkk ON
+                purch.id = bkk.transaksi_pembelian_id
+            WHERE
+                bkk.transaksi_pembelian_id IS NULL AND purch.is_display = TRUE
+            ORDER BY
+                purch.no_transaction ASC"
+        ));
+
         $transactionNumber = $this->setNewTransactionNumber();
 
         return view('buktikaskeluar.form', [
