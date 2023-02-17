@@ -34,8 +34,6 @@ Route::delete('/accounting/accounts/delete/{akun}', [akuncontroller::class, "des
 
 Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
 
-Route::get('/memo', [memorialcontroller::class, "index"]);
-
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
 Route::get('/barang', [barangcontroller::class, "index"]);
@@ -65,3 +63,9 @@ Route::get('/accounting/cash-out/print/{bukti_kas_keluar}', [bukti_kas_keluarcon
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
 Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
 Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
+
+// route jurnal memorial
+Route::get('/accounting/memorial', [memorialcontroller::class, "index"])->name('memorial');
+Route::get('/accounting/memorial/new', [memorialcontroller::class, "create"])->name('create_memorial');
+Route::post('/accounting/memorial', [memorialcontroller::class, "store"])->name('save_memorial');
+Route::get('/accounting/memorial/get_account_info/{id}', [memorialcontroller::class, 'get_account_info'])->name('get_account_info_memorial');
