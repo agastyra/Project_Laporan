@@ -29,11 +29,17 @@ Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])-
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])->name('update_account');
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
-Route::resource('detail', "DetailPenjualanController");
+// Route::resource('detail', "DetailPenjualanController");
+Route::post('/detail', "DetailPenjualanController@store")->name('detail.store');
+Route::put('/detail/edit/{id}', "DetailPenjualanController@update")->name('detail.update');
+Route::get('/detail/edit/{id}', "DetailPenjualanController@edit")->name('detail.edit');
+Route::post('/calcDet', "DetailPenjualanController@calcDetail")->name('detail.calc');
+Route::delete('/detail/{id}', "DetailPenjualanController@destroy")->name('detail.destroy');
 Route::get('/sales', [transaksi_penjualancontroller::class, 'index'])->name('transaksi.index');
 Route::get('/sales/show', [transaksi_penjualancontroller::class, 'show'])->name('transaksi.show');
 Route::post('/sales/store', [transaksi_penjualancontroller::class, 'store'])->name('transaksi.store');
 Route::get('/getBarangData/{id}', [transaksi_penjualancontroller::class, 'getData']);
+Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
 Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
 
 
