@@ -9,6 +9,7 @@ use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
+use App\Http\Livewire\BukuBesar\BukuBesar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,3 +66,7 @@ Route::get('/accounting/cash-out/print/{bukti_kas_keluar}', [bukti_kas_keluarcon
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
 Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
 Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
+
+
+// route buku besar
+Route::get('/accounting/ledger', BukuBesar::class)->name('ledger');
