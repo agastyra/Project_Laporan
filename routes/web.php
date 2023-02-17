@@ -29,7 +29,7 @@ Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::cla
 Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
 Route::get('/penyesuaian/editt-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "edit"])->name('editt-penyesuaian');
 Route::put('/penyesuaian/editt-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
-Route::get('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
+Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
 
 // Routing untuk jurnal_penyesuaian_detail
 Route::get('/penyesuaian_detail', [jurnal_penyesuaiancontroller::class, "index_detail"])->name('penyesuaian_detail');

@@ -56,13 +56,16 @@
                                                     class="text-decoration-none link-light badge bg-primary border-0"><i
                                                         class="mdi mdi-file-document-edit-outline"></i></a>
                                                 |
-                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
-                                                    method="POST"> @method('delete') @csrf <button
-                                                        class="badge bg-danger border-0"
-                                                        onclick="return confirm('Apakah anda yakin ingin menghapus ?')">
+                                                <form action="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
+                                                    method="POST" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        onclick="return confirm('Apakah anda yakin ?')">
                                                         <i class="mdi mdi-trash-can-outline"></i>
                                                     </button>
-                                                    {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
+                                                </form>
+                                                {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
                                             </td>
                                         </tr>
                                     @empty

@@ -14,37 +14,30 @@ class jurnal_penyesuaiancontroller extends Controller
 
     {
         $dtpenyesuaian = jurnal_penyesuaian::all();
+        // $dtpenyesuaian_detail = jurnal_penyesuaian_detail::all();
 
         return view('jurnal.penyesuaian.penyesuaian', [
-            'jurnal_penyesuaians' => $dtpenyesuaian,
+            'jurnal_penyesuaians' => $dtpenyesuaian, 
+            // 'jurnal_penyesuaian_detail' => $dtpenyesuaian_detail,
         ]);
     }
 
-      public function create()
 
+      public function create()
     {
         
         $akun = akun::all();
+        $dtpenyesuaian = jurnal_penyesuaian::all();
         // $akuns = akun::orderBy('no_account', 'asc')->get();
-        return view('jurnal.penyesuaian.create-penyesuaian', [
+        return view('jurnal.penyesuaian.detail_penyesuaian', [
             'akun' => $akun,
+            'jurnal_penyesuaians' => $dtpenyesuaian, 
            
 
         ]);
     }
     
-    //  public function tambah()
-    // {
-    //      $no_transaksi = jurnal_penyesuaian::all();
     
-    //     return view('jurnal.penyesuaian.create-penyesuaian', [
-    //         'no_transaksi' => $no_transaksi
-            
-    //     ]);
-    // }
-    
-
-
         public function store(Request $request)
     {
         // dd($request->toArray());
@@ -54,20 +47,28 @@ class jurnal_penyesuaiancontroller extends Controller
             'no_transaction' => $request->no_transaction,
         ]);
         return redirect('penyesuaian');
+
+
+        // $data = $request->all();
+
+        // $penyesuaian = new jurnal_penyesuaian;
+        // $penyesuaian->date = $request->date;
+        // $penyesuaian->no_transaction = $request->no_transaction;
+        // $penyesuaian->save();
+
+
+        // $penyesuaian_detail = new jurnal_penyesuaian_detail;
+        // $penyesuaian_detail->jurnal_penyesuaian_id = $penyesuaian->id;
+        // $penyesuaian_detail->akun_id = $request->akun_id;
+        // $penyesuaian_detail->debet = $request->debet;
+        // $penyesuaian_detail->kredit = $request->kredit;
+        // $penyesuaian_detail->save();
+        // return redirect()->back();
+
+
+
     }
-    //  public function edit()
-    // {
-    //     return view('jurnal.penyesuaian.edit-penyesuaian');
-    // }
-    /** 
-    * Show the form for editing the specified resource.
-    */
-        
-    // public function edit($id)
-    // {
-    //     $peny = jurnal_penyesuaian::findorfail($id);
-    //     return view('junal.penyesuaian.edit-penyesuaian',compact('penye'));
-    // }
+
     public function edit(jurnal_penyesuaian $id)
     {
         $akun = akun::all();
@@ -86,14 +87,7 @@ class jurnal_penyesuaiancontroller extends Controller
     public function update(Request $request, $id)
     {
         $penye = jurnal_penyesuaian::findorfail($id);
-    //     if ($request->debit) {
-    //     $penye->debit = $request->debit;
-    //     $penye->kredit = 0;
-    // } elseif ($request->B) {
-    //     $penye->kredit = $request->kredit;
-    //     $penye->debit = 0;
-    // }
-    // $penye->save();
+   
         $penye->update($request->all());
         return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Update');
 
@@ -113,7 +107,7 @@ class jurnal_penyesuaiancontroller extends Controller
     // }
      public function destroy($id)
      {
-         $penye = jurnal_penyesuaian_detail::findorfail($id);
+         $penye = jurnal_penyesuaian::findorfail($id);
          $penye->delete();
          return redirect()->route('penyesuaian');
         // return back();
@@ -123,7 +117,7 @@ class jurnal_penyesuaiancontroller extends Controller
       public function index_detail()
 
     {
-        $dtpenyesuaian_detail = jurnal_penyesuaian_detail::all();
+        $dtpenyesuaian_detail = jurnal_penyesuaian::all();
 
         return view('jurnal.penyesuaian_detail.penyesuaian_detail', [
             'jurnal_penyesuaians_details' => $dtpenyesuaian_detail,
@@ -138,15 +132,17 @@ class jurnal_penyesuaiancontroller extends Controller
     }
     public function store_detail(Request $request)
     {
-        dd($request->toArray());
+        // dd($request->toArray());
+        $jurnal_penyesuaian = jurnal_penyesuaian::where('no_transaction', $request->no_transaction)->first();
+        $jurnal_penyesuain_id = $jurnal_penyesuaian->id;
        
-        // jurnal_penyesuaian_detail::create([
+        jurnal_penyesuaian_detail::create([
 
-        //     'jurnal_penyesuaians_id' => $request->jurnal_penyesuaians_id,
-        //     'akuns_id' => $request->akuns_id,
-        //     'debet' => $request->debet,
-        //     'kredit' => $request->kredit,
-        // ]);
+            'jurnal_penyesuaian_id' => $jurnal_penyesuain_id->id, 
+            'akun_id' => $request->akun_id,
+            'debet' => $request->debet,
+            'kredit' => $request->kredit,
+        ]);
         return redirect('simpan_penyesuaian_detail');
     }
 //     public function getPenyesuaianId($id)
