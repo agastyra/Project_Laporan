@@ -12,21 +12,12 @@ class transaksi_penjualan extends Model
     protected $fillable = [
         'no_transaction',
         'date',
-        'customer_id',
-        'sub_total',
         'grand_total',
-        'diskon',
         'bayar',
         'kembali',
-        'valid'
     ];
 
     protected $hidden = [];
-
-    public function customer()
-    {
-        return $this->belongsTo(customer::class, 'customer_id', 'id');
-    }
 
     // public function detail_penjualan()
     // {

@@ -1,9 +1,10 @@
 <x-layout.app>
     <div class="row">
+        <h3 class="card-title">{{ $title }}</h3>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
-                <h3 class="card-title">{{ $title }}</h3>
                 <div class="card-body">
+                    <a href="{{ route('transaksi.create') }}" class="btn btn-info mb-3"><i class="mdi mdi-plus"></i> Tambah Transaksi</a>
                     <div class="table-responsive">
                         <table class="table table-dark">
                             <thead>
@@ -15,18 +16,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($items as $item)
+                                @forelse ($transaksis as $trans)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->no_transaction }}</td>
-                                    <td>{{ $item->customer_id }}</td>
-                                    <td>{{ $item->grand_total }}</td>
+                                    <td>{{ $trans->no_transaction }}</td>
+                                    <td>{{ $trans->date }}</td>
+                                    <td>{{ $trans->total }}</td>
                                 </tr>
-                                @empty
+                            @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">Belum ada Transaksi</td>
+                                    <td colspan="5" class="text-center">Belum ada Transaksi</td>
                                 </tr>
-                                @endforelse
+                            @endforelse
+                            
                             </tbody>
                         </table>
                     </div>

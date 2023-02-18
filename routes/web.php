@@ -40,6 +40,7 @@ Route::get('/sales/show', [transaksi_penjualancontroller::class, 'show'])->name(
 Route::post('/sales/store', [transaksi_penjualancontroller::class, 'store'])->name('transaksi.store');
 Route::get('/getBarangData/{id}', [transaksi_penjualancontroller::class, 'getData']);
 Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
+Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
 Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
 
 

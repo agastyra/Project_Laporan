@@ -16,7 +16,7 @@
                                     <option value="{{ $barang->id }}">{{ $barang->name_barang }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" id="subTotal" name="subTotal" class="form-control" hidden>
+                                <input type="text" id="harga_jual" name="harga_jual" class="form-control" hidden>
                             </div>
                             <input type="text" id="no_transaction" name="no_transaction" value="{{ $transCode }}"
                                 hidden>
@@ -26,6 +26,7 @@
                             <div class="col-sm-9">
                                 <input type="number" class="form-control text-dark" id="qty" name="qty"
                                     value="{{ old('qty') }}" required>
+                                    <input type="number" name="subTotal" id="subTotal" hidden>
                                 <div class="col-sm-12 mt-3">
                                     <button type="submit" class="btn btn-success"><i class="mdi mdi-cart-outline"></i>
                                         Tambah</button>
@@ -151,7 +152,7 @@
             url: '/getBarangData/' + data.id,
             dataType: 'json',
             success: function (response) {
-                $('#subTotal').val(response.subTotal);
+                $('#harga_jual').val(response.harga_jual);
             }
         });
     });
@@ -173,6 +174,21 @@
                 });
             });
         </script>
-
+    <script>
+        $(document).ready(function() {
+          $('#qty').on('input', function() {
+              var qty = $('#qty').val();
+              var harga_jual = $('#harga_jual').val();
+              $.ajax({
+                  type: 'POST',
+                  url: '{{ route("subCalc") }}',
+                  data: {_token: '{{ csrf_token() }}', qty: qty, harga_jual: harga_jual},
+                  success: function(result) {
+                      $('#subTotal').val(result.subTotal);
+                  }
+              });
+          });
+      });
+    </script>
         @endpush
 </x-layout.app>

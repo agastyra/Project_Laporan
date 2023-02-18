@@ -205,12 +205,24 @@ class DetailPenjualanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $detail = detail_penjualan::findOrFail($id);
-        $detail->delete();
-        return redirect()->route('transaksi.create', $detail->no_transaction)
-            ->with('success', 'Detail penjualan berhasil dihapus');
+{
+    $detail = detail_penjualan::find($id);
+
+    if ($detail) {
+        $barang = barang::find($detail->barang_id);
+
+        if ($barang) {
+            $stok = $barang->stok + $detail->qty;
+            $barang->stok = $stok;
+            $barang->save();
+
+            $detail->delete();
+        }
     }
+
+    return redirect()->route('transaksi.create', $detail->no_transaction);
+}
+
 
 
 }

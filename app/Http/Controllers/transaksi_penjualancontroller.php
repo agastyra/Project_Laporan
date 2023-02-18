@@ -12,17 +12,21 @@ use Illuminate\Support\Facades\DB;
 
 class transaksi_penjualancontroller extends Controller
 {
-    public function index($transaksiId = null)
-    {
-        $title = "Transaksi Penjualan";
-        $items = transaksi_penjualan::with([
-            'customer'
-        ])->where('valid', true)->get();
-        return view("transaksi.penjualan.index", [
-            'title' => $title,
-            'items' => $items
-        ]);
-    }
+    public function index()
+{
+    $title = "Transaksi Penjualan";
+    $transaksis = DB::table('transaksi_penjualans')
+    ->select(DB::raw('MONTH(date) as month'), DB::raw('SUM(grand_total) as total'), 'no_transaction', 'date')
+    ->groupBy('month', 'no_transaction', 'date')
+    ->get();
+
+    
+    return view('transaksi.penjualan.index', [
+        'title' => $title,
+        'transaksis' => $transaksis,
+    ]);
+}
+
 
     // public function search(Request $request)
     // {
@@ -58,7 +62,7 @@ class transaksi_penjualancontroller extends Controller
             $Gtotals = $totals->Gtotal;
         }
 
-        $dates = date('dmyHis');
+        $dates = date('ymdHis');
 
         return view('transaksi.penjualan.create', [
             'title' => $title,
@@ -74,11 +78,12 @@ class transaksi_penjualancontroller extends Controller
     {
         $barang = Barang::find($id);
         return response()->json([
-            'subTotal' => $barang->harga_jual,
+            'harga_jual' => $barang->harga_jual,
         ]);
     }
 
-    public function calculate(Request $request){
+    public function calculate(Request $request)
+    {
         $bayar = $request->bayar;
         $grand_total = $request->grand_total;
         $kembali = $bayar - $grand_total;
@@ -86,10 +91,19 @@ class transaksi_penjualancontroller extends Controller
         return response()->json(['kembali' => $kembali]);
     }
 
-    
+    public function calcSub(Request $request)
+    {
+        $harga_jual = $request->harga_jual;
+        $qty = $request->qty;
+        $subTotal = $harga_jual * $qty;
+
+        return response()->json(['subTotal' => $subTotal]);
+    }
+
+
     public function store(Request $request)
     {
-        $date = date('dmyHis');
+        $date = date('ymdHis');
         $storeTrans = transaksi_penjualan::create([
             'no_transaction' => $request->no_transaction,
             'date' => $date,
@@ -99,43 +113,6 @@ class transaksi_penjualancontroller extends Controller
         ]);
 
         return redirect()->route('transaksi.create');
-    }
-
-
-    public function show($tranCode)
-    {
-        $title = 'Daftar Transaksi';
-
-        $details = detail_penjualan::with([
-            'barang'
-        ])->where('no_transaction', $tranCode);
-
-        $items = $details->get();
-        $subTotal = $details->sum('subTotal');
-
-        $customers = customer::all();
-
-        $trans = transaksi_penjualan::with([
-            'customer'
-        ])->where('no_transaction', $tranCode)
-            ->where('valid', true)
-            ->first();
-
-        $data = [
-            'date' => $trans->date->toDateTimeString(),
-            'customerId' => $trans->customer_id,
-            'bayar' => $trans->bayar,
-            'kembali' => $trans->kembali
-        ];
-
-        return view('transaksi.penjualan.show', [
-            'title' => $title,
-            'transaksiId' => $tranCode,
-            'items' => $items,
-            'customers' => $customers,
-            'subTotal' => $subTotal,
-            'data' => $data
-        ]);
     }
 
 
