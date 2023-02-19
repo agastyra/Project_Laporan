@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\akuncontroller;
+use App\Http\Controllers\BuktiKasMasukController;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\memorialcontroller;
@@ -29,7 +30,7 @@ Route::get('/accounting/accounts/edit/{akun}', [akuncontroller::class, "edit"])-
 Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "store"])->name('update_account');
 Route::delete('/accounting/accounts/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
-// Route::resource('detail', "DetailPenjualanController");
+//Transaksi Penjualan
 Route::post('/detail', "DetailPenjualanController@store")->name('detail.store');
 Route::put('/detail/edit/{id}', "DetailPenjualanController@update")->name('detail.update');
 Route::get('/detail/edit/{id}', "DetailPenjualanController@edit")->name('detail.edit');
@@ -42,6 +43,11 @@ Route::get('/getBarangData/{id}', [transaksi_penjualancontroller::class, 'getDat
 Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
 Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
 Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
+
+//Bukti Kas Masuk
+Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
+Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
+Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
 
 
 Route::get('/memo', [memorialcontroller::class, "index"]);

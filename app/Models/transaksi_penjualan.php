@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class transaksi_penjualan extends Model
 {
     use HasFactory;
@@ -19,8 +18,7 @@ class transaksi_penjualan extends Model
 
     protected $hidden = [];
 
-    // public function detail_penjualan()
-    // {
-    //     return $this->hasMany(detail_penjualan::class);
-    // }
+    public function bukti_kas_masuk(){
+        return $this->hasMany(bukti_kas_masuk::class);
+    }
 }

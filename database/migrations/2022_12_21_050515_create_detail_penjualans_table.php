@@ -15,7 +15,7 @@ class CreateDetailPenjualansTable extends Migration
     {
         Schema::create('detail_penjualans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('no_transaction');
+            $table->string('no_transaction');
             $table->foreignId('barang_id');
             $table->integer('qty');
             $table->double('subTotal');

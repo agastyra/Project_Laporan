@@ -18,7 +18,7 @@
                                 </select>
                                 <input type="text" id="harga_jual" name="harga_jual" class="form-control" hidden>
                             </div>
-                            <input type="text" id="no_transaction" name="no_transaction" value="{{ $transCode }}"
+                            <input type="text" id="no_transaction" name="no_transaction" value="{{ $no_transaction }}"
                                 hidden>
                         </div>
                         <div class="form-group row">
@@ -58,13 +58,13 @@
                                     <label class="col-sm-3 col-form-label">Nomor</label>
                                     <div class="col-sm-9">
                                         <input class="form-control text-dark" name="no_transaction" id="no_transaction"
-                                            value="{{ $transCode }}" readonly>
+                                            value="{{ $no_transaction }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-dark" name="date" id="date" value="{{ $dates }}"
+                                        <input type="datetime" class="form-control text-dark" name="date" id="date" value="{{ $dates }}"
                                             readonly>
                                     </div>
                                 </div>

@@ -42,13 +42,20 @@ class DetailPenjualanController extends Controller
     public function store(Request $request)
     {
 
-        $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
-        if ($noTrans) {
-            $tranCode = ((int) $noTrans->noTrans + date('dm'));
+        // $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
+        // if ($noTrans) {
+        //     $tranCode = ((int) $noTrans->noTrans + date('dm'));
+        // } else {
+        //     $tranCode = 1;
+        // }
+        $tranCode = transaksi_penjualan::latest()->first();
+        if ($tranCode) {
+            $tranCode = substr($tranCode->no_transaction, -1);
+            $newCodeNumber = $tranCode + 1;
+            $tranCode = 'STRX' . $newCodeNumber;
         } else {
-            $tranCode = 1;
+            $tranCode = 'STRX1';
         }
-
         $goods = barang::where("id", $request->barang_id)->first();
 
         if ($goods <> null) {

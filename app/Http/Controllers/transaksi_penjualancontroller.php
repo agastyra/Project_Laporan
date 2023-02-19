@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TranSaleRequest;
 use App\Models\barang;
-use App\Models\customer;
 use App\Models\detail_penjualan;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
@@ -13,19 +11,19 @@ use Illuminate\Support\Facades\DB;
 class transaksi_penjualancontroller extends Controller
 {
     public function index()
-{
-    $title = "Transaksi Penjualan";
-    $transaksis = DB::table('transaksi_penjualans')
-    ->select(DB::raw('MONTH(date) as month'), DB::raw('SUM(grand_total) as total'), 'no_transaction', 'date')
-    ->groupBy('month', 'no_transaction', 'date')
-    ->get();
+    {
+        $title = "Transaksi Penjualan";
+        $transaksis = DB::table('transaksi_penjualans')
+            ->select(DB::raw('MONTH(date) as month'), DB::raw('SUM(grand_total) as total'), 'no_transaction', 'date')
+            ->groupBy('month', 'no_transaction', 'date')
+            ->get();
 
-    
-    return view('transaksi.penjualan.index', [
-        'title' => $title,
-        'transaksis' => $transaksis,
-    ]);
-}
+
+        return view('transaksi.penjualan.index', [
+            'title' => $title,
+            'transaksis' => $transaksis,
+        ]);
+    }
 
 
     // public function search(Request $request)
@@ -46,13 +44,14 @@ class transaksi_penjualancontroller extends Controller
     public function create()
     {
         $title = "Transaksi Penjualan";
-        $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
-        if ($noTrans) {
-            $tranCode = ((int) $noTrans->noTrans + date('dm'));
+        $tranCode = transaksi_penjualan::latest()->first();
+        if ($tranCode) {
+            $tranCode = substr($tranCode->no_transaction, -1);
+            $newCodeNumber = $tranCode + 1;
+            $tranCode = 'STRX' . $newCodeNumber;
         } else {
-            $tranCode = 1;
+            $tranCode = 'STRX1';
         }
-
         $Gtotals = 0;
         $barangs = barang::all();
         $details = detail_penjualan::where('no_transaction', $tranCode)->get();
@@ -61,18 +60,24 @@ class transaksi_penjualancontroller extends Controller
                 ->where('no_transaction', $tranCode)->groupBy('no_transaction')->first();
             $Gtotals = $totals->Gtotal;
         }
-
         $dates = date('ymdHis');
 
         return view('transaksi.penjualan.create', [
             'title' => $title,
             'dates' => $dates,
             'barangs' => $barangs,
-            'transCode' => $tranCode,
             'details' => $details,
-            'Gtotals' => $Gtotals
+            'Gtotals' => $Gtotals,
+            'no_transaction' => $tranCode
         ]);
     }
+
+    // $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
+    // if ($noTrans) {
+    //     $tranCode = ((int) $noTrans->noTrans + date('dm'));
+    // } else {
+    //     $tranCode = 1;
+    // }
 
     public function getData($id)
     {

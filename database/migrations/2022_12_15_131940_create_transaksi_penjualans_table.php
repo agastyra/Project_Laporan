@@ -14,9 +14,9 @@ class CreateTransaksiPenjualansTable extends Migration
     public function up()
     {
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
-            // $table->id();
+            $table->id();
             #ganti nama field (rangga)
-            $table->integer('no_transaction')->primary();
+            $table->string('no_transaction');
             $table->date('date');
             #ganti tipe data (rangga)
             $table->double('grand_total')->default(0);
