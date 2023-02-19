@@ -13,7 +13,7 @@
                         </div>
                         <hr />
 
-                        <form action="{{ route('update_barang', $barang->no_barang) }}" method="POST">
+                        <form action="{{route('update_barang', $barang->no_barang)}}" method="POST">
                             @method('PUT')
                             @csrf
 
@@ -63,7 +63,7 @@
 
                             <div align="right">
                                 <button class="positive ui button">Simpan</button>
-                                <a class="negative ui button" href="{{ route('barang') }}">Batal</a>
+                                <a class="negative ui button" href="/barang">Batal</a>
                             </div>
 
                         </form>

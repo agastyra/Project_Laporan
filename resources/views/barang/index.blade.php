@@ -66,7 +66,7 @@
                                                 class="mdi mdi-delete icon-sm"></i></button> -->
 
 
-                                        <a href="{{route('edit_barang', $barang->no_barang)}}"
+                                        <a href="{{route('edit_barang',$barang->no_barang)}}"
                                             class="btn btn-icon btn-success btn-sm "><i
                                                 class="mdi mdi-pencil icon-sm"></i></a>
 

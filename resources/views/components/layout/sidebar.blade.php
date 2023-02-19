@@ -80,7 +80,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/barang">
+                <a class="nav-link" href="{{route('barang')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-table-large"></i>
                     </span>

@@ -33,7 +33,8 @@ Route::put('/accounting/accounts/edit/{akun}', [akuncontroller::class, "update"]
 Route::delete('/accounting/accounts/delete/{akun}', [akuncontroller::class, "destroy"])->name('delete_account');
 
 //route barang
-Route::get('/barang', [barangcontroller::class, 'index']);
+// Route::get('/barang', [barangcontroller::class, 'index'])->name('barang');
+Route::get('/barang', [barangcontroller::class, "index"])->name('barang');
 Route::post('/barang/tambah', [barangcontroller::class, "store"])->name('simpan_barang');
 Route::get('/barang/tambah', [barangcontroller::class, "create"])->name('tambah_barang');
 Route::get('/barang/edit/{barang}', [barangcontroller::class, "edit"])->name('edit_barang');
