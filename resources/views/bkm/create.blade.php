@@ -12,7 +12,7 @@
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 col-form-label">Pilih Transaksi</label>
-            <select class="select2 form-control" style="" id="transaksi_penjualan_id" name="transaksi_penjualan_id">
+            <select class="select2 form-control" style="width:100%" id="transaksi_penjualan_id" name="transaksi_penjualan_id">
               <option value="-">Pilih Transaksi</option>
               @foreach ($transaksi as $trans)
               <option value="{{ $trans->id }}">{{ $trans->no_transaction }}</option>

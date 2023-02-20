@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\bukti_kas_masuk;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class BuktiKasMasukController extends Controller
 {
@@ -15,8 +17,18 @@ class BuktiKasMasukController extends Controller
      */
     public function index()
     {
-        //
+        $bkm = bukti_kas_masuk::all();
+        $bkmtotals = DB::table('bukti_kas_masuks')
+            ->select(DB::raw('SUM(total) as totals'), DB::raw('MONTH(tanggal) as bulan'))
+            ->groupBy('bulan')
+            ->get();
+
+        return view('bkm.index', [
+            'bkm' => $bkm,
+            'bkmtotals' => $bkmtotals
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,11 +43,11 @@ class BuktiKasMasukController extends Controller
         if ($noBKM) {
             $noBKM = substr($noBKM->no_bkm, -1);
             $newNoBKM = $noBKM + 1;
-            $noBKM = 'BKM'.'-'.$newNoBKM;
+            $noBKM = 'BKM' . '-' . $newNoBKM;
         } else {
             $noBKM = 'BKM-1';
         }
-        
+
 
         return view('bkm.create', [
             'title' => $title,
@@ -44,8 +56,9 @@ class BuktiKasMasukController extends Controller
         ]);
     }
 
-    public function getTransData($id){
-       $trans = transaksi_penjualan::findOrFail($id);
+    public function getTransData($id)
+    {
+        $trans = transaksi_penjualan::findOrFail($id);
         return response()->json([
             'tanggal' => $trans->date,
             'total' => $trans->grand_total

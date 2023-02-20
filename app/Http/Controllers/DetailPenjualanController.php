@@ -41,13 +41,6 @@ class DetailPenjualanController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $noTrans = DB::table('transaksi_penjualans')->select(DB::raw('MAX(no_transaction) as noTrans'))->first();
-        // if ($noTrans) {
-        //     $tranCode = ((int) $noTrans->noTrans + date('dm'));
-        // } else {
-        //     $tranCode = 1;
-        // }
         $tranCode = transaksi_penjualan::latest()->first();
         if ($tranCode) {
             $tranCode = substr($tranCode->no_transaction, -1);
@@ -70,7 +63,6 @@ class DetailPenjualanController extends Controller
         if ($details) {
             $sumQty = $details->qty + $request->qty;
             $sumSubTotal = $details->subTotal + $request->subTotal;
-
             $details->update(['qty' => $sumQty, 'subTotal' => $sumSubTotal]);
         } else {
             $detailStore = detail_penjualan::create([
@@ -85,57 +77,7 @@ class DetailPenjualanController extends Controller
 
     }
 
-    // if (!isset($barangId)) {
-    //     return redirect()->back()->withErrors('Produk Tidak Ditemukan');
-    // }
-
-    // $details = detail_penjualan::where([
-    //     ['no_transaction', '=', $tranCode],
-    //     ['barang_id', '=', $barangId]
-    // ])->get();
-
-    // $subTotal = $qty * $barangPrice;
-    // $reduceStock = $barangStock - $qty;
-
-    // $stockReduce = [
-    //     'stok' => $reduceStock
-    // ];
-
-    // $create = ([
-    //     'barang_id' => $barangId,
-    //     'no_transaction' => $tranCode,
-    //     'harga_jual' => $barangPrice,
-    //     'qty' => $qty,
-    //     'subTotal' => $subTotal
-    // ]);
-
-    // if ($barangStock == 0) {
-    //     return redirect()->back()->withErrors('Stok' . $barangName . 'Kosong');
-    // }elseif ((int)$qty <= $barangStock) {
-    //     if ($details->isEmpty()) {
-    //         foreach ($details as $detail) {
-    //             if ($detail->barangs_id == $barangId) {
-    //                 $update = [
-    //                     'qty' => $detail->qty + $qty,
-    //                     'subTotal' => $detail->subTotal + $subTotal,
-    //                 ];
-    //                 detail_penjualan::findOrFail($detail->id)->update($update);
-    //                 barang::findOrFail($barangId)->update($stockReduce);
-    //             }else {
-    //                 detail_penjualan::create($create);
-    //                 barang::findOrFail($barangId)->update($stockReduce);
-    //             }
-
-    //         }
-    //     }else {
-    //         detail_penjualan::create($create);
-    //         barang::findOrFail($barangId)->update($stockReduce);
-    //     }
-    //     return redirect()->route('transaksi.create', $tranCode);
-    // }else{
-    //     return redirect()->back();
-    // }
-
+    
     /**
      * Display the specified resource.
      *

@@ -45,6 +45,7 @@ Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name
 Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
 
 //Bukti Kas Masuk
+Route::get('/bkm', [BuktiKasMasukController::class, 'index'])->name('bkm.index');
 Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
 Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
 Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');

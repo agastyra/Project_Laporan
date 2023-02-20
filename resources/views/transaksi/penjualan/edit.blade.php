@@ -3,12 +3,11 @@
       <div class="col-lg-12 grid-margin">
          <div class="card">
             <div class="card-body">
-               {{-- <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Edit</h4> --}}
                <div class="col-sm-12-mt-5">
                   <form action="{{ route('detail.destroy', $detail->id) }}" method="post">
                      @csrf
                      @method('DELETE')
-                     <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"> Hapus detail</i></button>
+                     <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i> Hapus detail</button>
                   </form>
                </div>
                <form action="{{ route('detail.update', $detail->id) }}" method="post">

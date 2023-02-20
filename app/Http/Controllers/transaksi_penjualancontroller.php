@@ -60,7 +60,7 @@ class transaksi_penjualancontroller extends Controller
                 ->where('no_transaction', $tranCode)->groupBy('no_transaction')->first();
             $Gtotals = $totals->Gtotal;
         }
-        $dates = date('ymdHis');
+        $dates = date('d-m-Y H:i:s');
 
         return view('transaksi.penjualan.create', [
             'title' => $title,

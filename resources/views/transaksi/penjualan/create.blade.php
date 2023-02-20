@@ -24,9 +24,9 @@
                         <div class="form-group row">
                             <label for="qty" class="col-sm-3 col-form-label">Jumlah</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control text-dark" id="qty" name="qty"
-                                    value="{{ old('qty') }}" required>
-                                    <input type="number" name="subTotal" id="subTotal" hidden>
+                                <input type="number" class="form-control text-light" placeholder="Masukkan Jumlah"
+                                    id="qty" name="qty" value="{{ old('qty') }}" required>
+                                <input type="number" name="subTotal" id="subTotal" hidden>
                                 <div class="col-sm-12 mt-3">
                                     <button type="submit" class="btn btn-success"><i class="mdi mdi-cart-outline"></i>
                                         Tambah</button>
@@ -64,8 +64,8 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input type="datetime" class="form-control text-dark" name="date" id="date" value="{{ $dates }}"
-                                            readonly>
+                                        <input type="datetime" class="form-control text-dark" name="date" id="date"
+                                            value="{{ $dates }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +73,8 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kembali</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control text-dark" placeholder="" name="kembali" id="kembali"
-                                            readonly>
+                                        <input class="form-control text-dark" placeholder="Kembali" name="kembali"
+                                            id="kembali" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -99,7 +99,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Pembayaran</h4>
+                        <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Detail Transaksi</h4>
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -110,7 +110,7 @@
                                             <th>Harga</th>
                                             <th>Jumlah</th>
                                             <th>Subtotal</th>
-                                            <th>Aksi</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,7 +124,7 @@
                                             <td>
                                                 <div class="col-sm-12 mt-3">
                                                     <a href="{{ route('detail.edit', $item->id) }}"
-                                                        class="btn btn-success"> <i class="mdi mdi-pencil"></i> </a>
+                                                        class="btn btn-info"> <i class="mdi mdi-pencil-outline"></i> </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -141,10 +141,11 @@
                 </div>
             </div>
         </div>
-        @push('jssj')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-        <script>
-            $(document).ready(function() {
+    </div>
+    @push('jssj')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
     $('.select2').select2();
     $('#barang_id').on('select2:select', function (e) {
         var data = e.params.data;
@@ -157,9 +158,9 @@
         });
     });
 });
-        </script>
-        <script>
-            $(document).ready(function() {
+    </script>
+    <script>
+        $(document).ready(function() {
                 $('#bayar').on('input', function() {
                     var bayar = $('#bayar').val();
                     var grand_total = $('#grand_total').val();
@@ -173,7 +174,7 @@
                     });
                 });
             });
-        </script>
+    </script>
     <script>
         $(document).ready(function() {
           $('#qty').on('input', function() {
@@ -190,5 +191,5 @@
           });
       });
     </script>
-        @endpush
+    @endpush
 </x-layout.app>
