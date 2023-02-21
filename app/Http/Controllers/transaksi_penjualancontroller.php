@@ -43,7 +43,6 @@ class transaksi_penjualancontroller extends Controller
 
     public function create()
     {
-        $title = "Transaksi Penjualan";
         $tranCode = transaksi_penjualan::latest()->first();
         if ($tranCode) {
             $tranCode = substr($tranCode->no_transaction, -1);
@@ -63,7 +62,6 @@ class transaksi_penjualancontroller extends Controller
         $dates = date('d-m-Y H:i:s');
 
         return view('transaksi.penjualan.create', [
-            'title' => $title,
             'dates' => $dates,
             'barangs' => $barangs,
             'details' => $details,

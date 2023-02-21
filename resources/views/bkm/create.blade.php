@@ -2,8 +2,7 @@
   <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">{{ $title }}</h4>
-        <p class="card-description"> Basic form elements </p>
+        <h4 class="card-title"><i class="mdi mdi-square-inc-cash text-warning icon-md"></i> Bukti Kas Masuk</h4>
         <form action="{{ route('bkm.store') }}" method="post">
           @csrf
           <div class="form-group">

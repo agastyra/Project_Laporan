@@ -1,6 +1,5 @@
 <x-layout.app>
     <div class="row">
-        <h3 class="header">{{ $title }}</h3>
         <div class="col-lg-5 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -40,7 +39,7 @@
         <div class="col-lg-7 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Pembayaran</h4>
+                    <h4 class="card-tittle"><i class="mdi mdi-cash text-warning icon-md"></i> Pembayaran</h4>
                     <form action="{{ route('transaksi.store') }}" method="post">
                         @csrf
                         <span class="d-block text-center text-sm-left mt-1 mt-sm-0 float-none float-sm-left">
@@ -99,7 +98,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-tittle"><i class="mdi mdi-cash text-primary icon-md"></i> Detail Transaksi</h4>
+                        <h4 class="card-tittle"><i class="mdi mdi-cart text-danger icon-md"></i> Detail Transaksi</h4>
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-hover">

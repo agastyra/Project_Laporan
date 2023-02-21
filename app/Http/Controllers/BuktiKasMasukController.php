@@ -15,7 +15,21 @@ class BuktiKasMasukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // public function index()
+    // {
+    //     $bkm = bukti_kas_masuk::all();
+    //     $bkmtotals = DB::table('bukti_kas_masuks')
+    //         ->select(DB::raw('SUM(total) as totals'), DB::raw('MONTH(tanggal) as bulan'))
+    //         ->groupBy('bulan')
+    //         ->get();
+
+    //     return view('bkm.index', [
+    //         'bkm' => $bkm,
+    //         'bkmtotals' => $bkmtotals
+    //     ]);
+    // }
+
+    public function index(Request $request)
     {
         $bkm = bukti_kas_masuk::all();
         $bkmtotals = DB::table('bukti_kas_masuks')
@@ -23,11 +37,28 @@ class BuktiKasMasukController extends Controller
             ->groupBy('bulan')
             ->get();
 
+        if ($request->ajax()) {
+            $selectedMonth = $request->input('selectedMonth');
+
+            if (!empty($selectedMonth)) {
+                $bkm = bukti_kas_masuk::whereMonth('tanggal', $selectedMonth)->get();
+            }
+
+            return view('bkm.table', [
+                'bkm' => $bkm
+            ]);
+        }
+
         return view('bkm.index', [
             'bkm' => $bkm,
             'bkmtotals' => $bkmtotals
         ]);
     }
+
+
+
+
+
 
 
     /**
@@ -37,7 +68,6 @@ class BuktiKasMasukController extends Controller
      */
     public function create()
     {
-        $title = 'Bukti Kas Masuk';
         $transaksi = transaksi_penjualan::all();
         $noBKM = bukti_kas_masuk::latest()->first();
         if ($noBKM) {
@@ -50,7 +80,6 @@ class BuktiKasMasukController extends Controller
 
 
         return view('bkm.create', [
-            'title' => $title,
             'transaksi' => $transaksi,
             'no_bkm' => $noBKM
         ]);
@@ -103,7 +132,10 @@ class BuktiKasMasukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bkm = bukti_kas_masuk::findOrFail($id);
+        $trans = transaksi_penjualan::all();
+
+        return view('bkm.edit', compact('bkm', 'trans'));
     }
 
     /**
@@ -115,7 +147,18 @@ class BuktiKasMasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bkm = bukti_kas_masuk::find($id);
+        if ($bkm) {
+            $trans = transaksi_penjualan::find($bkm->transaksi_penjualan_id);
+            if ($trans) {
+                $bkm->transaksi_penjualan_id = $request->transaksi_penjualan_id;
+                $bkm->tanggal = $request->tanggal;
+                $bkm->total = $request->total;
+                $bkm->description = $request->description;
+                $bkm->update();
+            }
+        }
+        return redirect()->route('bkm.index');
     }
 
     /**
