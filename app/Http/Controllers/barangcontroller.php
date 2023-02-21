@@ -65,8 +65,7 @@ class barangcontroller extends Controller
             'no_barang' => 'required|max:6|unique:barangs',
             'name_barang' => 'required|max:30|unique:barangs',
             'stok' => 'required|integer|gte:0',
-            'harga_beli' => 'required|numeric|gte:0',
-            'harga_jual' => 'required|numeric|gte:0',
+
         ]);
         barang::where('no_barang', $barang->no_barang)->update($valid);
 
@@ -75,33 +74,34 @@ class barangcontroller extends Controller
 
     public function destroy(barang $barang)
     {
-        // $data = barang::findOrFail($id);
-        // $data->delete('no_barang');
 
-        // return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        // $user = barang::findOrFail($barang);
+        // $user->delete();
+
+        // return redirect()->route('barang');
         barang::destroy($barang->id);
 
         return redirect()->route('barang');
     }
 
-    private function incrementid()
-    {
-        $no_barang = barang::latest()->value('no_barang');
+    // private function incrementid()
+    // {
+    //     $no_barang = barang::latest()->value('no_barang');
 
-        if (is_null($no_barang)) {
-            $this->inc = "BRG-01";
-        } else {
-            $nobarang = explode('-', $no_barang);
-            $prefix = $nobarang[0];
-            $lanjut = (int) $nobarang[1];
-            $lanjut++;
-            $order = (string) $lanjut;
-            if (strlen($order) == 1) {
-                $order = '0' . $order;
-            }
-            $this->inc = $prefix . '-' . $order;
-        }
+    //     if (is_null($no_barang)) {
+    //         $this->inc = "BRG-01";
+    //     } else {
+    //         $nobarang = explode('-', $no_barang);
+    //         $prefix = $nobarang[0];
+    //         $lanjut = (int) $nobarang[1];
+    //         $lanjut++;
+    //         $order = (string) $lanjut;
+    //         if (strlen($order) == 1) {
+    //             $order = '0' . $order;
+    //         }
+    //         $this->inc = $prefix . '-' . $order;
+    //     }
 
-        return $this->inc;
-    }
+    //     return $this->inc;
+    // }
 }

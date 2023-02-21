@@ -34,7 +34,7 @@
                         <table id="list-barang" class="table table-dark table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
+                                    <!-- <th>No.</th> -->
                                     <th>No Barang</th>
                                     <th>Name Barang</th>
                                     <th>Stock</th>
@@ -51,7 +51,7 @@
 
 
                                 <tr>
-                                    <td>{{ $barang->id}}</td>
+                                    <!-- <td>{{ $barang->id}}</td> -->
                                     <td>{{ $barang->no_barang}}</td>
                                     <td>{{ $barang->name_barang}}</td>
                                     <td>{{ $barang->stok}}</td>
@@ -70,9 +70,20 @@
                                             class="btn btn-icon btn-success btn-sm "><i
                                                 class="mdi mdi-pencil icon-sm"></i></a>
 
-                                        <button type="button" class="btn btn-icon btn-danger btn-sm"
+
+                                        <form action="{{ route('hapus_barang', $barang->no_barang) }}" method="POST"
+                                            class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="badge bg-danger border-0"
+                                                onclick="return confirm('Apakah anda yakin ?')">
+                                                <i class="mdi mdi-trash-can-outline"></i>
+                                            </button>
+                                        </form>
+
+                                        <!-- <button type="button" class="btn btn-icon btn-danger btn-sm"
                                             data-bs-toggle="modal" data-bs-target="#modal-hapus"><i
-                                                class="mdi mdi-delete icon-sm"></i></button>
+                                                class="mdi mdi-delete icon-sm"></i></button> -->
                                     </td>
                                 </tr>
                                 @endforeach
