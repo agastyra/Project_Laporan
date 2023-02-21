@@ -46,33 +46,36 @@
                                 </thead>
                                 <tbody>
 
-                                    @forelse ($jurnal_penyesuaians as $id)
+                                    {{-- @forelse ($jurnal_penyesuaians as $id)
                                         <tr>
                                             <td>{{ date('d-m-y', strtotime($id->date)) }}</td>
-                                            <td>{{ $id->no_transaction }}</td>
+                                            <td>{{ $id->no_transaction }}</td> --}}
+                                    <tr>
+                                        <td>1-1-2023</td>
+                                        <td>jp-001</td>
 
-                                            <td>
-                                                <a href="{{ url('penyesuaian/editt-penyesuaian', $id->id) }}"
-                                                    class="text-decoration-none link-light badge bg-primary border-0"><i
-                                                        class="mdi mdi-file-document-edit-outline"></i></a>
-                                                |
-                                                <form action="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="badge bg-danger border-0"
-                                                        onclick="return confirm('Apakah anda yakin ?')">
-                                                        <i class="mdi mdi-trash-can-outline"></i>
-                                                    </button>
-                                                </form>
-                                                {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
-                                            </td>
-                                        </tr>
-                                    @empty
+
+                                        <td>
+                                            <a href=""
+                                                class="text-decoration-none link-light badge bg-primary border-0"><i
+                                                    class="mdi mdi-file-document-edit-outline"></i></a>
+                                            |
+                                            <form action="" method="POST" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0"
+                                                    onclick="return confirm('Apakah anda yakin ?')">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                </button>
+                                            </form>
+                                            {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
+                                        </td>
+                                    </tr>
+                                    {{-- @empty
                                         <tr>
                                             <td colspan="3">Tidak ada data</td>
                                         </tr>
-                                    @endforelse
+                                        @endforelse --}}
                                 </tbody>
                             </table>
                         </div>

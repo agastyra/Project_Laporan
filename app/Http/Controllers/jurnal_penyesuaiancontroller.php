@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 use PhpParser\Node\Param;
 
 class jurnal_penyesuaiancontroller extends Controller
-{
-     public function index()
+{   
+    private $transactionNumber;
 
+
+    public function index()
     {
         $dtpenyesuaian = jurnal_penyesuaian::all();
         // $dtpenyesuaian_detail = jurnal_penyesuaian_detail::all();
@@ -26,13 +28,26 @@ class jurnal_penyesuaiancontroller extends Controller
       public function create()
     {
         
-        $akun = akun::all();
-        $dtpenyesuaian = jurnal_penyesuaian::all();
-        // $akuns = akun::orderBy('no_account', 'asc')->get();
-        return view('jurnal.penyesuaian.detail_penyesuaian', [
-            'akun' => $akun,
-            'jurnal_penyesuaians' => $dtpenyesuaian, 
+        // $akun = akun::all();
+        // $dtpenyesuaian = jurnal_penyesuaian::all();
+        
+        jurnal_penyesuaian::all();
+        $akuns = akun::where('is_header_account', false)
+            ->orderBy('no_account', 'asc')->get();
+        $date = date('Y-m-d'); #2008-11-11
+
+        $noTransaksiPembelian = $this->setNewTransactionNumber();
+
+        jurnal_penyesuaian::create([
+            'no_transaction' => $noTransaksiPembelian,
+            'date' => $date,
+        ]);
+        return view('jurnal.penyesuaian.detail', [
+            // 'akun' => $akun,
+            // 'jurnal_penyesuaians' => $dtpenyesuaian, 
            
+            'akuns' => $akuns,
+            'date' => $date,
 
         ]);
     }
@@ -40,13 +55,27 @@ class jurnal_penyesuaiancontroller extends Controller
     
         public function store(Request $request)
     {
-        // dd($request->toArray());
+        dd($request->toArray());
        
-        jurnal_penyesuaian::create([
-            'date' => $request->date,
-            'no_transaction' => $request->no_transaction,
-        ]);
-        return redirect('penyesuaian');
+        // jurnal_penyesuaian::create([
+        //     'date' => $request->date,
+        //     'no_transaction' => $request->no_transaction,
+        // ]);
+        // $data = $request->all();
+        // // dd($data);
+        // $penyesuaian = new jurnal_penyesuaian;
+        // $penyesuaian->date =$data['date'];
+        // $penyesuaian->no_transaction =$data['no_transaction'];
+        // $penyesuaian->save();
+
+        // $detailpenyesuaian = new jurnal_penyesuaian_detail;
+        // $detailpenyesuaian->jurnal_penyesuaian_id =$penyesuaian->id;
+        // $detailpenyesuaian->akun_id =$data['akun'];
+        // $detailpenyesuaian->debet =$data['debet'];
+        // $detailpenyesuaian->kredit =$data['kredit'];
+        
+
+        return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Di Input');;
 
 
         // $data = $request->all();
@@ -64,10 +93,51 @@ class jurnal_penyesuaiancontroller extends Controller
         // $penyesuaian_detail->kredit = $request->kredit;
         // $penyesuaian_detail->save();
         // return redirect()->back();
-
-
-
+        }
+         public function get_account_info($id)
+    {
+        $akun = akun::where('id', $id)->get();
+        return response()->json($akun);
     }
+
+    private function getTransactionId()
+    {
+        $noTransaksiPembelian = $this->getTransactionNumber();
+        $result = jurnal_penyesuaian::where('no_transaction', $noTransaksiPembelian)->get();
+
+        $id = $result[0]->id;
+
+        return $id;
+    }
+
+    private function getTransactionNumber()
+    {
+        $result = jurnal_penyesuaian::latest()->value('no_transaction');
+
+        return $result;
+    }
+
+    private function setNewTransactionNumber()
+    {
+        $noTransaksiPembelian = jurnal_penyesuaian::latest()->value('no_transaction');
+
+        if (is_null($noTransaksiPembelian)) {
+            $this->transactionNumber = "JM-001";
+        } else {
+            $noTransaksiPembelian = explode('-', $noTransaksiPembelian);
+            $prefix = $noTransaksiPembelian[0];
+            $order = (int) $noTransaksiPembelian[1];
+            $order++;
+            $order = (string) $order;
+            if (strlen($order) == 1) {
+                $order = '0' . $order;
+            }
+            $this->transactionNumber = $prefix . '-' . $order;
+        }
+
+        return $this->transactionNumber;
+    }
+ 
 
     public function edit(jurnal_penyesuaian $id)
     {
@@ -92,19 +162,7 @@ class jurnal_penyesuaiancontroller extends Controller
         return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Update');
 
     }
-    //      public function update(Request $request, jurnal_penyesuaian $penye)
-    // {
-    //     $validatedData = $request->validate([
-    //         'date' => 'required|size:8',
-    //         'debet' => '',
-    //         'kredit' => 'required_if:debet,false',
-           
-    //     ]);
-
-    //     jurnal_penyesuaian::whereId($penye->id)->update($validatedData);
-
-    //     return redirect()->route('penyesuaian');
-    // }
+    
      public function destroy($id)
      {
          $penye = jurnal_penyesuaian::findorfail($id);
@@ -119,7 +177,7 @@ class jurnal_penyesuaiancontroller extends Controller
     {
         $dtpenyesuaian_detail = jurnal_penyesuaian::all();
 
-        return view('jurnal.penyesuaian_detail.penyesuaian_detail', [
+        return view('jurnal.penyesuaian.detail', [
             'jurnal_penyesuaians_details' => $dtpenyesuaian_detail,
         ]);
     }
@@ -132,26 +190,45 @@ class jurnal_penyesuaiancontroller extends Controller
     }
     public function store_detail(Request $request)
     {
-        // dd($request->toArray());
-        $jurnal_penyesuaian = jurnal_penyesuaian::where('no_transaction', $request->no_transaction)->first();
-        $jurnal_penyesuain_id = $jurnal_penyesuaian->id;
-       
-        jurnal_penyesuaian_detail::create([
+        $detail = new jurnal_penyesuaian_detail;
+        $detail->akun_id = $request->input('akun_id');
+        $detail->debet = $request->input('debet');
+        $detail->kredit = $request->input('kredit');
+        $detail->save();
 
-            'jurnal_penyesuaian_id' => $jurnal_penyesuain_id->id, 
-            'akun_id' => $request->akun_id,
-            'debet' => $request->debet,
-            'kredit' => $request->kredit,
+        $akun = jurnal_penyesuaian_detail::find($detail->akun_id);
+
+        return response()->json([
+            'message' => 'Data berhasil disimpan.',
+            'akun' => $akun
         ]);
-        return redirect('simpan_penyesuaian_detail');
+       
+    //     // dd($request->toArray());
+    //     // $jurnal_penyesuaian = jurnal_penyesuaian::where('no_transaction', $request->no_transaction)->first();
+    //     // $jurnal_penyesuain_id = $jurnal_penyesuaian->id;
+       
+    //     // jurnal_penyesuaian_detail::create([
+
+    //     //     'jurnal_penyesuaian_id' => $jurnal_penyesuain_id->id, 
+    //     //     'akun_id' => $request->akun_id,
+    //     //     'debet' => $request->debet,
+    //     //     'kredit' => $request->kredit,
+    //     // ]);
+        // return redirect('simpan_penyesuaian_detail');
     }
-//     public function getPenyesuaianId($id)
-// {
-//     $penyesuaian_detail = jurnal_penyesuaian_detail::find($id);
-//     $penyesuaians_id = $penyesuaian_detail->penyesuaian->id;
+    public function show($id)
+{
+    $akun = jurnal_penyesuaian_detail::find($id);
 
-//     return $penyesuaians_id;
-// }
-
-
+    return response()->json([
+        'akun' => $akun
+    ]);
+}
+ public function destroy_detail($id)
+     {
+         $penye = jurnal_penyesuaian_detail::findorfail($id);
+         $penye->delete();
+         return redirect()->route('detail_penyesuaian');
+        // return back();
+     }
 }
