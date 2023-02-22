@@ -125,7 +125,7 @@
                                                                     class="text-decoration-none link-light badge bg-primary border-0"><i
                                                                         class="mdi mdi-file-document-edit-outline"></i></a>
                                                                 |
-                                                                <a href="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
+                                                                <a href="{{ url('delete-penyesuaian', $id->id) }}"
                                                                     method="POST"> @method('delete') @csrf
                                                                     <button class="badge bg-danger border-0"
                                                                         onclick="return confirm('Apakah anda yakin ingin menghapus ?')">

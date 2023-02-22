@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [DashControl::class, 'index']);
+Route::get('/neracasaldo', [DashControl::class, 'indexneraca']);
 // Routing untuk jurnal_penyesuaian
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
 Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "create"])->name('create-penyesuaian');
@@ -33,11 +34,12 @@ Route::put('/penyesuaian/editt-penyesuaian/{id}', [jurnal_penyesuaiancontroller:
 Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
 Route::get('/penyesuaian/get_account_info/{id}', [jurnal_penyesuaianlcontroller::class, 'get_account_info'])->name('get_account_info_penyesuaian');
 // Routing untuk jurnal_penyesuaian_detail
-Route::post('/simpan-detail_penyesuaian', 'Jurnal_PenyesuaianController@store_detail');
-Route::get('/penyesuaian_detail', [jurnal_penyesuaian_detailcontroller::class, "index_detail"])->name('penyesuaian_detail');
-Route::get('/ambil-akun/{id}', [jurnal_penyesuaian_detailcontroller::class, "show"])->name('ambil-akun');
+// Route::post('/simpan-detail_penyesuaian', 'Jurnal_PenyesuaianController@store_detail');
+// Route::get('/penyesuaian_detail', [jurnal_penyesuaian_detailcontroller::class, "index_detail"])->name('penyesuaian_detail');
+// Route::get('/ambil-akun/{id}', [jurnal_penyesuaian_detailcontroller::class, "show"])->name('ambil-akun');
+// Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy_detail"])->name('delete-penyesuaian');
 // Route::post('/simpan-detail_penyesuaian', [jurnal_penyesuaian_detailcontroller::class, "store_detail"])->name('simpan-detail_penyesuaian');
-// Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaian_detailcontroller::class, "destroy_detail"])->name('delete-penyesuaian');
+Route::delete('/penyesuaian/delete-detail/{id}', [jurnal_penyesuaiancontroller::class, "destroy_detail"])->name('delete-detail');
 // // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
 Route::post('/accounting/accounts', [akuncontroller::class, "store"])->name('save_account');

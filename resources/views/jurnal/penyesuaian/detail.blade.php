@@ -24,6 +24,11 @@
                                     <input class="form-control text-dark disabled" type="date" name="date"
                                         readonly value="{{ $date }}" />
                                 </div>
+                                {{-- <div class="col-sm-1">
+                                    <button class="btn btn-icon btn-success btn-sm" type="submit">
+                                        <i class="mdi mdi-plus-box" href="{{ url('penyesuaian') }}"></i>
+                                    </button>
+                                </div> --}}
                             </div>
                             <div class="col-lg-4 mt-5">
                                 <div class="form-group row">
@@ -48,8 +53,9 @@
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>
                                         Debit</label>
                                     <div class="col-sm-7">
-                                        <input class="form-control text-light" placeholder="Please fill this input..."
-                                            type="number" id='debet_detail' name="debet" />
+                                        <input class="form-control text-light" placeholder="Masukan nominal"
+                                            value="{{ old('debet') }}" type="number" id='debet_detail'
+                                            name="debet" />
                                     </div>
                                     <div class="col-sm-1"></div>
                                 </div>
@@ -60,7 +66,8 @@
                                         Kredit</label>
                                     <div class="col-sm-7">
                                         <input class="form-control text-light" type="number" name="kredit"
-                                            placeholder="Please fill this input..." id="kredit_detail" />
+                                            value="{{ old('kredit') }}" placeholder="Masukan nominal"
+                                            id="kredit_detail" />
                                     </div>
                                     <div class="col-sm-1">
                                         <button class="btn btn-icon btn-success btn-sm" type="submit">
@@ -72,7 +79,7 @@
                         </div>
                     </form>
 
-                    <div class="col-md-12 mt-3">
+                    <div class="col-md-12 mt-4">
                         <div class="table-responsive">
                             <table class="table table-dark">
                                 <thead>
@@ -84,20 +91,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Kaos Gucci</td>
-                                        <td> $ 77.99 </td>
-                                        <td>1</td>
-                                        <td>
-                                            <form action="" method="POST" class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="badge bg-danger border-0"
-                                                    onclick="return confirm('Apakah anda yakin ?')">
-                                                    <i class="mdi mdi-trash-can-outline"></i>
-                                                </button>
-                                            </form>
-                                        </td>
+                                    @forelse ($jurnal_penyesuaian_detail as $id)
+                                        <tr>
+                                            {{-- <td>{{ date('d-m-y', strtotime($id->date)) }}</td> --}}
+                                            <td>{{ $id->akun->name_account }}</td>
+
+                                            <td>{{ $id->debet }}</td>
+                                            <td>{{ $id->kredit }}</td>
+
+                                            {{-- <td>aktiva lancar</td>
+                                        <td>50000</td>
+                                        <td>0</td> --}}
+                                            <td>
+                                                <a href="{{ url('/penyesuaian/editt-penyesuaian', $id->id) }}"
+                                                    class="text-decoration-none link-light badge bg-primary border-0"><i
+                                                        class="mdi mdi-file-document-edit-outline"></i>
+                                                </a>
+                                                <form action="{{ url('penyesuaian/delete-detail', $id->id) }}"
+                                                    method="POST" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        onclick="return confirm('Apakah anda yakin ?')">
+                                                        <i class="mdi mdi-trash-can-outline"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">Tidak ada data</td>
+                                        </tr>
+                                    @endforelse
                                     </tr>
                                 </tbody>
                             </table>

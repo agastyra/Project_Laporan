@@ -31,21 +31,23 @@ class jurnal_penyesuaiancontroller extends Controller
         // $akun = akun::all();
         // $dtpenyesuaian = jurnal_penyesuaian::all();
         
-        jurnal_penyesuaian::all();
+        jurnal_penyesuaian::where('jurnal_penyesuaian_id');
         $akuns = akun::where('is_header_account', false)
             ->orderBy('no_account', 'asc')->get();
         $date = date('Y-m-d'); #2008-11-11
 
         $noTransaksiPembelian = $this->setNewTransactionNumber();
 
-        jurnal_penyesuaian::create([
-            'no_transaction' => $noTransaksiPembelian,
-            'date' => $date,
-        ]);
+        // jurnal_penyesuaian::create([
+        //     'no_transaction' => $noTransaksiPembelian,
+        //     'date' => $date,
+        // ]);
+        // $akuns = akun::all();
+        $jurnal_penyesuaian_detail = jurnal_penyesuaian_detail::all();
         return view('jurnal.penyesuaian.detail', [
             // 'akun' => $akun,
             // 'jurnal_penyesuaians' => $dtpenyesuaian, 
-           
+            'jurnal_penyesuaian_detail' => $jurnal_penyesuaian_detail,
             'akuns' => $akuns,
             'date' => $date,
 
@@ -55,44 +57,29 @@ class jurnal_penyesuaiancontroller extends Controller
     
         public function store(Request $request)
     {
-        dd($request->toArray());
+        // dd($request->toArray());
        
         // jurnal_penyesuaian::create([
         //     'date' => $request->date,
         //     'no_transaction' => $request->no_transaction,
         // ]);
-        // $data = $request->all();
-        // // dd($data);
-        // $penyesuaian = new jurnal_penyesuaian;
-        // $penyesuaian->date =$data['date'];
-        // $penyesuaian->no_transaction =$data['no_transaction'];
-        // $penyesuaian->save();
+        $data = $request->all();
+        // dd($data);
+        $penyesuaian = new jurnal_penyesuaian;
+        $penyesuaian->date =$data['date'];
+        $penyesuaian->no_transaction =$data['no_transaction'];
+        $penyesuaian->save();
 
-        // $detailpenyesuaian = new jurnal_penyesuaian_detail;
-        // $detailpenyesuaian->jurnal_penyesuaian_id =$penyesuaian->id;
-        // $detailpenyesuaian->akun_id =$data['akun'];
-        // $detailpenyesuaian->debet =$data['debet'];
-        // $detailpenyesuaian->kredit =$data['kredit'];
+        $detailpenyesuaian = new jurnal_penyesuaian_detail;
+        $detailpenyesuaian->jurnal_penyesuaian_id =$penyesuaian->id;
+        $detailpenyesuaian->akun_id =$data['akun_id'];
+        $detailpenyesuaian->debet =$data['debet'];
+        $detailpenyesuaian->kredit =$data['kredit'];
+        $detailpenyesuaian->save();
         
 
         return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Di Input');;
 
-
-        // $data = $request->all();
-
-        // $penyesuaian = new jurnal_penyesuaian;
-        // $penyesuaian->date = $request->date;
-        // $penyesuaian->no_transaction = $request->no_transaction;
-        // $penyesuaian->save();
-
-
-        // $penyesuaian_detail = new jurnal_penyesuaian_detail;
-        // $penyesuaian_detail->jurnal_penyesuaian_id = $penyesuaian->id;
-        // $penyesuaian_detail->akun_id = $request->akun_id;
-        // $penyesuaian_detail->debet = $request->debet;
-        // $penyesuaian_detail->kredit = $request->kredit;
-        // $penyesuaian_detail->save();
-        // return redirect()->back();
         }
          public function get_account_info($id)
     {
@@ -126,7 +113,7 @@ class jurnal_penyesuaiancontroller extends Controller
         } else {
             $noTransaksiPembelian = explode('-', $noTransaksiPembelian);
             $prefix = $noTransaksiPembelian[0];
-            $order = (int) $noTransaksiPembelian[1];
+            $order = (int) $noTransaksiPembelian[0];
             $order++;
             $order = (string) $order;
             if (strlen($order) == 1) {
@@ -146,7 +133,7 @@ class jurnal_penyesuaiancontroller extends Controller
         
 
         $penye= jurnal_penyesuaian::where('kredit', true)->get();
-        return view('jurnal.penyesuaian.editt-penyesuaian', [
+        return view('jurnal.penyesuaian.detail', [
             'penye' => $penye,
             'id' => $id,
             'akun' => $akun,
@@ -184,7 +171,7 @@ class jurnal_penyesuaiancontroller extends Controller
       public function create_detail()
     {
        
-        return view('jurnal.penyesuaian.penyesuaian_detail', [
+        return view('jurnal.penyesuaian.detail', [
             // 'akun' => $akun,
         ]);
     }
@@ -226,9 +213,9 @@ class jurnal_penyesuaiancontroller extends Controller
 }
  public function destroy_detail($id)
      {
-         $penye = jurnal_penyesuaian_detail::findorfail($id);
-         $penye->delete();
-         return redirect()->route('detail_penyesuaian');
+         $peg = jurnal_penyesuaian_detail::findorfail($id);
+         $peg->delete();
+         return redirect()->route('create-penyesuaian');
         // return back();
      }
 }
