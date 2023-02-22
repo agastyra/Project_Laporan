@@ -23,6 +23,8 @@ class transaksi_pembeliancontroller extends Controller
 
     public function create()
     {
+        transaksi_pembelian::where('is_display', false)->delete();
+
         $barangs = barang::orderBy('no_barang', 'asc')->get();
 
         $date = date('Y-m-d'); #2008-11-11
