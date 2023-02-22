@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped" id="bkm-table">
+                        <table class="table table-hover" id="bkm-table">
                             <thead>
                                 <tr>
                                     <th>No.BKM</th>

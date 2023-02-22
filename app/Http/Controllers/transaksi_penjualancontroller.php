@@ -117,6 +117,4 @@ class transaksi_penjualancontroller extends Controller
 
         return redirect()->route('transaksi.create');
     }
-
-
 }
