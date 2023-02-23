@@ -21,8 +21,8 @@
                                 <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                     Tanggal</label>
                                 <div class="col-sm-7">
-                                    <input class="form-control text-dark disabled" type="date" name="date"
-                                        readonly value="{{ $date }}" />
+                                    <inpt class="form-control text-dark disabled" type="date" name="date" readonly
+                                        value="{{ $date }}" />
                                 </div>
                                 {{-- <div class="col-sm-1">
                                     <button class="btn btn-icon btn-success btn-sm" type="submit">
@@ -103,8 +103,9 @@
                                         <td>50000</td>
                                         <td>0</td> --}}
                                             <td>
-                                                <a href="{{ url('/penyesuaian/editt-penyesuaian', $id->id) }}"
-                                                    class="text-decoration-none link-light badge bg-primary border-0"><i
+
+                                                <a class="text-decoration-none link-light badge bg-primary border-0"
+                                                    data-bs-toggle="modal" data-bs-target="#modal-edit"><i
                                                         class="mdi mdi-file-document-edit-outline"></i>
                                                 </a>
                                                 <form action="{{ url('penyesuaian/delete-detail', $id->id) }}"
@@ -128,6 +129,70 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal --}}
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Edit detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">No Transaksi</label>
+                            <div class="col-sm-9">
+                                <input />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-dark disabled" type="date" name="date" readonly
+                                    value="{{ $date }}" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
+                                Akun</label>
+                            <div class="col-sm-7">
+                                <select class="js-example-basic-single" name="akun_id" id="akun_id_memo"
+                                    style="width:100%">
+                                    <option value=""> -- </option>
+                                    @forelse ($akuns as $akun)
+                                        <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
+                                            {{ $akun->name_account }}</option>
+                                    @empty
+                                        <option value="">-- Tidak ada data --</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Debet</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukan nominal"
+                                    value="{{ old('debet') }}" type="number" id='debet_detail' name="debet" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Kredit</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukan nominal"
+                                    value="{{ old('kredit') }}" type="number" id='kredit_detail' name="kredit" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                            class="mdi mdi-window-close"></i> Tutup</button>
+                    <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
                 </div>
             </div>
         </div>
