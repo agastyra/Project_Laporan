@@ -1,7 +1,10 @@
 @forelse ($bkm as $item)
 <tr>
     <td>{{ $item->no_bkm }}</td>
-    <td>{{ $item->transaksi_penjualan->no_transaction }}</td>
+    @if ($item->transaksi_penjualan_id == 0)
+    <td>{{ $item-> }}</td>
+        
+    @endif
     <td>{{ $item->tanggal }}</td>
     <td>{{ $item->description }}</td>
     <td>Rp. {{ number_format($item->total, 0, ',', '.') }}</td>
