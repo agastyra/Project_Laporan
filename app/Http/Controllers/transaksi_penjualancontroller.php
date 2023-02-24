@@ -118,7 +118,7 @@ class transaksi_penjualancontroller extends Controller
         return redirect()->route('transaksi.create');
     }
 
-    public function testBalance(){
-        return view('NeracaSaldo.balance');
-    }
+    // public function testBalance(){
+    //     return view('NeracaSaldo.balance');
+    // }
 }

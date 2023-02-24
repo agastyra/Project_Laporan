@@ -66,7 +66,7 @@ Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
 
-Route::get('/balance', [transaksi_penjualancontroller::class, 'testBalance']);
+// Route::get('/balance', [transaksi_penjualancontroller::class, 'testBalance']);
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 

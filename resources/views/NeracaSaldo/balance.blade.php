@@ -4,8 +4,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <h4 class="card-title col-md-10"><i class="mdi mdi-cash text-danger icon-md"></i> Neraca Saldo</h4>
-                        <div class="col-md-2">
+                        <h4 class="card-title col-md-8"><i class="mdi mdi-cash text-danger icon-md"></i> Neraca Saldo</h4>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="">Sortir Bulan: </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <select name="" id="" class="form-control text-light">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="col-md-1">
                             <button type="submit" class="btn btn-info"><i class="mdi mdi-printer"></i> Print</button>
                         </div>
                     </div>
