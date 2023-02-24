@@ -10,4 +10,7 @@ class DashControl extends Controller
     {
         return view('dashboard.dash');
     }
+    public function indexneraca(){
+        return view('NeracaSaldo.index');
+    }
 }

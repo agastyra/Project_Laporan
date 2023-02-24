@@ -145,9 +145,9 @@ class jurnal_penyesuaiancontroller extends Controller
     // }
     public function edit($id)
     {
-    $data1 = jurnal_penyesuaian::findOrFail($id);
-    $data2 = jurnal_penyesuaian_detail::where('id', $data1->jurnal_penyesuaian_detail_id)->firstOrFail();
-    return view('edit', compact('data1', 'data2'));
+    $penyesuaian = jurnal_penyesuaian::findOrFail($id);
+    $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $penyesuaian->jurnal_penyesuaian_detail_id)->firstOrFail();
+    return view('junal.penyesuaian.detail', compact('penyesuaian', 'penyesuaianDetail'));
 }
 
     // public function update(Request $request, $id)
@@ -164,20 +164,20 @@ class jurnal_penyesuaiancontroller extends Controller
 
     try {
         // Update data pada tabel Model1
-        $data1 = jurnal_penyesuaian::findOrFail($id);
-        $data1->date = $request->input('date');
-        $data1->no_transaction = $request->input('no_transaction');
-        $data1->save();
+        $penyesuaian = jurnal_penyesuaian::findOrFail($id);
+        $penyesuaian->date = $request->input('date');
+        $penyesuaian->no_transaction = $request->input('no_transaction');
+        $penyesuaian->save();
 
         // Update data pada tabel Model2
-        $data2 = jurnal_penyesuaian_detail::where('id', $data1->jurnal_penyesuaian_detail_id)->firstOrFail();
-        $data2->akun_id = $request->input('akun_id');
-        $data2->debet = $request->input('debet');
-        $data2->kredit = $request->input('kredit');
-        $data2->save();
+        $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $penyesuaian->jurnal_penyesuaian_detail_id)->firstOrFail();
+        $penyesuaianDetail->akun_id = $request->input('akun_id');
+        $penyesuaianDetail->debet = $request->input('debet');
+        $penyesuaianDetail->kredit = $request->input('kredit');
+        $penyesuaianDetail->save();
 
         DB::commit();
-        return redirect()->route('route.update-penyesuaian');
+        return response()->json(['success' => true]);
     } catch (\Throwable $e) {
         DB::rollback();
         throw $e;

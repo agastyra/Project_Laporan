@@ -14,7 +14,7 @@
                                 <div class="col-sm-7">
                                     <input class="form-control text-light" type="text"
                                         value="{{ old('no_transaction') }}" placeholder="Masukkan No Transaksi"
-                                        name="no_transaction" />
+                                        name="no_transaction" id="no_transaction" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -35,7 +35,7 @@
                                     <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
                                         Akun</label>
                                     <div class="col-sm-7">
-                                        <select class="js-example-basic-single" name="akun_id" id="akun_id_memo"
+                                        <select class="js-example-basic-single" name="akun_id" id="akun_id_detai"
                                             style="width:100%">
                                             <option value=""> -- </option>
                                             @forelse ($akuns as $akun)
@@ -97,7 +97,6 @@
                                             <td>{{ $id->akun->name_account }}</td>
                                             <td>{{ $id->debet }}</td>
                                             <td>{{ $id->kredit }}</td>
-
                                             {{-- <td>aktiva lancar</td>
                                         <td>50000</td>
                                         <td>0</td> --}}
@@ -105,7 +104,12 @@
 
                                                 <a class="text-decoration-none link-light badge bg-primary border-0"
                                                     data-bs-toggle="modal" data-bs-target="#editModal"><i
-                                                        class="mdi mdi-file-document-edit-outline"></i>
+                                                        class="mdi mdi-file-document-edit-outline"
+                                                        data-mydate="{{ $id->date }}"
+                                                        data-myno_transaction="{{ $id->no_transaction }}"
+                                                        data-myakun="{{ $id->akun->name_account }}"
+                                                        data-mydebet="{{ $id->debet }}"
+                                                        data-mykredit="{{ $id->kredit }}"></i>
                                                 </a>
                                                 <form action="{{ url('penyesuaian/delete-detail', $id->id) }}"
                                                     method="POST" class="d-inline">
@@ -151,7 +155,7 @@
                             <div class="col-sm-9">
                                 <input class="form-control text-light" type="text"
                                     value="{{ old('no_transaction') }}" placeholder="Masukkan No Transaksi"
-                                    name="no_transaction" />
+                                    name="no_transaction" id="no_trnasaction" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -159,14 +163,14 @@
                                     class="mdi mdi-calendar text-info"></i>Tanggal</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-dark disabled" type="date" name="date" readonly
-                                    value="{{ $date }}" />
+                                    value="{{ $date }}" id="date" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
                                 Akun</label>
                             <div class="col-sm-9">
-                                <select class="js-example-basic-single" name="akun_id" id="akun_id_memo"
+                                <select class="js-example-basic-single" name="akun_id" id="akun_id_detail"
                                     style="width:100%">
                                     {{-- <option value=""> -- </option> --}}
                                     @forelse ($akuns as $akun)
@@ -208,54 +212,77 @@
     @push('jssj')
         <script>
             $(document).ready(function() {
-                        // let baseUrl =
-                        //     $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
+                // let baseUrl =
+                //     $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
 
-                        $('#editModal').on('show.bs.modal', function(event) {
-                            var button = $(event.relatedTarget) // Button that triggered the modal
-                            var id = button.data('id') // Extract info from data-* attributes
+                $('#editModal').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var id = button.data('id') // Extract info from data-* attributes
 
-                            // Fill form with data from server
-                            // $.ajax({
-                            //     url: "/edit/" + id,
-                            //     type: "GET",
-                            //     dataType: "json",
-                            //     success: function(data) {
-                            //         $('#editForm').attr('action', '/update/' + id)
-                            //         // Set value for input fields for Model1
-                            //         // Set value for input fields for Model2
-                            //     },
-                            //     error: function(xhr, textStatus, errorThrown) {
-                            //         alert('Error: ' + textStatus + ' - ' + errorThrown);
-                            //     }
-                            // });
-                        });
+                    Fill form with data from server
+                    $.ajax({
+                        url: "/edit/" + id,
+                        type: "PUT",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#editForm').attr('action', '/update/' + id)
+                            // Set value for input fields for Model1
+                            // Set value for input fields for Model2
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            alert('Error: ' + textStatus + ' - ' + errorThrown);
+                        }
+                    });
+                });
 
-                        $('#editForm').submit(function(event) {
-                            event.preventDefault();
+                $('#editForm').submit(function(event) {
+                    event.preventDefault();
 
-                            var formData = $(this).serialize();
-                            var url = $(this).attr('action');
+                    var formData = $(this).serialize();
+                    var url = $(this).attr('action');
 
-                            // Send data to server
-                            $.ajax({
-                                url: url,
-                                type: "PUT",
-                                data: formData,
-                                dataType: "json",
-                                success: function(data) {
-                                    $('#editModal').modal('hide');
-                                    // Reload page or update data table
-                                    console.log('ok');
-                                },
-                                error: function(xhr, textStatus, errorThrown) {
-                                    alert('Error: ' + textStatus + ' - ' + errorThrown);
-                                }
+                    // Send data to server
+                    $.ajax({
+                        url: ,
+                        type: "PUT",
+                        data: formData,
+                        dataType: "json",
+                        success: function(data) {
+                            $('#editModal').modal('hide');
+                            // Reload page or update data table
+                            // console.log('ok');
+                            location.reload();
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            alert('Error: ' + textStatus + ' - ' + errorThrown);
+                        }
 
-                            });
-                        });
-                    }
+                    });
+                });
+            });
         </script>
+
+
+        {{-- <script>
+            //     $(document).ready(function() {
+            //                 $('#editModal').on('show.bs.modal', function(event) {
+            //                     var button = (event.relatedTarget)
+            //                     var date = button.data('mydate')
+            //                     var no_transaction = button.data('myno_transaction')
+            //                     var akun = button.data('myakun')
+            //                     var debet = button.data('mydebet')
+            //                     var kredit = button.data('mykredit')
+
+            //                     var modal = $(this)
+            //                     modal.find('.modal-body #no_transaction').val(no_transaction);
+            //                     modal.find('.modal-body #date').val(date);
+            //                     modal.find('.modal-body #akun_id_detail').val(ak);
+            //                     modal.find('.modal-body #debet').val(debet);
+            //                     modal.find('.modal-body #kredit').val(kredit);
+            //                 })
+            //             }
+            // 
+        </script> --}}
         <script src="{{ asset('assets/js/jurnal_penyesuaian/index.js') }}"></script>
     @endpush
 </x-layout.app>
