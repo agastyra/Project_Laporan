@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\akuncontroller;
 use App\Http\Controllers\barangcontroller;
+use App\Http\Controllers\BuktiKasMasukController;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
@@ -42,7 +43,28 @@ Route::put('/barang/edit/{barang}', [barangcontroller::class, "update"])->name('
 Route::delete('/barang/{barang}', [barangcontroller::class, "destroy"])->name('hapus_barang');
 //Route::put('/barang/tambah/{barang}', [barangcontroller::class, "incrementid"])->name('increment');
 
-Route::get('/sales', [transaksi_penjualancontroller::class, "index"]);
+//Transaksi Penjualan
+Route::post('/detail', "DetailPenjualanController@store")->name('detail.store');
+Route::put('/detail/edit/{id}', "DetailPenjualanController@update")->name('detail.update');
+Route::get('/detail/edit/{id}', "DetailPenjualanController@edit")->name('detail.edit');
+Route::post('/calcDet', "DetailPenjualanController@calcDetail")->name('detail.calc');
+Route::delete('/detail/{id}', "DetailPenjualanController@destroy")->name('detail.destroy');
+Route::get('/sales', [transaksi_penjualancontroller::class, 'index'])->name('transaksi.index');
+Route::get('/sales/show', [transaksi_penjualancontroller::class, 'show'])->name('transaksi.show');
+Route::post('/sales/store', [transaksi_penjualancontroller::class, 'store'])->name('transaksi.store');
+Route::get('/getBarangData/{id}', [transaksi_penjualancontroller::class, 'getData']);
+Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
+Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
+Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
+
+//Bukti Kas Masuk
+Route::get('/bkm', [BuktiKasMasukController::class, 'index'])->name('bkm.index');
+Route::get('/bkm/table', [BuktiKasMasukController::class, 'index'])->name('bkm.table');
+Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
+Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
+Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
+Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
+Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 

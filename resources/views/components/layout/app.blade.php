@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token"
+        content="{{ csrf_token() }}">
     <title>Toko Thrift Bismillah</title>
     <!-- plugins:css -->
     <link rel="stylesheet"
@@ -28,6 +30,8 @@
         href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/button.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+        rel="stylesheet">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -108,6 +112,8 @@
             return x1 + x2;
         }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
     @stack('jssj')
 

@@ -65,7 +65,8 @@ class barangcontroller extends Controller
             'no_barang' => 'required|max:6|unique:barangs',
             'name_barang' => 'required|max:30|unique:barangs',
             'stok' => 'required|integer|gte:0',
-
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
         ]);
         barang::where('no_barang', $barang->no_barang)->update($valid);
 

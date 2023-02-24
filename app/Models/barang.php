@@ -27,4 +27,9 @@ class barang extends Model
     {
         return $this->hasMany(detail_pembelian::class);
     }
+
+    public function detail_penjualan()
+    {
+        return $this->hasMany(detail_penjualan::class);
+    }
 }
