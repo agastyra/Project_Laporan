@@ -1,9 +1,10 @@
 @forelse ($bkm as $item)
 <tr>
     <td>{{ $item->no_bkm }}</td>
-    @if ($item->transaksi_penjualan_id == 0)
-    <td>{{ $item-> }}</td>
-        
+    @if ($item->transaksi_penjualan_id)
+    <td>{{ $item->jurnal_memorial->transaction_no }}</td>
+    @else
+    <td>{{ $item->transaksi_penjualan->no_transaction }}</td>
     @endif
     <td>{{ $item->tanggal }}</td>
     <td>{{ $item->description }}</td>
