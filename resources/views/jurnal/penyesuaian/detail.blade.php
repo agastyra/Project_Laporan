@@ -95,7 +95,6 @@
                                         <tr>
                                             {{-- <td>{{ date('d-m-y', strtotime($id->date)) }}</td> --}}
                                             <td>{{ $id->akun->name_account }}</td>
-
                                             <td>{{ $id->debet }}</td>
                                             <td>{{ $id->kredit }}</td>
 
@@ -105,7 +104,7 @@
                                             <td>
 
                                                 <a class="text-decoration-none link-light badge bg-primary border-0"
-                                                    data-bs-toggle="modal" data-bs-target="#modal-edit"><i
+                                                    data-bs-toggle="modal" data-bs-target="#editModal"><i
                                                         class="mdi mdi-file-document-edit-outline"></i>
                                                 </a>
                                                 <form action="{{ url('penyesuaian/delete-detail', $id->id) }}"
@@ -134,7 +133,7 @@
         </div>
     </div>
     {{-- Modal --}}
-    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -142,16 +141,22 @@
                     <h5 class="modal-title" id="modalTitleId">Edit detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
+                <form id="editForm">
+                    <div class="modal-body">
+                        @csrf
+                        @method('PUT')
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">No Transaksi</label>
+                            <label class="col-sm-3 col-form-label"> <i class="mdi mdi-receipt text-success"></i>No
+                                Transaksi</label>
                             <div class="col-sm-9">
-                                <input />
+                                <input class="form-control text-light" type="text"
+                                    value="{{ old('no_transaction') }}" placeholder="Masukkan No Transaksi"
+                                    name="no_transaction" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tanggal</label>
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-calendar text-info"></i>Tanggal</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-dark disabled" type="date" name="date" readonly
                                     value="{{ $date }}" />
@@ -160,10 +165,10 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
                                 Akun</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-9">
                                 <select class="js-example-basic-single" name="akun_id" id="akun_id_memo"
                                     style="width:100%">
-                                    <option value=""> -- </option>
+                                    {{-- <option value=""> -- </option> --}}
                                     @forelse ($akuns as $akun)
                                         <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
                                             {{ $akun->name_account }}</option>
@@ -174,31 +179,83 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Debet</label>
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-cash text-warning"></i>Debet</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-light" placeholder="Masukan nominal"
                                     value="{{ old('debet') }}" type="number" id='debet_detail' name="debet" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kredit</label>
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-cash text-warning"></i>Kredit</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-light" placeholder="Masukan nominal"
                                     value="{{ old('kredit') }}" type="number" id='kredit_detail' name="kredit" />
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                            class="mdi mdi-window-close"></i> Tutup</button>
-                    <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                                class="mdi mdi-window-close"></i> Tutup</button>
+                        <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     @push('jssj')
+        <script>
+            $(document).ready(function() {
+                        // let baseUrl =
+                        //     $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
+
+                        $('#editModal').on('show.bs.modal', function(event) {
+                            var button = $(event.relatedTarget) // Button that triggered the modal
+                            var id = button.data('id') // Extract info from data-* attributes
+
+                            // Fill form with data from server
+                            // $.ajax({
+                            //     url: "/edit/" + id,
+                            //     type: "GET",
+                            //     dataType: "json",
+                            //     success: function(data) {
+                            //         $('#editForm').attr('action', '/update/' + id)
+                            //         // Set value for input fields for Model1
+                            //         // Set value for input fields for Model2
+                            //     },
+                            //     error: function(xhr, textStatus, errorThrown) {
+                            //         alert('Error: ' + textStatus + ' - ' + errorThrown);
+                            //     }
+                            // });
+                        });
+
+                        $('#editForm').submit(function(event) {
+                            event.preventDefault();
+
+                            var formData = $(this).serialize();
+                            var url = $(this).attr('action');
+
+                            // Send data to server
+                            $.ajax({
+                                url: url,
+                                type: "PUT",
+                                data: formData,
+                                dataType: "json",
+                                success: function(data) {
+                                    $('#editModal').modal('hide');
+                                    // Reload page or update data table
+                                    console.log('ok');
+                                },
+                                error: function(xhr, textStatus, errorThrown) {
+                                    alert('Error: ' + textStatus + ' - ' + errorThrown);
+                                }
+
+                            });
+                        });
+                    }
+        </script>
         <script src="{{ asset('assets/js/jurnal_penyesuaian/index.js') }}"></script>
     @endpush
 </x-layout.app>

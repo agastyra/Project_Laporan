@@ -29,8 +29,8 @@ Route::get('/neracasaldo', [DashControl::class, 'indexneraca']);
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
 Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "create"])->name('create-penyesuaian');
 Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
-Route::get('/penyesuaian/editt-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "edit"])->name('editt-penyesuaian');
-Route::put('/penyesuaian/editt-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
+Route::get('/penyesuaian/edit-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "edit"])->name('edit-penyesuaian');
+Route::put('/penyesuaian/update-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
 Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
 Route::get('/penyesuaian/get_account_info/{id}', [jurnal_penyesuaianlcontroller::class, 'get_account_info'])->name('get_account_info_penyesuaian');
 // Routing untuk jurnal_penyesuaian_detail
@@ -39,6 +39,8 @@ Route::get('/penyesuaian/get_account_info/{id}', [jurnal_penyesuaianlcontroller:
 // Route::get('/ambil-akun/{id}', [jurnal_penyesuaian_detailcontroller::class, "show"])->name('ambil-akun');
 // Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy_detail"])->name('delete-penyesuaian');
 // Route::post('/simpan-detail_penyesuaian', [jurnal_penyesuaian_detailcontroller::class, "store_detail"])->name('simpan-detail_penyesuaian');
+// Route::get('/edit/{id}', 'ControllerName@edit')->name('edit');
+// Route::put('/update/{id}', 'ControllerName@update')->name('update');
 Route::delete('/penyesuaian/delete-detail/{id}', [jurnal_penyesuaiancontroller::class, "destroy_detail"])->name('delete-detail');
 // // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');

@@ -6,6 +6,7 @@ use App\Models\akun;
 use App\Models\jurnal_penyesuaian;
 use App\Models\jurnal_penyesuaian_detail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Param;
 
 class jurnal_penyesuaiancontroller extends Controller
@@ -126,29 +127,62 @@ class jurnal_penyesuaiancontroller extends Controller
     }
  
 
-    public function edit(jurnal_penyesuaian $id)
-    {
-        $akun = akun::all();
-        $no_transaksi = jurnal_penyesuaian::all();
+    // public function edit(jurnal_penyesuaian $id)
+
+
+    // {
+    //     $akun = akun::all();
+    //     $no_transaksi = jurnal_penyesuaian::all();
         
 
-        $penye= jurnal_penyesuaian::where('kredit', true)->get();
-        return view('jurnal.penyesuaian.detail', [
-            'penye' => $penye,
-            'id' => $id,
-            'akun' => $akun,
-            'no_transaksi' => $no_transaksi,
-        ]);
-    }
-
-    public function update(Request $request, $id)
+    //     $penye= jurnal_penyesuaian::where('kredit', true)->get();
+    //     return view('jurnal.penyesuaian.detail', [
+    //         'penye' => $penye,
+    //         'id' => $id,
+    //         'akun' => $akun,
+    //         'no_transaksi' => $no_transaksi,
+    //     ]);
+    // }
+    public function edit($id)
     {
-        $penye = jurnal_penyesuaian::findorfail($id);
-   
-        $penye->update($request->all());
-        return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Update');
+    $data1 = jurnal_penyesuaian::findOrFail($id);
+    $data2 = jurnal_penyesuaian_detail::where('id', $data1->jurnal_penyesuaian_detail_id)->firstOrFail();
+    return view('edit', compact('data1', 'data2'));
+}
 
+    // public function update(Request $request, $id)
+    // {
+    //     $penye = jurnal_penyesuaian::findorfail($id);
+   
+    //     $penye->update($request->all());
+    //     return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Update');
+
+    // }
+    public function update(Request $request, $id)
+{
+    DB::beginTransaction();
+
+    try {
+        // Update data pada tabel Model1
+        $data1 = jurnal_penyesuaian::findOrFail($id);
+        $data1->date = $request->input('date');
+        $data1->no_transaction = $request->input('no_transaction');
+        $data1->save();
+
+        // Update data pada tabel Model2
+        $data2 = jurnal_penyesuaian_detail::where('id', $data1->jurnal_penyesuaian_detail_id)->firstOrFail();
+        $data2->akun_id = $request->input('akun_id');
+        $data2->debet = $request->input('debet');
+        $data2->kredit = $request->input('kredit');
+        $data2->save();
+
+        DB::commit();
+        return redirect()->route('route.update-penyesuaian');
+    } catch (\Throwable $e) {
+        DB::rollback();
+        throw $e;
     }
+}
     
      public function destroy($id)
      {
