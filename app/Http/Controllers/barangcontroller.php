@@ -62,9 +62,9 @@ class barangcontroller extends Controller
     {
 
         $valid = $request->validate([
-            'no_barang' => 'required|max:5|unique:barangs',
-            'nama_barang' => 'required|max:30|unique:barangs',
-            'stok' => 'required',
+            'no_barang' => 'required|max:6|unique:barangs',
+            'name_barang' => 'required|max:30|unique:barangs',
+            'stok' => 'required|integer|gte:0',
             'harga_beli' => 'required',
             'harga_jual' => 'required',
         ]);
