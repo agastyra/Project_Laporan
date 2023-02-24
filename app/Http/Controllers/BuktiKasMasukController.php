@@ -134,10 +134,10 @@ class BuktiKasMasukController extends Controller
             $jurnal_memorial_id = $request->jurnal_memorial_id;
         } else {
             $jurnal_memorial_id = 0;
-            $transaksi_penjualan_id=0;
+            $transaksi_penjualan_id = 0;
         }
 
-        
+
         $createBKM = bukti_kas_masuk::create([
             'no_bkm' => $request->no_bkm,
             'transaksi_penjualan_id' => $transaksi_penjualan_id,
@@ -192,6 +192,7 @@ class BuktiKasMasukController extends Controller
         $bkm = bukti_kas_masuk::find($id);
         if ($bkm) {
             $trans = transaksi_penjualan::find($bkm->transaksi_penjualan_id);
+            $memo = jurnal_memorial::find($bkm->jurnal_memorial_id);
             if ($trans) {
                 $bkm->transaksi_penjualan_id = $request->transaksi_penjualan_id;
                 $bkm->jurnal_memorial_id = $request->jurnal_memorial_id;
@@ -199,6 +200,15 @@ class BuktiKasMasukController extends Controller
                 $bkm->total = $request->total;
                 $bkm->description = $request->description;
                 $bkm->update();
+            } else {
+                if ($memo) {
+                    $bkm->transaksi_penjualan_id = $request->transaksi_penjualan_id;
+                    $bkm->jurnal_memorial_id = $request->jurnal_memorial_id;
+                    $bkm->tanggal = $request->tanggal;
+                    $bkm->total = $request->total;
+                    $bkm->description = $request->description;
+                    $bkm->update();
+                }
             }
         }
         return redirect()->route('bkm.index');
