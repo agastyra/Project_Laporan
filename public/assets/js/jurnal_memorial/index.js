@@ -70,9 +70,11 @@ $(document).ready(function () {
                             response == ""
                         ) {
                             console.log(response);
+                            console.log("ini gaada datanya masihan");
                             akun_exists = false;
                         } else {
                             console.log(response);
+                            console.log("ini seh wes ada datanya");
                             akun_exists = true;
                         }
                     }
@@ -92,6 +94,7 @@ $(document).ready(function () {
                 url: baseUrl + "accounting/memorial/update_detail",
                 data: formData,
                 success: function (response) {
+                    console.log(response);
                     $(`tr#akun_${response.akun.id} > td.debet`).text(
                         format_number(response.detail.debet)
                     );
