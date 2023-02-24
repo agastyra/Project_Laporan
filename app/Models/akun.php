@@ -11,17 +11,21 @@ class akun extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'no_account',
-        'name_account',
-        'is_header_account',
-        'header_account',
-        'balance',
-    ];
+    protected $guarded = ['id'];
 
     public function getRouteKeyName()
     {
         return 'no_account';
+    }
+
+    /**
+     * Get all of the bukti_kas_keluar for the akun
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bukti_kas_keluar()
+    {
+        return $this->hasMany(bukti_kas_keluar::class);
     }
 
     public function jurnal_penyesuaian_detail()

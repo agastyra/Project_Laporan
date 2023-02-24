@@ -16,16 +16,19 @@ class akunController extends Controller
         ]);
     }
 
-    public function show(akun $akun)
+    public function create()
     {
-        return view('akun.show', [
-            'akun' => $akun,
+        $akun_headers = akun::where('is_header_account', true)->get();
+        return view('akun.view', [
+            'akun_headers' => $akun_headers,
         ]);
     }
 
     public function edit(akun $akun)
     {
+        $akun_headers = akun::where('is_header_account', true)->get();
         return view('akun.edit', [
+            'akun_headers' => $akun_headers,
             'akun' => $akun,
         ]);
     }
@@ -33,10 +36,11 @@ class akunController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'no_account' => 'required|size:3|unique:akuns',
+            'no_account' => 'required|size:4|unique:akuns',
             'name_account' => 'required|max:100|unique:akuns',
             'is_header_account' => '',
-            'header_account' => '',
+            'header_account' => 'required_if:is_header_account,false',
+            'type_account' => 'required',
             'balance' => '',
         ]);
 
@@ -48,10 +52,11 @@ class akunController extends Controller
     public function update(Request $request, akun $akun)
     {
         $validatedData = $request->validate([
-            'no_account' => 'required|size:3|unique:akuns',
-            'name_account' => 'required|max:100|unique:akuns',
+            'no_account' => 'required|size:4',
+            'name_account' => 'required|max:100',
             'is_header_account' => '',
-            'header_account' => '',
+            'header_account' => 'required_if:is_header_account,false',
+            'type_account' => 'required',
             'balance' => '',
         ]);
 
