@@ -8,6 +8,7 @@ use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\NeracaSaldoController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
@@ -66,7 +67,8 @@ Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
 
-// Route::get('/balance', [transaksi_penjualancontroller::class, 'testBalance']);
+Route::get('/balance', [NeracaSaldoController::class, 'index']);
+Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 

@@ -4,7 +4,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <h4 class="card-title col-md-8"><i class="mdi mdi-cash text-danger icon-md"></i> Neraca Saldo</h4>
+                        <h4 class="card-title col-md-8"><i class="mdi mdi-cash text-danger icon-md"></i> Neraca Saldo
+                        </h4>
                         <div class="col-md-3">
                             <div class="row">
                                 <div class="col-sm-5">
@@ -13,10 +14,14 @@
                                 <div class="col-sm-7">
                                     <input type="date" id="" name="" class="form-control text-light">
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-md-1">
-                            <button type="submit" class="btn btn-info"><i class="mdi mdi-printer"></i> Print</button>
+                            <form action="{{ route('print.ns') }}" method="get" target="_blank">
+                                @csrf
+                                <button type="submit" class="btn btn-info"><i class="mdi mdi-printer"></i>
+                                    Print</button>
+                            </form>
                         </div>
                     </div>
                     <div class="table-responsive">
