@@ -14,6 +14,6 @@
 </tr>
 @empty
 <tr>
-    <td colspan="5" class="text-center">Belum ada Kas Masuk Bulan ini</td>
+    <td colspan="6" class="text-center">Belum ada Kas Masuk Bulan ini</td>
 </tr>
 @endforelse
