@@ -46,22 +46,21 @@
                                 </thead>
                                 <tbody>
 
-                                    @forelse ($jurnal_penyesuaians as $id)
+                                    @forelse ($jurnal_penyesuaians as $detail)
                                         <tr>
-                                            <td>{{ date('d-m-y', strtotime($id->date)) }}</td>
-                                            <td>{{ $id->no_transaction }}</td>
-                                            {{-- <tr> --}}
-
-                                            {{-- <td>1-1-2023</td>
-                                        <td>jp-001</td> --}}
-
+                                            <td>{{ date('d-m-y', strtotime($detail->date)) }}</td>
+                                            <td>{{ $detail->no_transaction }}</td>
 
                                             <td>
-                                                <a href=""
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#editModal"
+                                                    data-detail-id="{{ $detail->id }}"
+                                                    data-penye-akun_id="{{ $detail->akun_id }}"
+                                                    data-penye-debet="{{ $detail->debet }}"
+                                                    data-penye-kredit="{{ $detail->kredit }}"
                                                     class="text-decoration-none link-light badge bg-primary border-0"><i
                                                         class="mdi mdi-file-document-edit-outline"></i></a>
                                                 |
-                                                <form action="{{ url('penyesuaian/delete-penyesuaian', $id->id) }}"
+                                                <form action="{{ url('penyesuaian/delete-penyesuaian', $detail->id) }}"
                                                     method="POST" class="d-inline">
                                                     @method('delete')
                                                     @csrf
@@ -86,5 +85,70 @@
             </div>
         </div>
     </div>
+    {{-- modal  --}}
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
+                            Akun</label>
+                        <div class="col-sm-9">
+                            <select class="js-example-basic-single" name="akun_id" id="tampil_akun_id"
+                                style="width:100%">
+                                {{-- <option value=""> -- </option> --}}
+                                @forelse ($akuns as $akun)
+                                    <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
+                                        {{ $akun->name_account }}</option>
+                                @empty
+                                    <option value="">-- Tidak ada data --</option>
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>Debet</label>
+                        <div class="col-sm-9">
+                            <input class="form-control text-light" placeholder="Masukan nominal" type="number"
+                                id='tampil_debet' name="debet" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>Kredit</label>
+                        <div class="col-sm-9">
+                            <input class="form-control text-light" placeholder="Masukan nominal" type="number"
+                                id='tampil_kredit' name="kredit" />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                        class="mdi mdi-window-close"></i> Tutup</button>
+            </div>
+            {{-- <div class="modal-footer"> --}}
+
+            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+            {{-- </div> --}}
+        </div>
+    </div>
+    @push('jssj')
+        <script>
+            $(document).ready(function() {
+                $('#editModal').on('show.bs.modal', function(event) {
+                    let button = $(event.relatedTarget)
+                });
+            });
+            // $(document).ready(function() {
+            //     $('#saveBtn').on('click', function() {
+            //         // Proses penyimpanan data ke database
+            //         $('#editModal').modal('hide');
+            //     });
+            // });
+        </script>
+    @endpush
 
 </x-layout.app>

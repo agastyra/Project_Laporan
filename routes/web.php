@@ -30,7 +30,7 @@ Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name
 Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "create"])->name('create-penyesuaian');
 Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
 Route::get('/penyesuaian/edit-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "edit"])->name('edit-penyesuaian');
-Route::put('/penyesuaian/update-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
+Route::put('/penyesuaian/update-penyesuaian', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
 Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
 Route::get('/penyesuaian/get_account_info/{id}', [jurnal_penyesuaianlcontroller::class, 'get_account_info'])->name('get_account_info_penyesuaian');
 // Routing untuk jurnal_penyesuaian_detail
