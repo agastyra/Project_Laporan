@@ -18,9 +18,11 @@ class jurnal_penyesuaiancontroller extends Controller
     {
         $dtpenyesuaian = jurnal_penyesuaian::all();
         // $dtpenyesuaian_detail = jurnal_penyesuaian_detail::all();
+        $akuns = akun::all();
 
         return view('jurnal.penyesuaian.penyesuaian', [
-            'jurnal_penyesuaians' => $dtpenyesuaian, 
+            'jurnal_penyesuaians' => $dtpenyesuaian,
+            'akuns' => $akuns, 
             // 'jurnal_penyesuaian_detail' => $dtpenyesuaian_detail,
         ]);
     }
@@ -32,7 +34,7 @@ class jurnal_penyesuaiancontroller extends Controller
         // $akun = akun::all();
         // $dtpenyesuaian = jurnal_penyesuaian::all();
         
-        jurnal_penyesuaian::where('jurnal_penyesuaian_id');
+        // jurnal_penyesuaian::where('jurnal_penyesuaian_id');
         $akuns = akun::where('is_header_account', false)
             ->orderBy('no_account', 'asc')->get();
         $date = date('Y-m-d'); #2008-11-11
@@ -158,19 +160,19 @@ class jurnal_penyesuaiancontroller extends Controller
     //     return redirect('penyesuaian')->with('toast_success', 'Data Berhasil Update');
 
     // }
-    public function update(Request $request, $id)
+    public function update(Request $request)
 {
     DB::beginTransaction();
 
     try {
         // Update data pada tabel Model1
-        $penyesuaian = jurnal_penyesuaian::findOrFail($id);
-        $penyesuaian->date = $request->input('date');
-        $penyesuaian->no_transaction = $request->input('no_transaction');
-        $penyesuaian->save();
+        // $penyesuaian = jurnal_penyesuaian::findOrFail($id);
+        // $penyesuaian->date = $request->input('date');
+        // $penyesuaian->no_transaction = $request->input('no_transaction');
+        // $penyesuaian->save();
 
         // Update data pada tabel Model2
-        $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $penyesuaian->jurnal_penyesuaian_detail_id)->firstOrFail();
+        $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $request->input('jurnal_penyesuaian_detail_id'))->firstOrFail();
         $penyesuaianDetail->akun_id = $request->input('akun_id');
         $penyesuaianDetail->debet = $request->input('debet');
         $penyesuaianDetail->kredit = $request->input('kredit');
