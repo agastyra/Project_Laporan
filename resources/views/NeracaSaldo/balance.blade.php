@@ -11,9 +11,7 @@
                                     <label for="">Sortir Bulan: </label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <select name="" id="" class="form-control text-light">
-                                        <option value=""></option>
-                                    </select>
+                                    <input type="date" id="" name="" class="form-control text-light">
                                 </div>
                             </div> 
                         </div>
