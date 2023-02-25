@@ -96,10 +96,10 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response);
                     $(`tr#akun_${response.akun.id} > td.debet`).text(
-                        format_number(response.detail.debet)
+                        response.detail.debet
                     );
                     $(`tr#akun_${response.akun.id} > td.kredit`).text(
-                        format_number(response.detail.kredit)
+                        response.detail.kredit
                     );
                 },
                 error: function (error) {
@@ -122,12 +122,8 @@ $(document).ready(function () {
                                 $.each(response.detail, function (key, value) {
                                     html += `<tr id='akun_${value.akun_id}'>`;
                                     html += `<td>( ${value.no_akun} ) ${value.name_akun}</td>`;
-                                    html += `<td class='debet'>${format_number(
-                                        value.debet
-                                    )}</td>`;
-                                    html += `<td class='kredit'>${format_number(
-                                        value.kredit
-                                    )}</td>`;
+                                    html += `<td class='debet'>${value.debet}</td>`;
+                                    html += `<td class='kredit'>${value.kredit}</td>`;
                                     html +=
                                         "<td>" +
                                         "<button type='button' class = 'btn btn-icon btn-success btn-sm btn-update-detail' data-detail-memorial-id='" +
@@ -174,8 +170,8 @@ $(document).ready(function () {
         let akun_name = $(this).data("detail-akun-nama");
         let memorial_id = $(this).data("detail-memorial-id");
         let akun_amount = parseInt(
-            $(this).data("detail-akun-debet") +
-                $(this).data("detail-akun-kredit")
+            $(`tr#akun_${akun_id} > td.debet`).text() +
+                $(`tr#akun_${akun_id} > td.kredit`).text()
         );
 
         $("#detail_memorial_id").val(memorial_id);
@@ -205,10 +201,10 @@ $(document).ready(function () {
             success: function (response) {
                 $("#modal-edit").modal("hide");
                 $(`tr#akun_${response.akun.id} > td.debet`).text(
-                    format_number(response.detail.debet)
+                    response.detail.debet
                 );
                 $(`tr#akun_${response.akun.id} > td.kredit`).text(
-                    format_number(response.detail.kredit)
+                    response.detail.kredit
                 );
             },
             error: function (error) {
@@ -232,5 +228,73 @@ $(document).ready(function () {
                 $(`tr#akun_${response.detail[0].akun_id}`).remove();
             },
         });
+    });
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    // submit form memorial
+    $(document).on("click", "#button-submit-memorial", function (e) {
+        e.preventDefault();
+
+        let debets = document.querySelectorAll("td.debet");
+        let kredits = document.querySelectorAll("td.kredit");
+        let akuns = Array.from(
+            document.querySelectorAll("#table_detail_akun_body > tr")
+        );
+        let debet = Array.from(debets);
+        let kredit = Array.from(kredits);
+        let totalDebet = 0;
+        let totalKredit = 0;
+
+        for (let i = 0; i < akuns.length; i++) {
+            totalDebet += parseInt(debet[i].innerHTML);
+            totalKredit += parseInt(kredit[i].innerHTML);
+        }
+
+        if (totalDebet != totalKredit) {
+            swal({
+                icon: "error",
+                title: "Jurnal tidak balance!",
+                text: "Silahkan cek kembali jurnal yang anda buat!",
+            });
+        } else if (totalDebet == 0 && totalKredit == 0) {
+            swal({
+                icon: "error",
+                title: "Jurnal kosong!",
+                text: "Silahkan tambahkan transaksi terlebih dahulu!",
+            });
+        } else {
+            swal({
+                title: "Apakah anda yakin untuk simpan?",
+                text: "Pastikan data anda sudah balance dan sesuai!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    let data = {
+                        _token: $("input[name=_token]").val(),
+                        is_display: 1,
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "accounting/memorial",
+                        data: data,
+                        success: function (response) {
+                            swal(response.status, {
+                                icon: "success",
+                            }).then((result) => {
+                                location.reload();
+                            });
+                        },
+                    });
+                } else {
+                }
+            });
+        }
     });
 });

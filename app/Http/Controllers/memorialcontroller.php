@@ -14,7 +14,10 @@ class memorialcontroller extends Controller
 
     public function index()
     {
-        return view('jurnal.memorial.index');
+        $jurnal_memorials = jurnal_memorial::where('is_display', true)->get();
+        return view('jurnal.memorial.index', [
+            'jurnal_memorials' => $jurnal_memorials,
+        ]);
     }
 
     public function create()
@@ -38,9 +41,32 @@ class memorialcontroller extends Controller
         ]);
     }
 
+    public function detail(jurnal_memorial $jurnal_memorial)
+    {
+        $jurnal_memorials = jurnal_memorial::whereId($jurnal_memorial->id)->get();
+
+        return view('jurnal.memorial.detail', [
+            'jurnal_memorials' => $jurnal_memorials,
+        ]);
+    }
+
     public function store(Request $request)
     {
-        dd($request->all());
+        $idJurnalMemorial = $this->getTransactionId();
+        jurnal_memorial::where('id', $idJurnalMemorial)
+            ->update([
+                'is_display' => $request->is_display,
+            ]);
+
+        return response()->json([
+            'status' => 'Jurnal memorial berhasil di tambahkan',
+        ]);
+    }
+
+    public function destroy(jurnal_memorial $jurnal_memorial)
+    {
+        jurnal_memorial::destroy($jurnal_memorial->id);
+        return redirect()->route('delete_memorial');
     }
 
     public function validate_akun(akun $akun)
@@ -153,7 +179,7 @@ class memorialcontroller extends Controller
                     'debet' => $akun_debet + $data['debet'],
                     'kredit' => 0,
                 ]);
-            } elseif ($data['kredit'] > 0 && $data['debet'] = 0) {
+        } elseif ($data['kredit'] > 0 && $data['debet'] = 0) {
             jurnal_memorial_detail::where('akun_id', $akun->id)
                 ->where('jurnal_memorial_id', $idTransaction)
                 ->update([
@@ -218,6 +244,8 @@ class memorialcontroller extends Controller
             $order++;
             $order = (string) $order;
             if (strlen($order) == 1) {
+                $order = '00' . $order;
+            } else if (strlen($order) == 2) {
                 $order = '0' . $order;
             }
             $this->transactionNumber = $prefix . '-' . $order;

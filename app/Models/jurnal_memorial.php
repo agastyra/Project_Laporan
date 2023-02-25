@@ -12,6 +12,11 @@ class jurnal_memorial extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'no_transaction';
+    }
+
     public function jurnal_memorial_detail()
     {
         return $this->hasMany(jurnal_memorial_detail::class);
