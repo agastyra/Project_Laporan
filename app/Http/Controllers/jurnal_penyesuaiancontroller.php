@@ -177,9 +177,10 @@ class jurnal_penyesuaiancontroller extends Controller
         $penyesuaianDetail->debet = $request->input('debet');
         $penyesuaianDetail->kredit = $request->input('kredit');
         $penyesuaianDetail->save();
+        return redirect()->back()->with('success', 'Data updated successfully!');
 
-        DB::commit();
-        return response()->json(['success' => true]);
+        // DB::commit();
+        // return response()->json(['success' => true]);
     } catch (\Throwable $e) {
         DB::rollback();
         throw $e;

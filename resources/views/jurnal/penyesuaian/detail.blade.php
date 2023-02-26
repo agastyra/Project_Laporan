@@ -21,8 +21,8 @@
                                 <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                     Tanggal</label>
                                 <div class="col-sm-7">
-                                    <inpt class="form-control text-dark disabled" type="date" name="date" readonly
-                                        value="{{ $date }}" />
+                                    <input class="form-control text-dark disabled" type="date" name="date"
+                                        id="date" readonly value="{{ old('date', $date) }}" />
                                 </div>
                                 {{-- <div class="col-sm-1">
                                     <button class="btn btn-icon btn-success btn-sm" type="submit">
@@ -144,51 +144,54 @@
                     <h5 class="modal-title" id="modalTitleId">Edit detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editForm">
+                <form id="editForm" action="{{ route('update-penyesuaian', $detail->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
                     <div class="modal-body">
-                        @csrf
-                        @method('PUT')
                         {{-- hapus en value e --}}
-                        <input type="hidden" name="jurnal_penyesuaian_detail_id" id="detail-id" <div
-                            class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
-                            Akun</label>
-                        <div class="col-sm-9">
-                            <select class="js-example-basic-single" name="akun_id" id="akun_id_detail"
-                                style="width:100%">
-                                {{-- <option value=""> -- </option> --}}
-                                @forelse ($akuns as $akun)
-                                    <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
-                                        {{ $akun->name_account }}</option>
-                                @empty
-                                    <option value="">-- Tidak ada data --</option>
-                                @endforelse
-                            </select>
+                        <input type="hidden" name="jurnal_penyesuaian_detail_id" id="detail-id">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
+                                Akun</label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" name="akun_id" id="akun_id_detail"
+                                    style="width:100%">
+                                    {{-- <option value=""> -- </option> --}}
+                                    @forelse ($akuns as $akun)
+                                        <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
+                                            {{ $akun->name_account }}</option>
+                                    @empty
+                                        <option value="">-- Tidak ada data --</option>
+                                    @endforelse
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>Debet</label>
-                        <div class="col-sm-9">
-                            <input class="form-control text-light" placeholder="Masukan nominal" type="number"
-                                id='debet_detail_modal' name="debet" />
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-cash text-warning"></i>Debet</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukan nominal" type="number"
+                                    id='debet_detail_modal' name="debet" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>Kredit</label>
-                        <div class="col-sm-9">
-                            <input class="form-control text-light" placeholder="Masukan nominal" type="number"
-                                id='kredit_detail_modal' name="kredit" />
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-cash text-warning"></i>Kredit</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukan nominal" type="number"
+                                    id='kredit_detail_modal' name="kredit" />
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                                    class="mdi mdi-window-close"></i> Tutup</button>
+                            <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i>
+                                Simpan</button>
+                        </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                        class="mdi mdi-window-close"></i> Tutup</button>
-                <button type="submit" class="btn btn-success"><i class="mdi mdi-floppy"></i> Simpan</button>
-            </div>
-            </form>
         </div>
-    </div>
     </div>
 
     @push('jssj')
@@ -198,8 +201,23 @@
                     $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
 
 
-                $('#editModal').on('show.bs.modal', function(event) {
+                // $('#editModal').on('show.bs.modal', function(event) {
+                $(document).on('click', '.update-button', function() {
                     let button = $(event.relatedTarget) // Button that triggered the modal
+                    let data_detail_id = $(this).data('data-detail-id');
+                    let detail_akun_id = $(this).data('detail-akun-id');
+                    let debet = $(this).data('detail-debet');
+                    let kredit = $(this).data('detail-kredit');
+                    console.log(data_detail_id);
+                    console.log(detail_akun_id);
+                    console.log(debet);
+                    console.log(kredit);
+
+                    $('#editModal').modal('show');
+                    //  $('#editModal').on('show.bs.modal') 
+                    $('#detail-id').val(data_detail_id);
+                    $('#debet_detail_modal').val(debet);
+                    $('#kredit_detail_modal').val(kredit);
                     // let data_detail_id = button.data('data-detail-id')
                     // let detail_akun_id = button.data('detail-akun-id')
                     // let debet = button.data('detail-debet')
@@ -209,7 +227,17 @@
                     // modal.find('.modal-body #detail-id').val(data_detail_id);
                     // modal.find('.modal-body #debet_detail').val(debet);
                     // modal.find('.modal-body #kredit_detail').val(kredit);
+                    $.ajax({
+                        url: '{{ route('update-penyesuaian') }}',
+                        type: "PUT",
+                        data: formData,
+                        success: function(data) {
+                            // Reload page or update data table
+                            console.log('ok');
+                        }
+                    });
                 });
+
 
 
             });
@@ -236,6 +264,6 @@
             //             }
             // 
         </script> --}}
-        <script src="{{ asset('assets/js/jurnal_penyesuaian/index.js') }}"></script>
+        {{-- <script src="{{ asset('assets/js/jurnal_penyesuaian/index.js') }}"></script> --}}
     @endpush
 </x-layout.app>

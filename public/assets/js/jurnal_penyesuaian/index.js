@@ -66,9 +66,18 @@ $(document).ready(function () {
         console.log(debet);
         console.log(kredit);
         
+        $('#editModal').modal('show');
+        //  $('#editModal').on('show.bs.modal') 
+                  
+                
         $('#detail-id').val(data_detail_id);
         $('#debet_detail_modal').val(debet);
         $('#kredit_detail_modal').val(kredit);
+         
+         
+//     $('#edit-name').val(name);
+//     $('#edit-email').val(email);
+// });
     });
 
     $('#editForm').submit(function(event) {
@@ -82,9 +91,10 @@ $(document).ready(function () {
             type: "PUT",
             data: formData,
             success: function(data) {
-                $('#editModal').modal('hide');
                 // Reload page or update data table
                 console.log('ok');
+                
+
             },
             error: function(xhr, textStatus, errorThrown) {
                 alert('Error: ' + textStatus + ' - ' + errorThrown);

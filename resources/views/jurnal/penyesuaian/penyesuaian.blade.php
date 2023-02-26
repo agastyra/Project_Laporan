@@ -140,6 +140,20 @@
             $(document).ready(function() {
                 $('#editModal').on('show.bs.modal', function(event) {
                     let button = $(event.relatedTarget)
+                    // let data_detail_id = $(this).data('data-detail-id');
+                    // let detail_akun_id = $(this).data('detail-akun-id');
+                    // let debet = $(this).data('detail-debet');
+                    // let kredit = $(this).data('detail-kredit');
+                    // console.log(data_detail_id);
+                    // console.log(detail_akun_id);
+                    // console.log(debet);
+                    // console.log(kredit);
+
+                    // $('#editModal').modal('show');
+                    // //  $('#editModal').on('show.bs.modal') 
+                    // $('#detail-id').val(data_detail_id);
+                    // $('#debet_detail_modal').val(debet);
+                    // $('#kredit_detail_modal').val(kredit);
                 });
             });
             // $(document).ready(function() {
