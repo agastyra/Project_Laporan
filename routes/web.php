@@ -8,7 +8,11 @@ use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
+
 use App\Http\Controllers\NeracaSaldoController;
+
+use App\Http\Controllers\RegisterController;
+
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +67,8 @@ Route::get('/bkm', [BuktiKasMasukController::class, 'index'])->name('bkm.index')
 Route::get('/bkm/table', [BuktiKasMasukController::class, 'index'])->name('bkm.table');
 Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
 Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
+Route::get('/getMemoData/{id}', [BuktiKasMasukController::class, 'getMemoData'])->name('getMemo');
+Route::post('/debKredCal', [BuktiKasMasukController::class, 'debKredCal'])->name('debKred');
 Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
@@ -86,7 +92,7 @@ Route::get('/purchase/get_detail', [transaksi_pembeliancontroller::class, "get_d
 Route::get('/purchase/validate_barang/{barang:id}', [transaksi_pembeliancontroller::class, "validate_barang"])->name('validate_barang');
 Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "update_detail"])->name("update_detail");
 Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
-Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail');
+Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail_purchase');
 
 //route kas keluar
 Route::get('/accounting/cash-out', [bukti_kas_keluarcontroller::class, "index"])->name('cash_out');
@@ -99,3 +105,21 @@ Route::get('/accounting/cash-out/print/{bukti_kas_keluar}', [bukti_kas_keluarcon
 Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
 Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
 Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
+
+// route jurnal memorial
+Route::get('/accounting/memorial', [memorialcontroller::class, "index"])->name('memorial');
+Route::get('/accounting/memorial/new', [memorialcontroller::class, "create"])->name('create_memorial');
+Route::post('/accounting/memorial', [memorialcontroller::class, "store"])->name('save_memorial');
+Route::get('/accounting/memorial/detail/{jurnal_memorial}', [memorialcontroller::class, "detail"])->name('detail_memorial');
+Route::post('/accounting/memorial/delete/{jurnal_memorial}', [memorialcontroller::class, "destroy"])->name('delete_memorial');
+Route::get('/accounting/memorial/get_detail', [memorialcontroller::class, 'get_detail'])->name('get_detail_memorial');
+Route::get('/accounting/memorial/validate_akun/{akun:id}', [memorialcontroller::class, 'validate_akun'])->name('validate_akun_memorial');
+Route::post('/accounting/memorial/store_detail', [memorialcontroller::class, 'store_detail'])->name('store_detail_memorial');
+Route::put('/accounting/memorial/update_detail_qty', [memorialcontroller::class, 'update_detail_qty'])->name('update_detail_qty_memorial');
+Route::put('/accounting/memorial/update_detail', [memorialcontroller::class, 'update_detail'])->name('update_detail_memorial');
+Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 'delete_detail'])->name('delete_detail_memorial');
+Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 'delete_detail'])->name('delete_detail');
+
+// authentication
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register_user');

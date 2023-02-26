@@ -17,7 +17,8 @@ class CreateBuktiKasMasuksTable extends Migration
             $table->id();
             $table->string('no_bkm');
             $table->date('tanggal');
-            $table->foreignId('transaksi_penjualan_id');
+            $table->foreignId('transaksi_penjualan_id')->nullable();
+            $table->foreignId('jurnal_memorial_id')->nullable();
             $table->longText('description');
             $table->double('total');
             // $table->string('other_acccount');
