@@ -8,6 +8,9 @@ use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
+
+use App\Http\Controllers\NeracaSaldoController;
+
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
@@ -64,9 +67,16 @@ Route::get('/bkm', [BuktiKasMasukController::class, 'index'])->name('bkm.index')
 Route::get('/bkm/table', [BuktiKasMasukController::class, 'index'])->name('bkm.table');
 Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
 Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
+Route::get('/getMemoData/{id}', [BuktiKasMasukController::class, 'getMemoData'])->name('getMemo');
+Route::post('/debKredCal', [BuktiKasMasukController::class, 'debKredCal'])->name('debKred');
 Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
+
+Route::get('/balance', [NeracaSaldoController::class, 'index']);
+Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
+
+Route::get('/memo', [memorialcontroller::class, "index"]);
 
 Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 

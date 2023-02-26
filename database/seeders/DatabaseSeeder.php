@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\akun;
 use App\Models\barang;
+use App\Models\detail_penjualan;
+use App\Models\jurnal_memorial;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -70,6 +72,14 @@ class DatabaseSeeder extends Seeder
             'harga_beli' => 300000,
             'harga_jual' => 400000,
         ]);
+
+        //jurnal_memorial::create([
+          //  'date' => date('ymd'),
+          //'transaction_no' => "MEMO01",
+          //  'debet' => 300000,
+          //  'kredit' => 0
+        //]);
+    
 
     }
 }
