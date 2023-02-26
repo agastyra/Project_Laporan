@@ -15,7 +15,7 @@ class CreateUsers extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('no_user', 8);
+            $table->string('no_user', 15);
             $table->string('username', 20);
             $table->string('password', 80);
             $table->string('nama_depan', 20);
