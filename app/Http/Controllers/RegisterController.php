@@ -24,6 +24,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
+            'no_user' => '',
             'username' => 'required|min:6|max:20|unique:users',
             'password' => 'required|min:8|max:16',
             'nama_depan' => 'required|max:20',
@@ -67,5 +68,8 @@ class RegisterController extends Controller
         $validatedData['no_user'] = $this->no_user;
 
         User::create($validatedData);
+
+        return redirect()->route('/login', ['success' => 'Data anda berhasil di tambahkan!']);
+
     }
 }
