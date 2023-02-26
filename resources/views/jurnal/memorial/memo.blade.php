@@ -73,6 +73,17 @@
                             </div>
                         </div>
                     </form>
+                    <div class="row my-4">
+                        <div class="col-sm-12">
+                            <a href="{{ route('memorial') }}"
+                                class="btn btn-danger"><i class="mdi mdi-trash-can"></i>
+                                Batal</a>
+                            <button type="button"
+                                id="button-submit-memorial"
+                                class="btn btn-success"><i class="mdi mdi-note"></i>
+                                Simpan</button>
+                        </div>
+                    </div>
                     <div class="col-md-12 mt-3">
                         <div class="table-responsive">
                             <table class="table table-dark"
