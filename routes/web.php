@@ -8,6 +8,7 @@ use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
@@ -106,3 +107,8 @@ Route::post('/accounting/memorial/store_detail', [memorialcontroller::class, 'st
 Route::put('/accounting/memorial/update_detail_qty', [memorialcontroller::class, 'update_detail_qty'])->name('update_detail_qty_memorial');
 Route::put('/accounting/memorial/update_detail', [memorialcontroller::class, 'update_detail'])->name('update_detail_memorial');
 Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 'delete_detail'])->name('delete_detail_memorial');
+Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 'delete_detail'])->name('delete_detail');
+
+// authentication
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register_user');
