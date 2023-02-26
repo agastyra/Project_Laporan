@@ -17,8 +17,14 @@ class jurnal_memorial extends Model
         return 'no_transaction';
     }
 
+    protected $hidden=[];
+
     public function jurnal_memorial_detail()
     {
         return $this->hasMany(jurnal_memorial_detail::class);
+    }
+
+    public function bukti_kas_masuk(){
+        return $this->hasMany(bukti_kas_masuk::class);
     }
 }

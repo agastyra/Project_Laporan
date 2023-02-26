@@ -63,6 +63,8 @@ Route::get('/bkm', [BuktiKasMasukController::class, 'index'])->name('bkm.index')
 Route::get('/bkm/table', [BuktiKasMasukController::class, 'index'])->name('bkm.table');
 Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
 Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
+Route::get('/getMemoData/{id}', [BuktiKasMasukController::class, 'getMemoData'])->name('getMemo');
+Route::post('/debKredCal', [BuktiKasMasukController::class, 'debKredCal'])->name('debKred');
 Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
