@@ -73,12 +73,12 @@ class DatabaseSeeder extends Seeder
             'harga_jual' => 400000,
         ]);
 
-        jurnal_memorial::create([
-            'date' => date('ymd'),
-            'transaction_no' => "MEMO01",
-            'debet' => 300000,
-            'kredit' => 0
-        ]);
+        //jurnal_memorial::create([
+          //  'date' => date('ymd'),
+          //'transaction_no' => "MEMO01",
+          //  'debet' => 300000,
+          //  'kredit' => 0
+        //]);
     
 
     }
