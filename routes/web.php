@@ -9,6 +9,7 @@ use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
@@ -112,3 +113,4 @@ Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 
 // authentication
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register_user');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
