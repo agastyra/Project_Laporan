@@ -98,6 +98,7 @@
     <script src="{{ asset('assets/js/select2.js') }}"></script>
     <link rel="script"
         src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
         function format_number(nStr) {

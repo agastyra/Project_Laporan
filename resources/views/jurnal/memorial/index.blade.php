@@ -19,27 +19,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1/1/2019</td>
-                                    <td>JM-001</td>
-                                    <td>
-                                        <a href=""
-                                            class="text-decoration-none link-light badge bg-primary border-0">
-                                            <i class="mdi mdi-file-document-edit-outline"></i>
-                                        </a>
-                                        <form action=""
-                                            method="POST"
-                                            class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="badge bg-danger border-0"
-                                                onclick="return confirm('Apakah anda yakin ?')">
-                                                <i class="mdi mdi-trash-can-outline"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                @forelse ($jurnal_memorials as $jurnal_memorial)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $jurnal_memorial->date }}</td>
+                                        <td>{{ $jurnal_memorial->no_transaction }}</td>
+                                        <td>
+                                            <a href="{{ route('detail_memorial', $jurnal_memorial->no_transaction) }}"
+                                                class="text-decoration-none link-light badge bg-primary border-0">
+                                                <i class="mdi mdi-cloud-print-outline"></i>
+                                            </a>
+                                            <form action="{{ route('memorial', $jurnal_memorial->no_transaction) }}"
+                                                method="POST"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0"
+                                                    onclick="return confirm('Apakah anda yakin ?')">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
