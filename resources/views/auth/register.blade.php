@@ -42,11 +42,15 @@
                                             alt="Logo"
                                             class="m-auto mb-5">
                                     </div>
-                                    <h3 class="card-title text-center mb-3">Toko Thrift Bismillah | Pendaftaran Karyawan Baru
+                                    <h3 class="card-title text-center mb-3">Toko Thrift Bismillah | Pendaftaran Karyawan
+                                        Baru
                                         </h4>
                                 </div>
                             </div>
-                            <form class="form-sample" method="post" action="{{ route('register_user') }}">
+                            <form class="form-sample"
+                                method="post"
+                                action="{{ route('register_user') }}">
+                                @csrf
                                 <p class="card-description">Autentikasi</p>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -58,7 +62,14 @@
                                                     class="form-control text-light @error('username')
                                                             is-invalid
                                                         @enderror"
-                                                    placeholder="antonisiregar" />
+                                                    placeholder="antonisiregar"
+                                                    value="{{ old('username') }}" />
+                                                @error('username')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -72,6 +83,12 @@
                                                             is-invalid
                                                         @enderror"
                                                     placeholder="********" />
+                                                @error('password')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +104,14 @@
                                                     class="form-control text-light @error('nama_depan')
                                                             is-invalid
                                                         @enderror"
-                                                    placeholder="Antoni" />
+                                                    placeholder="Antoni"
+                                                    value="{{ old('nama_depan') }}" />
+                                                @error('username')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +124,14 @@
                                                     class="form-control text-light @error('nama_belakang')
                                                             is-invalid
                                                         @enderror"
-                                                    placeholder="Siregar" />
+                                                    placeholder="Siregar"
+                                                    value="{{ old('nama_belakang') }}" />
+                                                @error('nama_belakang')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -116,9 +147,33 @@
                                                     @enderror"
                                                     name="jenis_kelamin">
                                                     <option value=""> -- </option>
-                                                    <option value="1">Laki - Laki</option>
-                                                    <option value="2">Perempuan</option>
+                                                    @for ($i = 1; $i <= 2; $i++)
+                                                        @if (old('jenis_kelamin') == $i)
+                                                            <option value="{{ old('jenis_kelamin') }}"
+                                                                selected>
+                                                                @if ($i == 1)
+                                                                    Laki - Laki
+                                                                @elseif ($i == 2)
+                                                                    Perempuan
+                                                                @endif
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $i }}">
+                                                                @if ($i == 1)
+                                                                    Laki - Laki
+                                                                @elseif ($i == 2)
+                                                                    Perempuan
+                                                                @endif
+                                                            </option>
+                                                        @endif
+                                                    @endfor
                                                 </select>
+                                                @error('jenis_kelamin')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +186,15 @@
                                                         is-invalid
                                                     @enderror"
                                                     placeholder="dd/mm/yyyy"
-                                                    type="date" />
+                                                    type="date"
+                                                    name="ttl"
+                                                    value="{{ old('ttl') }}" />
+                                                @error('ttl')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -147,10 +210,37 @@
                                                     @enderror"
                                                     name="jabatan">
                                                     <option value=""> -- </option>
-                                                    <option value="1">Kasir</option>
-                                                    <option value="2">Akuntan</option>
-                                                    <option value="3">Direktur</option>
+                                                    @for ($i = 1; $i <= 3; $i++)
+                                                        @if (old('jabatan') == $i)
+                                                            <option value="{{ old('jabatan') }}"
+                                                                selected>
+                                                                @if ($i == 1)
+                                                                    Kasir
+                                                                @elseif ($i == 2)
+                                                                    Akuntan
+                                                                @elseif ($i == 3)
+                                                                    Direktur
+                                                                @endif
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $i }}">
+                                                                @if ($i == 1)
+                                                                    Kasir
+                                                                @elseif ($i == 2)
+                                                                    Akuntan
+                                                                @elseif ($i == 3)
+                                                                    Direktur
+                                                                @endif
+                                                            </option>
+                                                        @endif
+                                                    @endfor
                                                 </select>
+                                                @error('jabatan')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +257,8 @@
                                                             name="status"
                                                             id="membershipRadios1"
                                                             value="1"
-                                                            checked> Magang </label>
+                                                            checked> Magang
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-5">
@@ -177,10 +268,18 @@
                                                             class="form-check-input"
                                                             name="status"
                                                             id="membershipRadios2"
-                                                            value="2"> Pegawai Tetap </label>
+                                                            value="2"
+                                                            @if (old('status') == 2) checked @endif> Pegawai
+                                                        Tetap </label>
                                                 </div>
                                             </div>
                                         </div>
+                                        @error('status')
+                                            <div id="validationServerUsernameFeedback"
+                                                class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <p class="card-description"> Alamat </p>
@@ -194,7 +293,14 @@
                                                             is-invalid
                                                         @enderror"
                                                     name="alamat_jalan"
-                                                    placeholder="JL. Jakarta No. 1" />
+                                                    placeholder="JL. Jakarta No. 1"
+                                                    value="{{ old('alamat_jalan') }}" />
+                                                @error('alamat_jalan')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -213,6 +319,12 @@
                                                             {{ $provinsi['nama'] }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('alamat_provinsi')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -229,6 +341,12 @@
                                                         @enderror">
                                                     <option value=""> -- </option>
                                                 </select>
+                                                @error('alamat_kota_kabupaten')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -243,6 +361,12 @@
                                                         @enderror">
                                                     <option value=""> -- </option>
                                                 </select>
+                                                @error('alamat_kecamatan')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -259,6 +383,12 @@
                                                         @enderror">
                                                     <option value=""> -- </option>
                                                 </select>
+                                                @error('alamat_kelurahan')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +401,14 @@
                                                             is-invalid
                                                         @enderror"
                                                     name="alamat_kode_pos"
-                                                    placeholder="65131" />
+                                                    placeholder="65131"
+                                                    value="{{ old('alamat_kode_pos') }}" />
+                                                @error('alamat_kode_pos')
+                                                    <div id="validationServerUsernameFeedback"
+                                                        class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
