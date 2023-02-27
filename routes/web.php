@@ -7,12 +7,10 @@ use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
-use App\Http\Controllers\memorialcontroller;
-
-use App\Http\Controllers\NeracaSaldoController;
-
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\memorialcontroller;
+use App\Http\Controllers\NeracaSaldoController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;

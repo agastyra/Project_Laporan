@@ -77,10 +77,10 @@
                                     <input class="form-control text-dark disabled" value="{{ $transaksi->kembali }}"
                                         id="kembali" name="kembali" readonly disabled />
                                     <div class="col-sm-12 mt-3">
-                                        <button type="button" class="btn btn-info"><i class="mdi mdi-fax"> <a
-                                                    href="{{route('printpem', $transaksi->no_transaction)}}"></a></i>
-                                            Cetak
-                                            Nota</button>
+
+
+                                        <a href="{{url('/purchase/print/$transaction->no_transaction')}}"
+                                            class="button"> <i class="mdi mdi-printer"></i> Cetak Nota</a>
                                     </div>
                                 </div>
                             </div>
