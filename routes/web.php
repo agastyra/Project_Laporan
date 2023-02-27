@@ -72,6 +72,7 @@ Route::post('/debKredCal', [BuktiKasMasukController::class, 'debKredCal'])->name
 Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
+Route::get('accounting/bkm/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
 
 Route::get('/balance', [NeracaSaldoController::class, 'index']);
 Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
@@ -92,6 +93,8 @@ Route::get('/purchase/get_detail', [transaksi_pembeliancontroller::class, "get_d
 Route::get('/purchase/validate_barang/{barang:id}', [transaksi_pembeliancontroller::class, "validate_barang"])->name('validate_barang');
 Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "update_detail"])->name("update_detail");
 Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
+Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail');
+Route::get('/purchase/print/{id}', [transaksi_pembeliancontroller::class, "print"])->name('printpem');
 Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail_purchase');
 
 //route kas keluar

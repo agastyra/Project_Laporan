@@ -7,10 +7,19 @@ use App\Models\jurnal_memorial;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 
 class BuktiKasMasukController extends Controller
 {
+    public function report(bukti_kas_masuk $bukti_kas_masuk)
+    {
+        $pdf = PDF::loadView('bkm.report', [
+            'bkm' => $bukti_kas_masuk,
+        ]);
+
+        return $pdf->stream();
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,21 +55,15 @@ class BuktiKasMasukController extends Controller
             }
 
             return view('bkm.table', [
-                'bkm' => $bkm
+                'bkm' => $bkm,
             ]);
         }
 
         return view('bkm.index', [
             'bkm' => $bkm,
-            'bkmtotals' => $bkmtotals
+            'bkmtotals' => $bkmtotals,
         ]);
     }
-
-
-
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -82,8 +85,12 @@ class BuktiKasMasukController extends Controller
 
         return view('bkm.create', [
             'transaksi' => $transaksi,
+<<<<<<< HEAD
+            'no_bkm' => $noBKM,
+=======
             'memo' => $memo,
             'no_bkm' => $noBKM
+>>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
         ]);
     }
 
@@ -92,7 +99,7 @@ class BuktiKasMasukController extends Controller
         $trans = transaksi_penjualan::findOrFail($id);
         return response()->json([
             'tanggal' => $trans->date,
-            'total' => $trans->grand_total
+            'total' => $trans->grand_total,
         ]);
     }
 
@@ -144,7 +151,7 @@ class BuktiKasMasukController extends Controller
             'jurnal_memorial_id' => $jurnal_memorial_id,
             'tanggal' => $request->tanggal,
             'total' => $request->total,
-            'description' => $request->description
+            'description' => $request->description,
         ]);
 
         return redirect()->route('bkm.create');
