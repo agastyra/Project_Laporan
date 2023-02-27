@@ -144,14 +144,14 @@
                     <h5 class="modal-title" id="modalTitleId">Edit detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editForm" action="{{ route('update-penyesuaian', $detail->id) }}" method="post">
+                <form id="editForm" action="{{ route('update-penyesuaian') }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
                         {{-- hapus en value e --}}
-                        <input type="hidden" name="jurnal_penyesuaian_detail_id" id="detail-id">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
+                                <input type="hidden" name="jurnal_penyesuaian_detail_id" id="detail_id">
                                 Akun</label>
                             <div class="col-sm-9">
                                 <select class="js-example-basic-single" name="akun_id" id="akun_id_detail"
@@ -204,8 +204,9 @@
                 // $('#editModal').on('show.bs.modal', function(event) {
                 $(document).on('click', '.update-button', function() {
                     let button = $(event.relatedTarget) // Button that triggered the modal
-                    let data_detail_id = $(this).data('data-detail-id');
+                    let data_detail_id = $(this).data('detail-id');
                     let detail_akun_id = $(this).data('detail-akun-id');
+
                     let debet = $(this).data('detail-debet');
                     let kredit = $(this).data('detail-kredit');
                     console.log(data_detail_id);
@@ -215,7 +216,7 @@
 
                     $('#editModal').modal('show');
                     //  $('#editModal').on('show.bs.modal') 
-                    $('#detail-id').val(data_detail_id);
+                    $('#detail_id').val(data_detail_id);
                     $('#debet_detail_modal').val(debet);
                     $('#kredit_detail_modal').val(kredit);
                     // let data_detail_id = button.data('data-detail-id')

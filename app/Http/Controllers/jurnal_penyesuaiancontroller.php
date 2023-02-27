@@ -162,29 +162,45 @@ class jurnal_penyesuaiancontroller extends Controller
     // }
     public function update(Request $request)
 {
-    DB::beginTransaction();
+    $id = $request->jurnal_penyesuaian_detail_id;
+    
+    $jurnal = jurnal_penyesuaian_detail::where('id',"=",$id)
+    ->update([
+        "debet"     => $request->debet,
+        "kredit"    => $request->kredit
+    ]);
+    // dd($jurnal);
+    // if ($jurnal){
+    //     $jurnal->akun_id = $request->akun_id;
+    //     $jurnal->debet = $request->debet;
+    //     $jurnal->kredit = $request->kredit;
+    //     $jurnal->update();
 
-    try {
-        // Update data pada tabel Model1
-        // $penyesuaian = jurnal_penyesuaian::findOrFail($id);
-        // $penyesuaian->date = $request->input('date');
-        // $penyesuaian->no_transaction = $request->input('no_transaction');
-        // $penyesuaian->save();
+    // }
+    // DB::beginTransaction();
 
-        // Update data pada tabel Model2
-        $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $request->input('jurnal_penyesuaian_detail_id'))->firstOrFail();
-        $penyesuaianDetail->akun_id = $request->input('akun_id');
-        $penyesuaianDetail->debet = $request->input('debet');
-        $penyesuaianDetail->kredit = $request->input('kredit');
-        $penyesuaianDetail->save();
-        return redirect()->back()->with('success', 'Data updated successfully!');
+    // try {
+    //     // Update data pada tabel Model1
+    //     // $penyesuaian = jurnal_penyesuaian::findOrFail($id);
+    //     // $penyesuaian->date = $request->input('date');
+    //     // $penyesuaian->no_transaction = $request->input('no_transaction');
+    //     // $penyesuaian->save();
 
-        // DB::commit();
-        // return response()->json(['success' => true]);
-    } catch (\Throwable $e) {
-        DB::rollback();
-        throw $e;
-    }
+    //     // Update data pada tabel Model2
+    //     $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $request->input('jurnal_penyesuaian_detail_id'))->firstOrFail();
+    //     $penyesuaianDetail->akun_id = $request->input('akun_id');
+    //     $penyesuaianDetail->debet = $request->input('debet');
+    //     $penyesuaianDetail->kredit = $request->input('kredit');
+    //     $penyesuaianDetail->save();
+    //     return redirect()->back()->with('success', 'Data updated successfully!');
+
+    // //     // DB::commit();
+    // //     // return response()->json(['success' => true]);
+    // } catch (\Throwable $e) {
+    //     DB::rollback();
+    //     throw $e;
+    // }
+     return redirect()->back()->with('success', 'Data updated successfully!');
 }
     
      public function destroy($id)
