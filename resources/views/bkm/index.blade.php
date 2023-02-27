@@ -15,7 +15,7 @@
                                     <label for="selectedMonth" class="col-sm-4">Pilih Bulan:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control text-light" name="selectedMonth" id="selectedMonth">
-                                            <option value="">Pilih Bulan</option>
+                                            <option value="">All</option>
                                             <option value="1">Januari</option>
                                             <option value="2">Februari</option>
                                             <option value="3">Maret</option>

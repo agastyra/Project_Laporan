@@ -31,7 +31,7 @@
                                     <td>
                                         <a href="{{ route('detail_purchase', $purchase->no_transaction) }}"
                                             class="text-decoration-none link-light badge bg-primary border-0">
-                                            <i class="mdi mdi-file-document-edit-outline"></i>
+                                            <i class="mdi mdi-cloud-print-outline"></i>
                                         </a>
                                         <form action="{{ route('delete_purchase', $purchase->no_transaction) }}"
                                             method="POST" class="d-inline">

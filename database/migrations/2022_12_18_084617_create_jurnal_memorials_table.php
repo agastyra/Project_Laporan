@@ -16,9 +16,8 @@ class CreateJurnalMemorialsTable extends Migration
         Schema::create('jurnal_memorials', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->string('transaction_no', 6)->nullable()->default("");
-            $table->double('debet')->default(0);
-            $table->double('kredit')->default(0);
+            $table->string('no_transaction', 6);
+            $table->boolean('is_display')->default(false);
             $table->timestamps();
         });
     }
