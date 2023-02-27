@@ -85,12 +85,9 @@ class BuktiKasMasukController extends Controller
 
         return view('bkm.create', [
             'transaksi' => $transaksi,
-<<<<<<< HEAD
+
             'no_bkm' => $noBKM,
-=======
             'memo' => $memo,
-            'no_bkm' => $noBKM
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
         ]);
     }
 
@@ -110,7 +107,7 @@ class BuktiKasMasukController extends Controller
         return response()->json([
             'tanggal' => $memo->date,
             'debet' => $memo->debet,
-            'kredit' => $memo->kredit
+            'kredit' => $memo->kredit,
         ]);
     }
 
@@ -144,7 +141,6 @@ class BuktiKasMasukController extends Controller
             $transaksi_penjualan_id = 0;
         }
 
-
         $createBKM = bukti_kas_masuk::create([
             'no_bkm' => $request->no_bkm,
             'transaksi_penjualan_id' => $transaksi_penjualan_id,
@@ -156,10 +152,6 @@ class BuktiKasMasukController extends Controller
 
         return redirect()->route('bkm.create');
     }
-
-
-
-
 
     /**
      * Display the specified resource.
