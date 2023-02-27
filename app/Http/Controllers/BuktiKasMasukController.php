@@ -86,6 +86,7 @@ class BuktiKasMasukController extends Controller
         return view('bkm.create', [
             'transaksi' => $transaksi,
 
+
             'no_bkm' => $noBKM,
             'memo' => $memo,
         ]);

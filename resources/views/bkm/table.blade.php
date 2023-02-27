@@ -11,7 +11,6 @@
     <td>Rp. {{ number_format($item->total, 0, ',', '.') }}</td>
     <td><a href="{{ route('bkm.edit', $item->id) }}" class="btn btn-primary"><i
                 class="mdi mdi-arrow-right-circle-outline icon-sm"></i></a>
-        <a href="{{route('print', $item->id)}}" class="btn btn-warning"> <i class="mdi mdi-printer"></i></a>
     </td>
 </tr>
 @empty

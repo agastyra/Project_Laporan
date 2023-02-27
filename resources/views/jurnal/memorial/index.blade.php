@@ -29,19 +29,24 @@
                                                 class="text-decoration-none link-light badge bg-primary border-0">
                                                 <i class="mdi mdi-cloud-print-outline"></i>
                                             </a>
-                                            <form action="{{ route('memorial', $jurnal_memorial->no_transaction) }}"
-                                                method="POST"
-                                                class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="badge bg-danger border-0"
-                                                    onclick="return confirm('Apakah anda yakin ?')">
-                                                    <i class="mdi mdi-trash-can-outline"></i>
-                                                </button>
-                                            </form>
+                                            @can('office.tetap')
+                                                <form action="{{ route('memorial', $jurnal_memorial->no_transaction) }}"
+                                                    method="POST"
+                                                    class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        onclick="return confirm('Apakah anda yakin ?')">
+                                                        <i class="mdi mdi-trash-can-outline"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
+                                    <tr>
+                                        <td colspan="4">Tidak ada data</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
