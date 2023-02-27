@@ -1807,18 +1807,6 @@
         },
         {
             "name": "livewire/livewire",
-<<<<<<< HEAD
-            "version": "v2.11.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/livewire/livewire.git",
-                "reference": "e92233f31dc1b88fb1ac242b32afe1ab7525ee05"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/e92233f31dc1b88fb1ac242b32afe1ab7525ee05",
-                "reference": "e92233f31dc1b88fb1ac242b32afe1ab7525ee05",
-=======
             "version": "v2.12.1",
             "source": {
                 "type": "git",
@@ -1829,7 +1817,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/livewire/livewire/zipball/c0bd6619358b333f5e47428a4413cc5d24bd60dd",
                 "reference": "c0bd6619358b333f5e47428a4413cc5d24bd60dd",
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
                 "shasum": ""
             },
             "require": {
@@ -1881,11 +1868,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/livewire/livewire/tree/v2.11.2"
-=======
                 "source": "https://github.com/livewire/livewire/tree/v2.12.1"
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
             },
             "funding": [
                 {
@@ -1893,11 +1876,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2023-01-29T23:45:02+00:00"
-=======
             "time": "2023-02-22T21:13:21+00:00"
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
         },
         {
             "name": "masterminds/html5",
@@ -6251,18 +6230,6 @@
         },
         {
             "name": "laravel/sail",
-<<<<<<< HEAD
-            "version": "v1.20.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/5ae072b182b1efbec927409e8a3ce3b1078cc42c",
-                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c",
-=======
             "version": "v1.21.0",
             "source": {
                 "type": "git",
@@ -6273,7 +6240,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/758a914fc4da41f3f6ca5522c85902181b228bd1",
                 "reference": "758a914fc4da41f3f6ca5522c85902181b228bd1",
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
                 "shasum": ""
             },
             "require": {
@@ -6321,11 +6287,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-<<<<<<< HEAD
-            "time": "2023-02-08T20:22:21+00:00"
-=======
             "time": "2023-02-16T19:16:27+00:00"
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
         },
         {
             "name": "mockery/mockery",
@@ -6658,18 +6620,6 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-<<<<<<< HEAD
-            "version": "9.2.24",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2cf940ebc6355a9d430462811b5aaa308b174bed",
-                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed",
-=======
             "version": "9.2.25",
             "source": {
                 "type": "git",
@@ -6680,7 +6630,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0e2b40518197a8c0d4b08bc34dfff1c99c508954",
                 "reference": "0e2b40518197a8c0d4b08bc34dfff1c99c508954",
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
                 "shasum": ""
             },
             "require": {
@@ -6736,11 +6685,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.24"
-=======
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.25"
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
             },
             "funding": [
                 {
@@ -6748,11 +6693,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2023-01-26T08:26:55+00:00"
-=======
             "time": "2023-02-25T05:32:00+00:00"
->>>>>>> c38c00b178306f601efbd6a0295f48fbfb14a12a
         },
         {
             "name": "phpunit/php-file-iterator",
