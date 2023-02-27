@@ -6,8 +6,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Table Cash Out</h5>
                         <div align="right">
-                            <a class="positive ui button"
-                                href="{{ route('create_cash_out') }}">Tambah</a>
+                            <a class="positive ui button" href="{{ route('create_cash_out') }}">Tambah</a>
                         </div>
                         <div class="table-responsive mt-4">
                             <table class="table">
@@ -23,24 +22,24 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($bukti_kas_keluars as $bkk)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $bkk->no_transaction }}</td>
-                                            <td>{{ $bkk->tanggal }}</td>
-                                            <td>{{ $bkk->description }}</td>
-                                            @if ($bkk->akun_amount)
-                                                <td>{{ number_format($bkk->akun_amount, 0, ',', '.') }}</td>
-                                            @else
-                                                <td>{{ number_format($bkk->transaksi_pembelian->grand_total, 0, ',', '.') }}
-                                                </td>
-                                            @endif
-                                            <td>
-                                                <a href="{{ route('report_cash_out', $bkk->no_transaction) }}"
-                                                    target="_blank"
-                                                    class="text-decoration-none link-light badge bg-primary border-0">
-                                                    <i class="mdi mdi-printer"></i>
-                                                </a>
-                                                {{-- <form action=""
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $bkk->no_transaction }}</td>
+                                        <td>{{ $bkk->tanggal }}</td>
+                                        <td>{{ $bkk->description }}</td>
+                                        @if ($bkk->akun_amount)
+                                        <td>{{ number_format($bkk->akun_amount, 0, ',', '.') }}</td>
+                                        @else
+                                        <td>{{ number_format($bkk->transaksi_pembelian->grand_total, 0, ',', '.') }}
+                                        </td>
+                                        @endif
+                                        <td>
+                                            <a href="{{ route('report_cash_out', $bkk->no_transaction) }}"
+                                                target="_blank"
+                                                class="text-decoration-none link-light badge bg-primary border-0">
+                                                <i class="mdi mdi-printer"></i>
+                                            </a>
+                                            {{-- <form action=""
                                                     method="POST"
                                                     class="d-inline">
                                                     @method('delete')
@@ -51,12 +50,12 @@
                                                         <i class="mdi mdi-trash-can-outline"></i>
                                                     </button>
                                                 </form> --}}
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
                                     @empty
-                                        <tr>
-                                            <td colspan="6">Tidak ada data</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="6">Tidak ada data</td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>

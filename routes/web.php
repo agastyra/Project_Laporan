@@ -65,6 +65,7 @@ Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'
 Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
 Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
 Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
+Route::get('accounting/bkm/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
 
 Route::get('/memo', [memorialcontroller::class, "index"]);
 
@@ -83,6 +84,7 @@ Route::get('/purchase/validate_barang/{barang:id}', [transaksi_pembeliancontroll
 Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "update_detail"])->name("update_detail");
 Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
 Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail');
+Route::get('/purchase/print/{id}', [transaksi_pembeliancontroller::class, "print"])->name('printpem');
 
 //route kas keluar
 Route::get('/accounting/cash-out', [bukti_kas_keluarcontroller::class, "index"])->name('cash_out');

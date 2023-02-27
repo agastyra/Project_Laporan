@@ -6,10 +6,19 @@ use App\Models\bukti_kas_masuk;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 
 class BuktiKasMasukController extends Controller
 {
+    public function report(bukti_kas_masuk $bukti_kas_masuk)
+    {
+        $pdf = PDF::loadView('bkm.report', [
+            'bkm' => $bukti_kas_masuk,
+        ]);
+
+        return $pdf->stream();
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,21 +54,15 @@ class BuktiKasMasukController extends Controller
             }
 
             return view('bkm.table', [
-                'bkm' => $bkm
+                'bkm' => $bkm,
             ]);
         }
 
         return view('bkm.index', [
             'bkm' => $bkm,
-            'bkmtotals' => $bkmtotals
+            'bkmtotals' => $bkmtotals,
         ]);
     }
-
-
-
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -78,10 +81,9 @@ class BuktiKasMasukController extends Controller
             $noBKM = 'BKM-1';
         }
 
-
         return view('bkm.create', [
             'transaksi' => $transaksi,
-            'no_bkm' => $noBKM
+            'no_bkm' => $noBKM,
         ]);
     }
 
@@ -90,7 +92,7 @@ class BuktiKasMasukController extends Controller
         $trans = transaksi_penjualan::findOrFail($id);
         return response()->json([
             'tanggal' => $trans->date,
-            'total' => $trans->grand_total
+            'total' => $trans->grand_total,
         ]);
     }
 
@@ -107,7 +109,7 @@ class BuktiKasMasukController extends Controller
             'transaksi_penjualan_id' => $request->transaksi_penjualan_id,
             'tanggal' => $request->tanggal,
             'total' => $request->total,
-            'description' => $request->description
+            'description' => $request->description,
         ]);
 
         return redirect()->route('bkm.create');
