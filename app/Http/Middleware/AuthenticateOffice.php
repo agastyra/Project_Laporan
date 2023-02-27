@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AuthenticateDirektur
+class AuthenticateOffice
 {
     /**
      * Handle an incoming request.
@@ -20,9 +20,10 @@ class AuthenticateDirektur
             return redirect()->route('login');
         }
 
-        if (auth()->user()->jabatan != 3) {
+        if (auth()->user()->jabatan == 1) {
             abort(403, 'Anda tidak memiliki akses!');
         }
+
         return $next($request);
     }
 }

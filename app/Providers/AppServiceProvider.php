@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Gate::define('office', function (User $user) {
+            return $user->jabatan != 1;
+        });
+
+        Gate::define('cashier', function (User $user) {
+            return $user->jabatan != 2;
+        });
+
+        Gate::define('cashier.tetap', function (User $user) {
+            if (($user->jabatan == 1 && $user->status == 2) || $user->jabatan == 3) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        Gate::define('office.tetap', function (User $user) {
+            if (($user->jabatan == 2 && $user->status == 2) || $user->jabatan == 3) {
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 }
