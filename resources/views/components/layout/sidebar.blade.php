@@ -1,30 +1,53 @@
 <div>
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <nav class="sidebar sidebar-offcanvas"
+        id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="index.html"><img src="{{ asset('assets/images/logo.svg') }}"
+            <a class="sidebar-brand brand-logo"
+                href="/">
+                <img src="{{ asset('assets/images/logo.svg') }}"
+                    alt="logo" />
+            </a>
+            <a class="sidebar-brand brand-logo-mini"
+                href="/"><img src="{{ asset('assets/images/favicon.png') }}"
                     alt="logo" /></a>
-            <a class="sidebar-brand brand-logo-mini" href="index.html"><img
-                    src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" /></a>
         </div>
         <ul class="nav">
             <li class="nav-item profile">
                 <div class="profile-desc">
                     <div class="profile-pic">
                         <div class="count-indicator">
-                            <img class="img-xs rounded-circle " src="{{ asset('assets/images/faces/face15.jpg') }}"
+                            <img class="img-xs rounded-circle "
+                                src="{{ asset('assets/images/faces/face15.jpg') }}"
                                 alt="">
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                            <span>Gold Member</span>
+                            <h5 class="mb-0 font-weight-normal">{{ auth()->user()->nama_depan }}</h5>
+                            <span class="d-block mt-1">
+                                @if (auth()->user()->jabatan == 1)
+                                    Kasir
+                                @elseif (auth()->user()->jabatan == 2)
+                                    Akuntan
+                                @elseif (auth()->user()->jabatan == 3)
+                                    Direktur
+                                @endif
+                            </span>
+                            <span class="d-block">
+                                @if (auth()->user()->status == 1)
+                                    Pegawai magang
+                                @else
+                                    Pegawai Tetap
+                                @endif
+                            </span>
                         </div>
                     </div>
-                    <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i
-                            class="mdi mdi-dots-vertical"></i></a>
+                    <a href="#"
+                        id="profile-dropdown"
+                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
                     <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                         aria-labelledby="profile-dropdown">
-                        <a href="#" class="dropdown-item preview-item">
+                        <a href="#"
+                            class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-settings text-primary"></i>
@@ -35,7 +58,8 @@
                             </div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
+                        <a href="#"
+                            class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-onepassword  text-info"></i>
@@ -46,7 +70,8 @@
                             </div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
+                        <a href="#"
+                            class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-calendar-today text-success"></i>
@@ -63,7 +88,8 @@
                 <span class="nav-link">Navigation</span>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link"
+                    href="/">
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
@@ -72,7 +98,8 @@
             </li>
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('accounts')}}">
+                <a class="nav-link"
+                    href="{{ route('accounts') }}">
                     <span class="menu-icon">
                         <i class="mdi mdi-playlist-play"></i>
                     </span>
@@ -80,7 +107,8 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('barang')}}">
+                <a class="nav-link"
+                    href="{{ route('barang') }}">
                     <span class="menu-icon">
                         <i class="mdi mdi-table-large"></i>
                     </span>
@@ -88,7 +116,8 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/penyesuaian">
+                <a class="nav-link"
+                    href="/penyesuaian">
                     <span class="menu-icon">
                         <i class="mdi mdi-chart-bar"></i>
                     </span>
@@ -96,7 +125,8 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/memo">
+                <a class="nav-link"
+                    href="/memo">
                     <span class="menu-icon">
                         <i class="mdi mdi-contacts"></i>
                     </span>
@@ -105,7 +135,8 @@
             </li>
             <li class="nav-item menu-items">
 
-                <a class="nav-link" href="">
+                <a class="nav-link"
+                    href="">
                     <span class="menu-icon">
                         <i class="mdi mdi-file-document-box"></i>
                     </span>
