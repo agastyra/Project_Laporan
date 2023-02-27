@@ -62,21 +62,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
 
 //Bukti Kas Masuk
-    Route::get('/bkm', [BuktiKasMasukController::class, 'index'])->name('bkm.index');
-    Route::get('/bkm/table', [BuktiKasMasukController::class, 'index'])->name('bkm.table');
-    Route::get('/bkm/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
-    Route::get('/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
-    Route::get('/getMemoData/{id}', [BuktiKasMasukController::class, 'getMemoData'])->name('getMemo');
-    Route::post('/debKredCal', [BuktiKasMasukController::class, 'debKredCal'])->name('debKred');
-    Route::post('/bkm/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
-    Route::get('/bkm/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
-    Route::put('/bkm/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
-    Route::get('accounting/bkm/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
+    Route::get('/accounting/cash-in', [BuktiKasMasukController::class, 'index'])->name('bkm.index');
+    Route::get('/accounting/cash-in/table', [BuktiKasMasukController::class, 'index'])->name('bkm.table');
+    Route::get('/accounting/cash-in/create', [BuktiKasMasukController::class, 'create'])->name('bkm.create');
+    Route::get('/accounting/getTransData/{id}', [BuktiKasMasukController::class, 'getTransData'])->name('getTrans');
+    Route::get('/accounting/getMemoData/{id}', [BuktiKasMasukController::class, 'getMemoData'])->name('getMemo');
+    Route::post('/accounting/debKredCal', [BuktiKasMasukController::class, 'debKredCal'])->name('debKred');
+    Route::post('/accounting/cash-in/store', [BuktiKasMasukController::class, 'store'])->name('bkm.store');
+    Route::get('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
+    Route::put('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
+    Route::get('accounting/cash-in/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
 
     Route::get('/balance', [NeracaSaldoController::class, 'index']);
     Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
-
-    Route::get('/memo', [memorialcontroller::class, "index"]);
 
     Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
 
