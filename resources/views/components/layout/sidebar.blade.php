@@ -97,7 +97,7 @@
                 </a>
             </li>
 
-            <li class="nav-item menu-items">
+            <!-- <li class="nav-item menu-items">
                 <a class="nav-link"
                     href="{{ route('accounts') }}">
                     <span class="menu-icon">
@@ -105,7 +105,7 @@
                     </span>
                     <span class="menu-title">Akun</span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item menu-items">
                 <a class="nav-link"
                     href="{{ route('barang') }}">
@@ -115,7 +115,7 @@
                     <span class="menu-title">Barang</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
+            <!-- <li class="nav-item menu-items">
                 <a class="nav-link"
                     href="/penyesuaian">
                     <span class="menu-icon">
@@ -123,8 +123,9 @@
                     </span>
                     <span class="menu-title">Jurnal Penyesuaian</span>
                 </a>
-            </li>
-            <li class="nav-item menu-items">
+            </li> -->
+            
+           <!-- <li class="nav-item menu-items">
                 <a class="nav-link"
                     href="/memo">
                     <span class="menu-icon">
@@ -132,8 +133,8 @@
                     </span>
                     <span class="menu-title">Jurnal Memorial</span>
                 </a>
-            </li>
-            <li class="nav-item menu-items">
+            </li> -->
+            <!-- <li class="nav-item menu-items">
 
                 <a class="nav-link"
                     href="">
@@ -143,7 +144,51 @@
 
                     <span class="menu-title">Bukti</span>
                 </a>
+            </li> -->
+
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-file-document-box"></i>
+                    </span>
+                    <span class="menu-title">Accounting</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="auth">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{route('accounts')}}"> Akun </a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('cash_out')}}"> Bukti Kas Keluar
+                            </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('bkm.index')}}"> Bukti Kas Masuk
+                            </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/memo"> Jurnal Memorial </a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="/penyesuaian"> Jurnal penyesuaian
+                            </a></li>
+                    </ul>
+                </div>
             </li>
+
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                    aria-controls="ui-basic">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-bank-transfer"></i>
+                    </span>
+                    <span class="menu-title">Transaksi</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{route('transaksi.index')}}">Penjualan</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('purchase')}}">Pembelian</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
         </ul>
     </nav>
 </div>
