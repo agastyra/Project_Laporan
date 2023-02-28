@@ -4,15 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class transaksi_penjualan extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'no_transaction',
+        'date',
+        'grand_total',
+        'bayar',
+        'kembali',
+    ];
 
-    public function detail_trans()
-    {
-        return $this->belongsTo(detail_trans::class);
+    protected $hidden = [];
+
+    public function bukti_kas_masuk(){
+        return $this->hasMany(bukti_kas_masuk::class);
     }
 }
