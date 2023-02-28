@@ -11,12 +11,7 @@ class jurnal_memorial_detail extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'jurnal_memorials_id',
-        'akuns_id',
-        'type',
-        'amount',
-    ];
+    protected $guarded = ['id'];
 
     public function jurnal_memorial()
     {
