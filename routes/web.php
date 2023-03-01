@@ -14,9 +14,9 @@ use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use App\Http\Livewire\BukuBesar\BukuBesar;
 use Illuminate\Support\Facades\Route;
-use Barryvdh\DomPDF\PDF;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+//use Barryvdh\DomPDF\PDF;
+//use Dompdf\Dompdf;
+//use Dompdf\Options;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
