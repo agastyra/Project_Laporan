@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Neraca Saldo</title>
+    <title>Jurnal Umum</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -60,14 +60,15 @@
         <h1>Toko Thrift Bismillah</h1>
     </span>
     <span>
-        <h1>Bulan {{ ('Isi Bulan') }}</h1>
+        <h1>Bulan {{ ('(Isi Bulan)') }}</h1>
     </span>
     <span>
-        <h1>Neraca Saldo</h1>
+        <h1>Jurnal Umum</h1>
     </span>
     <table>
       <thead>
         <tr>
+          <th>Tanggal</th>
           <th>No. Akun</th>
           <th>Nama Akun</th>
           <th>Debit</th>
@@ -76,22 +77,18 @@
       </thead>
       <tbody>
         <tr>
+          <td>19-03-2044</td>
           <td>1001</td>
           <td>Kas</td>
           <td><div class="idr">Rp.</div><div class="debit"> 1000.000</div></td>
           <td><div class="idr">Rp.</div><div class="credit"></div></td>
         </tr>
         <tr>
+          <td>19-03-2044</td>
           <td>1001</td>
           <td>Kas</td>
-          <td><div class="idr">Rp.</div><div class="debit"> 1000.000</div></td>
-          <td><div class="idr">Rp.</div><div class="credit"></div></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Total</td>
-          <td><div class="idr">Rp.</div><div class="debit balance"> 1000.000</div></td>
-          <td><div class="idr">Rp.</div><div class="credit balance"></div></td>
+          <td><div class="idr">Rp.</div><div class="debit"></div></td>
+          <td><div class="idr">Rp.</div><div class="credit">500.000</div></td>
         </tr>
       </tbody>
     </table>

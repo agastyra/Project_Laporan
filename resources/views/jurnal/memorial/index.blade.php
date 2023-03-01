@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Table Memorial</h5>
+                    <h5 class="card-title">Tabel Jurnal Umum</h5>
                     <div align="right">
                         <a class="positive ui button"
                             href="{{ route('create_memorial') }}">Tambah</a>
