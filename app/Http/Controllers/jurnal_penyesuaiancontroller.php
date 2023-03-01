@@ -129,10 +129,15 @@ class jurnal_penyesuaiancontroller extends Controller
     }
  
 
-    // public function edit(jurnal_penyesuaian $id)
+    public function tampil($id)
 
-
-    // {
+    {
+    // $penyesuaian = jurnal_penyesuaian::findOrFail($id);
+    // $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $penyesuaian->jurnal_penyesuaian_detail_id)->firstOrFail();
+    //     return view('jurnal.penyesuaian.tampil-detail',[
+    //         'penyesuaian' => $penyesuaian, 
+    //         'penyesuaianDetail' => $penyesuaianDetail,
+    //     ]);
     //     $akun = akun::all();
     //     $no_transaksi = jurnal_penyesuaian::all();
         
@@ -144,7 +149,7 @@ class jurnal_penyesuaiancontroller extends Controller
     //         'akun' => $akun,
     //         'no_transaksi' => $no_transaksi,
     //     ]);
-    // }
+    }
     public function edit($id)
     {
     $penyesuaian = jurnal_penyesuaian::findOrFail($id);

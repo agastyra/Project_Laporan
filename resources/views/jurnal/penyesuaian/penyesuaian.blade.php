@@ -50,27 +50,30 @@
                                         <tr>
                                             <td>{{ date('d-m-y', strtotime($detail->date)) }}</td>
                                             <td>{{ $detail->no_transaction }}</td>
+                                            <p>{{ $detail->debet }}</p>
+                                            <p>{{ $detail->kredit }}
+                                            <p>
 
-                                            <td>
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#editModal"
-                                                    data-detail-id="{{ $detail->id }}"
-                                                    data-penye-akun_id="{{ $detail->akun_id }}"
-                                                    data-penye-debet="{{ $detail->debet }}"
-                                                    data-penye-kredit="{{ $detail->kredit }}"
-                                                    class="text-decoration-none link-light badge bg-primary border-0"><i
-                                                        class="mdi mdi-file-document-edit-outline"></i></a>
-                                                |
-                                                <form action="{{ url('penyesuaian/delete-penyesuaian', $detail->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="badge bg-danger border-0"
-                                                        onclick="return confirm('Apakah anda yakin ?')">
-                                                        <i class="mdi mdi-trash-can-outline"></i>
-                                                    </button>
-                                                </form>
-                                                {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
-                                            </td>
+                                                <td>
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#editModal"
+                                                        data-tampil-debet="{{ $detail->debet }}"
+                                                        data-tampil-kredit="{{ $detail->kredit }}"
+                                                        class="text-decoration-none
+                                                    link-light badge bg-primary border-0"><i
+                                                            class="mdi mdi-file-document-edit-outline"></i></a>
+                                                    |
+                                                    <form
+                                                        action="{{ url('penyesuaian/delete-penyesuaian', $detail->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="badge bg-danger border-0"
+                                                            onclick="return confirm('Apakah anda yakin ?')">
+                                                            <i class="mdi mdi-trash-can-outline"></i>
+                                                        </button>
+                                                    </form>
+                                                    {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
+                                                </td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -94,38 +97,44 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
-                            Akun</label>
-                        <div class="col-sm-9">
-                            <select class="js-example-basic-single" name="akun_id" id="tampil_akun_id"
-                                style="width:100%">
-                                {{-- <option value=""> -- </option> --}}
-                                @forelse ($akuns as $akun)
-                                    <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
-                                        {{ $akun->name_account }}</option>
-                                @empty
-                                    <option value="">-- Tidak ada data --</option>
-                                @endforelse
-                            </select>
+                <form id="editForm" action="{{ route('update-penyesuaian') }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i class="mdi mdi-account text-primary"></i>
+                                Akun</label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" name="akun_id" id="tampil_akun_id"
+                                    style="width:100%">
+                                    {{-- <option value=""> -- </option> --}}
+                                    @forelse ($akuns as $akun)
+                                        <option value="{{ $akun->id }}">( {{ $akun->no_account }} )
+                                            {{ $akun->name_account }}</option>
+                                    @empty
+                                        <option value="">-- Tidak ada data --</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-cash text-warning"></i>Debet</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukan nominal" type="number"
+                                    id="tampil_debet" name="debet" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"><i
+                                    class="mdi mdi-cash text-warning"></i>Kredit</label>
+                            <div class="col-sm-9">
+                                <input class="form-control text-light" placeholder="Masukan nominal" type="number"
+                                    id="tampil_kredit" name="kredit" />
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>Debet</label>
-                        <div class="col-sm-9">
-                            <input class="form-control text-light" placeholder="Masukan nominal" type="number"
-                                id='tampil_debet' name="debet" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"><i class="mdi mdi-cash text-warning"></i>Kredit</label>
-                        <div class="col-sm-9">
-                            <input class="form-control text-light" placeholder="Masukan nominal" type="number"
-                                id='tampil_kredit' name="kredit" />
-                        </div>
-                    </div>
-                </div>
+                </form>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
                         class="mdi mdi-window-close"></i> Tutup</button>
             </div>
@@ -138,24 +147,24 @@
     @push('jssj')
         <script>
             $(document).ready(function() {
-                $('#editModal').on('show.bs.modal', function(event) {
-                    let button = $(event.relatedTarget)
-                    // let data_detail_id = $(this).data('data-detail-id');
-                    // let detail_akun_id = $(this).data('detail-akun-id');
-                    // let debet = $(this).data('detail-debet');
-                    // let kredit = $(this).data('detail-kredit');
-                    // console.log(data_detail_id);
-                    // console.log(detail_akun_id);
-                    // console.log(debet);
-                    // console.log(kredit);
+                let baseUrl =
+                    $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
 
-                    // $('#editModal').modal('show');
-                    // //  $('#editModal').on('show.bs.modal') 
-                    // $('#detail-id').val(data_detail_id);
-                    // $('#debet_detail_modal').val(debet);
-                    // $('#kredit_detail_modal').val(kredit);
+                // $('#editModal').on('show.bs.modal', function(event) {
+                $(document).on('click', '.update-button', function() {
+                    let button = $(event.relatedTarget) // Button that triggered the modal
+                    let debet = $(this).data('tampil-debet');
+                    let kredit = $(this).data('tampil-kredit');
+                    console.log(debet);
+                    console.log(kredit);
+
+                    $('#editModal').modal('show');
+                    $('#tampil_debet').val(debet);
+                    $('#tampil_kredit').val(kredit);
+
                 });
             });
+
             // $(document).ready(function() {
             //     $('#saveBtn').on('click', function() {
             //         // Proses penyimpanan data ke database

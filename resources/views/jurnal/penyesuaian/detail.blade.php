@@ -11,7 +11,7 @@
                             <div class="form-group row mt-">
                                 <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
                                     No</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-8">
                                     <input class="form-control text-light" type="text"
                                         value="{{ old('no_transaction') }}" placeholder="Masukkan No Transaksi"
                                         name="no_transaction" id="no_transaction" />
@@ -20,7 +20,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                     Tanggal</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-8">
                                     <input class="form-control text-dark disabled" type="date" name="date"
                                         id="date" readonly value="{{ old('date', $date) }}" />
                                 </div>
@@ -171,7 +171,7 @@
                                     class="mdi mdi-cash text-warning"></i>Debet</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-light" placeholder="Masukan nominal" type="number"
-                                    id='debet_detail_modal' name="debet" />
+                                    id="debet_detail_modal" name="debet" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -179,7 +179,7 @@
                                     class="mdi mdi-cash text-warning"></i>Kredit</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-light" placeholder="Masukan nominal" type="number"
-                                    id='kredit_detail_modal' name="kredit" />
+                                    id="kredit_detail_modal" name="kredit" />
                             </div>
                         </div>
 
@@ -199,7 +199,57 @@
             $(document).ready(function() {
                 let baseUrl =
                     $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
+                // $("#debet_detail_modal").keyup(function() {
+                //     if (
+                //         $("#kredit_detail_modal").val() == "" ||
+                //         $("#kredit_detail_modal").val() == null ||
+                //         $("#kredit_detail_modal").val() == undefined ||
+                //         $("#kredit_detail_modal").val() == 0
+                //     ) {
+                //         $("#kredit_detail_modal").val("0");
+                //     } else {
+                //         $("#debet_detail_modal").val("0");
+                //     }
+                // });
 
+                // $("#kredit_detail_modal").keyup(function() {
+                //     if (
+                //         $("#debet_detail_modal").val() == "" ||
+                //         $("#debet_detail_modal").val() == null ||
+                //         $("#debet_detail_modal").val() == undefined ||
+                //         $("#debet_detail_modal").val() == 0
+                //     ) {
+                //         $("#debet_detail_modal").val("0");
+                //     } else {
+                //         $("#kredit_detail_modal").val("0");
+                //     }
+                // });
+
+                // $("#debet_detail_modal").change(function() {
+                //     if (
+                //         $("#kredit_detail_modal").val() == "" ||
+                //         $("#kredit_detail_modal").val() == null ||
+                //         $("#kredit_detail_modal").val() == undefined ||
+                //         $("#kredit_detail_modal").val() == 0
+                //     ) {
+                //         $("#kredit_detail_modal").val("0");
+                //     } else {
+                //         $("#debet_detail_modal").val("0");
+                //     }
+                // });
+
+                // $("#kredit_detail_modal").change(function() {
+                //     if (
+                //         $("#debet_detail_modal").val() == "" ||
+                //         $("#debet_detail_modal").val() == null ||
+                //         $("#debet_detail_modal").val() == undefined ||
+                //         $("#debet_detail_modal").val() == 0
+                //     ) {
+                //         $("#debet_detail_modal").val("0");
+                //     } else {
+                //         $("#kredit_detail_modal").val("0");
+                //     }
+                // });
 
                 // $('#editModal').on('show.bs.modal', function(event) {
                 $(document).on('click', '.update-button', function() {
@@ -219,17 +269,9 @@
                     $('#detail_id').val(data_detail_id);
                     $('#debet_detail_modal').val(debet);
                     $('#kredit_detail_modal').val(kredit);
-                    // let data_detail_id = button.data('data-detail-id')
-                    // let detail_akun_id = button.data('detail-akun-id')
-                    // let debet = button.data('detail-debet')
-                    // let kredit = button.data('detail-kredit')
 
-                    // let modal = $(this)
-                    // modal.find('.modal-body #detail-id').val(data_detail_id);
-                    // modal.find('.modal-body #debet_detail').val(debet);
-                    // modal.find('.modal-body #kredit_detail').val(kredit);
                     $.ajax({
-                        url: '{{ route('update-penyesuaian') }}',
+                        url: "{{ route('update-penyesuaian') }}",
                         type: "PUT",
                         data: formData,
                         success: function(data) {
@@ -238,11 +280,21 @@
                         }
                     });
                 });
-
-
-
             });
         </script>
+        {{-- <script>
+            $(document).ready(function() {
+                let debet = $('#debet_detail_modal');
+                let kredit = $('#kredit_detail_modal');
+                $('#debit_detail_modal').keyup(function() {
+                    $('#kredit_detail_modal').val(0);
+                });
+
+                $('#kredit_detail_modal').keyup(function() {
+                    $('#debit_detail_modal').val(0);
+                });
+            });
+        </script> --}}
 
 
         {{-- <script>
