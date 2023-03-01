@@ -419,7 +419,7 @@
                                             class="btn btn-primary btn-block w-100 py-3 mt-5 mb-3">Daftar</button>
                                     </div>
                                 </div>
-                                <p class="sign-up text-center">Sudah punya akun?<a href="#"> Masuk
+                                <p class="sign-up text-center">Sudah punya akun?<a href="{{ route('login') }}"> Masuk
                                         disini</a></p>
                             </form>
                         </div>
