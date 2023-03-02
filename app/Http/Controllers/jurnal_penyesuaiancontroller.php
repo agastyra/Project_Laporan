@@ -129,26 +129,26 @@ class jurnal_penyesuaiancontroller extends Controller
     }
  
 
-    public function tampil($id)
+    public function tampil(jurnal_penyesuaian $penyesuaian)
 
     {
-    // $penyesuaian = jurnal_penyesuaian::findOrFail($id);
-    // $penyesuaianDetail = jurnal_penyesuaian_detail::where('id', $penyesuaian->jurnal_penyesuaian_detail_id)->firstOrFail();
-    //     return view('jurnal.penyesuaian.tampil-detail',[
-    //         'penyesuaian' => $penyesuaian, 
-    //         'penyesuaianDetail' => $penyesuaianDetail,
-    //     ]);
-    //     $akun = akun::all();
-    //     $no_transaksi = jurnal_penyesuaian::all();
+    $penyesuaians = jurnal_penyesuaian::whereId($penyesuaian->id)->get();
+   
+        return view('jurnal.penyesuaian.tampil-detail',[
+            'penyesuaians' => $penyesuaians, 
+           
+        ]);
+        // $akun = akun::all();
+        // $no_transaksi = jurnal_penyesuaian::all();
         
 
-    //     $penye= jurnal_penyesuaian::where('kredit', true)->get();
-    //     return view('jurnal.penyesuaian.detail', [
-    //         'penye' => $penye,
-    //         'id' => $id,
-    //         'akun' => $akun,
-    //         'no_transaksi' => $no_transaksi,
-    //     ]);
+        // $penye= jurnal_penyesuaian::where('kredit', true)->get();
+        // return view('jurnal.penyesuaian.detail', [
+        //     'penye' => $penye,
+        //     'id' => $id,
+        //     'akun' => $akun,
+        //     'no_transaksi' => $no_transaksi,
+        // ]);
     }
     public function edit($id)
     {

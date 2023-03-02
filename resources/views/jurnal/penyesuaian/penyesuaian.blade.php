@@ -51,29 +51,26 @@
                                             <td>{{ date('d-m-y', strtotime($detail->date)) }}</td>
                                             <td>{{ $detail->no_transaction }}</td>
                                             <p>{{ $detail->debet }}</p>
-                                            <p>{{ $detail->kredit }}
-                                            <p>
+                                            <p>{{ $detail->kredit }}</p>
 
-                                                <td>
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#editModal"
-                                                        data-tampil-debet="{{ $detail->debet }}"
-                                                        data-tampil-kredit="{{ $detail->kredit }}"
-                                                        class="text-decoration-none
+
+                                            <td>
+                                                <a href="{{ route('tampil-detail', $detail->id) }}"
+                                                    class="text-decoration-none
                                                     link-light badge bg-primary border-0"><i
-                                                            class="mdi mdi-file-document-edit-outline"></i></a>
-                                                    |
-                                                    <form
-                                                        action="{{ url('penyesuaian/delete-penyesuaian', $detail->id) }}"
-                                                        method="POST" class="d-inline">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="badge bg-danger border-0"
-                                                            onclick="return confirm('Apakah anda yakin ?')">
-                                                            <i class="mdi mdi-trash-can-outline"></i>
-                                                        </button>
-                                                    </form>
-                                                    {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
-                                                </td>
+                                                        class="mdi mdi-file-document-edit-outline"></i></a>
+                                                |
+                                                <form action="{{ url('penyesuaian/delete-penyesuaian', $detail->id) }}"
+                                                    method="POST" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        onclick="return confirm('Apakah anda yakin ?')">
+                                                        <i class="mdi mdi-trash-can-outline"></i>
+                                                    </button>
+                                                </form>
+                                                {{-- <i class="mdi mdi-trash-can-outline" style="color: red"></i></a> --}}
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -144,7 +141,7 @@
             {{-- </div> --}}
         </div>
     </div>
-    @push('jssj')
+    {{-- @push('jssj')
         <script>
             $(document).ready(function() {
                 let baseUrl =
@@ -172,6 +169,6 @@
             //     });
             // });
         </script>
-    @endpush
+    @endpush --}}
 
 </x-layout.app>

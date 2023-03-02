@@ -1,22 +1,17 @@
 <x-layout.app>
-
-    <div class="row">
-        @if (session('toast_success'))
-            <div class="alert alert-success">
-                {{ session('toast_success') }}
-            </div>
-        @endif
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <form action="#" method="POST">
-                        {{ csrf_field() }}
+    @foreach ($penyesuaians as $penyesuaian)
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        {{-- <form action="#" method="POST">
+                            {{ csrf_field() }} --}}
                         <div class="form-group row mt-5">
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-receipt text-success"></i>
                                 No</label>
                             <div class="col-sm-9">
                                 <input class="form-control text-light" type="text"
-                                    value="{{ old('no_transaction') }}" placeholder="Masukkan No Transaksi"
+                                    value="{{ $penyesuaian->no_transaction }}" placeholder="Masukkan No Transaksi"
                                     name="no_transaction" />
                             </div>
                         </div>
@@ -24,7 +19,7 @@
                             <label class="col-sm-3 col-form-label"><i class="mdi mdi-calendar text-info"></i>
                                 Tanggal</label>
                             <div class="col-sm-9">
-                                <input class="form-control text-light" type="date" value="{{ old('date') }}"
+                                <input class="form-control text-light" type="date" value="{{ $penyesuaian->date }}"
                                     id="date" name="date" placeholder="masukan jumlah disni" />
                             </div>
                         </div>
@@ -32,41 +27,37 @@
                             <button type="submit" class="positive ui button">
                                 Simpan</button> <a class="negative ui button" href="{{ url('penyesuaian') }}">Batal</a>
                         </div> --}}
-                    </form>
-                    <div class="row">
-                        <div class="col-lg-12 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i>
-                                        Tabel
-                                    </h4>
-                                    <div class="col-md-12 mt-3">
-                                        <div class="table-responsive">
-                                            <table class="table table-dark">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Akun</th>
-                                                        <th>Debit</th>
-                                                        <th>Kredit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                        {{-- </form> --}}
+                        <div class="row">
+                            <div class="col-lg-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i>
+                                            Tabel Detail
+                                        </h4>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-dark">
+                                                    <thead>
+                                                        <tr>
 
-                                                    @forelse ($jurnal_penyesuaian_detail as $detail)
-                                                        <tr>
-                                                            {{-- <td>{{ date('d-m-y', strtotime($detail->date)) }}</td> --}}
-                                                            <td>{{ $detail->akun->name_account }}</td>
-                                                            <td>{{ $detail->debet }}</td>
-                                                            <td>{{ $detail->kredit }}</td>
+                                                            <th>Akun</th>
+                                                            <th>Debit</th>
+                                                            <th>Kredit</th>
                                                         </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="3">Tidak ada data</td>
-                                                        </tr>
-                                                    @endforelse
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody id="table_detail_akun_body">
+                                                        @foreach ($penyesuaian->jurnal_penyesuaian_detail as $detail)
+                                                            <tr>
+                                                                {{-- <td>{{ date('d-m-y', strtotime($detail->date)) }}</td> --}}
+                                                                <td>{{ $detail->akun->name_account }}</td>
+                                                                <td>{{ $detail->debet }}</td>
+                                                                <td>{{ $detail->kredit }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -76,8 +67,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+        {{-- 
     @push('jssj')
         {{-- <script>
             $(document).ready(function() {
@@ -136,5 +126,6 @@
                     }
                 });
         </script> --}}
-    @endpush
+        {{-- @endpush --}}
+    @endforeach
 </x-layout.app>

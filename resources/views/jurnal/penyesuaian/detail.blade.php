@@ -2,6 +2,11 @@
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
+                @if (session('toast_success'))
+                    <div class="alert alert-success">
+                        {{ session('toast_success') }}
+                    </div>
+                @endif
                 <div class="card-body">
                     <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal penyesuaian
                     </h4>
@@ -199,57 +204,60 @@
             $(document).ready(function() {
                 let baseUrl =
                     $(location).attr("protocol") + "//" + $(location).attr("host") + "/";
-                // $("#debet_detail_modal").keyup(function() {
-                //     if (
-                //         $("#kredit_detail_modal").val() == "" ||
-                //         $("#kredit_detail_modal").val() == null ||
-                //         $("#kredit_detail_modal").val() == undefined ||
-                //         $("#kredit_detail_modal").val() == 0
-                //     ) {
-                //         $("#kredit_detail_modal").val("0");
-                //     } else {
-                //         $("#debet_detail_modal").val("0");
-                //     }
-                // });
+                let html = "";
+                let akun_exists = false;
 
-                // $("#kredit_detail_modal").keyup(function() {
-                //     if (
-                //         $("#debet_detail_modal").val() == "" ||
-                //         $("#debet_detail_modal").val() == null ||
-                //         $("#debet_detail_modal").val() == undefined ||
-                //         $("#debet_detail_modal").val() == 0
-                //     ) {
-                //         $("#debet_detail_modal").val("0");
-                //     } else {
-                //         $("#kredit_detail_modal").val("0");
-                //     }
-                // });
+                $("#debet_detail_modal").keyup(function() {
+                    if (
+                        $("#kredit_detail_modal").val() == "" ||
+                        $("#kredit_detail_modal").val() == null ||
+                        $("#kredit_detail_modal").val() == undefined ||
+                        $("#kredit_detail_modal").val() == 0
+                    ) {
+                        $("#kredit_detail_modal").val("0");
+                    } else {
+                        $("#debet_detail_modal").val("0");
+                    }
+                });
 
-                // $("#debet_detail_modal").change(function() {
-                //     if (
-                //         $("#kredit_detail_modal").val() == "" ||
-                //         $("#kredit_detail_modal").val() == null ||
-                //         $("#kredit_detail_modal").val() == undefined ||
-                //         $("#kredit_detail_modal").val() == 0
-                //     ) {
-                //         $("#kredit_detail_modal").val("0");
-                //     } else {
-                //         $("#debet_detail_modal").val("0");
-                //     }
-                // });
+                $("#kredit_detail_modal").keyup(function() {
+                    if (
+                        $("#debet_detail_modal").val() == "" ||
+                        $("#debet_detail_modal").val() == null ||
+                        $("#debet_detail_modal").val() == undefined ||
+                        $("#debet_detail_modal").val() == 0
+                    ) {
+                        $("#debet_detail_modal").val("0");
+                    } else {
+                        $("#kredit_detail_modal").val("0");
+                    }
+                });
 
-                // $("#kredit_detail_modal").change(function() {
-                //     if (
-                //         $("#debet_detail_modal").val() == "" ||
-                //         $("#debet_detail_modal").val() == null ||
-                //         $("#debet_detail_modal").val() == undefined ||
-                //         $("#debet_detail_modal").val() == 0
-                //     ) {
-                //         $("#debet_detail_modal").val("0");
-                //     } else {
-                //         $("#kredit_detail_modal").val("0");
-                //     }
-                // });
+                $("#debet_detail_modal").change(function() {
+                    if (
+                        $("#kredit_detail_modal").val() == "" ||
+                        $("#kredit_detail_modal").val() == null ||
+                        $("#kredit_detail_modal").val() == undefined ||
+                        $("#kredit_detail_modal").val() == 0
+                    ) {
+                        $("#kredit_detail_modal").val("0");
+                    } else {
+                        $("#debet_detail_modal").val("0");
+                    }
+                });
+
+                $("#kredit_detail_modal").change(function() {
+                    if (
+                        $("#debet_detail_modal").val() == "" ||
+                        $("#debet_detail_modal").val() == null ||
+                        $("#debet_detail_modal").val() == undefined ||
+                        $("#debet_detail_modal").val() == 0
+                    ) {
+                        $("#debet_detail_modal").val("0");
+                    } else {
+                        $("#kredit_detail_modal").val("0");
+                    }
+                });
 
                 // $('#editModal').on('show.bs.modal', function(event) {
                 $(document).on('click', '.update-button', function() {
@@ -317,6 +325,6 @@
             //             }
             // 
         </script> --}}
-        {{-- <script src="{{ asset('assets/js/jurnal_penyesuaian/index.js') }}"></script> --}}
+        <script src="{{ asset('assets/js/jurnal_penyesuaian/index.js') }}"></script>
     @endpush
 </x-layout.app>
