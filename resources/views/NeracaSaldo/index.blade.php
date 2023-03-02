@@ -1,47 +1,57 @@
 <x-layout.app>
-    <h1>Neraca Saldo</h1>
-
-    <div class="col-md-12 mt-4">
-        <div class="table-responsive">
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th style="background-color:blue" scope="col-md">Kode Akun</th>
-                        <th style="background-color:blue" scope="col-md">Nama Akun</th>
-                        <th style="background-color:blue" scope="col-md">Debit</th>
-                        <th style="background-color:blue" scope="col-md">Kredit</th>
-                        <th style="background-color:blue" scope="col-md">Saldo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @foreach ($akun as $a) --}}
-                    <tr>
-                        <td>001</td>
-                        <td>aktiva</td>
-                        <td>5000</td>
-                        <td>0</td>
-                        <td>5000</td>
-                        {{-- <td>{{ $a->kode_akun }}</td>
-                <td>{{ $a->nama_akun }}</td>
-                <td>{{ $a->jenis_akun == 'debit' ? $a->saldo : '' }}</td>
-                <td>{{ $a->jenis_akun == 'kredit' ? $a->saldo : '' }}</td>
-                <td>{{ $a->saldo }}</td> --}}
-                    </tr>
-                    {{-- @endforeach --}}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="2" style="background-color:blue" scope="col-md"><strong>Total</strong></th>
-                        <th colspan="2" style="background-color:blue" scope="col-md"><strong></strong></th>
-                        <th colspan="2"style="background-color:blue" scope="col-md"><strong></strong></th>
-
-
-                        {{-- <td>{{ $saldoDebit }}</td>
-                <td>{{ $saldoKredit }}</td>
-                <td>{{ $saldoAkhir }}</td> --}}
-                    </tr>
-                </tfoot>
-            </table>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="card-title col-md-8"><i class="mdi mdi-cash text-danger icon-md"></i> Neraca Saldo
+                        </h4>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="">Sortir Bulan: </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="date" id="" name="" class="form-control text-light">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <form action="{{ route('print.ns') }}" method="get" target="_blank">
+                                @csrf
+                                <button type="submit" class="btn btn-info"><i class="mdi mdi-printer"></i>
+                                    Print</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No. Akun</th>
+                                    <th>Nama Akun</th>
+                                    <th>Debit</th>
+                                    <th>Kredit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1001</td>
+                                    <td>Opening Balance</td>
+                                    <td></td>
+                                    <td class="credit">1000.00</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Ending Balance</td>
+                                    <td class="debit balance">900.00</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </x-layout.app>

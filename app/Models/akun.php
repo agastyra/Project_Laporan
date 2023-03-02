@@ -18,6 +18,16 @@ class akun extends Model
         return 'no_account';
     }
 
+    /**
+     * Get all of the bukti_kas_keluar for the akun
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bukti_kas_keluar()
+    {
+        return $this->hasMany(bukti_kas_keluar::class);
+    }
+
     public function jurnal_penyesuaian_detail()
     {
         return $this->hasMany(jurnal_penyesuaian_detail::class);

@@ -15,8 +15,8 @@ class CreateDetailPembeliansTable extends Migration
     {
         Schema::create('detail_pembelians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_pembelians_id');
-            $table->foreignId('barangs_id');
+            $table->foreignId('transaksi_pembelian_id');
+            $table->foreignId('barang_id');
             $table->integer('qty')->nullable();
             $table->timestamps();
         });

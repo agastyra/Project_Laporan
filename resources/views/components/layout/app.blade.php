@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token"
+        content="{{ csrf_token() }}">
     <title>Toko Thrift Bismillah</title>
     <!-- plugins:css -->
     <link rel="stylesheet"
@@ -28,6 +30,8 @@
         href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/button.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+        rel="stylesheet">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -37,10 +41,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon"
         href="{{ asset('assets/images/favicon.png') }}" />
-
-    {{-- SweetAlert2 --}}
-    <link rel="stylesheet"
-        href="{{ asset('assets/css/sweetalert2.min.css') }}">
+    @livewireStyles
 </head>
 
 <body>
@@ -71,8 +72,6 @@
     </div>
     <!-- JQuery -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    {{-- SweetAlert2 --}}
-    <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
     <!-- plugins:js -->
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
@@ -99,8 +98,27 @@
     <script src="{{ asset('assets/js/select2.js') }}"></script>
     <link rel="script"
         src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        function format_number(nStr) {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + '.' + '$2');
+            }
+            return x1 + x2;
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
     @stack('jssj')
 
+    @livewireScripts
 </body>
 
 </html>
