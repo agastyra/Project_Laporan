@@ -8,6 +8,7 @@ use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
+use App\Http\Controllers\jurnal_penyesuaian_detailcontroller;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\NeracaSaldoController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
@@ -60,7 +61,24 @@ Route::middleware(['office'])->group(function () {
     // route buku besar
     Route::get('/accounting/ledger', BukuBesar::class)->name('ledger');
 
-    Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"]);
+    // Routing untuk jurnal_penyesuaian
+    Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
+    Route::get('/penyesuaian/create-penyesuaian', [jurnal_penyesuaiancontroller::class, "create"])->name('create-penyesuaian');
+    Route::post('/penyesuaian/simpan-penyesuaian', [jurnal_penyesuaiancontroller::class, "store"])->name('simpan-penyesuaian');
+    Route::get('/penyesuaian/edit-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "edit"])->name('edit-penyesuaian');
+    Route::get('/detail-penyesuaian/{penyesuaian}', [jurnal_penyesuaiancontroller::class, "tampil"])->name('tampil-detail');
+    Route::put('/penyesuaian/update-penyesuaian', [jurnal_penyesuaiancontroller::class, "update"])->name('update-penyesuaian');
+    Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy"])->name('delete-penyesuaian');
+    Route::get('/penyesuaian/get_account_info/{id}', [jurnal_penyesuaianlcontroller::class, 'get_account_info'])->name('get_account_info_penyesuaian');
+    // Routing untuk jurnal_penyesuaian_detail
+    // Route::post('/simpan-detail_penyesuaian', 'Jurnal_PenyesuaianController@store_detail');
+    // Route::get('/penyesuaian_detail', [jurnal_penyesuaian_detailcontroller::class, "index_detail"])->name('penyesuaian_detail');
+    // Route::get('/ambil-akun/{id}', [jurnal_penyesuaian_detailcontroller::class, "show"])->name('ambil-akun');
+    // Route::delete('/penyesuaian/delete-penyesuaian/{id}', [jurnal_penyesuaiancontroller::class, "destroy_detail"])->name('delete-penyesuaian');
+    // Route::post('/simpan-detail_penyesuaian', [jurnal_penyesuaian_detailcontroller::class, "store_detail"])->name('simpan-detail_penyesuaian');
+    // Route::get('/edit/{id}', 'ControllerName@edit')->name('edit');
+    // Route::put('/update/{id}', 'ControllerName@update')->name('update');
+    Route::delete('/penyesuaian/delete-detail/{id}', [jurnal_penyesuaiancontroller::class, "destroy_detail"])->name('delete-detail');
 
     //route kas keluar
     Route::get('/accounting/cash-out', [bukti_kas_keluarcontroller::class, "index"])->name('cash_out');
@@ -68,11 +86,6 @@ Route::middleware(['office'])->group(function () {
     Route::get('/accounting/cash-out/new', [bukti_kas_keluarcontroller::class, "form"])->name('create_cash_out');
     Route::get('/accounting/cash-out/get_transaction/{transaksi_pembelian:id}', [bukti_kas_keluarcontroller::class, 'get_transaction'])->name('get_transaction');
     Route::get('/accounting/cash-out/print/{bukti_kas_keluar}', [bukti_kas_keluarcontroller::class, "report"])->name('report_cash_out');
-
-    //route kas masuk
-    Route::get('/form_kas_masuk', [bukti_kas_masukcontroller::class, "form"]);
-    Route::get('/laporan_kas_masuk', [bukti_kas_masukcontroller::class, "report"]);
-    Route::get('/tabel_kas_masuk', [bukti_kas_masukcontroller::class, "tabel"]);
 
     // route jurnal memorial
     Route::get('/accounting/memorial', [memorialcontroller::class, "index"])->name('memorial');
