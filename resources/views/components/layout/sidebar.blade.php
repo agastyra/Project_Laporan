@@ -178,7 +178,7 @@
                                     href="{{ route('bkm.index') }}"> Bukti Kas Masuk
                                 </a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('memorial') }}"> Jurnal Memorial </a>
+                                    href="{{ route('memorial') }}"> Jurnal Umum </a>
                             </li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="/penyesuaian"> Jurnal penyesuaian
