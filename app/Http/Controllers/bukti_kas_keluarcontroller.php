@@ -23,9 +23,7 @@ class bukti_kas_keluarcontroller extends Controller
 
     public function form()
     {
-        $akuns = akun::where('is_header_account', false)
-            ->where('type_account', '<>', 1)
-            ->orderBy('no_account', 'asc')->get();
+        $akuns = akun::orderBy('no_account', 'asc')->get();
 
         $transaksis = DB::select(DB::raw(
             "SELECT
@@ -54,6 +52,8 @@ class bukti_kas_keluarcontroller extends Controller
     {
         $rules = [];
 
+        // dd($request->all());
+
         if ($request->is_other) {
             $rules = [
                 'is_other' => '',
@@ -70,12 +70,12 @@ class bukti_kas_keluarcontroller extends Controller
             $rules = [
                 'is_other' => '',
                 'tanggal' => 'required',
+                'akun_id' => 'required',
+                'akun_amount' => 'required|gt:0',
                 'transaksi_pembelian_id' => 'required',
                 'description' => 'required',
             ];
             $data = $request->validate($rules);
-            $data["akun_id"] = null;
-            $data["akun_amount"] = null;
             $data['no_transaction'] = $this->setNewTransactionNumber();
             bukti_kas_keluar::create($data);
         }

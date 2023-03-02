@@ -5,7 +5,8 @@
                 <div class="card-body">
                     <h5 class="card-title">Table Account</h5>
                     <div align="right">
-                        <a class="positive ui button" href="{{ route('create_account') }}">Tambah</a>
+                        <a class="positive ui button"
+                            href="{{ route('create_account') }}">Tambah</a>
                     </div>
                     <div class="table-responsive mt-4">
                         <table class="table">
@@ -18,29 +19,32 @@
                             </thead>
                             <tbody>
                                 @forelse ($akuns as $akun)
-                                <tr>
-                                    <td>{{ $akun->no_account }}</td>
-                                    <td>{{ $akun->name_account }}</td>
-                                    <td>
-                                        <a href="{{ route('edit_account', $akun->no_account) }}"
-                                            class="text-decoration-none link-light badge bg-primary border-0">
-                                            <i class="mdi mdi-file-document-edit-outline"></i>
-                                        </a>
-                                        <form action="{{ route('delete_account', $akun->no_account) }}" method="POST"
-                                            class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="badge bg-danger border-0"
-                                                onclick="return confirm('Apakah anda yakin ?')">
-                                                <i class="mdi mdi-trash-can-outline"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $akun->no_account }}</td>
+                                        <td>{{ $akun->name_account }}</td>
+                                        <td>
+                                            <a href="{{ route('edit_account', $akun->no_account) }}"
+                                                class="text-decoration-none link-light badge bg-primary border-0">
+                                                <i class="mdi mdi-file-document-edit-outline"></i>
+                                            </a>
+                                            @can('office.tetap')
+                                                <form action="{{ route('delete_account', $akun->no_account) }}"
+                                                    method="POST"
+                                                    class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        onclick="return confirm('Apakah anda yakin ?')">
+                                                        <i class="mdi mdi-trash-can-outline"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
                                 @empty
-                                <tr>
-                                    <td colspan="3">Tidak ada data</td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="3">Tidak ada data</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
