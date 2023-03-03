@@ -13,8 +13,9 @@ use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\NeracaSaldoController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
-use App\Http\Livewire\BukuBesar\BukuBesar;
+// use App\Http\Livewire\BukuBesar\BukuBesar;
 use Illuminate\Support\Facades\Route;
+
 //use Barryvdh\DomPDF\PDF;
 //use Dompdf\Dompdf;
 //use Dompdf\Options;
@@ -59,7 +60,7 @@ Route::middleware(['office'])->group(function () {
     Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
 
     // route buku besar
-    Route::get('/accounting/ledger', BukuBesar::class)->name('ledger');
+    // Route::get('/accounting/ledger', BukuBesar::class)->name('ledger');
 
     // Routing untuk jurnal_penyesuaian
     Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
@@ -100,6 +101,7 @@ Route::middleware(['office'])->group(function () {
     Route::put('/accounting/memorial/update_detail', [memorialcontroller::class, 'update_detail'])->name('update_detail_memorial');
     Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 'delete_detail'])->name('delete_detail_memorial');
     Route::delete('/accounting/memorial/delete_detail', [memorialcontroller::class, 'delete_detail'])->name('delete_detail');
+    Route::get('/accounting/memorial/print_memorial', [memorialcontroller::class, 'report'])->name('print_memorial');
 });
 
 Route::middleware(['cashier'])->group(function () {
