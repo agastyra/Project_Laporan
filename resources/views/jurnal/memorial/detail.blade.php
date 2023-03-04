@@ -4,7 +4,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal Memorial (
+                        <h4 class="card-tittle"><i class="mdi mdi-table-edit text-danger icon-md"></i> Jurnal Umum (
                             {{ $jurnal_memorial->no_transaction }} )
                         </h4>
                         <div class="row">
@@ -19,15 +19,7 @@
                                     value="{{ $jurnal_memorial->date }}" />
                             </div>
                         </div>
-                        <div class="row my-4">
-                            <div class="col-sm-12"
-                                align='right'>
-                                <button type="button"
-                                    class="btn btn-info"><i class="mdi mdi-fax"></i> Cetak
-                                    Jurnal</button>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mt-3">
+                        <div class="col-md-12 mt-5">
                             <div class="table-responsive">
                                 <table class="table table-dark"
                                     id="table_detail_akun">
@@ -43,8 +35,8 @@
                                             <tr>
                                                 <td>( {{ $detail->akun->no_account }} )
                                                     {{ $detail->akun->name_account }}</td>
-                                                <td>{{ $detail->debet }}</td>
-                                                <td>{{ $detail->kredit }}</td>
+                                                <td>{{ number_format($detail->debet, 0, ',', '.') }}</td>
+                                                <td>{{ number_format($detail->kredit, 0, ',', '.') }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

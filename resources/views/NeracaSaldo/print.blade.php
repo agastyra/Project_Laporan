@@ -5,7 +5,7 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #F7F7F7;
+        background-color: #FFFFFFs;
       }
 
       h1 {
@@ -16,14 +16,14 @@
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px auto;
+        margin: 20px;
         background-color: #FFFFFF;
         box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
       }
 
       th, td {
         padding: 10px;
-        text-align: left;
+        /* text-align: left; */
         border-bottom: 1px solid #CCCCCC;
       }
 
@@ -36,12 +36,18 @@
         background-color: #F2F2F2;
       }
 
+      .idr{
+        text-align: left;
+      }
+
       .debit {
         color: #FF0000;
+        text-align: right;
       }
 
       .credit {
         color: #00BFFF;
+        text-align: right;
       }
 
       .balance {
@@ -54,7 +60,7 @@
         <h1>Toko Thrift Bismillah</h1>
     </span>
     <span>
-        <h1>Bulan </h1>
+        <h1>Bulan {{ ('Isi Bulan') }}</h1>
     </span>
     <span>
         <h1>Neraca Saldo</h1>
@@ -72,20 +78,20 @@
         <tr>
           <td>1001</td>
           <td>Kas</td>
-          <td class="debit">1000.000</td>
-          <td class="credit"></td>
+          <td><div class="idr">Rp.</div><div class="debit"> 1000.000</div></td>
+          <td><div class="idr">Rp.</div><div class="credit"></div></td>
         </tr>
         <tr>
-          <td>202</td>
-          <td>Salary</td>
-          <td class="debit"></td>
-          <td class="credit">500.000</td>
+          <td>1001</td>
+          <td>Kas</td>
+          <td><div class="idr">Rp.</div><div class="debit"> 1000.000</div></td>
+          <td><div class="idr">Rp.</div><div class="credit"></div></td>
         </tr>
         <tr>
           <td></td>
           <td>Total</td>
-          <td class="debit balance"></td>
-          <td class="credit balance">600.000</td>
+          <td><div class="idr">Rp.</div><div class="debit balance"> 1000.000</div></td>
+          <td><div class="idr">Rp.</div><div class="credit balance"></div></td>
         </tr>
       </tbody>
     </table>
