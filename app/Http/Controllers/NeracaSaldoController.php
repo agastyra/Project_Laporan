@@ -34,7 +34,8 @@ class NeracaSaldoController extends Controller
         $view = app(Factory::class);
         $pdf = new PDF($dompdf, $config, $files, $view, $paperSize, $paperOrientation);
         $pdf->loadView('NeracaSaldo.print', $data);
-        return $pdf->download('NeracaSaldo.print');
+        return $pdf->stream('NeracaSaldo.print');
+        // return view('NeracaSaldo.print');
     }
 
 }
