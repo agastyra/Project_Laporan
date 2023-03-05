@@ -8,10 +8,8 @@ use App\Http\Controllers\bukti_kas_keluarcontroller;
 use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\NeracaSaldoController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
@@ -108,7 +106,8 @@ Route::middleware(['cashier'])->group(function () {
     Route::get('/getBarangData/{id}', [transaksi_penjualancontroller::class, 'getData']);
     Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
     Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
-    Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
+    Route::get('/sales/create', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
+    Route::get('/sales/print/{no_transaction}', [transaksi_penjualancontroller::class, 'print'])->name('printpen');
 
     // route pembelian
     Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');

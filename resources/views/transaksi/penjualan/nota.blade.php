@@ -13,28 +13,34 @@
                 </div>
             </div>
             <!--End Invoice Mid-->
+            <div id="penjualan">
+                <span>Nota Penjualan</span>
+            </div>
 
-            <div id="ket">
-                <span>Nota pembelian:({{ $purchase->no_transaction }})</span>
+            <div style="align-items: right;">
+                <span>No : ({{$transaksi_penjualan->no_transaction}})</span>
             </div>
             <div id="bot">
 
                 <div id="table">
-                    <table>
-                        <tr>
-                            <td class="item">
-                                <h2>Item</h2>
-                            </td>
-                            <td class="Hours">
-                                <h2>Qty</h2>
-                            </td>
-                            <td class="Rate">
-                                <h2>Sub Total</h2>
-                            </td>
-                        </tr>
+                    <table class="table table-dark" id="table_penjualan">
+                        <thead>
+                            <tr>
+                                <th>item</th>
+                                <th>Qty</th>
+                                <th>Sub total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </tbody>
+
 
                         <tr class="service">
-
                             <td class="tableitem">
                                 <p class="itemtext">Roti Panggang</p>
                             </td>
@@ -69,7 +75,6 @@
 
             </div>
             <!--End InvoiceBot-->
-
         </div>
         <!--End
  Invoice-->
