@@ -7,17 +7,18 @@ use App\Models\detail_penjualan;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class transaksi_penjualancontroller extends Controller
 {
 
     function print(transaksi_penjualan $transaksi_penjualan) {
-        // $pdf = PDF::loadView('transaksi.penjualan.nota', [
-        //     'transaksi_penjualan' => $transaksi_penjualan,
-        // ]);
+        $pdf = PDF::loadView('transaksi.penjualan.nota', [
+            'transaksi_penjualan' => $transaksi_penjualan,
+        ]);
 
-        // return $pdf->stream();
-        dd($transaksi_penjualan);
+        return $pdf->stream();
+        // dd($transaksi_penjualan);
     }
 
     public function index()
