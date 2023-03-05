@@ -26,6 +26,7 @@
                         </div>
                     </div>
                     <div class="table-responsive mt-4">
+                        <h5>{{ $akun }}</h5>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -34,12 +35,36 @@
                                     <th scope="col-md">Ref</th>
                                     <th scope="col-md">Debet</th>
                                     <th scope="col-md">Kredit</th>
+                                    <th scope="col-md">Saldo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    {{-- <td colspan="5">{{ $selectedAkun }}</td> --}}
-                                </tr>
+                                @forelse ($buku_besar as $bb)
+                                    <tr>
+                                        <td>{{ $bb->date }}</td>
+                                        <td>{{ $bb->keterangan }}</td>
+                                        <td>{{ $bb->no_account }}</td>
+                                        <td>
+                                            @if ($bb->debet == '-')
+                                                -
+                                            @else
+                                                Rp. {{ number_format($bb->debet, 0, ',', '.') }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($bb->kredit == '-')
+                                                -
+                                            @else
+                                                Rp. {{ number_format($bb->kredit, 0, ',', '.') }}
+                                            @endif
+                                        </td>
+                                        <td>Rp. {{ number_format($bb->saldo_akhir, 0, ',', '.') }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5">Tidak ada data</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
