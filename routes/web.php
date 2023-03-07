@@ -30,7 +30,11 @@ use Dompdf\Options;
 |
  */
 
+
 Route::get('/', [DashControl::class, 'index']);
+Route::get('/print/lb', function(){
+    return view('LabaRugi.print');
+});
 
 // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
