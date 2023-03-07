@@ -5,10 +5,8 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\barangcontroller;
 use App\Http\Controllers\BuktiKasMasukController;
 use App\Http\Controllers\bukti_kas_keluarcontroller;
-use App\Http\Controllers\bukti_kas_masukcontroller;
 use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
-use App\Http\Controllers\jurnal_penyesuaian_detailcontroller;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\NeracaSaldoController;
 use App\Http\Controllers\transaksi_pembeliancontroller;
@@ -60,6 +58,7 @@ Route::middleware(['office'])->group(function () {
 
     // route buku besar
     Route::get('/accounting/ledger', [\App\Http\Livewire\BukuBesar::class, "__invoke"])->name('ledger');
+    Route::get('/accounting/ledger/print_ledger', [\App\Http\Livewire\BukuBesar::class, "print"]);
 
     // Routing untuk jurnal_penyesuaian
     Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');

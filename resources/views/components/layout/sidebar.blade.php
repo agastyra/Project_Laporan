@@ -156,17 +156,17 @@
                 <li class="nav-item menu-items">
                     <a class="nav-link"
                         data-bs-toggle="collapse"
-                        href="#auth"
+                        href="#accounting"
                         aria-expanded="false"
-                        aria-controls="auth">
+                        aria-controls="accounting">
                         <span class="menu-icon">
-                            <i class="mdi mdi-file-document-box"></i>
+                            <i class="mdi mdi mdi-margin"></i>
                         </span>
                         <span class="menu-title">Accounting</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse"
-                        id="auth">
+                        id="accounting">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('accounts') }}"> Akun </a>
@@ -183,6 +183,28 @@
                             <li class="nav-item"> <a class="nav-link"
                                     href="/penyesuaian"> Jurnal penyesuaian
                                 </a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item menu-items">
+                    <a class="nav-link"
+                        data-bs-toggle="collapse"
+                        href="#report"
+                        aria-expanded="false"
+                        aria-controls="report">
+                        <span class="menu-icon">
+                            <i class="mdi mdi mdi mdi-clipboard-text"></i>
+                        </span>
+                        <span class="menu-title">Report</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse"
+                        id="report">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('ledger') }}"> Buku Besar </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
