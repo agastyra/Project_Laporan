@@ -19,7 +19,7 @@
                         data-bs-toggle="dropdown">
                         <div class="navbar-profile">
                             <img class="img-xs rounded-circle"
-                                src="assets/images/faces/face15.jpg"
+                                src="{{ asset('assets/images/faces/face15.jpg') }}"
                                 alt="">
                             <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ auth()->user()->nama_depan }}
                                 {{ auth()->user()->nama_belakang }}</p>
