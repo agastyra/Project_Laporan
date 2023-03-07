@@ -13,8 +13,8 @@
                             class="btn btn-inverse-info btn-icon mb-3">
                             <i class="mdi mdi-filter-outline"></i>
                         </button>
-                        <a href="/accounting/memorial/print_memorial?tanggal_awal_filter={{ request('tanggal_awal_filter') }}&tanggal_akhir_filter={{ request('tanggal_akhir_filter') }}"
-                            target="_blank"
+                        <a href="/accounting/ledger/print_ledger?akun_id={{ request('akun_id') }}&tanggal_awal_filter={{ request('tanggal_awal_filter') }}&tanggal_akhir_filter={{ request('tanggal_akhir_filter') }}"
+                            target="_blank" 
                             id="print_buku_besar"
                             class="btn btn-inverse-primary btn-icon mb-3 d-inline-flex">
                             <i class="mdi mdi-printer m-auto"></i>
