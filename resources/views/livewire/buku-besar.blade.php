@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">
-                        <i class="mdi mdi-table-large text-danger"></i>
+                        <i class="mdi mdi mdi-book-open-page-variant text-danger"></i>
                         Buku Besar
                     </h4>
                     <div align="left">
