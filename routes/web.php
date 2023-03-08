@@ -36,6 +36,10 @@ Route::get('/print/lb', function(){
     return view('LabaRugi.print');
 });
 
+Route::get('/labarugi', function(){
+    return view('LabaRugi.index');
+});
+
 // Routing untuk akun
 Route::get('/accounting/accounts', [akuncontroller::class, "index"])->name('accounts');
 Route::post('/accounting/accounts', [akuncontroller::class, "store"])->name('save_account');
