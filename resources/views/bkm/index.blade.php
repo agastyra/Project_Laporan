@@ -1,6 +1,6 @@
 <x-layout.app>
     <div class="row">
-        
+
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -8,10 +8,11 @@
                         <div class="col-md-9">
                             <h4 class="card-title"><i class="mdi mdi-cash text-danger icon-md"></i> Bukti Kas Masuk</h4>
                         </div>
-                        <div class="col-md-2">
+
+                        <div class="col-md-3">
                             <form method="GET">
                                 <div class="form-group row">
-                                        <label for="selectedMonth" class="col-sm-4">Pilih Bulan:</label>
+                                    <label for="selectedMonth" class="col-sm-4">Pilih Bulan:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control text-light" name="selectedMonth" id="selectedMonth">
                                             <option value="">All</option>
@@ -32,8 +33,9 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-1">
-                            <a href="{{ route('bkm.create') }}" class="btn btn-warning mt-1"><i class="mdi mdi-plus"></i></a>
+                        <div class="col-md-1" align="right">
+                            <a href="{{ route('bkm.create') }}" class="btn btn-warning mt-1"><i
+                                    class="mdi mdi-plus"></i></a>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -45,7 +47,7 @@
                                     <th>Tanggal</th>
                                     <th>Keterangan</th>
                                     <th>Total</th>
-                                    <th>Edit</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,21 +62,21 @@
     @push('jssj')
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script>
-        $(document).ready(function() {
-    $('#selectedMonth').on('change', function() {
-        var selectedMonth = $(this).val();
+    $(document).ready(function() {
+        $('#selectedMonth').on('change', function() {
+            var selectedMonth = $(this).val();
 
-        $.ajax({
-            url: '{{ route("bkm.index") }}',
-            data: {
-                selectedMonth: selectedMonth
-            },
-            success: function(response) {
-                $('#bkm-table tbody').html(response);
-            }
+            $.ajax({
+                url: '{{ route("bkm.index") }}',
+                data: {
+                    selectedMonth: selectedMonth
+                },
+                success: function(response) {
+                    $('#bkm-table tbody').html(response);
+                }
+            });
         });
     });
-});
     </script>
     @endpush
 </x-layout.app>

@@ -16,8 +16,7 @@ class CreateJurnalPenyesuaiansTable extends Migration
         Schema::create('jurnal_penyesuaians', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->double('debet')->default(0);
-            $table->double('kredit')->default(0);
+            $table->string('no_transaction');
             $table->timestamps();
         });
     }

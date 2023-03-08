@@ -12,7 +12,7 @@ $(document).ready(function () {
     } else if ($("#other_cash_out").prop("checked") == false) {
         $("#purchase_bkk").css("display", "block");
         $("#purchase").css("display", "block");
-        $("#akun_other").css("display", "none");
+        // $("#akun_other").css("display", "none");
         $("#akun_cash_out").val("").change();
         $("#amount_other").css("display", "none");
         $("#jumlah").val(0);
@@ -29,7 +29,7 @@ $(document).ready(function () {
         } else if ($(this).prop("checked") == false) {
             $("#purchase_bkk").css("display", "block");
             $("#purchase").css("display", "block");
-            $("#akun_other").css("display", "none");
+            // $("#akun_other").css("display", "none");
             $("#akun_cash_out").val("").change();
             $("#amount_other").css("display", "none");
             $("#jumlah").val(0);
@@ -46,6 +46,7 @@ $(document).ready(function () {
                         $("#purhcase_jumlah").text(
                             format_number(response.total)
                         );
+                        $("#jumlah").val(response.total);
                         $("#purhcase_supplier").text(response.vendor);
                     }
                 }

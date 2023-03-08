@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller
+class AuthenticationController extends Controller
 {
     private $no_user = '';
 
-    public function index()
+    public function register()
     {
         $api = new APIController();
 
@@ -21,9 +22,10 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function register_user(Request $request)
     {
         $validatedData = $request->validate([
+            'no_user' => '',
             'username' => 'required|min:6|max:20|unique:users',
             'password' => 'required|min:8|max:16',
             'nama_depan' => 'required|max:20',
@@ -67,5 +69,39 @@ class RegisterController extends Controller
         $validatedData['no_user'] = $this->no_user;
 
         User::create($validatedData);
+
+        return redirect('/authentication/login')->with('register_success', 'Data anda berhasil di tambahkan!');
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function login_user(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => 'required|min:6|max:20',
+            'password' => 'required|min:8|max:16',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        }
+
+        return back()->with('loginError', 'Terjadi kesalahan pada informasi yang anda berikan. <br> Silahkan cek <b>username</b> dan <b>password</b> yang anda masukkan!');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/authentication/login');
     }
 }

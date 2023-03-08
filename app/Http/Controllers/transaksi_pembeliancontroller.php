@@ -7,10 +7,20 @@ use App\Models\detail_pembelian;
 use App\Models\transaksi_pembelian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class transaksi_pembeliancontroller extends Controller
 {
     private $transactionNumber;
+
+    function print(transaksi_pembelian $transaksi_pembelian) {
+        $pdf = PDF::loadView('transaksi.pembelian.nota', [
+            'transaksi_pembelian' => $transaksi_pembelian,
+        ]);
+
+        return $pdf->stream();
+
+    }
 
     public function index()
     {
