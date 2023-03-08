@@ -53,8 +53,18 @@ Route::middleware(['office'])->group(function () {
     Route::put('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
     Route::get('accounting/cash-in/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
 
+    // neraca saldo
     Route::get('/balance', [NeracaSaldoController::class, 'index']);
     Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
+  
+    // labar rugi
+    Route::get('/print/lb', function(){
+        return view('LabaRugi.print');
+    });
+
+    Route::get('/labarugi', function(){
+        return view('LabaRugi.index');
+    });
 
     // route buku besar
     Route::get('/accounting/ledger', [\App\Http\Livewire\BukuBesar::class, "__invoke"])->name('ledger');
