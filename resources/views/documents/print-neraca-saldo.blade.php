@@ -1,99 +1,120 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Neraca Saldo</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #FFFFFF;
-      }
 
-      h1 {
-        text-align: center;
-        color: #333333;
-      }
+<head>
+  <title>{{ $title }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFFFFF;
+    }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px;
-        background-color: #FFFFFF;
-        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
-      }
+    h1,
+    h3 {
+      text-align: center;
+      color: #333333;
+      margin: 6pt 0;
+    }
 
-      th, td {
-        padding: 10px;
-        /* text-align: left; */
-        border-bottom: 1px solid #CCCCCC;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px;
+      background-color: #FFFFFF;
+      box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+    }
 
-      th {
-        background-color: #F5F5F5;
-        font-weight: bold;
-      }
+    th,
+    td {
+      padding: 10px;
+      /* text-align: left; */
+      border: 1px solid #CCCCCC;
+    }
 
-      tbody tr:hover {
-        background-color: #F2F2F2;
-      }
+    th {
+      background-color: #F5F5F5;
+      font-weight: bold;
+    }
 
-      .idr{
-        text-align: left;
-      }
+    tbody tr:hover {
+      background-color: #F2F2F2;
+    }
 
-      .debit {
-        color: #FF0000;
-        text-align: right;
-      }
+    .idr {
+      text-align: left;
+    }
 
-      .credit {
-        color: #00BFFF;
-        text-align: right;
-      }
+    .debit {
+      color: #FF0000;
+      text-align: right;
+    }
 
-      .balance {
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <span>
-        <h1>Toko Thrift Bismillah</h1>
-    </span>
-    <span>
-        <h1>Bulan {{ ('Isi Bulan') }}</h1>
-    </span>
-    <span>
-        <h1>Neraca Saldo</h1>
-    </span>
-    <table>
-      <thead>
-        <tr>
-          <th>No. Akun</th>
-          <th>Nama Akun</th>
-          <th>Debit</th>
-          <th>Credit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1001</td>
-          <td>Kas</td>
-          <td><div class="idr">Rp.</div><div class="debit"> 1000.000</div></td>
-          <td><div class="idr">Rp.</div><div class="credit"></div></td>
-        </tr>
-        <tr>
-          <td>1001</td>
-          <td>Kas</td>
-          <td><div class="idr">Rp.</div><div class="debit"> 1000.000</div></td>
-          <td><div class="idr">Rp.</div><div class="credit"></div></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Total</td>
-          <td><div class="idr">Rp.</div><div class="debit balance"> 1000.000</div></td>
-          <td><div class="idr">Rp.</div><div class="credit balance"></div></td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+    .credit {
+      color: #00BFFF;
+      text-align: right;
+    }
+
+    .balance {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <span>
+    <h1>Toko Thrift Bismillah</h1>
+  </span>
+  <span>
+    <h1>Neraca Saldo</h1>
+  </span>
+  @if (!is_null($bulan))
+  <span>
+    <h3>Periode {{ $bulan }}</h3>
+  </span>
+  @else
+  <span>
+    <h3>Semua periode</h3>
+  </span>
+  @endif
+  <table>
+    <thead>
+      <tr>
+        <th>No. Akun</th>
+        <th>Nama Akun</th>
+        <th>Debit</th>
+        <th>Credit</th>
+      </tr>
+    </thead>
+    <tbody>
+      @forelse($neraca_saldo as $detail)
+      <tr>
+        <td>{{ $detail->no_account }}</td>
+        <td>{{ $detail->name_account }}</td>
+        <td class="debit">@if ($detail->debet == '-')
+          -
+          @else
+          Rp. {{ number_format((float) $detail->debet, 0, ',', '.') }}
+          @endif
+        </td>
+        <td class="credit">@if ($detail->kredit == '-')
+          -
+          @else
+          Rp. {{ number_format((float) $detail->kredit, 0, ',', '.') }}
+          @endif
+        </td>
+      </tr>
+      @empty
+      <tr>
+        <td colspan="4">Tidak ada akun yang tersedia</td>
+      </tr>
+      @endforelse
+    </tbody>
+    <tfoot>
+      <th colspan="2">Total</th>
+      <th style="text-align: 'left;'">Rp. {{ number_format((float) $sumDebet, 0, ',', '.') }}</th>
+      <th style="text-align: 'left;'">Rp. {{ number_format((float) $sumKredit, 0, ',', '.') }}</th>
+    </tfoot>
+  </table>
+</body>
+
 </html>
