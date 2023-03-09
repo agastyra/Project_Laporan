@@ -48,26 +48,22 @@
 
     .idr {
       text-align: right;
-      display: inline-block;
     }
 
     .debit {
       color: #FF0000;
       text-align: right;
-      display: inline-block;
     }
 
     .credit {
       color: #00BFFF;
       text-align: right;
-      display: inline-block;
     }
 
     .balance {
       font-weight: bold;
       color: #E36425;
       text-align: right;
-      display: inline-block;
     }
   </style>
 </head>
@@ -107,28 +103,25 @@
         <td>{{ $detail->keterangan }}</td>
         <td>{{ $detail->no_account }}</td>
         <td>
-          <div class="idr">Rp.</div>
           <div class="debit">
             @if ($detail->debet == '-')
             -
             @else
-            {{ number_format($detail->debet, 0, ',', '.') }}
+            Rp. {{ number_format($detail->debet, 0, ',', '.') }}
             @endif
           </div>
         </td>
         <td>
-          <div class="idr">Rp.</div>
           <div class="credit">
             @if ($detail->kredit == '-')
             -
             @else
-            {{ number_format($detail->kredit, 0, ',', '.') }}
+            Rp. {{ number_format($detail->kredit, 0, ',', '.') }}
             @endif
           </div>
         </td>
         <td>
-          <div class="idr">Rp.</div>
-          <div class="balance">{{ number_format($detail->saldo_akhir, 0, ',', '.') }}</div>
+          <div class="balance">Rp. {{ number_format($detail->saldo_akhir, 0, ',', '.') }}</div>
         </td>
       </tr>
       @empty
