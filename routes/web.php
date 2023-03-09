@@ -52,10 +52,6 @@ Route::middleware(['office'])->group(function () {
     Route::get('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
     Route::put('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
     Route::get('accounting/cash-in/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
-
-    // neraca saldo
-    Route::get('/balance', [NeracaSaldoController::class, 'index']);
-    Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
   
     // labar rugi
     Route::get('/print/lb', function(){
@@ -69,6 +65,10 @@ Route::middleware(['office'])->group(function () {
     // route buku besar
     Route::get('/accounting/ledger', [\App\Http\Livewire\BukuBesar::class, "__invoke"])->name('ledger');
     Route::get('/accounting/ledger/print_ledger', [\App\Http\Livewire\BukuBesar::class, "print"]);
+
+    // neraca saldo
+    Route::get('/accounting/trial-balance', [\App\Http\Livewire\NeracaSaldo::class, "__invoke"])->name('trial-balance');
+    Route::get('/accounting/trial-balance/print_trial_balance', [\App\Http\Livewire\NeracaSaldo::class, "print"]);
 
     // Routing untuk jurnal_penyesuaian
     Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
@@ -155,6 +155,8 @@ Route::middleware(['cashier'])->group(function () {
 
 // authentication
 Route::middleware(['guest'])->group(function () {
+    Route::redirect('/register', '/authentication/register');
+    Route::redirect('/login', '/authentication/login');
     Route::get('/authentication/register', [AuthenticationController::class, 'register'])->name('register');
     Route::post('/authentication/register', [AuthenticationController::class, 'register_user'])->name('register_user');
     Route::get('/authentication/login', [AuthenticationController::class, 'login'])->name('login');

@@ -2,13 +2,7 @@
 <html>
 
 <head>
-  <title>
-    Buku Besar
-    @if($akun)
-    | {{ $akun }}
-    @else
-    @endif
-  </title>
+  <title>{{ $title }}</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -34,7 +28,7 @@
     td {
       padding: 10px;
       /* text-align: left; */
-      border-bottom: 1px solid #CCCCCC;
+      border: 1px solid #CCCCCC;
     }
 
     th {
@@ -47,7 +41,7 @@
     }
 
     .idr {
-      text-align: right;
+      text-align: left;
     }
 
     .debit {
@@ -62,8 +56,6 @@
 
     .balance {
       font-weight: bold;
-      color: #E36425;
-      text-align: right;
     }
   </style>
 </head>
@@ -73,63 +65,55 @@
     <h1>Toko Thrift Bismillah</h1>
   </span>
   <span>
-    <h1>Buku Besar</h1>
+    <h1>Neraca Saldo</h1>
   </span>
-  @if (!is_null($tanggal_awal) && !is_null($tanggal_akhir))
+  @if (!is_null($bulan))
   <span>
-    <h3>Periode {{ $tanggal_awal }} s.d {{ $tanggal_akhir }}</h3>
+    <h3>Periode {{ $bulan }}</h3>
   </span>
   @else
   <span>
     <h3>Semua periode</h3>
   </span>
   @endif
-  <h4>{{ $akun }}</h4>
   <table>
     <thead>
       <tr>
-        <th>Tanggal</th>
-        <th>Keterangan</th>
-        <th>Ref</th>
-        <th>Debet</th>
-        <th>Kredit</th>
-        <th>Saldo</th>
+        <th>No. Akun</th>
+        <th>Nama Akun</th>
+        <th>Debit</th>
+        <th>Credit</th>
       </tr>
     </thead>
     <tbody>
-      @forelse ($buku_besar as $detail)
+      @forelse($neraca_saldo as $detail)
       <tr>
-        <td>{{ $detail->date }}</td>
-        <td>{{ $detail->keterangan }}</td>
         <td>{{ $detail->no_account }}</td>
-        <td>
-          <div class="debit">
-            @if ($detail->debet == '-')
-            -
-            @else
-            Rp. {{ number_format($detail->debet, 0, ',', '.') }}
-            @endif
-          </div>
+        <td>{{ $detail->name_account }}</td>
+        <td class="debit">@if ($detail->debet == '-')
+          -
+          @else
+          Rp. {{ number_format((float) $detail->debet, 0, ',', '.') }}
+          @endif
         </td>
-        <td>
-          <div class="credit">
-            @if ($detail->kredit == '-')
-            -
-            @else
-            Rp. {{ number_format($detail->kredit, 0, ',', '.') }}
-            @endif
-          </div>
-        </td>
-        <td>
-          <div class="balance">Rp. {{ number_format($detail->saldo_akhir, 0, ',', '.') }}</div>
+        <td class="credit">@if ($detail->kredit == '-')
+          -
+          @else
+          Rp. {{ number_format((float) $detail->kredit, 0, ',', '.') }}
+          @endif
         </td>
       </tr>
       @empty
       <tr>
-        <td colspan="6">Tidak ada transaksi</td>
+        <td colspan="4">Tidak ada akun yang tersedia</td>
       </tr>
       @endforelse
     </tbody>
+    <tfoot>
+      <th colspan="2">Total</th>
+      <th style="text-align: 'left;'">Rp. {{ number_format((float) $sumDebet, 0, ',', '.') }}</th>
+      <th style="text-align: 'left;'">Rp. {{ number_format((float) $sumKredit, 0, ',', '.') }}</th>
+    </tfoot>
   </table>
 </body>
 
