@@ -47,7 +47,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <h3 class="card-title col-md-8"><i class="mdi mdi-table text-danger"></i> Laporan Laba Rugi</h3>
+                        <h3 class="card-title col-md-8"><i class="mdi mdi-table text-danger"></i> Laporan Perubahan Modal
+                        </h3>
                         <div class="col-md-3">
                             <div class="row">
                                 <div class="col-sm-5">
@@ -59,7 +60,7 @@
                             </div>
                         </div>
                         <div class="col-md-1">
-                            <form action="{{ route('') }}" method="get" target="_blank">
+                            <form action="{{ route('print.ns') }}" method="get" target="_blank">
                                 @csrf
                                 <button type="submit" class="btn btn-info"><i class="mdi mdi-printer"></i>
                                     Print</button>
@@ -67,16 +68,16 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <h5>Penjualan</h5>
+                        {{-- <h5>Penjualan</h5>
+                        <p><span class="price-label">Price</span> <span class="dotted-line"></span> <span
+                                class="price-value">$4000</span>
+                        </p> --}}
+                        <h5>Modal awal</h5>
+                        <h5>Laba bersih setelah pajak:</h5>
                         <p><span class="price-label">Price</span> <span class="dotted-line"></span> <span
                                 class="price-value">$4000</span>
                         </p>
-                        <h5>Penjualan Bersih</h5>
-                        <h5>Harga Pokok Penjualan:</h5>
-                        <p><span class="price-label">Price</span> <span class="dotted-line"></span> <span
-                                class="price-value">$4000</span>
-                        </p>
-                        <h5><span class="price-label">Harga Pokok Penjualan</span> <span class="dotted-seemless"></span>
+                        {{-- <h5><span class="price-label">Harga Pokok Penjualan</span> <span class="dotted-seemless"></span>
                             <span class="price-value">$4000</span>
                         </h5>
                         <h5>Beban Operasional:</h5>
@@ -86,15 +87,15 @@
                         <h5><span class="price-label">Total Beban Operasional</span> <span
                                 class="dotted-seemless"></span>
                             <span class="price-value">$4000</span>
-                        </h5>
-                        <h5>Laba Bersih</h5>
-                        <h5>Biaya Lain-lain:</h5>
+                        </h5> --}}
+                        <h5>prive</h5>
+                        <h5>Modal akhir:</h5>
                         <p><span class="price-label">Price</span> <span class="dotted-line"></span> <span
                                 class="price-value">$4000</span>
                         </p>
-                        <h5><span class="price-label">Laba Bersih</span> <span class="dotted-seemless"></span> <span
+                        {{-- <h5><span class="price-label">Laba Bersih</span> <span class="dotted-seemless"></span> <span
                                 class="price-value">$4000</span>
-                        </h5>
+                        </h5> --}}
                     </div>
                 </div>
             </div>

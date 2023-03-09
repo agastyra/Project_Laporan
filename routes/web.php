@@ -9,6 +9,7 @@ use App\Http\Controllers\DashControl;
 use App\Http\Controllers\jurnal_penyesuaiancontroller;
 use App\Http\Controllers\memorialcontroller;
 use App\Http\Controllers\NeracaSaldoController;
+use App\Http\Controllers\laporan_perubahan_modalcontroller;
 use App\Http\Controllers\transaksi_pembeliancontroller;
 use App\Http\Controllers\transaksi_penjualancontroller;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,12 @@ Route::middleware(['office'])->group(function () {
     // neraca saldo
     Route::get('/balance', [NeracaSaldoController::class, 'index']);
     Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
+
+    // perubahan modal
+    Route::get('/laporan_perubahan_modal', [laporan_perubahan_modalcontroller::class, 'index']);
+    Route::get('/PrintBalance', [laporan_perubahan_modalcontroller::class, 'print'])->name('print.ns');
+
+
   
     // labar rugi
     Route::get('/print/lb', function(){
