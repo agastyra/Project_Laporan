@@ -140,6 +140,12 @@ class transaksi_pembeliancontroller extends Controller
             'qty' => $qty['qty'],
         ];
 
+        $barang_stok = barang::where('id', $barang_id)->value('stok');
+
+        barang::where('id', $barang_id)->update([
+            'stok' => $barang_stok + $qty['qty'],
+        ]);
+
         detail_pembelian::create($data);
     }
 
