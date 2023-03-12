@@ -150,7 +150,7 @@ Route::middleware(['cashier'])->group(function () {
     Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "update_detail"])->name("update_detail");
     Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
     Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail_purchase');
-    Route::get('/purchase/print/{id}', [transaksi_pembeliancontroller::class, "print"])->name('printpem');
+    Route::get('/purchase/print/{transaksi_pembelian}', [transaksi_pembeliancontroller::class, "print"])->name('purchase_print');
 });
 
 // authentication

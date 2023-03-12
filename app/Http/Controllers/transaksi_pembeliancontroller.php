@@ -15,11 +15,10 @@ class transaksi_pembeliancontroller extends Controller
 
     function print(transaksi_pembelian $transaksi_pembelian) {
         $pdf = PDF::loadView('transaksi.pembelian.nota', [
-            'transaksi_pembelian' => $transaksi_pembelian,
+            'transaksi' => $transaksi_pembelian,
         ]);
 
         return $pdf->stream('transaksi.pembelian.nota');
-
     }
 
     public function index()

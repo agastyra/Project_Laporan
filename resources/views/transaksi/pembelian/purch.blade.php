@@ -150,9 +150,6 @@
                                             <button type="submit"
                                                 class="btn btn-success"><i class="mdi mdi-cart-outline"></i>
                                                 Simpan</button>
-                                            <button type="submit"
-                                                class="btn btn-info"><i class="mdi mdi-fax"></i> Cetak
-                                                Nota</button>
                                         </div>
                                     </div>
                                 </div>
