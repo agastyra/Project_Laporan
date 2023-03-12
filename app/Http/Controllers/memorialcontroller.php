@@ -32,6 +32,8 @@ class memorialcontroller extends Controller
         ]);
     }
 
+    
+
     public function create()
     {
         jurnal_memorial::where('is_display', false)->delete();
@@ -315,6 +317,56 @@ class memorialcontroller extends Controller
         }
 
         return $this->transactionNumber;
+    }
+
+    //API
+
+    public function indexIon(Request $request)
+    {
+        $jurnal_memorials = [];
+
+        if ($request->input('tanggal_awal_filter') && $request->input('tanggal_akhir_filter')) {
+            $jurnal_memorials = akun::join('jurnal_memorial_details', 'akuns.id', '=', 'jurnal_memorial_details.akun_id')
+                ->join('jurnal_memorials', 'jurnal_memorials.id', '=', 'jurnal_memorial_details.jurnal_memorial_id')
+                ->select(
+                    'jurnal_memorials.id as jurnal_id',
+                    'jurnal_memorials.date as jurnal_tanggal',
+                    'akuns.id as akun_id',
+                    'akuns.no_account as no_akun',
+                    'akuns.name_account as nama_akun',
+                    'jurnal_memorial_details.debet as debet',
+                    'jurnal_memorial_details.kredit as kredit'
+                )->where('jurnal_memorials.is_display', true)
+                ->whereBetween(
+                    'jurnal_memorials.created_at',
+                    [$request->input('tanggal_awal_filter') . " 00:00:00", $request->input('tanggal_akhir_filter') . " 23:59:59"]
+                )->orderBy('jurnal_memorials.created_at', 'asc')
+                ->orderBy('jurnal_memorial_details.debet', 'desc')
+                ->get();
+
+        } else {
+            $jurnal_memorials = akun::join('jurnal_memorial_details', 'akuns.id', '=', 'jurnal_memorial_details.akun_id')
+                ->join('jurnal_memorials', 'jurnal_memorials.id', '=', 'jurnal_memorial_details.jurnal_memorial_id')
+                ->select(
+                    'jurnal_memorials.id as jurnal_id',
+                    'jurnal_memorials.date as jurnal_tanggal',
+                    'akuns.id as akun_id',
+                    'akuns.no_account as no_akun',
+                    'akuns.name_account as nama_akun',
+                    'jurnal_memorial_details.debet as debet',
+                    'jurnal_memorial_details.kredit as kredit'
+                )->where('jurnal_memorials.is_display', true)
+                ->orderBy('jurnal_memorials.created_at', 'asc')
+                ->orderBy('jurnal_memorial_details.debet', 'desc')
+                ->get();
+
+        }
+
+        return response()->json([
+            'jurnal_memorials' => $jurnal_memorials,
+            'tanggal_awal' => $request->input('tanggal_awal_filter'),
+            'tanggal_akhir' => $request->input('tanggal_akhir_filter')
+        ]);
     }
 
 }
