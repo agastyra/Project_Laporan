@@ -18,7 +18,7 @@ class transaksi_pembeliancontroller extends Controller
             'transaksi_pembelian' => $transaksi_pembelian,
         ]);
 
-        return $pdf->stream();
+        return $pdf->stream('transaksi.pembelian.nota');
 
     }
 

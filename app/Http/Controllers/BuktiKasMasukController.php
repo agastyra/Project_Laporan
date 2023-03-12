@@ -17,7 +17,7 @@ class BuktiKasMasukController extends Controller
             'bkm' => $bukti_kas_masuk,
         ]);
 
-        return $pdf->stream();
+        return $pdf->stream('bkm.report');
 
     }
     /**
@@ -85,8 +85,9 @@ class BuktiKasMasukController extends Controller
 
         return view('bkm.create', [
             'transaksi' => $transaksi,
-            'memo' => $memo,
+
             'no_bkm' => $noBKM,
+            'memo' => $memo,
         ]);
     }
 

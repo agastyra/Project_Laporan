@@ -2,7 +2,9 @@
 
             <div id="mid">
                 <div class="info">
-                    <h2>Info Kontak</h2>
+                    <div style="align-items: center;">
+                        <h3>Thirft Shop Bismillah</h3>
+                    </div>
                     <p align-content-center>
                         Alamat : Jalan Jakarta No:38 Malang</br>
                         Email : bismillahthrift@shop.com</br>
@@ -12,11 +14,14 @@
             </div>
             <!--End Invoice Mid-->
 
+            <div id="ket">
+                <span>Nota pembelian:({{ $transaksi_pembelian->no_transaction }})</span>
+            </div>
             <div id="bot">
 
                 <div id="table">
                     <table>
-                        <tr class="tabletitle">
+                        <tr>
                             <td class="item">
                                 <h2>Item</h2>
                             </td>
@@ -29,6 +34,7 @@
                         </tr>
 
                         <tr class="service">
+
                             <td class="tableitem">
                                 <p class="itemtext">Roti Panggang</p>
                             </td>
@@ -63,6 +69,7 @@
 
             </div>
             <!--End InvoiceBot-->
+
         </div>
         <!--End
  Invoice-->

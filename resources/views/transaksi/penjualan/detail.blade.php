@@ -1,6 +1,6 @@
 <x-layout.app>
     @foreach ($transaksis as $transaksi)
-    <h3 class="header mb-3">Transaksi Pembelian ({{ $transaksi->no_transaction }})</h3>
+    <h3 class="header mb-3">Transaksi penjualan ({{ $transaksi->no_transaction }})</h3>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">

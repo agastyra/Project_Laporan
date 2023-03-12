@@ -135,8 +135,8 @@ Route::middleware(['cashier'])->group(function () {
     Route::get('/getBarangData/{id}', [transaksi_penjualancontroller::class, 'getData']);
     Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
     Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
-    Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
-
+    Route::get('/sales/create', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
+    Route::get('/sales/print', [transaksi_penjualancontroller::class, 'out'])->name('printpen');
     // route pembelian
     Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');
     Route::get('/purchase/new', [transaksi_pembeliancontroller::class, "create"])->name('create_purchase');
