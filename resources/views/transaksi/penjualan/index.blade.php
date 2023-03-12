@@ -36,6 +36,7 @@
                                         <a href="{{route('printpen', $trans->no_transaction)}}"
                                             class="btn btn-behance"><i class="mdi mdi-printer"></i></a>
                                         <a href="" class="btn btn-danger"> <i class="mdi mdi-trash-can"></i></a>
+
                                     </td>
                                 </tr>
                                 @empty
@@ -51,4 +52,5 @@
             </div>
         </div>
     </div>
+
 </x-layout.app>

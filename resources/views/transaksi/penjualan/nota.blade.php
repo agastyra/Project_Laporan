@@ -18,13 +18,16 @@
             </div>
 
             <div style="align-items: right;">
-                <span>No : ({{$transaksi_penjualan->no_transaction}})</span>
+                <span>No : {{$sales->no_transaction}} </span>
             </div>
             <div id="bot">
 
                 <div id="table">
                     <table class="table table-dark" id="table_penjualan">
                         <thead>
+
+
+
                             <tr>
                                 <th>item</th>
                                 <th>Qty</th>
@@ -35,32 +38,19 @@
                         <tbody>
 
                             <tr>
-                                <td></td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                            </tr>
+
+                            <tr>
+                                <td>total</td>
+                                <td>1</td>
                             </tr>
                         </tbody>
 
 
-                        <tr class="service">
-                            <td class="tableitem">
-                                <p class="itemtext">Roti Panggang</p>
-                            </td>
-                            <td class="tableitem">
-                                <p class="itemtext">5</p>
-                            </td>
-                            <td class="tableitem">
-                                <p class="itemtext">Rp5.000,-</p>
-                            </td>
-                        </tr>
 
-                        <tr class="tabletitle">
-                            <td></td>
-                            <td class="Rate">
-                                <h2>Total</h2>
-                            </td>
-                            <td class="payment">
-                                <h2>Rp37.500,-</h2>
-                            </td>
-                        </tr>
 
                     </table>
                 </div>

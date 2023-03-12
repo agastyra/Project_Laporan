@@ -9,6 +9,11 @@ class detail_penjualan extends Model
 {
     use HasFactory;
 
+    public function getRouteKeyName()
+    {
+        return 'no_transaction';
+    }
+
     protected $fillable = [
         'no_transaction',
         'barang_id',

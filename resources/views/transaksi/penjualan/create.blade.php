@@ -123,7 +123,8 @@
                                             <td>
                                                 <div class="col-sm-12 mt-3">
                                                     <a href="{{ route('detail.edit', $item->id) }}"
-                                                        class="btn btn-info"> <i class="mdi mdi-pencil-outline"></i> </a>
+                                                        class="btn btn-info"> <i class="mdi mdi-pencil-outline"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -144,51 +145,59 @@
     @push('jssj')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
-        $(document).ready(function() {
-    $('.select2').select2();
-    $('#barang_id').on('select2:select', function (e) {
-        var data = e.params.data;
-        $.ajax({
-            url: '/getBarangData/' + data.id,
-            dataType: 'json',
-            success: function (response) {
-                $('#harga_jual').val(response.harga_jual);
-            }
+    $(document).ready(function() {
+        $('.select2').select2();
+        $('#barang_id').on('select2:select', function(e) {
+            var data = e.params.data;
+            $.ajax({
+                url: '/getBarangData/' + data.id,
+                dataType: 'json',
+                success: function(response) {
+                    $('#harga_jual').val(response.harga_jual);
+                }
+            });
         });
     });
-});
     </script>
     <script>
-        $(document).ready(function() {
-                $('#bayar').on('input', function() {
-                    var bayar = $('#bayar').val();
-                    var grand_total = $('#grand_total').val();
-                    $.ajax({
-                        type: 'POST',
-                        url: '{{ route("calculate") }}',
-                        data: {_token: '{{ csrf_token() }}', bayar: bayar, grand_total: grand_total},
-                        success: function(result) {
-                            $('#kembali').val(result.kembali);
-                        }
-                    });
-                });
+    $(document).ready(function() {
+        $('#bayar').on('input', function() {
+            var bayar = $('#bayar').val();
+            var grand_total = $('#grand_total').val();
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("calculate") }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    bayar: bayar,
+                    grand_total: grand_total
+                },
+                success: function(result) {
+                    $('#kembali').val(result.kembali);
+                }
             });
+        });
+    });
     </script>
     <script>
-        $(document).ready(function() {
-          $('#qty').on('input', function() {
-              var qty = $('#qty').val();
-              var harga_jual = $('#harga_jual').val();
-              $.ajax({
-                  type: 'POST',
-                  url: '{{ route("subCalc") }}',
-                  data: {_token: '{{ csrf_token() }}', qty: qty, harga_jual: harga_jual},
-                  success: function(result) {
-                      $('#subTotal').val(result.subTotal);
-                  }
-              });
-          });
-      });
+    $(document).ready(function() {
+        $('#qty').on('input', function() {
+            var qty = $('#qty').val();
+            var harga_jual = $('#harga_jual').val();
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("subCalc") }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    qty: qty,
+                    harga_jual: harga_jual
+                },
+                success: function(result) {
+                    $('#subTotal').val(result.subTotal);
+                }
+            });
+        });
+    });
     </script>
     @endpush
 </x-layout.app>

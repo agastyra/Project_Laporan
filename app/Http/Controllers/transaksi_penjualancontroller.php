@@ -12,14 +12,38 @@ use PDF;
 class transaksi_penjualancontroller extends Controller
 {
 
-    function print(transaksi_penjualan $transaksi_penjualan) {
+    public function out(transaksi_penjualan $transaksi_penjualan)
+    {
         $pdf = PDF::loadView('transaksi.penjualan.nota', [
+
             'transaksi_penjualan' => $transaksi_penjualan,
+        ]);
+
+        return $pdf->stream();
+
+    }
+
+    function print(Request $request) {
+
+        $sales = transaksi_penjualan::where('no_transaction', $request->no_transaction)->first();
+        $detail = detail_penjualan::where('no_transaction', $request->no_transaction)->first();
+        $pdf = PDF::loadView('transaksi.penjualan.nota', [
+            'sales' => $sales,
+            'detail' => $detail,
         ]);
 
         return $pdf->stream();
         // dd($transaksi_penjualan);
     }
+
+    // public function detail(transaksi_penjualan $transaksi_penjualan)
+    // {
+    //     $transaksis = transaksi_penjualan::whereId($transaksi_penjualan->id)->get();
+
+    //     return view('transaksi.penjualan.detail', [
+    //         'transaksis' => $transaksis,
+    //     ]);
+    // }
 
     public function index()
     {
@@ -121,7 +145,7 @@ class transaksi_penjualancontroller extends Controller
             'kembali' => $request->kembali,
         ]);
 
-        return redirect()->route('transaksi.create');
+        return redirect()->route('printpen', $request->no_transaction);
     }
 
     // public function testBalance(){

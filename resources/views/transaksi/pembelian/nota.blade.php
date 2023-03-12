@@ -15,7 +15,7 @@
             <!--End Invoice Mid-->
 
             <div id="ket">
-                <span>Nota pembelian:({{ $purchase->no_transaction }})</span>
+                <span>Nota pembelian:({{ $transaksi_pembelian->no_transaction }})</span>
             </div>
             <div id="bot">
 
