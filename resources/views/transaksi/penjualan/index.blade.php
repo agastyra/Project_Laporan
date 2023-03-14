@@ -21,6 +21,7 @@
                                     <th>Kode Transaksi</th>
                                     <th>Tanggal</th>
                                     <th>Grand Total</th>
+                                    <th>Print</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,9 +31,10 @@
                                     <td>{{ $trans->no_transaction }}</td>
                                     <td>{{ $trans->date }}</td>
                                     <td>{{ $trans->total }}</td>
-                                    <td><form action="{{ route('sales.print') }}" method="get">
+                                    <td><form action="{{ route('sales.print') }}" method="get" target="_blank">
+                                        @csrf
                                         <input type="text" name="no_transaction" id="no_transaction" value="{{ $trans->no_transaction }}" hidden>
-                                        <button type="submit">print</button>
+                                        <button type="submit" class="btn btn-secondary btn-icon"><i class="mdi mdi-printer"></i></button>
                                     </form></td>
                                 </tr>
                             @empty

@@ -1,8 +1,29 @@
 <div id="invoice-POS">
 
+    <style>
+        table tr .th,
+        table tr td {
+            padding: 13px
+        }
+
+        .mt-3 {
+            margin-top: 3em;
+        }
+
+        .text-start {
+            text-align: left
+        }
+
+        .text-end {
+            text-align: right
+        }
+    </style>
+
     <div id="mid">
         <div class="info">
-            <h2>Info Kontak</h2>
+            <div style="align-items: center;">
+                <h3>Thirft Shop Bismillah</h3>
+            </div>
             <p align-content-center>
                 Alamat : Jalan Jakarta No:38 Malang</br>
                 Email : bismillahthrift@shop.com</br>
@@ -12,65 +33,106 @@
     </div>
     <!--End Invoice Mid-->
 
+    <div id="ket">
+        <span>Nota pembelian:( {{ $sales->no_transaction }} )</span> <br> <br>
+    </div>
     <div id="bot">
 
         <div id="table">
             <table>
-                <thead>
+                <tr>
+                    <th class="item text-start th">
+                        Item
+                    </th>
+                    <th class="Hours text-end th">
+                        Harga
+                    </th>
+                    <th class="Hours text-end th">
+                        Qty
+                    </th>
+                    <th class="Rate text-end th">
+                        Sub Total
+                    </th>
+                </tr>
 
-                    <tr class="tabletitle">
-                        <td class="item">
-                            <h2>Item</h2>
-                        </td>
-                        <td class="Hours">
-                            <h2>Qty</h2>
-                        </td>
-                        <td class="Rate">
-                            <h2>Sub Total</h2>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($detail as $item)
-
+                @forelse ($detail as $item)
                     <tr class="service">
-                        <td class="tableitem">
-                            <p class="itemtext">{{ $item->barang->name_barang }}</p>
+                        <td class="tableitem text-start td">
+                            {{ $item->barang->name_barang }}
                         </td>
-                        <td class="tableitem">
-                            <p class="itemtext">{{ $item->qty }}</p>
+                        <td class="tableitem text-end td">
+                            Rp. {{ number_format($item->barang->harga_jual, 0, ',', '.') }},-
                         </td>
-                        <td class="tableitem">
-                            <p class="itemtext">{{ $item->subTotal }}</p>
+                        <td class="tableitem text-end td">
+                            {{ $item->qty }}
                         </td>
-                    </tr>
-
-                    @endforeach
-                    <tr class="tabletitle">
-                        <td></td>
-                        <td class="Rate">
-                            <h2>Total</h2>
-                        </td>
-                        <td class="payment">
-                            <h2>Rp37.500,-</h2>
+                        <td class="tableitem text-end td">Rp.
+                            {{ number_format($item->subTotal, 0, ',', '.') }},-
                         </td>
                     </tr>
-                </tbody>
+                @empty
+                    <tr>
+                        <td colspan="3">Tidak ada item.</td>
+                    </tr>
+                @endforelse
 
+                {{-- space --}}
+                <tr>
+                    <h3></h3>
+                </tr>
+
+                <tr class="tabletitle mt-3">
+                    <th class="Rate text-start">
+                        Total
+                    </th>
+                    <th class="payment text-end"
+                        colspan="2">
+                        Rp. {{ number_format($sales->grand_total, 0, ',', '.') }},-
+                    </th>
+                </tr>
+
+                <tr class="tabletitle">
+                    <th class="Rate text-start">
+                        Total bayar
+                        </td>
+                    <th class="payment text-end"
+                        colspan="2">
+                        Rp. {{ number_format($sales->grand_total, 0, ',', '.') }},-
+                    </th>
+                </tr>
+
+                <tr class="tabletitle">
+                    <th class="Rate text-start">
+                        Bayar
+                        </td>
+                    <th class="payment text-end"
+                        colspan="2">
+                        Rp. {{ number_format($sales->bayar, 0, ',', '.') }},-
+                    </th>
+                </tr>
+
+                <tr class="tabletitle">
+                    <th class="Rate text-start">
+                        Kembali
+                        </td>
+                    <th class="payment text-end"
+                        colspan="2">
+                        Rp. {{ number_format($sales->kembali, 0, ',', '.') }},-
+                    </th>
+                </tr>
 
             </table>
         </div>
         <!--End Table-->
+    </div>
 
-        <div id="legalcopy">
-            <p class="legal"><strong>Terimakasih Telah Berbelanja!</strong> <em>*Barang yang sudah dibeli tidak
-                    dapat
-                    dikembalikan. Jangan lupa berkunjung kembali </em>
-            </p>
-        </div>
-
+    <div id="legalcopy">
+        <p class="legal"><strong>Terimakasih Telah Berbelanja!</strong> <em>*Barang yang sudah dibeli tidak
+                dapat
+                dikembalikan. Jangan lupa berkunjung kembali </em>
+        </p>
     </div>
     <!--End InvoiceBot-->
+
 </div>
-<!--End
- Invoice-->
+<!--End Invoice-->

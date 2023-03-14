@@ -131,26 +131,17 @@ class transaksi_penjualancontroller extends Controller
         $sales = transaksi_penjualan::where('no_transaction', $request->no_transaction)->first();
         $detail = detail_penjualan::where('no_transaction', $request->no_transaction)->get();
 
-        //dd($sales, $detail);
-
-        return view('transaksi.penjualan.nota', [
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $config = app(Repository::class);
+        $files = app(Filesystem::class);
+        $view = app(Factory::class);
+        $pdf = new PDF($dompdf, $config, $files, $view);
+        $pdf->loadView('transaksi.penjualan.nota', [
             'sales' => $sales,
             'detail' => $detail,
         ]);
-
-        // $pdfOptions = new Options();
-        // $pdfOptions->set('defaultFont', 'Arial');
-        // $dompdf = new Dompdf($pdfOptions);
-        // $paperSize = 'A4';
-        // $paperOrientation = 'portrait';
-        // $config = app(Repository::class);
-        // $files = app(Filesystem::class);
-        // $view = app(Factory::class);
-        // $pdf = new PDF($dompdf, $config, $files, $view, $paperSize, $paperOrientation);
-        // $pdf->loadView('transaksi.penjualan.nota', [
-        //     'sales' => $sales,
-        //     'detail' => $detail,
-        // ]);
-        // $pdf->stream('transaksi.penjualan.nota');
+        $pdf->stream('transaksi.penjualan.nota');
     }
 }
