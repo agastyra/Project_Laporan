@@ -22,7 +22,7 @@
                                     <th>Kode Transaksi</th>
                                     <th>Tanggal</th>
                                     <th>Grand Total</th>
-                                    <th>Aksi</th>
+                                    <th>Print</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,12 +32,11 @@
                                     <td>{{ $trans->no_transaction }}</td>
                                     <td>{{ $trans->date }}</td>
                                     <td>{{ $trans->total }}</td>
-                                    <td>
-                                        <a href="{{route('printpen', $trans->no_transaction)}}"
-                                            class="btn btn-behance"><i class="mdi mdi-printer"></i></a>
-                                        <a href="" class="btn btn-danger"> <i class="mdi mdi-trash-can"></i></a>
-
-                                    </td>
+                                    <td><form action="{{ route('sales.print') }}" method="get" target="_blank">
+                                        @csrf
+                                        <input type="text" name="no_transaction" id="no_transaction" value="{{ $trans->no_transaction }}" hidden>
+                                        <button type="submit" class="btn btn-secondary btn-icon"><i class="mdi mdi-printer"></i></button>
+                                    </form></td>
                                 </tr>
                                 @empty
                                 <tr>

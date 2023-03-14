@@ -7,7 +7,12 @@ use App\Models\detail_penjualan;
 use App\Models\transaksi_penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PDF;
+use Barryvdh\DomPDF\PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\View\Factory;
 
 class transaksi_penjualancontroller extends Controller
 {
@@ -145,10 +150,25 @@ class transaksi_penjualancontroller extends Controller
             'kembali' => $request->kembali,
         ]);
 
-        return redirect()->route('printpen', $request->no_transaction);
+        return redirect()->route('transaksi.index');
     }
 
-    // public function testBalance(){
-    //     return view('NeracaSaldo.balance');
-    // }
+    public function print(Request $request)
+    {
+        $sales = transaksi_penjualan::where('no_transaction', $request->no_transaction)->first();
+        $detail = detail_penjualan::where('no_transaction', $request->no_transaction)->get();
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $config = app(Repository::class);
+        $files = app(Filesystem::class);
+        $view = app(Factory::class);
+        $pdf = new PDF($dompdf, $config, $files, $view);
+        $pdf->loadView('transaksi.penjualan.nota', [
+            'sales' => $sales,
+            'detail' => $detail,
+        ]);
+        $pdf->stream('transaksi.penjualan.nota');
+    }
 }
