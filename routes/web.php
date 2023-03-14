@@ -52,10 +52,6 @@ Route::middleware(['office'])->group(function () {
     Route::get('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'edit'])->name('bkm.edit');
     Route::put('/accounting/cash-in/edit/{id}', [BuktiKasMasukController::class, 'update'])->name('bkm.update');
     Route::get('accounting/cash-in/print/{id}', [BuktiKasMasukController::class, 'report'])->name('print');
-
-    // neraca saldo
-    Route::get('/balance', [NeracaSaldoController::class, 'index']);
-    Route::get('/PrintBalance', [NeracaSaldoController::class, 'print'])->name('print.ns');
   
     // labar rugi
     Route::get('/print/lb', function(){
@@ -69,6 +65,10 @@ Route::middleware(['office'])->group(function () {
     // route buku besar
     Route::get('/accounting/ledger', [\App\Http\Livewire\BukuBesar::class, "__invoke"])->name('ledger');
     Route::get('/accounting/ledger/print_ledger', [\App\Http\Livewire\BukuBesar::class, "print"]);
+
+    // neraca saldo
+    Route::get('/accounting/trial-balance', [\App\Http\Livewire\NeracaSaldo::class, "__invoke"])->name('trial-balance');
+    Route::get('/accounting/trial-balance/print_trial_balance', [\App\Http\Livewire\NeracaSaldo::class, "print"]);
 
     // Routing untuk jurnal_penyesuaian
     Route::get('/penyesuaian', [jurnal_penyesuaiancontroller::class, "index"])->name('penyesuaian');
@@ -137,10 +137,7 @@ Route::middleware(['cashier'])->group(function () {
     Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
     Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
     Route::get('/nota', [transaksi_penjualancontroller::class, 'print'])->name('sales.print');
-    Route::get('/testp', function(){
-        return view('transaksi.penjualan.nota');
-    });
-
+    
     // route pembelian
     Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');
     Route::get('/purchase/new', [transaksi_pembeliancontroller::class, "create"])->name('create_purchase');
@@ -154,11 +151,13 @@ Route::middleware(['cashier'])->group(function () {
     Route::put('/purchase/update_detail', [transaksi_pembeliancontroller::class, "update_detail"])->name("update_detail");
     Route::put('/purchase/update_detail_qty', [transaksi_pembeliancontroller::class, "update_detail_qty"])->name("update_detail_qty");
     Route::delete('/purchase/delete_detail', [transaksi_pembeliancontroller::class, "delete_detail"])->name('delete_detail_purchase');
-    Route::get('/purchase/print/{id}', [transaksi_pembeliancontroller::class, "print"])->name('printpem');
+    Route::get('/purchase/print/{transaksi_pembelian}', [transaksi_pembeliancontroller::class, "print"])->name('purchase_print');
 });
 
 // authentication
 Route::middleware(['guest'])->group(function () {
+    Route::redirect('/register', '/authentication/register');
+    Route::redirect('/login', '/authentication/login');
     Route::get('/authentication/register', [AuthenticationController::class, 'register'])->name('register');
     Route::post('/authentication/register', [AuthenticationController::class, 'register_user'])->name('register_user');
     Route::get('/authentication/login', [AuthenticationController::class, 'login'])->name('login');

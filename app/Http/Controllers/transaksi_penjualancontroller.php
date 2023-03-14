@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\barang;
 use App\Models\detail_penjualan;
 use App\Models\transaksi_penjualan;
-//use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\PDF;
@@ -15,9 +14,42 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\View\Factory;
 
-
 class transaksi_penjualancontroller extends Controller
 {
+
+    public function out(transaksi_penjualan $transaksi_penjualan)
+    {
+        $pdf = PDF::loadView('transaksi.penjualan.nota', [
+
+            'transaksi_penjualan' => $transaksi_penjualan,
+        ]);
+
+        return $pdf->stream();
+
+    }
+
+    function print(Request $request) {
+
+        $sales = transaksi_penjualan::where('no_transaction', $request->no_transaction)->first();
+        $detail = detail_penjualan::where('no_transaction', $request->no_transaction)->first();
+        $pdf = PDF::loadView('transaksi.penjualan.nota', [
+            'sales' => $sales,
+            'detail' => $detail,
+        ]);
+
+        return $pdf->stream();
+        // dd($transaksi_penjualan);
+    }
+
+    // public function detail(transaksi_penjualan $transaksi_penjualan)
+    // {
+    //     $transaksis = transaksi_penjualan::whereId($transaksi_penjualan->id)->get();
+
+    //     return view('transaksi.penjualan.detail', [
+    //         'transaksis' => $transaksis,
+    //     ]);
+    // }
+
     public function index()
     {
         $title = "Transaksi Penjualan";
@@ -26,13 +58,11 @@ class transaksi_penjualancontroller extends Controller
             ->groupBy('month', 'no_transaction', 'date')
             ->get();
 
-
         return view('transaksi.penjualan.index', [
             'title' => $title,
             'transaksis' => $transaksis,
         ]);
     }
-
 
     // public function search(Request $request)
     // {
@@ -46,8 +76,6 @@ class transaksi_penjualancontroller extends Controller
 
     //     return view('transaksi.penjualan.create', compact('barbar'));
     // }
-
-
 
     public function create()
     {
@@ -74,7 +102,7 @@ class transaksi_penjualancontroller extends Controller
             'barangs' => $barangs,
             'details' => $details,
             'Gtotals' => $Gtotals,
-            'no_transaction' => $tranCode
+            'no_transaction' => $tranCode,
         ]);
     }
 
@@ -111,7 +139,6 @@ class transaksi_penjualancontroller extends Controller
         return response()->json(['subTotal' => $subTotal]);
     }
 
-
     public function store(Request $request)
     {
         $date = date('ymdHis');
@@ -120,7 +147,7 @@ class transaksi_penjualancontroller extends Controller
             'date' => $date,
             'grand_total' => $request->grand_total,
             'bayar' => $request->bayar,
-            'kembali' => $request->kembali
+            'kembali' => $request->kembali,
         ]);
 
         return redirect()->route('transaksi.index');

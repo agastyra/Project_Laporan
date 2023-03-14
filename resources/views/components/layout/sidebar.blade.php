@@ -205,6 +205,9 @@
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('ledger') }}"> Buku Besar </a>
                             </li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('trial-balance') }}"> Neraca Saldo </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

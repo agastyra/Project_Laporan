@@ -15,11 +15,10 @@ class transaksi_pembeliancontroller extends Controller
 
     function print(transaksi_pembelian $transaksi_pembelian) {
         $pdf = PDF::loadView('transaksi.pembelian.nota', [
-            'transaksi_pembelian' => $transaksi_pembelian,
+            'transaksi' => $transaksi_pembelian,
         ]);
 
-        return $pdf->stream();
-
+        return $pdf->stream('transaksi.pembelian.nota');
     }
 
     public function index()
@@ -139,6 +138,12 @@ class transaksi_pembeliancontroller extends Controller
             'barang_id' => $barang_id,
             'qty' => $qty['qty'],
         ];
+
+        $barang_stok = barang::where('id', $barang_id)->value('stok');
+
+        barang::where('id', $barang_id)->update([
+            'stok' => $barang_stok + $qty['qty'],
+        ]);
 
         detail_pembelian::create($data);
     }

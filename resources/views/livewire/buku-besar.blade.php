@@ -80,7 +80,7 @@
                 </div>
                 <div class="table-responsive mt-4">
                     <h5 class="italic">{{ $akun }}</h5>
-                    <table class="table">
+                    <table class="table table-dark table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col-md">Tanggal</th>
