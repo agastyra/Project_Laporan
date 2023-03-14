@@ -136,6 +136,10 @@ Route::middleware(['cashier'])->group(function () {
     Route::post('/calc', [transaksi_penjualancontroller::class, 'calculate'])->name('calculate');
     Route::post('/calcSub', [transaksi_penjualancontroller::class, 'calcSub'])->name('subCalc');
     Route::get('/sales/create/{no_transaction?}', [transaksi_penjualancontroller::class, 'create'])->name('transaksi.create');
+    Route::get('/nota', [transaksi_penjualancontroller::class, 'print'])->name('sales.print');
+    Route::get('/testp', function(){
+        return view('transaksi.penjualan.nota');
+    });
 
     // route pembelian
     Route::get('/purchase', [transaksi_pembeliancontroller::class, "index"])->name('purchase');

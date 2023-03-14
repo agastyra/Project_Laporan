@@ -30,6 +30,10 @@
                                     <td>{{ $trans->no_transaction }}</td>
                                     <td>{{ $trans->date }}</td>
                                     <td>{{ $trans->total }}</td>
+                                    <td><form action="{{ route('sales.print') }}" method="get">
+                                        <input type="text" name="no_transaction" id="no_transaction" value="{{ $trans->no_transaction }}" hidden>
+                                        <button type="submit">print</button>
+                                    </form></td>
                                 </tr>
                             @empty
                                 <tr>
